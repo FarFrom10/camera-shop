@@ -1,3 +1,5 @@
+export const RATING_STAR_NUMBER = 5;
+
 export enum AppRoute {
   Index = '/',
   Catalog = '/catalog',
@@ -15,27 +17,32 @@ export const RouteName = {
 
 export const SocialsNames = ['vk', 'pinterest', 'reddit'] as const;
 
-export enum CartIconName {
-  Added = 'icon-basket',
-  Add = 'icon-add-basket',
+export enum IconName {
+  CartAdded = 'icon-basket',
+  CartAdd = 'icon-add-basket',
+  LogoHeader = 'icon-logo',
+  LogoFooter = 'icon-logo-mono',
+  ArrowMini = 'icon-arrow-mini',
+  Star = 'icon-star',
+  StarFull = 'icon-full-star',
 }
-
-export enum LogoIconName {
-  Header = 'icon-logo',
-  Footer = 'icon-logo-mono',
-}
-
-export const LogoSize = {
-  Width: 100,
-  Height: 36,
-} as const;
 
 export const BannerSize = {
   Width: 1280,
   Height: 280,
 } as const;
 
+export const ProductCardSize = {
+  Width: 280,
+  Height: 240,
+} as const;
+
 export const SocialIconSize = {
   Width: 20,
   Height: 20,
+} as const;
+
+export const TemporaryNumbers = {
+  CatalogCards: 6,
+  Rating: 2 ,
 } as const;

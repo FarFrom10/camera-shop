@@ -1,4 +1,5 @@
-import { LogoIconName, LogoSize } from '../../const';
+import { IconName } from '../../const';
+import CommonIcon from '../common-icon/common-icon';
 
 type LogoProps = {
   isFooter?: boolean;
@@ -11,9 +12,7 @@ function Logo({isFooter = false}: LogoProps): JSX.Element {
       href="index.html"
       aria-label="Переход на главную"
     >
-      <svg width={LogoSize.Width} height={LogoSize.Height} aria-hidden="true">
-        <use xlinkHref={isFooter ? `#${LogoIconName.Footer}` : `#${LogoIconName.Header}`} />
-      </svg>
+      <CommonIcon icon={isFooter ? IconName.LogoFooter : IconName.LogoHeader}/>
     </a>
   );
 }

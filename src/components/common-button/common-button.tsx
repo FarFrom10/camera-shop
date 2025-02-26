@@ -1,6 +1,6 @@
 import cn from 'classnames';
-import { CartIconName } from '../../const';
-import CartIcon from '../cart-icon/cart-icon';
+import { IconName } from '../../const';
+import CommonIcon from '../common-icon/common-icon';
 
 type CommonButtonProps = {
   isInCart?: boolean;
@@ -13,7 +13,7 @@ function CommonButton({isInCart = false, isAddToCart = false, isProductCard = tr
   if (isInCart) {
     return (
       <a className="btn btn--purple-border product-card__btn product-card__btn--in-cart" href="#">
-        <CartIcon icon={CartIconName.Added}/>
+        <CommonIcon icon={IconName.CartAdded}/>
         В корзине
       </a>
     );
@@ -26,7 +26,7 @@ function CommonButton({isInCart = false, isAddToCart = false, isProductCard = tr
       {'product-card__btn': isProductCard},
     )} type="button"
     >
-      {isAddToCart && <CartIcon icon={CartIconName.Add}/>}
+      {isAddToCart && <CommonIcon icon={IconName.CartAdd}/>}
       {isAddToCart ? 'Добавить в корзину' : 'Купить'}
     </button>
   );
