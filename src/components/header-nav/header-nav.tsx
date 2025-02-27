@@ -5,7 +5,7 @@ function HeaderNav(): JSX.Element {
   return(
     <nav className="main-nav header__main-nav">
       <ul className="main-nav__list">
-        <HeaderNavLink route={AppRoute.Catalog}/>
+        <HeaderNavLink route={AppRoute.Index}/>
       </ul>
     </nav>
   );

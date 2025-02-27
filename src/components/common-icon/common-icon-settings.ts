@@ -13,6 +13,14 @@ export const IconSettings: SettingsType = {
     width: 24,
     height: 16,
   },
+  [IconName.Lens]: {
+    width: 16,
+    height: 16,
+  },
+  [IconName.Close]: {
+    width: 10,
+    height: 10,
+  },
   [IconName.LogoFooter]: {
     width: 100,
     height: 36,

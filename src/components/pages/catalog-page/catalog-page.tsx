@@ -1,19 +1,15 @@
+import { AppRoute } from '../../../const';
 import BigBanner from '../../big-banner/big-banner';
 import CatalogPageContent from '../../catalog-page-content/catalog-page-content';
-import Footer from '../../footer/footer';
-import Header from '../../header/header';
+import Title from '../../title/title';
 
 function CatalogPage(): JSX.Element {
   return(
-    <div className="wrapper">
-      <Header/>
-      <main>
-        <BigBanner/>
-        <CatalogPageContent/>
-      </main>
-      <Footer/>
-    </div>
-
+    <>
+      <Title pageName={AppRoute.Index}/>
+      <BigBanner/>
+      <CatalogPageContent/>
+    </>
   );
 }
 

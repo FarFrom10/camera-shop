@@ -1,8 +1,7 @@
-import { RouteName } from '../../const';
-import { HeaderLinkRoute } from '../types/types';
+import { AppRoute, RouteName } from '../../const';
 
 type HeaderNavLinkProps = {
-  route: HeaderLinkRoute;
+  route: AppRoute;
 }
 
 function HeaderNavLink({route}: HeaderNavLinkProps): JSX.Element {

@@ -1,3 +1,5 @@
+import { IconName } from '../../const';
+import CommonIcon from '../common-icon/common-icon';
 import SearchSelectList from '../search-select-list/search-select-list';
 
 function FormSearch(): JSX.Element {
@@ -5,14 +7,7 @@ function FormSearch(): JSX.Element {
     <div className="form-search">
       <form>
         <label>
-          <svg
-            className="form-search__icon"
-            width={16}
-            height={16}
-            aria-hidden="true"
-          >
-            <use xlinkHref="#icon-lens" />
-          </svg>
+          <CommonIcon icon={IconName.Lens} iconClass='form-search__icon'/>
           <input
             className="form-search__input"
             type="text"
@@ -23,9 +18,7 @@ function FormSearch(): JSX.Element {
         <SearchSelectList/>
       </form>
       <button className="form-search__reset" type="reset">
-        <svg width={10} height={10} aria-hidden="true">
-          <use xlinkHref="#icon-close" />
-        </svg>
+        <CommonIcon icon={IconName.Close}/>
         <span className="visually-hidden">Сбросить поиск</span>
       </button>
     </div>
