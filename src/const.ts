@@ -26,6 +26,7 @@ export enum IconName {
   LogoHeader = 'icon-logo',
   LogoFooter = 'icon-logo-mono',
   ArrowMini = 'icon-arrow-mini',
+  ArrowUp = 'icon-arrow2',
   Star = 'icon-star',
   StarFull = 'icon-full-star',
 }

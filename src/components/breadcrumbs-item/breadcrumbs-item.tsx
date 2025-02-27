@@ -1,17 +1,18 @@
-import { IconName } from '../../const';
+import { Link } from 'react-router-dom';
+import { AppRoute, IconName, RouteName } from '../../const';
 import CommonIcon from '../common-icon/common-icon';
 
 type BreadcrubmsItemProps = {
   isActive?: boolean;
-  page: string;
+  route: AppRoute;
 }
 
-function BreadcrubmsItem({isActive = false, page}: BreadcrubmsItemProps): JSX.Element {
+function BreadcrubmsItem({isActive = false, route}: BreadcrubmsItemProps): JSX.Element {
   if (isActive) {
     return (
       <li className="breadcrumbs__item">
         <span className='breadcrumbs__link breadcrumbs__link--active'>
-          {page}
+          {RouteName[route]}
         </span>
       </li>
     );
@@ -19,10 +20,10 @@ function BreadcrubmsItem({isActive = false, page}: BreadcrubmsItemProps): JSX.El
 
   return(
     <li className="breadcrumbs__item">
-      <a className='breadcrumbs__link' href="index.html">
-        {page}
+      <Link className='breadcrumbs__link' to={route}>
+        {RouteName[route]}
         <CommonIcon icon={IconName.ArrowMini}/>
-      </a>
+      </Link>
     </li>
   );
 }
