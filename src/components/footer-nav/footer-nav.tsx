@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 function FooterNav(): JSX.Element {
   return(
     <ul className="footer__nav">
@@ -5,24 +7,24 @@ function FooterNav(): JSX.Element {
         <p className="footer__title">Навигация</p>
         <ul className="footer__list">
           <li className="footer__item">
-            <a className="link" href="#">
+            <Link className="link" to="#">
           Каталог
-            </a>
+            </Link>
           </li>
           <li className="footer__item">
-            <a className="link" href="#">
+            <Link className="link" to="#">
           Гарантии
-            </a>
+            </Link>
           </li>
           <li className="footer__item">
-            <a className="link" href="#">
+            <Link className="link" to="#">
           Доставка
-            </a>
+            </Link>
           </li>
           <li className="footer__item">
-            <a className="link" href="#">
+            <Link className="link" to="#">
           О компании
-            </a>
+            </Link>
           </li>
         </ul>
       </li>
@@ -30,19 +32,19 @@ function FooterNav(): JSX.Element {
         <p className="footer__title">Ресурсы</p>
         <ul className="footer__list">
           <li className="footer__item">
-            <a className="link" href="#">
+            <Link className="link" to="#">
           Курсы операторов
-            </a>
+            </Link>
           </li>
           <li className="footer__item">
-            <a className="link" href="#">
+            <Link className="link" to="#">
           Блог
-            </a>
+            </Link>
           </li>
           <li className="footer__item">
-            <a className="link" href="#">
+            <Link className="link" to="#">
           Сообщество
-            </a>
+            </Link>
           </li>
         </ul>
       </li>
@@ -50,14 +52,14 @@ function FooterNav(): JSX.Element {
         <p className="footer__title">Поддержка</p>
         <ul className="footer__list">
           <li className="footer__item">
-            <a className="link" href="#">
+            <Link className="link" to="#">
           FAQ
-            </a>
+            </Link>
           </li>
           <li className="footer__item">
-            <a className="link" href="#">
+            <Link className="link" to="#">
           Задать вопрос
-            </a>
+            </Link>
           </li>
         </ul>
       </li>

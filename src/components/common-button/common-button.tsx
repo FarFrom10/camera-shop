@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import { IconName } from '../../const';
 import CommonIcon from '../common-icon/common-icon';
+import { Link } from 'react-router-dom';
 
 type CommonButtonProps = {
   isInCart?: boolean;
@@ -12,10 +13,10 @@ function CommonButton({isInCart = false, isAddToCart = false, isProductCard = tr
 
   if (isInCart) {
     return (
-      <a className="btn btn--purple-border product-card__btn product-card__btn--in-cart" href="#">
+      <Link className="btn btn--purple-border product-card__btn product-card__btn--in-cart" to="#">
         <CommonIcon icon={IconName.CartAdded}/>
         В корзине
-      </a>
+      </Link>
     );
   }
 

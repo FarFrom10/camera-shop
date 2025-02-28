@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { SocialIconSize } from '../../const';
 
 type SocialItemProps = {
@@ -7,15 +8,15 @@ type SocialItemProps = {
 function SocialItem({name}: SocialItemProps): JSX.Element {
   return (
     <li className="social__item">
-      <a
+      <Link
         className="link"
-        href="#"
+        to="#"
         aria-label={`Переход на страницу ${name === 'vk' ? 'вконтакте' : name}`}
       >
         <svg width={SocialIconSize.Width} height={SocialIconSize.Height} aria-hidden="true">
           <use xlinkHref={`#icon-${name}`} />
         </svg>
-      </a>
+      </Link>
     </li>
   );
 }

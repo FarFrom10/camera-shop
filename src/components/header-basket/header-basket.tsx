@@ -1,11 +1,12 @@
-import { IconName } from '../../const';
+import { Link } from 'react-router-dom';
+import { AppRoute, IconName } from '../../const';
 import CommonIcon from '../common-icon/common-icon';
 
 function HeaderBasket(): JSX.Element {
   return (
-    <a className="header__basket-link" href="#">
+    <Link className="header__basket-link" to={AppRoute.Basket}>
       <CommonIcon icon={IconName.CartAdded}/>
-    </a>
+    </Link>
   );
 }
 
