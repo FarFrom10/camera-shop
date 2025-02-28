@@ -37,6 +37,13 @@ export enum ProductTabsCategory {
   Description = 'Описание',
 }
 
+export enum ButtonText {
+  Buy = 'Купить',
+  AddToCart = 'Добавить в корзину',
+  AddedToCart = 'В корзине',
+  ShowMore = 'Показать больше отзывов',
+}
+
 export const BannerSize = {
   Width: 1280,
   Height: 280,
@@ -61,6 +68,7 @@ export const SocialIconSize = {
 
 export const TemporaryNumbers = {
   CatalogCards: 6,
+  Reviews: 3,
   Rating: 2 ,
   price: 73629
 } as const;

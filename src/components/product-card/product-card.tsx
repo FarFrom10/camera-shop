@@ -1,3 +1,4 @@
+import { ButtonText } from '../../const';
 import ButtonMoreDetails from '../button-more-details/button-more-details';
 import CommonButton from '../common-button/common-button';
 import ProductCardImage from '../product-card-image/product-card-image';
@@ -9,7 +10,7 @@ function ProductCard(): JSX.Element {
       <ProductCardImage/>
       <ProductCardInfo/>
       <div className="product-card__buttons">
-        <CommonButton/>
+        <CommonButton buttonText={ButtonText.Buy} isProductCard/>
         <ButtonMoreDetails/>
       </div>
     </div>

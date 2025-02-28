@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { IconName } from '../../const';
+import { ButtonText, IconName } from '../../const';
 import CommonIcon from '../common-icon/common-icon';
 import { Link } from 'react-router-dom';
 
@@ -7,15 +7,21 @@ type CommonButtonProps = {
   isInCart?: boolean;
   isAddToCart?: boolean;
   isProductCard?: boolean;
+  buttonText: ButtonText;
 }
 
-function CommonButton({isInCart = false, isAddToCart = false, isProductCard = true}: CommonButtonProps): JSX.Element {
+function CommonButton({
+  isInCart = false,
+  isAddToCart = false,
+  isProductCard = false,
+  buttonText
+}: CommonButtonProps): JSX.Element {
 
   if (isInCart) {
     return (
       <Link className="btn btn--purple-border product-card__btn product-card__btn--in-cart" to="#">
         <CommonIcon icon={IconName.CartAdded}/>
-        В корзине
+        {buttonText}
       </Link>
     );
   }
@@ -28,7 +34,7 @@ function CommonButton({isInCart = false, isAddToCart = false, isProductCard = tr
     )} type="button"
     >
       {isAddToCart && <CommonIcon icon={IconName.CartAdd}/>}
-      {isAddToCart ? 'Добавить в корзину' : 'Купить'}
+      {buttonText}
     </button>
   );
 }

@@ -1,4 +1,4 @@
-import { TemporaryNumbers } from '../../const';
+import { ButtonText, TemporaryNumbers } from '../../const';
 import CommonButton from '../common-button/common-button';
 import ProductCardImage from '../product-card-image/product-card-image';
 import ProductPageTabs from '../product-page-tabs/product-page-tabs';
@@ -14,7 +14,7 @@ function ProductPageInfo(): JSX.Element {
           <h1 className="title title--h3">Ретрокамера «Das Auge IV»</h1>
           <ProductRating ratingNumber={TemporaryNumbers.Rating} isProductPage/>
           <ProductPrice price={TemporaryNumbers.price} isProductPage/>
-          <CommonButton isAddToCart/>
+          <CommonButton buttonText={ButtonText.AddToCart} isAddToCart/>
           <ProductPageTabs/>
         </div>
       </div>
