@@ -2,6 +2,23 @@ export const SITE_NAME = 'Фотошоп';
 export const TIMEOUT_SHOW_ERROR = 3000;
 export const RATING_STAR_NUMBER = 5;
 
+export const TEMPORARY_ALT_TEXT = 'ВРЕМЕННЫЙ ТЕКСТ';
+
+export const TemporaryNumbers = {
+  Reviews: 3,
+  Rating: 2 ,
+  ReviewCount: 666,
+  BasketList: 2,
+  price: 73629
+} as const;
+
+export const TemporaryImages = {
+  PreviewImg: 'img/content/das-auge.jpg',
+  PreviewImg2x: 'img/content/das-auge@2x.jpg',
+  PreviewImgWebp: 'img/content/das-auge.webp',
+  PreviewImgWebp2x: 'img/content/das-auge@2x.webp'
+} as const;
+
 export const BusketAmount = {
   Min: 1,
   Max: 99
@@ -47,10 +64,11 @@ export enum ButtonQuantityDirection {
   Next = 'next',
 }
 
-export enum ItemImageCategory {
+export enum CommonPictureCategory {
   ProductCard = 'ProductCard',
   ProductPage = 'ProductPage',
   BasketItem = 'BasketItem',
+  Banner = 'Banner'
 }
 
 export enum ProductTabsCategory {
@@ -72,31 +90,18 @@ export enum PriceClass {
   BasketItemTotal = 'basket-item__total-price',
 }
 
-export const BannerSize = {
-  Width: 1280,
-  Height: 280,
-} as const;
+export enum CommonPictureClass {
+  Product = 'product-card__img',
+  Basket = 'basket-item__img',
+  Banner = 'banner',
+}
 
 export const SocialIconSize = {
   Width: 20,
   Height: 20,
 } as const;
 
-export const TemporaryNumbers = {
-  CatalogCards: 6,
-  Reviews: 3,
-  Rating: 2 ,
-  BasketList: 2,
-  price: 73629
-} as const;
-
-export const TemporaryImages = {
-  PreviewImg: 'img/content/das-auge.jpg',
-  PreviewImg2x: 'img/content/das-auge@2x.jpg',
-  PreviewImgWebp: 'img/content/das-auge.webp',
-  PreviewImgWebp2x: 'img/content/das-auge@2x.webp'
-} as const;
-
 export enum APIRoute {
   Cameras = '/cameras',
+  PromoCameras = '/promo',
 }

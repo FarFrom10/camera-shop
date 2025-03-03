@@ -14,7 +14,7 @@ function ButtonMoreDetails({isTransparent = true}: ButtonMoreDetailsProps):JSX.E
       {'btn--transparent': isTransparent}
     )} to={AppRoute.Product}
     >
-          Подробнее
+      Подробнее
     </Link>
   );
 }

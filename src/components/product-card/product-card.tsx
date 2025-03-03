@@ -1,14 +1,37 @@
-import { ButtonText, ItemImageCategory } from '../../const';
+import { ButtonText, CommonPictureCategory } from '../../const';
+import { CameraData } from '../../types/cameras';
 import ButtonMoreDetails from '../button-more-details/button-more-details';
 import CommonButton from '../common-button/common-button';
-import CommonItemImage from '../common-item-image/common-item-image';
+import CommonPicture from '../common-picture/common-picture';
 import ProductCardInfo from '../product-card-info/product-card-info';
 
-function ProductCard(): JSX.Element {
+type ProductCardProps = {
+  camera: CameraData;
+}
+
+function ProductCard({camera}: ProductCardProps): JSX.Element {
+  const {
+    name,
+    price,
+    rating,
+    reviewCount,
+    previewImg,
+    previewImg2x,
+    previewImgWebp,
+    previewImgWebp2x,
+  } = camera;
+
   return(
     <div className="product-card">
-      <CommonItemImage category={ItemImageCategory.ProductCard}/>
-      <ProductCardInfo/>
+      <CommonPicture
+        category={CommonPictureCategory.ProductCard}
+        name={name}
+        img={previewImg}
+        img2x={previewImg2x}
+        webp={previewImgWebp}
+        webp2x={previewImgWebp2x}
+      />
+      <ProductCardInfo name={name} rating={rating} reviewCount={reviewCount} price={price}/>
       <div className="product-card__buttons">
         <CommonButton buttonText={ButtonText.Buy} isProductCard/>
         <ButtonMoreDetails/>

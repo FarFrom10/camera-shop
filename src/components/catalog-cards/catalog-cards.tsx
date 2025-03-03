@@ -1,9 +1,12 @@
-import { nanoid } from '@reduxjs/toolkit';
-import { TemporaryNumbers } from '../../const';
 import ProductCard from '../product-card/product-card';
+import { CameraData } from '../../types/cameras';
 
-function CatalogCards(): JSX.Element {
-  const cards = Array.from({length: TemporaryNumbers.CatalogCards}).map(() => <ProductCard key={nanoid()}/>);
+type CatalogCardsProps = {
+  cameras: CameraData[];
+}
+
+function CatalogCards({cameras}: CatalogCardsProps): JSX.Element {
+  const cards = cameras.map((camera) => <ProductCard camera={camera} key={camera.id}/>);
 
   return(
     <div className="cards catalog__cards">

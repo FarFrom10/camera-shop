@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { BusketAmount, ButtonQuantityDirection, IconName, ItemImageCategory, PriceClass, TemporaryNumbers } from '../../const';
+import { BusketAmount, ButtonQuantityDirection, CommonPictureCategory, CommonPictureClass, IconName, PriceClass, TemporaryNumbers } from '../../const';
 import BasketItemDescription from '../basket-item-description/basket-item-description';
 import BasketQuantityButton from '../basket-quantity-button/basket-quantity-button';
 import CommonIcon from '../common-icon/common-icon';
-import CommonItemImage from '../common-item-image/common-item-image';
 import ProductPrice from '../product-price/product-price';
+import CommonPicture from '../common-picture/common-picture';
 
 function BasketItem(): JSX.Element {
   const [amount, setAmount] = useState<number>(1);
@@ -26,7 +26,7 @@ function BasketItem(): JSX.Element {
 
   return (
     <li className="basket-item">
-      <CommonItemImage category={ItemImageCategory.BasketItem}/>
+      <CommonPicture category={CommonPictureCategory.BasketItem} imageClass={CommonPictureClass.Basket}/>
       <BasketItemDescription/>
       <ProductPrice priceClass={PriceClass.BasketItem} price={TemporaryNumbers.price}/>
       <div className="quantity">

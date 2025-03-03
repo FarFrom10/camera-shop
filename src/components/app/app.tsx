@@ -7,13 +7,14 @@ import ProductPage from '../pages/product-page/product-page';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
 import BasketPage from '../pages/basket-page/basket-page';
 import { useAppSelector } from '../../hooks';
-import { selectIsCamerasLoading } from '../../store/cameras-process/cameras-process.selectors';
+import { selectIsCamerasLoading, selectIsPromoCamerasLoading } from '../../store/cameras-process/cameras-process.selectors';
 import LoadingScreen from '../loading-screen/loading-screen';
 
 function App(): JSX.Element {
   const isCamerasLoading = useAppSelector(selectIsCamerasLoading);
+  const isPromoCamerasLoading = useAppSelector(selectIsPromoCamerasLoading);
 
-  if(isCamerasLoading) {
+  if(isCamerasLoading || isPromoCamerasLoading) {
     return <LoadingScreen/>;
   }
 

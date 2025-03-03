@@ -1,15 +1,22 @@
-import { PriceClass, TemporaryNumbers } from '../../const';
+import { PriceClass } from '../../const';
 import ProductPrice from '../product-price/product-price';
 import ProductRating from '../product-rating/product-rating';
 
-function ProductCardInfo(): JSX.Element {
+type ProductCardInfoProps = {
+  name: string;
+  rating: number;
+  reviewCount: number;
+  price: number;
+}
+
+function ProductCardInfo({name, rating, reviewCount, price}: ProductCardInfoProps): JSX.Element {
   return (
     <div className="product-card__info">
-      <ProductRating ratingNumber={TemporaryNumbers.Rating}/>
+      <ProductRating ratingNumber={rating} reviewCount={reviewCount}/>
       <p className="product-card__title">
-                  Ретрокамера «Das Auge IV»
+        {name}
       </p>
-      <ProductPrice priceClass={PriceClass.ProductCard} price={TemporaryNumbers.price}/>
+      <ProductPrice priceClass={PriceClass.ProductCard} price={price}/>
     </div>
   );
 }

@@ -10,10 +10,11 @@ function Layout(): JSX.Element {
   const {pathname} = useLocation();
   const isCatalogPage = pathname === AppRoute.Index;
   const isProductPage = pathname === AppRoute.Product;
+  const isBasketPage = pathname === AppRoute.Basket;
 
   return(
     <div className="wrapper">
-      <Header/>
+      <Header isBasketPage={isBasketPage}/>
       <main>
         <div className="page-content">
           {isCatalogPage && <BigBanner/>}

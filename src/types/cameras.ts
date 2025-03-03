@@ -2,7 +2,7 @@ export type CameraType = 'Коллекционная' | 'Моментальна�
 export type CameraCategory = 'Видеокамера' | 'Фотоаппарат'
 export type CameraLevel = 'Нулевой' | 'Любительский' | 'Профессиональный'
 
-export type CamerasData = {
+export type CameraData = {
   id: number;
   name: string;
   vendorCode: string;
@@ -19,3 +19,11 @@ export type CamerasData = {
   previewImgWebp2x: string;
 }
 
+export type PromoCameraData = {
+  id: number;
+  name: string;
+  previewImg: string;
+  previewImg2x: string;
+  previewImgWebp: string;
+  previewImgWebp2x: string;
+}

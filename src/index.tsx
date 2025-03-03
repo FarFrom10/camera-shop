@@ -4,7 +4,7 @@ import App from './components/app/app';
 import { toast, ToastContainer } from 'react-toastify';
 import { TIMEOUT_SHOW_ERROR } from './const';
 import { store } from './store';
-import { fetchCamerasAction } from './store/api-actions';
+import { fetchCamerasAction, fetchPromoCamerasAction } from './store/api-actions';
 import { Provider } from 'react-redux';
 
 const root = ReactDOM.createRoot(
@@ -12,6 +12,13 @@ const root = ReactDOM.createRoot(
 );
 
 store.dispatch(fetchCamerasAction())
+  .then((response) => {
+    if (response.meta.requestStatus === 'rejected') {
+      toast.warn('Unable to access server');
+    }
+  });
+
+store.dispatch(fetchPromoCamerasAction())
   .then((response) => {
     if (response.meta.requestStatus === 'rejected') {
       toast.warn('Unable to access server');

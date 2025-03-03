@@ -1,14 +1,19 @@
 import cn from 'classnames';
-import { IconName, RATING_STAR_NUMBER } from '../../const';
+import { IconName, RATING_STAR_NUMBER, TemporaryNumbers } from '../../const';
 import CommonIcon from '../common-icon/common-icon';
 import { nanoid } from '@reduxjs/toolkit';
 
 type ProductRatingProps = {
   ratingNumber: number;
+  reviewCount?: number;
   isProductPage?: boolean;
 }
 
-function ProductRating({ratingNumber, isProductPage = false}: ProductRatingProps): JSX.Element {
+function ProductRating({
+  ratingNumber,
+  isProductPage = false,
+  reviewCount = TemporaryNumbers.ReviewCount
+}: ProductRatingProps): JSX.Element {
   const stars = Array.from({length: RATING_STAR_NUMBER}).map((_, i) =>
     <CommonIcon icon={i > ratingNumber - 1 ? IconName.Star : IconName.StarFull} key={nanoid()}/>
   );
@@ -23,7 +28,7 @@ function ProductRating({ratingNumber, isProductPage = false}: ProductRatingProps
       {stars}
       <p className="visually-hidden">{`Рейтинг: ${ratingNumber}`}</p>
       <p className="rate__count">
-        <span className="visually-hidden">Всего оценок:</span>23
+        <span className="visually-hidden">Всего оценок:</span>{reviewCount}
       </p>
     </div>
   );
