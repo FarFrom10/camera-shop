@@ -2,6 +2,11 @@ export const RATING_STAR_NUMBER = 5;
 
 export const SITE_NAME = 'Фотошоп';
 
+export const BusketAmount = {
+  Min: 1,
+  Max: 99
+} as const;
+
 export enum AppRoute {
   Index = '/',
   Product = '/product',
@@ -28,8 +33,20 @@ export enum IconName {
   LogoFooter = 'icon-logo-mono',
   ArrowMini = 'icon-arrow-mini',
   ArrowUp = 'icon-arrow2',
+  ArrowSide = 'icon-arrow',
   Star = 'icon-star',
   StarFull = 'icon-full-star',
+}
+
+export enum ButtonQuantityDirection {
+  Prev = 'prev',
+  Next = 'next',
+}
+
+export enum ItemImageCategory {
+  ProductCard = 'ProductCard',
+  ProductPage = 'ProductPage',
+  BasketItem = 'BasketItem',
 }
 
 export enum ProductTabsCategory {
@@ -44,21 +61,16 @@ export enum ButtonText {
   ShowMore = 'Показать больше отзывов',
 }
 
+export enum PriceClass {
+  ProductCard = 'product-card__price',
+  ProductPage = 'product__price',
+  BasketItem = 'basket-item__price',
+  BasketItemTotal = 'basket-item__total-price',
+}
+
 export const BannerSize = {
   Width: 1280,
   Height: 280,
-} as const;
-
-
-export const CardImageSize = {
-  ProductCard: {
-    Width: 280,
-    Height: 240,
-  },
-  ProductPage: {
-    Width: 560,
-    Height: 480,
-  }
 } as const;
 
 export const SocialIconSize = {
@@ -70,5 +82,13 @@ export const TemporaryNumbers = {
   CatalogCards: 6,
   Reviews: 3,
   Rating: 2 ,
+  BasketList: 2,
   price: 73629
+} as const;
+
+export const TemporaryImages = {
+  PreviewImg: 'img/content/das-auge.jpg',
+  PreviewImg2x: 'img/content/das-auge@2x.jpg',
+  PreviewImgWebp: 'img/content/das-auge.webp',
+  PreviewImgWebp2x: 'img/content/das-auge@2x.webp'
 } as const;

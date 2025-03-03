@@ -1,13 +1,14 @@
+import { PriceClass } from '../../const';
 import { ConvertPrice } from '../../utils/common';
 
 type ProductPriceProps = {
   price: number;
-  isProductPage?: boolean;
+  priceClass: PriceClass;
 }
 
-function ProductPrice({price, isProductPage = false}: ProductPriceProps): JSX.Element {
+function ProductPrice({price, priceClass}: ProductPriceProps): JSX.Element {
   return(
-    <p className={isProductPage ? 'product__price' : 'product-card__price'}>
+    <p className={priceClass}>
       <span className="visually-hidden">Цена:</span>
       {ConvertPrice(price)}
     </p>

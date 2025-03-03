@@ -37,6 +37,10 @@ export const IconSettings: SettingsType = {
     width: 12,
     height: 18,
   },
+  [IconName.ArrowSide]: {
+    width: 7,
+    height: 12,
+  },
   [IconName.Star]: {
     width: 17,
     height: 16,

@@ -1,4 +1,4 @@
-import { TemporaryNumbers } from '../../const';
+import { PriceClass, TemporaryNumbers } from '../../const';
 import ProductPrice from '../product-price/product-price';
 import ProductRating from '../product-rating/product-rating';
 
@@ -9,7 +9,7 @@ function ProductCardInfo(): JSX.Element {
       <p className="product-card__title">
                   Ретрокамера «Das Auge IV»
       </p>
-      <ProductPrice price={TemporaryNumbers.price}/>
+      <ProductPrice priceClass={PriceClass.ProductCard} price={TemporaryNumbers.price}/>
     </div>
   );
 }
