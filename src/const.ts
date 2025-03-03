@@ -1,11 +1,15 @@
-export const RATING_STAR_NUMBER = 5;
-
 export const SITE_NAME = 'Фотошоп';
+export const TIMEOUT_SHOW_ERROR = 3000;
+export const RATING_STAR_NUMBER = 5;
 
 export const BusketAmount = {
   Min: 1,
   Max: 99
 } as const;
+
+export enum NameSpace {
+  Cameras = 'cameras',
+}
 
 export enum AppRoute {
   Index = '/',
@@ -92,3 +96,7 @@ export const TemporaryImages = {
   PreviewImgWebp: 'img/content/das-auge.webp',
   PreviewImgWebp2x: 'img/content/das-auge@2x.webp'
 } as const;
+
+export enum APIRoute {
+  Cameras = '/cameras',
+}
