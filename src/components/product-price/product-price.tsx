@@ -1,5 +1,5 @@
 import { PriceClass } from '../../const';
-import { ConvertPrice } from '../../utils/common';
+import { convertPrice } from '../../utils/common';
 
 type ProductPriceProps = {
   price: number;
@@ -10,7 +10,7 @@ function ProductPrice({price, priceClass}: ProductPriceProps): JSX.Element {
   return(
     <p className={priceClass}>
       <span className="visually-hidden">Цена:</span>
-      {ConvertPrice(price)}
+      {convertPrice(price)}
     </p>
   );
 }

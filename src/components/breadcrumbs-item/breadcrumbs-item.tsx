@@ -4,15 +4,17 @@ import CommonIcon from '../common-icon/common-icon';
 
 type BreadcrubmsItemProps = {
   isActive?: boolean;
-  route: AppRoute;
+  route?: AppRoute;
+  productRoute?: string;
+  productName?: string;
 }
 
-function BreadcrubmsItem({isActive = false, route}: BreadcrubmsItemProps): JSX.Element {
+function BreadcrubmsItem({isActive = false, route, productRoute = '', productName = ''}: BreadcrubmsItemProps): JSX.Element {
   if (isActive) {
     return (
       <li className="breadcrumbs__item">
         <span className='breadcrumbs__link breadcrumbs__link--active'>
-          {RouteName[route]}
+          {route ? RouteName[route] : productName}
         </span>
       </li>
     );
@@ -20,8 +22,8 @@ function BreadcrubmsItem({isActive = false, route}: BreadcrubmsItemProps): JSX.E
 
   return(
     <li className="breadcrumbs__item">
-      <Link className='breadcrumbs__link' to={route}>
-        {RouteName[route]}
+      <Link className='breadcrumbs__link' to={route ? route : productRoute}>
+        {route ? RouteName[route] : productName}
         <CommonIcon icon={IconName.ArrowMini}/>
       </Link>
     </li>
