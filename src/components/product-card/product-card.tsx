@@ -1,4 +1,5 @@
-import { ButtonText, CommonPictureCategory } from '../../const';
+import { generatePath } from 'react-router-dom';
+import { AppRoute, ButtonText, CommonPictureCategory } from '../../const';
 import { CameraData } from '../../types/cameras';
 import ButtonMoreDetails from '../button-more-details/button-more-details';
 import CommonButton from '../common-button/common-button';
@@ -11,6 +12,7 @@ type ProductCardProps = {
 
 function ProductCard({camera}: ProductCardProps): JSX.Element {
   const {
+    id,
     name,
     price,
     rating,
@@ -34,7 +36,7 @@ function ProductCard({camera}: ProductCardProps): JSX.Element {
       <ProductCardInfo name={name} rating={rating} reviewCount={reviewCount} price={price}/>
       <div className="product-card__buttons">
         <CommonButton buttonText={ButtonText.Buy} isProductCard/>
-        <ButtonMoreDetails/>
+        <ButtonMoreDetails route={generatePath(AppRoute.Product, {id:String(id)})}/>
       </div>
     </div>
   );

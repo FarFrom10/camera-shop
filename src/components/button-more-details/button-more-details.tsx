@@ -1,18 +1,18 @@
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
 
 type ButtonMoreDetailsProps = {
   isTransparent?: boolean;
+  route: string;
 }
 
-function ButtonMoreDetails({isTransparent = true}: ButtonMoreDetailsProps):JSX.Element {
+function ButtonMoreDetails({isTransparent = true, route}: ButtonMoreDetailsProps):JSX.Element {
 
   return (
     <Link className={cn(
       'btn',
       {'btn--transparent': isTransparent}
-    )} to={AppRoute.Product}
+    )} to={route}
     >
       Подробнее
     </Link>

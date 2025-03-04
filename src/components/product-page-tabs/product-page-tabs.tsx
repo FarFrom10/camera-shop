@@ -5,9 +5,15 @@ import { ProductTabsCategory } from '../../const';
 import ProductTabsButton from '../product-tabs-button/product-tabs-button';
 import cn from 'classnames';
 import { isValueProductTabsCategory } from '../../utils/type';
+import { CameraData } from '../../types/cameras';
 
-function ProductPageTabs(): JSX.Element {
+type ProductPageTabsProps = {
+  camera: CameraData;
+}
+
+function ProductPageTabs({camera}: ProductPageTabsProps): JSX.Element {
   const [activeTab, setActiveTab] = useState<ProductTabsCategory>(ProductTabsCategory.Description);
+  const {description} = camera;
 
   const handleButtonClick = (evt: MouseEvent<HTMLButtonElement>) => {
     if(evt.target instanceof HTMLElement
@@ -31,14 +37,14 @@ function ProductPageTabs(): JSX.Element {
           {'is-active': activeTab === ProductTabsCategory.Characteristics}
         )}
         >
-          <ProductTabsList/>
+          <ProductTabsList camera={camera}/>
         </div>
         <div className={cn(
           'tabs__element',
           {'is-active': activeTab === ProductTabsCategory.Description}
         )}
         >
-          <ProductTabsText/>
+          <ProductTabsText description={description}/>
         </div>
       </div>
     </div>

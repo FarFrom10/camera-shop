@@ -6,6 +6,7 @@ type CommonPictureProps = {
   category: CommonPictureCategory;
   imageClass?: CommonPictureClass;
   name?: string;
+  id?: string;
   img?: string;
   img2x?:string;
   webp?: string;
@@ -16,6 +17,7 @@ function CommonPicture({
   category,
   imageClass = CommonPictureClass.Product,
   name = TEMPORARY_ALT_TEXT,
+  id = '',
   img = TemporaryImages.PreviewImg,
   img2x = TemporaryImages.PreviewImg2x,
   webp = TemporaryImages.PreviewImgWebp,
@@ -28,17 +30,17 @@ function CommonPicture({
       <picture>
         <source
           type="image/webp"
-          srcSet={`${webp}, ${webp2x}`}
+          srcSet={`/${webp}, /${webp2x}`}
         />
         <img
-          src={img}
-          srcSet={img2x}
+          src={`/${img}`}
+          srcSet={`/${img2x}`}
           width={ImageSettings[category].width}
           height={ImageSettings[category].height}
           alt={name}
         />
       </picture>
-      {isBanner && <BannerInfo name={name}/>}
+      {isBanner && <BannerInfo id={id} name={name}/>}
     </div>
   );
 }

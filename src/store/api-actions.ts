@@ -18,3 +18,11 @@ export const fetchPromoCamerasAction = createAsyncThunk<PromoCameraData[], undef
     return data;
   }
 );
+
+export const fetchCameraByIdAction = createAsyncThunk<CameraData, string, AsyncThunkArguments>(
+  `${NameSpace.Cameras}/fetchCameraById`,
+  async(id, {extra: api}) => {
+    const {data} = await api.get<CameraData>(`${APIRoute.Cameras}/${id}`);
+    return data;
+  }
+);

@@ -30,7 +30,7 @@ export enum NameSpace {
 
 export enum AppRoute {
   Index = '/',
-  Product = '/product',
+  Product = '/product/:id',
   Basket = '/basket',
   NotFound = '*',
 }

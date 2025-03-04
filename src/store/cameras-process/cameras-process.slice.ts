@@ -1,16 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { CamerasProcess } from '../../types/state';
-import { fetchCamerasAction, fetchPromoCamerasAction } from '../api-actions';
+import { fetchCameraByIdAction, fetchCamerasAction, fetchPromoCamerasAction } from '../api-actions';
 
 const initialState: CamerasProcess = {
   cameras: [],
   promoCameras: [],
-  fullCamera: null,
+  currentCamera: null,
 
   isCamerasLoading: false,
   isPromoCamerasLoading: false,
-  isFullCameraLoading: false,
+  isCurrentCameraLoading: false,
 };
 
 export const camersProcess = createSlice({
@@ -39,6 +39,17 @@ export const camersProcess = createSlice({
       })
       .addCase(fetchPromoCamerasAction.rejected, (state) => {
         state.isPromoCamerasLoading = false;
+      })
+
+      .addCase(fetchCameraByIdAction.pending, (state) => {
+        state.isCurrentCameraLoading = true;
+      })
+      .addCase(fetchCameraByIdAction.fulfilled,(state, action) => {
+        state.currentCamera = action.payload;
+        state.isCurrentCameraLoading = false;
+      })
+      .addCase(fetchCameraByIdAction.rejected, (state) => {
+        state.isCurrentCameraLoading = false;
       });
   },
 });
