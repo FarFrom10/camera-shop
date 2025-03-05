@@ -1,6 +1,7 @@
 export const SITE_NAME = 'Фотошоп';
 export const TIMEOUT_SHOW_ERROR = 3000;
 export const RATING_STAR_NUMBER = 5;
+export const REVIEWS_STEP_NUMBER = 3;
 
 export const TEMPORARY_ALT_TEXT = 'ВРЕМЕННЫЙ ТЕКСТ';
 

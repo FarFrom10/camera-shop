@@ -8,13 +8,15 @@ type CommonButtonProps = {
   isAddToCart?: boolean;
   isProductCard?: boolean;
   buttonText: ButtonText;
+  onButtonClick?: () => void;
 }
 
 function CommonButton({
   isInCart = false,
   isAddToCart = false,
   isProductCard = false,
-  buttonText
+  buttonText,
+  onButtonClick
 }: CommonButtonProps): JSX.Element {
 
   if (isInCart) {
@@ -27,11 +29,13 @@ function CommonButton({
   }
 
   return (
-    <button className={cn(
-      'btn',
-      'btn--purple',
-      {'product-card__btn': isProductCard},
-    )} type="button"
+    <button
+      onClick={onButtonClick && onButtonClick}
+      className={cn(
+        'btn',
+        'btn--purple',
+        {'product-card__btn': isProductCard},
+      )} type="button"
     >
       {isAddToCart && <CommonIcon icon={IconName.CartAdd}/>}
       {buttonText}
