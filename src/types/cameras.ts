@@ -27,3 +27,14 @@ export type PromoCameraData = {
   previewImgWebp: string;
   previewImgWebp2x: string;
 }
+
+export type CameraReview = {
+  id: string;
+  createAt: string;
+  cameraId: number;
+  userName: string;
+  advantage: string;
+  disadvantage: string;
+  review: string;
+  rating: number;
+}

@@ -1,4 +1,4 @@
-import { Outlet, useLocation } from 'react-router-dom';
+import { generatePath, Outlet, useLocation, useParams } from 'react-router-dom';
 import Footer from '../footer/footer';
 import Header from '../header/header';
 import Breadcrumbs from '../breadcrumbs/breadcrumbs';
@@ -8,8 +8,10 @@ import ButtonUp from '../button-up/button-up';
 
 function Layout(): JSX.Element {
   const {pathname} = useLocation();
+  const {id} = useParams();
+
   const isCatalogPage = pathname === AppRoute.Index;
-  const isProductPage = pathname === AppRoute.Product;
+  const isProductPage = id ? pathname === generatePath(AppRoute.Product, {id}) : false;
   const isBasketPage = pathname === AppRoute.Basket;
 
   return(

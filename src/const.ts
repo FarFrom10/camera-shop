@@ -5,7 +5,6 @@ export const RATING_STAR_NUMBER = 5;
 export const TEMPORARY_ALT_TEXT = 'ВРЕМЕННЫЙ ТЕКСТ';
 
 export const TemporaryNumbers = {
-  Reviews: 3,
   Rating: 2 ,
   ReviewCount: 666,
   BasketList: 2,
@@ -26,6 +25,7 @@ export const BusketAmount = {
 
 export enum NameSpace {
   Cameras = 'cameras',
+  Reviews = 'reviews,'
 }
 
 export enum AppRoute {
@@ -96,6 +96,12 @@ export enum CommonPictureClass {
   Banner = 'banner',
 }
 
+export enum ProductRatingClass {
+  ProductPage = 'product__rate',
+  ProductCard = 'product-card__rate',
+  ReviewCard = 'review-card__rate',
+}
+
 export const SocialIconSize = {
   Width: 20,
   Height: 20,
@@ -104,4 +110,9 @@ export const SocialIconSize = {
 export enum APIRoute {
   Cameras = '/cameras',
   PromoCameras = '/promo',
+}
+
+export enum DateFormat {
+  DateTime = 'YYYY/MM/DD',
+  Review = 'D MMMM'
 }

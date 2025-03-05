@@ -1,12 +1,15 @@
-import { nanoid } from '@reduxjs/toolkit';
-import { TemporaryNumbers } from '../../const';
 import ReviewCard from '../review-card/review-card';
+import { CameraReview } from '../../types/cameras';
 
-function ReviewsList(): JSX.Element {
-  const reviews = Array.from({length: TemporaryNumbers.Reviews}).map(() => <ReviewCard key={nanoid()}/>);
+type ReviewsListProps = {
+  reviews: CameraReview[];
+}
+
+function ReviewsList({reviews}: ReviewsListProps): JSX.Element {
+  const reviewsList = reviews.map((review) => <ReviewCard cameraReview={review} key={review.id}/>);
   return (
     <ul className="review-block__list">
-      {reviews}
+      {reviewsList}
     </ul>
   );
 }

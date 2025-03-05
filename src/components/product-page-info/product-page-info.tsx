@@ -1,4 +1,4 @@
-import { ButtonText, CommonPictureCategory, PriceClass } from '../../const';
+import { ButtonText, CommonPictureCategory, PriceClass, ProductRatingClass } from '../../const';
 import { CameraData } from '../../types/cameras';
 import CommonButton from '../common-button/common-button';
 import CommonPicture from '../common-picture/common-picture';
@@ -34,7 +34,7 @@ function ProductPageInfo({camera}: ProductPageInfoProps): JSX.Element {
         />
         <div className="product__content">
           <h1 className="title title--h3">{name}</h1>
-          <ProductRating ratingNumber={rating} reviewCount={reviewCount} isProductPage/>
+          <ProductRating ratingNumber={rating} reviewCount={reviewCount} ratingClass={ProductRatingClass.ProductPage}/>
           <ProductPrice priceClass={PriceClass.ProductPage} price={price}/>
           <CommonButton buttonText={ButtonText.AddToCart} isAddToCart/>
           <ProductPageTabs camera={camera}/>

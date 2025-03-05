@@ -6,17 +6,16 @@ export function convertPrice(price: number): string{
   }).format(price);
 }
 
-
 export function getFilteredPathnames(pathnames: string[], id?: string | undefined): string[] {
-  let indexToDelete: number;
+  const itemsToDelete: number[] = [];
 
   return pathnames.length > 1
     ? pathnames.map((path, i) => {
       if (id && path === id) {
-        indexToDelete = i - 1;
+        itemsToDelete.push(i - 1);
         return `/${pathnames[i - 1]}/${path}`;
       }
       return `/${path}`;
-    }).filter((_, i) => i !== indexToDelete)
+    }).filter((_, i) => !itemsToDelete.includes(i))
     : pathnames;
 }
