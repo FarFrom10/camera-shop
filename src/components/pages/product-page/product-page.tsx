@@ -9,6 +9,8 @@ import { selectCurrentCamera, selectIsCurrentCameraLoading } from '../../../stor
 import LoadingScreen from '../../loading-screen/loading-screen';
 import NotFoundPage from '../not-found-page/not-found-page';
 import { selectIsReviewsLoading } from '../../../store/reviews-process/reviews-process.selectors';
+import Breadcrumbs from '../../breadcrumbs/breadcrumbs';
+import ButtonUp from '../../button-up/button-up';
 
 function ProductPage(): JSX.Element {
   const {id} = useParams();
@@ -39,8 +41,14 @@ function ProductPage(): JSX.Element {
 
   return (
     <>
-      <Title pageName={AppRoute.Product}/>
-      <ProductPageContent camera={currentCamera}/>
+      <main>
+        <div className="page-content">
+          <Title pageName={AppRoute.Product}/>
+          <Breadcrumbs/>
+          <ProductPageContent camera={currentCamera}/>
+        </div>
+      </main>
+      <ButtonUp/>
     </>
   );
 }

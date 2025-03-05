@@ -1,13 +1,17 @@
 import { AppRoute } from '../../../const';
 import BasketPageContent from '../../basket-page-content/basket-page-content';
+import Breadcrumbs from '../../breadcrumbs/breadcrumbs';
 import Title from '../../title/title';
 
 function BasketPage(): JSX.Element {
   return (
-    <>
-      <Title pageName={AppRoute.Basket}/>
-      <BasketPageContent/>
-    </>
+    <main>
+      <div className="page-content">
+        <Title pageName={AppRoute.Basket}/>
+        <Breadcrumbs/>
+        <BasketPageContent/>
+      </div>
+    </main>
   );
 }
 

@@ -5,18 +5,21 @@ import { AppRoute } from '../../../const';
 
 function NotFoundPage(): JSX.Element {
   return (
-    <>
-      <Title pageName={AppRoute.NotFound}/>
-      <div className={styles.wrapper}>
-        <h1 className={styles.title}>404: Страница не найдена</h1>
-        <Link
-          className={styles.link}
-          to={AppRoute.Index}
-        >
+    <main>
+      <div className="page-content">
+        <Title pageName={AppRoute.NotFound}/>
+        <div className={styles.wrapper}>
+          <h1 className={styles.title}>404: Страница не найдена</h1>
+          <Link
+            className={styles.link}
+            to={AppRoute.Index}
+          >
           Перейти на главную страницу
-        </Link>
+          </Link>
+        </div>
       </div>
-    </>
+    </main>
+
   );
 }
 
