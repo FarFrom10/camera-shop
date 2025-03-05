@@ -8,15 +8,15 @@ export function convertPrice(price: number): string{
 
 
 export function getFilteredPathnames(pathnames: string[], id?: string | undefined): string[] {
-  const itemsToDelete: number[] = [];
+  let indexToDelete: number;
 
   return pathnames.length > 1
     ? pathnames.map((path, i) => {
       if (id && path === id) {
-        itemsToDelete.push(i - 1);
+        indexToDelete = i - 1;
         return `/${pathnames[i - 1]}/${path}`;
       }
       return `/${path}`;
-    }).filter((_, i) => !itemsToDelete.includes(i))
+    }).filter((_, i) => i !== indexToDelete)
     : pathnames;
 }
