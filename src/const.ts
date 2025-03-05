@@ -115,5 +115,5 @@ export enum APIRoute {
 
 export enum DateFormat {
   DateTime = 'YYYY/MM/DD',
-  Review = 'D MMMM'
+  Review = 'DD MMMM'
 }
