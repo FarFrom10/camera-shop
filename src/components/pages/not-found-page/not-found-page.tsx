@@ -8,12 +8,12 @@ function NotFoundPage(): JSX.Element {
     <>
       <Title pageName={AppRoute.NotFound}/>
       <div className={styles.wrapper}>
-        <h1 className={styles.title}>404: Not Found</h1>
+        <h1 className={styles.title}>404: Страница не найдена</h1>
         <Link
           className={styles.link}
           to={AppRoute.Index}
         >
-          Go to Home page
+          Перейти на главную страницу
         </Link>
       </div>
     </>

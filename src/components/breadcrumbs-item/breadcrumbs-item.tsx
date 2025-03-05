@@ -9,7 +9,7 @@ type BreadcrubmsItemProps = {
   productName?: string;
 }
 
-function BreadcrubmsItem({isActive = false, route, productRoute = '', productName = ''}: BreadcrubmsItemProps): JSX.Element {
+function BreadcrubmsItem({isActive = false, route, productRoute = '', productName = 'Нет названия'}: BreadcrubmsItemProps): JSX.Element {
   if (isActive) {
     return (
       <li className="breadcrumbs__item">

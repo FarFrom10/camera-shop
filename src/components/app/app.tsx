@@ -9,6 +9,7 @@ import BasketPage from '../pages/basket-page/basket-page';
 import { useAppSelector } from '../../hooks';
 import { selectIsCamerasLoading, selectIsPromoCamerasLoading } from '../../store/cameras-process/cameras-process.selectors';
 import LoadingScreen from '../loading-screen/loading-screen';
+import NotFoundPage from '../pages/not-found-page/not-found-page';
 
 function App(): JSX.Element {
   const isCamerasLoading = useAppSelector(selectIsCamerasLoading);
@@ -35,6 +36,10 @@ function App(): JSX.Element {
                   element={<BasketPage/>}
                 />
               </Route>
+              <Route
+                path={AppRoute.NotFound}
+                element={<NotFoundPage/>}
+              />
             </Route>
           </Routes>
         </ScrollToTop>
