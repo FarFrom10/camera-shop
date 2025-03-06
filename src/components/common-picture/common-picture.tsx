@@ -30,11 +30,11 @@ function CommonPicture({
       <picture>
         <source
           type="image/webp"
-          srcSet={`/${webp}, /${webp2x}`}
+          srcSet={`${webp}, ${webp2x}`}
         />
         <img
-          src={`/${img}`}
-          srcSet={`/${img2x}`}
+          src={img}
+          srcSet={img2x}
           width={ImageSettings[category].width}
           height={ImageSettings[category].height}
           alt={name}
