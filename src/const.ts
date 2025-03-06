@@ -2,6 +2,7 @@ export const SITE_NAME = 'Фотошоп';
 export const TIMEOUT_SHOW_ERROR = 3000;
 export const RATING_STAR_NUMBER = 5;
 export const REVIEWS_STEP_NUMBER = 3;
+export const CLASS_SCROLL_LOCK = 'scroll-lock';
 
 export const TEMPORARY_ALT_TEXT = 'ВРЕМЕННЫЙ ТЕКСТ';
 
@@ -12,12 +13,20 @@ export const TemporaryNumbers = {
   price: 73629
 } as const;
 
+export const TemporaryBusketItemDescription = {
+  Name: 'ВРЕМЕННЫЕ ДАННЫЕ',
+  VendorCode: 'DA4IU67AD5',
+  Type: 'Коллекционная',
+  Category: 'Видеокамера',
+} as const;
+
 export const TemporaryImages = {
   PreviewImg: 'img/content/das-auge.jpg',
   PreviewImg2x: 'img/content/das-auge@2x.jpg',
   PreviewImgWebp: 'img/content/das-auge.webp',
   PreviewImgWebp2x: 'img/content/das-auge@2x.webp'
 } as const;
+
 
 export const BusketAmount = {
   Min: 1,

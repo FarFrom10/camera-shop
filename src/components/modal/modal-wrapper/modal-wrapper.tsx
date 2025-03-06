@@ -1,15 +1,25 @@
-function ModalWrapper(): JSX.Element {
+import cn from 'classnames';
+import ModalWrapperContent from '../../modal-wrapper-content/modal-wrapper-content';
+
+type ModalWrapperProps = {
+  isActive: boolean;
+  onModalClose: () => void;
+  children: JSX.Element;
+}
+
+function ModalWrapper({isActive, onModalClose, children}: ModalWrapperProps): JSX.Element {
   return(
-    <div className="modal is-active">
+    <div className={cn(
+      'modal',
+      {'is-active': isActive}
+    )}
+    >
       <div className="modal__wrapper">
-        <div className="modal__overlay"/>
-        <div className="modal__content">
-          <button className="cross-btn" type="button" aria-label="Закрыть попап">
-            <svg width={10} height={10} aria-hidden="true">
-              <use xlinkHref="#icon-close" />
-            </svg>
-          </button>
-        </div>
+        <div onClick={onModalClose} className="modal__overlay"/>
+        {isActive &&
+          <ModalWrapperContent onModalClose={onModalClose}>
+            {children}
+          </ModalWrapperContent>}
       </div>
     </div>
   );

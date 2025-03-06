@@ -8,9 +8,10 @@ import ProductCardInfo from '../product-card-info/product-card-info';
 
 type ProductCardProps = {
   camera: CameraData;
+  onButtonClick: (id: number | null) => void ;
 }
 
-function ProductCard({camera}: ProductCardProps): JSX.Element {
+function ProductCard({camera, onButtonClick}: ProductCardProps): JSX.Element {
   const {
     id,
     name,
@@ -35,7 +36,7 @@ function ProductCard({camera}: ProductCardProps): JSX.Element {
       />
       <ProductCardInfo name={name} rating={rating} reviewCount={reviewCount} price={price}/>
       <div className="product-card__buttons">
-        <CommonButton buttonText={ButtonText.Buy} isProductCard/>
+        <CommonButton currentId={id} onButtonClick={onButtonClick} buttonText={ButtonText.Buy} isProductCard/>
         <ButtonMoreDetails route={generatePath(AppRoute.Product, {id:String(id)})}/>
       </div>
     </div>

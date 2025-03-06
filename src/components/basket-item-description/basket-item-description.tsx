@@ -1,19 +1,30 @@
-function BasketItemDescription(): JSX.Element {
+import { PriceClass, TemporaryBusketItemDescription, TemporaryNumbers } from '../../const';
+import { CameraData } from '../../types/cameras';
+import ProductPrice from '../product-price/product-price';
+
+type BasketItemDescriptionProps = {
+  camera?: CameraData;
+  shouldDisplayPrice?: boolean;
+}
+
+function BasketItemDescription({shouldDisplayPrice = false, camera}: BasketItemDescriptionProps): JSX.Element {
   return (
     <div className="basket-item__description">
-      <p className="basket-item__title">Фотоаппарат «Орлёнок»</p>
+      <p className="basket-item__title">{camera?.name || TemporaryBusketItemDescription.Name}</p>
       <ul className="basket-item__list">
         <li className="basket-item__list-item">
           <span className="basket-item__article">Артикул:</span>{' '}
-          <span className="basket-item__number">O78DFGSD832</span>
+          <span className="basket-item__number">{camera?.vendorCode || TemporaryBusketItemDescription.VendorCode}</span>
         </li>
         <li className="basket-item__list-item">
-          Плёночная фотокамера
+          {camera?.type || TemporaryBusketItemDescription.Type}
         </li>
         <li className="basket-item__list-item">
-          Любительский уровень
+          {camera?.category || TemporaryBusketItemDescription.Category}
         </li>
       </ul>
+      {shouldDisplayPrice &&
+      <ProductPrice priceClass={PriceClass.BasketItem} price={camera?.price || TemporaryNumbers.price}/>}
     </div>
   );
 }

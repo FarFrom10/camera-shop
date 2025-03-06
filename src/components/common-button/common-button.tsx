@@ -8,7 +8,8 @@ type CommonButtonProps = {
   isAddToCart?: boolean;
   isProductCard?: boolean;
   buttonText: ButtonText;
-  onButtonClick?: () => void;
+  currentId?: number | null;
+  onButtonClick?: (id: number | null) => void ;
 }
 
 function CommonButton({
@@ -16,6 +17,7 @@ function CommonButton({
   isAddToCart = false,
   isProductCard = false,
   buttonText,
+  currentId = null,
   onButtonClick
 }: CommonButtonProps): JSX.Element {
 
@@ -30,7 +32,7 @@ function CommonButton({
 
   return (
     <button
-      onClick={onButtonClick && onButtonClick}
+      onClick={() => onButtonClick && onButtonClick(currentId)}
       className={cn(
         'btn',
         'btn--purple',
