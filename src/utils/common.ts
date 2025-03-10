@@ -19,3 +19,20 @@ export function getFilteredPathnames(pathnames: string[], id?: string | undefine
     }).filter((_, i) => !itemsToDelete.includes(i))
     : pathnames;
 }
+
+export function formatPhoneNumber(value: string): string {
+  const phoneNumber = value.slice(2).replace(/[^\d]/g, '');
+  const phoneNumberLength = phoneNumber.length;
+
+  if (phoneNumberLength < 4) {
+    return `+7${phoneNumber}`;
+  }
+  if (phoneNumberLength < 7) {
+    return `+7(${phoneNumber.slice(0,3)})${phoneNumber.slice(3)}`;
+  }
+  if (phoneNumberLength < 9) {
+    return `+7(${phoneNumber.slice(0,3)})${phoneNumber.slice(3,6)}-${phoneNumber.slice(6)}`;
+  }
+
+  return `+7(${phoneNumber.slice(0,3)})${phoneNumber.slice(3,6)}-${phoneNumber.slice(6,8)}-${phoneNumber.slice(8, 10)}`;
+}
