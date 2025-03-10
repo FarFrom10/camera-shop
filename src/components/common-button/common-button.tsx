@@ -7,6 +7,8 @@ type CommonButtonProps = {
   isInCart?: boolean;
   isAddToCart?: boolean;
   isProductCard?: boolean;
+  isModal?: boolean;
+  isFitWidth?: boolean;
   buttonText: ButtonText;
   currentId?: number | null;
   onButtonClick?: (id: number | null) => void ;
@@ -16,6 +18,8 @@ function CommonButton({
   isInCart = false,
   isAddToCart = false,
   isProductCard = false,
+  isModal = false,
+  isFitWidth = false,
   buttonText,
   currentId = null,
   onButtonClick
@@ -37,6 +41,8 @@ function CommonButton({
         'btn',
         'btn--purple',
         {'product-card__btn': isProductCard},
+        {'modal__btn': isModal},
+        {'modal__btn--fit-width': isFitWidth},
       )} type="button"
     >
       {isAddToCart && <CommonIcon icon={IconName.CartAdd}/>}

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { CLASS_SCROLL_LOCK, IconName } from '../../const';
+import { CLASS_SCROLL_LOCK, IconName, MODAL_OPEN_FOCUS_DELAY } from '../../const';
 import CommonIcon from '../common-icon/common-icon';
 
 type ModalWrapperContentProps = {
@@ -16,13 +16,13 @@ function ModalWrapperContent({onModalClose, children}: ModalWrapperContentProps)
     const focusableElements = modalElement.querySelectorAll(
       'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
     );
-    const firstFocusableElement = focusableElements[0];
-    const lastFocusableElement = focusableElements[focusableElements.length - 1];
+    const firstFocusableElement = focusableElements[0] as HTMLElement;
+    const lastFocusableElement = focusableElements[focusableElements.length - 1] as HTMLElement;
 
     //Без этого не получилось добавить фокус на модальном окне при его появлении
     setTimeout(() => {
-      (firstFocusableElement as HTMLElement)?.focus();
-    }, 300) ;
+      firstFocusableElement.focus();
+    }, MODAL_OPEN_FOCUS_DELAY) ;
 
     const closeModal = (evt: KeyboardEvent) => {
       if(evt.key === 'Escape'){
@@ -37,10 +37,10 @@ function ModalWrapperContent({onModalClose, children}: ModalWrapperContentProps)
       if (event.key === 'Tab') {
         if (document.activeElement === lastFocusableElement) {
           event.preventDefault();
-          (firstFocusableElement as HTMLElement)?.focus();
+          firstFocusableElement.focus();
         } else if (document.activeElement === firstFocusableElement && event.shiftKey) {
           event.preventDefault();
-          (firstFocusableElement as HTMLElement)?.focus();
+          firstFocusableElement.focus();
         }
       }
     };

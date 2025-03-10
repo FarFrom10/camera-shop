@@ -3,6 +3,7 @@ export const TIMEOUT_SHOW_ERROR = 3000;
 export const RATING_STAR_NUMBER = 5;
 export const REVIEWS_STEP_NUMBER = 3;
 export const CLASS_SCROLL_LOCK = 'scroll-lock';
+export const MODAL_OPEN_FOCUS_DELAY = 300;
 
 export const TEMPORARY_ALT_TEXT = 'ВРЕМЕННЫЙ ТЕКСТ';
 
@@ -67,6 +68,7 @@ export enum IconName {
   ArrowSide = 'icon-arrow',
   Star = 'icon-star',
   StarFull = 'icon-full-star',
+  Snowflake = 'icon-snowflake',
 }
 
 export enum ButtonQuantityDirection {
@@ -91,6 +93,7 @@ export enum ButtonText {
   AddToCart = 'Добавить в корзину',
   AddedToCart = 'В корзине',
   ShowMore = 'Показать больше отзывов',
+  Order = 'Заказать'
 }
 
 export enum PriceClass {

@@ -49,4 +49,8 @@ export const IconSettings: SettingsType = {
     width: 17,
     height: 16,
   },
+  [IconName.Snowflake]: {
+    width: 9,
+    height: 9,
+  },
 } as const;
