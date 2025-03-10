@@ -24,6 +24,8 @@ function ProductCard({camera, onButtonClick}: ProductCardProps): JSX.Element {
     previewImgWebp2x,
   } = camera;
 
+  const handleButtonClick = () => onButtonClick(id);
+
   return(
     <div className="product-card">
       <CommonPicture
@@ -36,7 +38,7 @@ function ProductCard({camera, onButtonClick}: ProductCardProps): JSX.Element {
       />
       <ProductCardInfo name={name} rating={rating} reviewCount={reviewCount} price={price}/>
       <div className="product-card__buttons">
-        <CommonButton currentId={id} onButtonClick={onButtonClick} buttonText={ButtonText.Buy} isProductCard/>
+        <CommonButton onButtonClick={handleButtonClick} buttonText={ButtonText.Buy} isProductCard/>
         <ButtonMoreDetails route={generatePath(AppRoute.Product, {id:String(id)})}/>
       </div>
     </div>

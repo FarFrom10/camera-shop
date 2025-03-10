@@ -6,3 +6,9 @@ export type AsyncThunkArguments = {
   state: State;
   extra: AxiosInstance;
 }
+
+export type ContactMeData = {
+  camerasIds: number[];
+  coupon: string;
+  tel: string;
+}

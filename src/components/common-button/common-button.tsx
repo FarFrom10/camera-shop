@@ -10,8 +10,7 @@ type CommonButtonProps = {
   isModal?: boolean;
   isFitWidth?: boolean;
   buttonText: ButtonText;
-  currentId?: number | null;
-  onButtonClick?: (id: number | null) => void ;
+  onButtonClick?: () => void ;
 }
 
 function CommonButton({
@@ -21,7 +20,6 @@ function CommonButton({
   isModal = false,
   isFitWidth = false,
   buttonText,
-  currentId = null,
   onButtonClick
 }: CommonButtonProps): JSX.Element {
 
@@ -36,7 +34,7 @@ function CommonButton({
 
   return (
     <button
-      onClick={() => onButtonClick && onButtonClick(currentId)}
+      onClick={onButtonClick && onButtonClick}
       className={cn(
         'btn',
         'btn--purple',
