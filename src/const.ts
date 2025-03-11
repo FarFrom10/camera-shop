@@ -4,6 +4,12 @@ export const RATING_STAR_NUMBER = 5;
 export const REVIEWS_STEP_NUMBER = 3;
 export const CLASS_SCROLL_LOCK = 'scroll-lock';
 export const MODAL_OPEN_FOCUS_DELAY = 300;
+export const PHONE_NUMBER_START = '+7';
+
+export const PhoneMaxLength = {
+  InputValue: 16,
+  Numbers: 11
+} as const;
 
 export const TEMPORARY_ALT_TEXT = 'ВРЕМЕННЫЙ ТЕКСТ';
 
@@ -113,6 +119,10 @@ export enum ProductRatingClass {
   ProductPage = 'product__rate',
   ProductCard = 'product-card__rate',
   ReviewCard = 'review-card__rate',
+}
+
+export enum InputValidationErrorMessage {
+  Phone = 'Формат: +7(9XX)XXX-XX-XX'
 }
 
 export const SocialIconSize = {
