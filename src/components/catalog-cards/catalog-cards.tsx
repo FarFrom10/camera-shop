@@ -26,7 +26,7 @@ function CatalogCards({cameras}: CatalogCardsProps): JSX.Element {
         {cards}
       </div>
       <ModalWrapper onModalClose={handleModalContactMeClose} isActive={modalContactMe.isOpen}>
-        <ModalContactMe camera={currentCamera}/>
+        <ModalContactMe onModalClose={handleModalContactMeClose} camera={currentCamera}/>
       </ModalWrapper>
     </>
   );

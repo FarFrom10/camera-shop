@@ -3,7 +3,7 @@ import { AppRoute } from '../../../const';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import ProductPageContent from '../../product-page-content/product-page-content';
 import Title from '../../title/title';
-import { fetchCameraByIdAction, fetchCameraReviewsByIdAction } from '../../../store/api-actions';
+import { getCameraByIdAction, fetchCameraReviewsByIdAction } from '../../../store/api-actions';
 import { useEffect } from 'react';
 import { selectCurrentCamera, selectIsCurrentCameraLoading } from '../../../store/cameras-process/cameras-process.selectors';
 import LoadingScreen from '../../loading-screen/loading-screen';
@@ -22,7 +22,7 @@ function ProductPage(): JSX.Element {
 
   useEffect(()=> {
     if (id) {
-      dispatch(fetchCameraByIdAction(id))
+      dispatch(getCameraByIdAction(id))
         .then((response) => {
           if(response.meta.requestStatus === 'fulfilled') {
             dispatch(fetchCameraReviewsByIdAction(id));

@@ -9,6 +9,6 @@ export type AsyncThunkArguments = {
 
 export type ContactMeData = {
   camerasIds: number[];
-  coupon: string;
+  coupon: string | null;
   tel: string;
 }

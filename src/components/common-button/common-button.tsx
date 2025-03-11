@@ -4,6 +4,7 @@ import CommonIcon from '../common-icon/common-icon';
 import { Link } from 'react-router-dom';
 
 type CommonButtonProps = {
+  isDisabled?: boolean;
   isInCart?: boolean;
   isAddToCart?: boolean;
   isProductCard?: boolean;
@@ -14,6 +15,7 @@ type CommonButtonProps = {
 }
 
 function CommonButton({
+  isDisabled = false,
   isInCart = false,
   isAddToCart = false,
   isProductCard = false,
@@ -34,6 +36,7 @@ function CommonButton({
 
   return (
     <button
+      disabled={isDisabled}
       onClick={onButtonClick && onButtonClick}
       className={cn(
         'btn',
@@ -44,7 +47,7 @@ function CommonButton({
       )} type="button"
     >
       {isAddToCart && <CommonIcon icon={IconName.CartAdd}/>}
-      {buttonText}
+      {isDisabled ? ButtonText.Loading : buttonText}
     </button>
   );
 }

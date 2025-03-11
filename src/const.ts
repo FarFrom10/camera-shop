@@ -42,7 +42,8 @@ export const BusketAmount = {
 
 export enum NameSpace {
   Cameras = 'cameras',
-  Reviews = 'reviews,'
+  Reviews = 'reviews,',
+  User = 'user',
 }
 
 export enum AppRoute {
@@ -95,6 +96,7 @@ export enum ProductTabsCategory {
 }
 
 export enum ButtonText {
+  Loading = 'Отправка...',
   Buy = 'Купить',
   AddToCart = 'Добавить в корзину',
   AddedToCart = 'В корзине',
@@ -125,6 +127,13 @@ export enum InputValidationErrorMessage {
   Phone = 'Формат: +7(9XX)XXX-XX-XX'
 }
 
+export const ServerConnectionStatusMessage = {
+  Fail: 'Не удалось связаться с сервером',
+  Success: {
+    contactMe: 'Товар добавлен в список отложенных товаров'
+  }
+} as const;
+
 export const SocialIconSize = {
   Width: 20,
   Height: 20,
@@ -133,6 +142,7 @@ export const SocialIconSize = {
 export enum APIRoute {
   Cameras = '/cameras',
   PromoCameras = '/promo',
+  Oders = '/orders',
 }
 
 export enum DateFormat {
