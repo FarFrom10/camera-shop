@@ -128,11 +128,20 @@ export enum InputValidationErrorMessage {
 }
 
 export const ServerConnectionStatusMessage = {
-  Fail: 'Не удалось связаться с сервером',
+  Fail: {
+    common: 'Ошибка соединения с сервером',
+    camera: 'Не удалось загрузить информацию о товаре',
+    reviews: 'Не удалось загрузить отзывы'
+  },
   Success: {
     contactMe: 'Товар добавлен в список отложенных товаров'
   }
 } as const;
+
+export enum EmptyListMessage {
+  Cameras = 'Список товаров пуст',
+  Reviews = 'Список отзывов пуст'
+}
 
 export const SocialIconSize = {
   Width: 20,

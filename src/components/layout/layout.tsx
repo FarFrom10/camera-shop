@@ -7,12 +7,13 @@ import { AppRoute } from '../../const';
 function Layout(): JSX.Element {
   const {pathname} = useLocation();
   const isBasketPage = pathname === AppRoute.Basket;
+  const isIndexPage = pathname === AppRoute.Index;
 
   return(
     <div className="wrapper">
-      <Header isBasketPage={isBasketPage}/>
+      <Header isIndexPage={isIndexPage} isBasketPage={isBasketPage}/>
       <Outlet/>
-      <Footer/>
+      <Footer isIndexPage={isIndexPage}/>
     </div>
   );
 }

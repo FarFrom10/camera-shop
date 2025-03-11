@@ -3,6 +3,8 @@ import { CameraData } from '../../types/cameras';
 import ModalWrapper from '../modal/modal-wrapper/modal-wrapper';
 import ModalContactMe from '../modal/modal-contact-me/modal-contact-me';
 import { useModalContactMe } from '../../hooks/use-modal-contact-me';
+import EmptyList from '../empty-list/empty-list';
+import { EmptyListMessage } from '../../const';
 
 type CatalogCardsProps = {
   cameras: CameraData[];
@@ -22,9 +24,15 @@ function CatalogCards({cameras}: CatalogCardsProps): JSX.Element {
 
   return(
     <>
-      <div className="cards catalog__cards">
-        {cards}
-      </div>
+      {cameras.length > 0
+        ?
+        (
+          <div className="cards catalog__cards">
+            {cards}
+          </div>
+        )
+        : <EmptyList message={EmptyListMessage.Cameras}/>}
+
       <ModalWrapper onModalClose={handleModalContactMeClose} isActive={modalContactMe.isOpen}>
         <ModalContactMe onModalClose={handleModalContactMeClose} camera={currentCamera}/>
       </ModalWrapper>

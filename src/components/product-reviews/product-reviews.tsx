@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { ButtonText, REVIEWS_STEP_NUMBER } from '../../const';
+import { ButtonText, EmptyListMessage, REVIEWS_STEP_NUMBER } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { selectReviews } from '../../store/reviews-process/reviews-process.selectors';
 import { getSortedReviews } from '../../utils/reviews';
 import CommonButton from '../common-button/common-button';
 import ReviewsList from '../reviews-list/reviews-list';
+import EmptyList from '../empty-list/empty-list';
 
 function ProductReviews(): JSX.Element {
   const reviews = useAppSelector(selectReviews);
@@ -22,9 +23,13 @@ function ProductReviews(): JSX.Element {
         <div className="page-content__headed">
           <h2 className="title title--h3">Отзывы</h2>
         </div>
-        <ReviewsList reviews={sortedReviews}/>
+
+        { reviews.length > 1
+          ? <ReviewsList reviews={sortedReviews}/>
+          : <EmptyList message={EmptyListMessage.Reviews}/>}
+
         <div className="review-block__buttons">
-          {reviewsNumber !== reviews.length &&
+          {reviewsNumber !== reviews.length && reviews.length > REVIEWS_STEP_NUMBER &&
             <CommonButton onButtonClick={handleButtonClick} buttonText={ButtonText.ShowMore}/>}
         </div>
       </div>

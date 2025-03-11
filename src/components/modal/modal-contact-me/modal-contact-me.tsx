@@ -42,7 +42,7 @@ function ModalContactMe({camera, onModalClose}: ModalContactMeProps): JSX.Elemen
     }))
       .then((response) => {
         if (response.meta.requestStatus === 'rejected') {
-          toast.warn(ServerConnectionStatusMessage.Fail);
+          toast.warn(ServerConnectionStatusMessage.Fail.common);
         } else {
           onModalClose();
           toast.success(ServerConnectionStatusMessage.Success.contactMe);

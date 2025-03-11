@@ -14,14 +14,14 @@ const root = ReactDOM.createRoot(
 store.dispatch(fetchCamerasAction())
   .then((response) => {
     if (response.meta.requestStatus === 'rejected') {
-      toast.warn('Unable to access server');
+      toast.warn(ServerConnectionStatusMessage.Fail.common);
     }
   });
 
 store.dispatch(fetchPromoCamerasAction())
   .then((response) => {
     if (response.meta.requestStatus === 'rejected') {
-      toast.warn(ServerConnectionStatusMessage.Fail);
+      toast.warn(ServerConnectionStatusMessage.Fail.common);
     }
   });
 

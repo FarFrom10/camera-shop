@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { AppRoute } from '../../../const';
+import { AppRoute, ServerConnectionStatusMessage } from '../../../const';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import ProductPageContent from '../../product-page-content/product-page-content';
 import Title from '../../title/title';
@@ -11,6 +11,7 @@ import NotFoundPage from '../not-found-page/not-found-page';
 import { selectIsReviewsLoading } from '../../../store/reviews-process/reviews-process.selectors';
 import Breadcrumbs from '../../breadcrumbs/breadcrumbs';
 import ButtonUp from '../../button-up/button-up';
+import { toast } from 'react-toastify';
 
 function ProductPage(): JSX.Element {
   const {id} = useParams();
@@ -24,12 +25,23 @@ function ProductPage(): JSX.Element {
     if (id) {
       dispatch(getCameraByIdAction(id))
         .then((response) => {
-          if(response.meta.requestStatus === 'fulfilled') {
-            dispatch(fetchCameraReviewsByIdAction(id));
+          if(response.meta.requestStatus === 'rejected') {
+            toast.warn(ServerConnectionStatusMessage.Fail.camera);
           }
         });
     }
   }, [id, dispatch]);
+
+  useEffect(() => {
+    if (currentCamera !== null && id) {
+      dispatch(fetchCameraReviewsByIdAction(id))
+        .then((response) => {
+          if(response.meta.requestStatus === 'rejected') {
+            toast.warn(ServerConnectionStatusMessage.Fail.reviews);
+          }
+        });
+    }
+  }, [id, currentCamera, dispatch]);
 
   if(isCurrentCameraLoading || isReviewsLoading) {
     return <LoadingScreen/>;

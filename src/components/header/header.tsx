@@ -5,13 +5,14 @@ import Logo from '../logo/logo';
 
 type HeaderProps = {
   isBasketPage: boolean;
+  isIndexPage?: boolean;
 }
 
-function Header({isBasketPage}: HeaderProps): JSX.Element {
+function Header({isBasketPage, isIndexPage = false}: HeaderProps): JSX.Element {
   return (
     <header className="header" id="header">
       <div className="container">
-        <Logo/>
+        <Logo isIndexPage={isIndexPage}/>
         <HeaderNav/>
         {isBasketPage && <FormSearch/>}
         {isBasketPage && <HeaderBasket/>}
