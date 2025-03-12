@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { AppRoute, IconName } from '../../const';
+import { AppRoute, IconName, LogoClass } from '../../const';
 import CommonIcon from '../common-icon/common-icon';
 
 type LogoProps = {
@@ -11,7 +11,8 @@ function Logo({isFooter = false, isIndexPage = false}: LogoProps): JSX.Element {
   if (isIndexPage) {
     return (
       <span
-        className="header__logo"
+        data-testid='logo-span'
+        className={isFooter ? LogoClass.Footer : LogoClass.Header}
       >
         <CommonIcon icon={isFooter ? IconName.LogoFooter : IconName.LogoHeader}/>
       </span>
@@ -20,7 +21,8 @@ function Logo({isFooter = false, isIndexPage = false}: LogoProps): JSX.Element {
 
   return (
     <Link
-      className="header__logo"
+      data-testid='logo-link'
+      className={isFooter ? LogoClass.Footer : LogoClass.Header}
       to={AppRoute.Index}
       aria-label="Переход на главную"
     >

@@ -5,7 +5,7 @@ import { selectReviews } from '../../store/reviews-process/reviews-process.selec
 import { getSortedReviews } from '../../utils/reviews';
 import CommonButton from '../common-button/common-button';
 import ReviewsList from '../reviews-list/reviews-list';
-import EmptyList from '../empty-list/empty-list';
+import EmptyListTitle from '../empty-list-title/empty-list-title';
 
 function ProductReviews(): JSX.Element {
   const reviews = useAppSelector(selectReviews);
@@ -26,7 +26,7 @@ function ProductReviews(): JSX.Element {
 
         { reviews.length > 1
           ? <ReviewsList reviews={sortedReviews}/>
-          : <EmptyList message={EmptyListMessage.Reviews}/>}
+          : <EmptyListTitle message={EmptyListMessage.Reviews}/>}
 
         <div className="review-block__buttons">
           {reviewsNumber !== reviews.length && reviews.length > REVIEWS_STEP_NUMBER &&

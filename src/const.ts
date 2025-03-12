@@ -123,6 +123,11 @@ export enum ProductRatingClass {
   ReviewCard = 'review-card__rate',
 }
 
+export enum LogoClass {
+  Header = 'header__logo',
+  Footer = 'footer__logo',
+}
+
 export enum InputValidationErrorMessage {
   Phone = 'Формат: +7(9XX)XXX-XX-XX'
 }
