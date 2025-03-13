@@ -42,7 +42,7 @@ export const BusketAmount = {
 
 export enum NameSpace {
   Cameras = 'cameras',
-  Reviews = 'reviews,',
+  Reviews = 'reviews',
   User = 'user',
 }
 
