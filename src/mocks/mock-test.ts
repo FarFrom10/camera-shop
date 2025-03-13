@@ -1,3 +1,4 @@
+import { ContactMeData } from '../types/api';
 import { CameraData, CameraReview, PromoCameraData } from '../types/cameras';
 
 export const mockCurrentCamera: CameraData = {
@@ -21,7 +22,7 @@ export const mockCameras: CameraData[] = [
   mockCurrentCamera
 ];
 
-export const mockCamerasPromoCameras: PromoCameraData[] = [
+export const mockPromoCameras: PromoCameraData[] = [
   {
     'id': 1,
     'name': 'Ретрокамера Dus Auge lV',
@@ -44,3 +45,9 @@ export const mockReviews: CameraReview[] = [
     'rating': 5
   }
 ];
+
+export const mockContactMeData: ContactMeData = {
+  camerasIds: [1],
+  coupon: null,
+  tel: '+76666666',
+};

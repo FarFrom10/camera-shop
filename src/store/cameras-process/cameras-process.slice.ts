@@ -13,7 +13,7 @@ const initialState: CamerasProcess = {
   isCurrentCameraLoading: false,
 };
 
-export const camersProcess = createSlice({
+export const camerasProcess = createSlice({
   name: NameSpace.Cameras,
   initialState,
   reducers: {},
