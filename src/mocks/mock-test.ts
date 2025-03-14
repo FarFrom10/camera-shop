@@ -1,7 +1,7 @@
 import { ContactMeData } from '../types/api';
 import { CameraData, CameraReview, PromoCameraData } from '../types/cameras';
 
-export const mockCurrentCamera: CameraData = {
+export const fakeCurrentCamera: CameraData = {
   'id': 1,
   'name': 'Ретрокамера Dus Auge lV',
   'vendorCode': 'DA4IU67AD5',
@@ -18,11 +18,11 @@ export const mockCurrentCamera: CameraData = {
   'previewImgWebp2x': 'img/content/das-auge@2x.webp'
 };
 
-export const mockCameras: CameraData[] = [
-  mockCurrentCamera
+export const fakeCameras: CameraData[] = [
+  fakeCurrentCamera
 ];
 
-export const mockPromoCameras: PromoCameraData[] = [
+export const fakePromoCameras: PromoCameraData[] = [
   {
     'id': 1,
     'name': 'Ретрокамера Dus Auge lV',
@@ -33,7 +33,7 @@ export const mockPromoCameras: PromoCameraData[] = [
   }
 ];
 
-export const mockReviews: CameraReview[] = [
+export const fakeReviews: CameraReview[] = [
   {
     'id': 'f1d10ddd-2a21-4f71-9e1e-5f511703fbdd',
     'createAt': '2022-07-09T13:24:57.980Z',
@@ -46,7 +46,7 @@ export const mockReviews: CameraReview[] = [
   }
 ];
 
-export const mockContactMeData: ContactMeData = {
+export const fakeContactMeData: ContactMeData = {
   camerasIds: [1],
   coupon: null,
   tel: '+76666666',

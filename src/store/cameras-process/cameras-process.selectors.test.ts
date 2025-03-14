@@ -1,13 +1,13 @@
 import { NameSpace } from '../../const';
-import { mockCameras, mockPromoCameras, mockCurrentCamera } from '../../mocks/mock-test';
+import { fakeCameras, fakePromoCameras, fakeCurrentCamera } from '../../mocks/mock-test';
 import { selectCameras, selectCurrentCamera, selectIsCamerasLoading, selectIsCurrentCameraLoading, selectIsPromoCamerasLoading, selectPromoCameras } from './cameras-process.selectors';
 
 describe('CamerasProcess selectors', () => {
   const state = {
     [NameSpace.Cameras]: {
-      cameras: mockCameras,
-      promoCameras: mockPromoCameras,
-      currentCamera: mockCurrentCamera,
+      cameras: fakeCameras,
+      promoCameras: fakePromoCameras,
+      currentCamera: fakeCurrentCamera,
 
       isCamerasLoading: false,
       isPromoCamerasLoading: false,

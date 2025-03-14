@@ -1,4 +1,4 @@
-import { mockCameras, mockCurrentCamera, mockPromoCameras } from '../../mocks/mock-test';
+import { fakeCameras, fakeCurrentCamera, fakePromoCameras } from '../../mocks/mock-test';
 import { fetchCamerasAction, fetchPromoCamerasAction, getCameraByIdAction } from '../api-actions';
 import { camerasProcess } from './cameras-process.slice';
 
@@ -6,7 +6,7 @@ describe('CameraProcess slice', () => {
   it('should return initial state with empty action', () => {
     const emptyAction = { type: '' };
     const expectedState = {
-      cameras: mockCameras,
+      cameras: fakeCameras,
       promoCameras: [],
       currentCamera: null,
 
@@ -54,7 +54,7 @@ describe('CameraProcess slice', () => {
   });
   it('should add data to "cameras" and set "isCamerasLoading" to "false" with "fetchCamerasAction.fulfilled" action', () => {
     const expectedState = {
-      cameras: mockCameras,
+      cameras: fakeCameras,
       promoCameras: [],
       currentCamera: null,
 
@@ -63,7 +63,7 @@ describe('CameraProcess slice', () => {
       isCurrentCameraLoading: false,
     };
 
-    const result = camerasProcess.reducer(undefined, fetchCamerasAction.fulfilled(mockCameras, '', undefined));
+    const result = camerasProcess.reducer(undefined, fetchCamerasAction.fulfilled(fakeCameras, '', undefined));
 
     expect(result).toEqual(expectedState);
   });
@@ -101,7 +101,7 @@ describe('CameraProcess slice', () => {
   it('should add data to "promoCameras" and set "isPromoCamerasLoading" to "false" with "fetchPromoCamerasAction.fulfilled" action', () => {
     const expectedState = {
       cameras: [],
-      promoCameras: mockPromoCameras,
+      promoCameras: fakePromoCameras,
       currentCamera: null,
 
       isCamerasLoading: false,
@@ -109,7 +109,7 @@ describe('CameraProcess slice', () => {
       isCurrentCameraLoading: false,
     };
 
-    const result = camerasProcess.reducer(undefined, fetchPromoCamerasAction.fulfilled(mockPromoCameras, '', undefined));
+    const result = camerasProcess.reducer(undefined, fetchPromoCamerasAction.fulfilled(fakePromoCameras, '', undefined));
 
     expect(result).toEqual(expectedState);
   });
@@ -148,15 +148,15 @@ describe('CameraProcess slice', () => {
     const expectedState = {
       cameras: [],
       promoCameras: [],
-      currentCamera: mockCurrentCamera,
+      currentCamera: fakeCurrentCamera,
 
       isCamerasLoading: false,
       isPromoCamerasLoading: false,
       isCurrentCameraLoading: false,
     };
-    const fakeId = String(mockCurrentCamera.id);
+    const fakeId = String(fakeCurrentCamera.id);
 
-    const result = camerasProcess.reducer(undefined, getCameraByIdAction.fulfilled(mockCurrentCamera, '', fakeId));
+    const result = camerasProcess.reducer(undefined, getCameraByIdAction.fulfilled(fakeCurrentCamera, '', fakeId));
 
     expect(result).toEqual(expectedState);
   });

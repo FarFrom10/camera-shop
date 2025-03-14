@@ -1,4 +1,4 @@
-import { mockReviews } from '../../mocks/mock-test';
+import { fakeReviews } from '../../mocks/mock-test';
 import { fetchCameraReviewsByIdAction } from '../api-actions';
 import { reviewsProcess } from './reviews-process.slice';
 
@@ -6,7 +6,7 @@ describe('ReviewProcess slice', () => {
   it('should return initial state with empty action', () => {
     const emptyAction = { type: '' };
     const expectedState = {
-      reviews:mockReviews,
+      reviews:fakeReviews,
 
       isReviewsLoading: false,
     };
@@ -42,13 +42,13 @@ describe('ReviewProcess slice', () => {
   });
   it('should add data to "reviews" and set "isReviewsLoading" to "false" with "fetchCameraReviewsByIdAction.fulfilled" action', () => {
     const expectedState = {
-      reviews: mockReviews,
+      reviews: fakeReviews,
 
       isReviewsLoading: false,
     };
-    const fakeId = String(mockReviews[0].cameraId);
+    const fakeId = String(fakeReviews[0].cameraId);
 
-    const result = reviewsProcess.reducer(undefined, fetchCameraReviewsByIdAction.fulfilled(mockReviews, '', fakeId));
+    const result = reviewsProcess.reducer(undefined, fetchCameraReviewsByIdAction.fulfilled(fakeReviews, '', fakeId));
 
     expect(result).toEqual(expectedState);
   });

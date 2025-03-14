@@ -1,4 +1,4 @@
-import { mockContactMeData } from '../../mocks/mock-test';
+import { fakeContactMeData } from '../../mocks/mock-test';
 import { postContactMeDataAction } from '../api-actions';
 import { userProcess } from './user-process.slice';
 
@@ -39,7 +39,7 @@ describe('UserProcess slice', () => {
       isContactMeDataLoading: false
     };
 
-    const result = userProcess.reducer(undefined, postContactMeDataAction.fulfilled('', '', mockContactMeData));
+    const result = userProcess.reducer(undefined, postContactMeDataAction.fulfilled('', '', fakeContactMeData));
 
     expect(result).toEqual(expectedState);
   });

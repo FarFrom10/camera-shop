@@ -1,11 +1,11 @@
 import { NameSpace } from '../../const';
-import { mockReviews } from '../../mocks/mock-test';
+import { fakeReviews } from '../../mocks/mock-test';
 import { selectIsReviewsLoading, selectReviews } from './reviews-process.selectors';
 
 describe('ReviewsProcess selectors', () => {
   const state = {
     [NameSpace.Reviews]: {
-      reviews: mockReviews,
+      reviews: fakeReviews,
 
       isReviewsLoading: false,
     }
