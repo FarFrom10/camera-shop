@@ -6,7 +6,7 @@ import { State } from '../types/state';
 import { createAPI } from '../services/api';
 import thunk from 'redux-thunk';
 import { Action } from 'redux';
-import { AppThunkDispatch } from './mocks';
+import { AppThunkDispatch } from '../types/mocks';
 import { Provider } from 'react-redux';
 
 export function withRouter(component: JSX.Element): JSX.Element {

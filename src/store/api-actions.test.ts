@@ -4,7 +4,7 @@ import MockAdapter from 'axios-mock-adapter';
 import thunk from 'redux-thunk';
 import { State } from '../types/state';
 import { Action } from '@reduxjs/toolkit';
-import { AppThunkDispatch, extractActionsTypes } from '../utils/mocks';
+import { AppThunkDispatch, extractActionsTypes } from '../types/mocks';
 import { APIRoute } from '../const';
 import { fetchCameraReviewsByIdAction, fetchCamerasAction, fetchPromoCamerasAction, getCameraByIdAction, postContactMeDataAction } from './api-actions';
 import { fakeCameras, fakeContactMeData, fakeCurrentCamera, fakePromoCameras, fakeReviews } from '../mocks/mock-test';

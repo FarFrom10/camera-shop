@@ -11,7 +11,7 @@ function Logo({isFooter = false, isIndexPage = false}: LogoProps): JSX.Element {
   if (isIndexPage) {
     return (
       <span
-        data-testid='logo-span'
+        data-testid='logoSpan'
         className={isFooter ? LogoClass.Footer : LogoClass.Header}
       >
         <CommonIcon icon={isFooter ? IconName.LogoFooter : IconName.LogoHeader}/>
@@ -21,7 +21,7 @@ function Logo({isFooter = false, isIndexPage = false}: LogoProps): JSX.Element {
 
   return (
     <Link
-      data-testid='logo-link'
+      data-testid='logoLink'
       className={isFooter ? LogoClass.Footer : LogoClass.Header}
       to={AppRoute.Index}
       aria-label="Переход на главную"

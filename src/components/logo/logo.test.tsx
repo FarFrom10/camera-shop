@@ -4,8 +4,8 @@ import { LogoClass } from '../../const';
 import { withRouter } from '../../utils/mock-component';
 
 describe('Component: Logo', () => {
-  const linkTestId = 'logo-link';
-  const spanTestId = 'logo-span';
+  const linkTestId = 'logoLink';
+  const spanTestId = 'logoSpan';
   const headerClass = LogoClass.Header;
   const footerClass = LogoClass.Footer;
 
@@ -17,7 +17,7 @@ describe('Component: Logo', () => {
     expect(logoElement).toHaveClass(headerClass);
   });
 
-  it('should render correctly in header and return span', () => {
+  it('should render correctly with prop "isIndexPage" in header and return span', () => {
     render(<Logo isIndexPage/>);
     const logoElement = screen.getByTestId(spanTestId);
 
@@ -25,7 +25,7 @@ describe('Component: Logo', () => {
     expect(logoElement).toHaveClass(headerClass);
   });
 
-  it('should render correctly in footer and return Link', () => {
+  it('should render correctly with prop "isFooter" in footer and return Link', () => {
     render(withRouter(<Logo isFooter/>));
     const logoElement = screen.getByTestId(linkTestId);
 

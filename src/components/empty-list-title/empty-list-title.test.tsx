@@ -5,7 +5,7 @@ import EmptyListTitle from './empty-list-title';
 describe('Component: EmptyListTitle', () => {
   it('should render correctly', () => {
     const expectedText = EmptyListMessage.Cameras;
-    const titleTestId = 'empty-list-title';
+    const titleTestId = 'emptyListTitle';
 
     render(<EmptyListTitle message={expectedText}/>);
     const title = screen.getByTestId(titleTestId);

@@ -8,8 +8,8 @@ type CommonIconProps = {
 
 function CommonIcon({icon, iconClass = ''}: CommonIconProps): JSX.Element {
   return (
-    <svg data-testid='svg-container' className={iconClass} width={IconSettings[icon].width} height={IconSettings[icon].height} aria-hidden="true">
-      <use data-testid='common-icon' xlinkHref={`#${icon}`}></use>
+    <svg data-testid='svgContainer' className={iconClass} width={IconSettings[icon].width} height={IconSettings[icon].height} aria-hidden="true">
+      <use data-testid='commonIcon' xlinkHref={`#${icon}`}></use>
     </svg>
   );
 }

@@ -3,11 +3,11 @@ import CommonIcon from './common-icon';
 import { IconName } from '../../const';
 
 describe('Component: CommonIcon', () => {
-  it('should render correctly', () => {
+  it('should render correctly with prop "iconClass"', () => {
     const expectedIcon = IconName.ArrowUp;
     const expectedClass = 'test-class';
-    const svgTestId = 'svg-container';
-    const iconTestId = 'common-icon';
+    const svgTestId = 'svgContainer';
+    const iconTestId = 'commonIcon';
 
     render(<CommonIcon icon={expectedIcon} iconClass={expectedClass}/>);
     const svgElement = screen.getByTestId(svgTestId);
