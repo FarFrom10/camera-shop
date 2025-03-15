@@ -27,8 +27,9 @@ function CommonPicture({
 
   return (
     <div className={imageClass}>
-      <picture>
+      <picture data-testid="commonPictureContainer" >
         <source
+          data-testid="commonPictureSource"
           type="image/webp"
           srcSet={`${webp}, ${webp2x}`}
         />

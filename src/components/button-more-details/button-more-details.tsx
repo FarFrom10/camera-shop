@@ -9,7 +9,7 @@ type ButtonMoreDetailsProps = {
 function ButtonMoreDetails({isTransparent = true, route}: ButtonMoreDetailsProps):JSX.Element {
 
   return (
-    <Link className={cn(
+    <Link data-testid="buttonMoreDetailsLink" className={cn(
       'btn',
       {'btn--transparent': isTransparent}
     )} to={route}
