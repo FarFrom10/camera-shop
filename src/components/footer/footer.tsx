@@ -8,7 +8,7 @@ type FooterProps = {
 
 function Footer({isIndexPage = false}: FooterProps): JSX.Element {
   return (
-    <footer className="footer">
+    <footer data-testid='footer' className="footer">
       <div className="container">
         <div className="footer__info">
           <Logo isIndexPage={isIndexPage} isFooter/>

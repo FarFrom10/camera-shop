@@ -7,7 +7,7 @@ type HeaderNavLinkProps = {
 
 function HeaderNavLink({route}: HeaderNavLinkProps): JSX.Element {
   return (
-    <li className="main-nav__item">
+    <li data-testid='headerNavItem' className="main-nav__item">
       <Link className="main-nav__link" to={route}>
         {RouteName[route]}
       </Link>

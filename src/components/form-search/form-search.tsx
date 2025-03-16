@@ -4,7 +4,7 @@ import SearchSelectList from '../search-select-list/search-select-list';
 
 function FormSearch(): JSX.Element {
   return (
-    <div className="form-search">
+    <div data-testid='formSearch' className="form-search">
       <form>
         <label>
           <CommonIcon icon={IconName.Lens} iconClass='form-search__icon'/>

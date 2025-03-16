@@ -4,7 +4,7 @@ import CommonIcon from '../common-icon/common-icon';
 
 function HeaderBasket(): JSX.Element {
   return (
-    <Link className="header__basket-link" to={AppRoute.Basket}>
+    <Link data-testid='headerBasket' className="header__basket-link" to={AppRoute.Basket}>
       <CommonIcon icon={IconName.CartAdded}/>
     </Link>
   );

@@ -4,13 +4,13 @@ import HeaderNav from '../header-nav/header-nav';
 import Logo from '../logo/logo';
 
 type HeaderProps = {
-  isBasketPage: boolean;
+  isBasketPage?: boolean;
   isIndexPage?: boolean;
 }
 
-function Header({isBasketPage, isIndexPage = false}: HeaderProps): JSX.Element {
+function Header({isBasketPage = false, isIndexPage = false}: HeaderProps): JSX.Element {
   return (
-    <header className="header" id="header">
+    <header data-testid='header' className="header" id="header">
       <div className="container">
         <Logo isIndexPage={isIndexPage}/>
         <HeaderNav/>

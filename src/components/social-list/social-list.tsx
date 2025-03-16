@@ -5,7 +5,7 @@ function SocialList(): JSX.Element {
   const socials = SocialsNames.map((name) => <SocialItem name={name} key={name}/>);
 
   return (
-    <ul className="social">
+    <ul data-testid='socialList' className="social">
       {socials}
     </ul>
   );

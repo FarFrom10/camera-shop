@@ -20,12 +20,12 @@ function ProductRating({
   );
 
   return (
-    <div className={`rate ${ratingClass}`}>
+    <div data-testid='productRatingContainer' className={`rate ${ratingClass}`}>
       {stars}
       <p className="visually-hidden">{`Рейтинг: ${ratingNumber}`}</p>
 
       {!disableReviewCount &&
-      <p className="rate__count">
+      <p data-testid='rateCount' className="rate__count">
         <span className="visually-hidden">Всего оценок:</span>{reviewCount}
       </p>}
     </div>

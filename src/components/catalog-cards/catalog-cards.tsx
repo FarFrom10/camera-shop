@@ -27,7 +27,7 @@ function CatalogCards({cameras}: CatalogCardsProps): JSX.Element {
       {cameras.length > 0
         ?
         (
-          <div className="cards catalog__cards">
+          <div data-testid='catalogCardsContainer' className="cards catalog__cards">
             {cards}
           </div>
         )

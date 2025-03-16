@@ -8,7 +8,7 @@ type ProductPriceProps = {
 
 function ProductPrice({price, priceClass}: ProductPriceProps): JSX.Element {
   return(
-    <p className={priceClass}>
+    <p data-testid='productPriceContainer' className={priceClass}>
       <span className="visually-hidden">Цена:</span>
       {convertPrice(price)}
     </p>

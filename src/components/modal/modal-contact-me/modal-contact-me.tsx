@@ -52,7 +52,7 @@ function ModalContactMe({camera, onModalClose}: ModalContactMeProps): JSX.Elemen
 
   if (camera === null) {
     return (
-      <p className="title title--h4">Произошла ошибка: камера не найдена</p>
+      <p className="title title--h4">{ServerConnectionStatusMessage.Fail.camera}</p>
     );
   }
 
@@ -67,6 +67,7 @@ function ModalContactMe({camera, onModalClose}: ModalContactMeProps): JSX.Elemen
             <CommonIcon icon={IconName.Snowflake}/>
           </span>
           <input
+            data-testid='modalContactMePhone'
             tabIndex={0}
             value={phone}
             onChange={(evt) => handleInputChange(evt)}

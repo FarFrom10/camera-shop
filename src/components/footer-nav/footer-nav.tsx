@@ -3,7 +3,7 @@ import { AppRoute } from '../../const';
 
 function FooterNav(): JSX.Element {
   return(
-    <ul className="footer__nav">
+    <ul data-testid='footerNav' className="footer__nav">
       <li className="footer__nav-item">
         <p className="footer__title">Навигация</p>
         <ul className="footer__list">

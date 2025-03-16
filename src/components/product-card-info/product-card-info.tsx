@@ -11,7 +11,7 @@ type ProductCardInfoProps = {
 
 function ProductCardInfo({name, rating, reviewCount, price}: ProductCardInfoProps): JSX.Element {
   return (
-    <div className="product-card__info">
+    <div data-testid='productCardInfoContainer' className="product-card__info">
       <ProductRating ratingNumber={rating} reviewCount={reviewCount}/>
       <p className="product-card__title">
         {name}

@@ -27,7 +27,7 @@ function CommonButton({
 
   if (isInCart) {
     return (
-      <Link className="btn btn--purple-border product-card__btn product-card__btn--in-cart" to="#">
+      <Link data-testid='commonButtonWithLink' className="btn btn--purple-border product-card__btn product-card__btn--in-cart" to="#">
         <CommonIcon icon={IconName.CartAdded}/>
         {buttonText}
       </Link>
@@ -36,6 +36,7 @@ function CommonButton({
 
   return (
     <button
+      data-testid='commonButton'
       disabled={isDisabled}
       onClick={onButtonClick && onButtonClick}
       className={cn(

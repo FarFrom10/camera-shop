@@ -10,7 +10,7 @@ function Layout(): JSX.Element {
   const isIndexPage = pathname === AppRoute.Index;
 
   return(
-    <div className="wrapper">
+    <div data-testid='layout' className="wrapper">
       <Header isIndexPage={isIndexPage} isBasketPage={isBasketPage}/>
       <Outlet/>
       <Footer isIndexPage={isIndexPage}/>

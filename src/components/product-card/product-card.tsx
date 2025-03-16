@@ -25,9 +25,10 @@ function ProductCard({camera, onButtonClick}: ProductCardProps): JSX.Element {
   } = camera;
 
   const handleButtonClick = () => onButtonClick(id);
+  const path = generatePath(AppRoute.Product, {id:String(id)});
 
   return(
-    <div className="product-card">
+    <div data-testid='productCardContainer' className="product-card">
       <CommonPicture
         category={CommonPictureCategory.ProductCard}
         name={name}
@@ -39,7 +40,7 @@ function ProductCard({camera, onButtonClick}: ProductCardProps): JSX.Element {
       <ProductCardInfo name={name} rating={rating} reviewCount={reviewCount} price={price}/>
       <div className="product-card__buttons">
         <CommonButton onButtonClick={handleButtonClick} buttonText={ButtonText.Buy} isProductCard/>
-        <ButtonMoreDetails route={generatePath(AppRoute.Product, {id:String(id)})}/>
+        <ButtonMoreDetails route={path}/>
       </div>
     </div>
   );

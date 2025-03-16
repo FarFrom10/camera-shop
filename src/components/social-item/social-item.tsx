@@ -7,14 +7,15 @@ type SocialItemProps = {
 
 function SocialItem({name}: SocialItemProps): JSX.Element {
   return (
-    <li className="social__item">
+    <li data-testid='socialItem' className="social__item">
       <Link
+        data-testid='socialItemLink'
         className="link"
         to="#"
-        aria-label={`Переход на страницу ${name === 'vk' ? 'вконтакте' : name}`}
+        aria-label={`Переход на страницу ${name}`}
       >
         <svg width={SocialIconSize.Width} height={SocialIconSize.Height} aria-hidden="true">
-          <use xlinkHref={`#icon-${name}`} />
+          <use data-testid='socialItemIcon' xlinkHref={`#icon-${name}`} />
         </svg>
       </Link>
     </li>
