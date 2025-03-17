@@ -9,13 +9,13 @@ type ModalWrapperProps = {
 
 function ModalWrapper({isActive, onModalClose, children}: ModalWrapperProps): JSX.Element {
   return(
-    <div className={cn(
+    <div data-testid='modalWrapper' className={cn(
       'modal',
       {'is-active': isActive}
     )}
     >
       <div className="modal__wrapper">
-        <div onClick={onModalClose} className="modal__overlay"/>
+        <div data-testid='modalWrapperOverlay' onClick={onModalClose} className="modal__overlay"/>
         {isActive &&
           <ModalWrapperContent onModalClose={onModalClose}>
             {children}

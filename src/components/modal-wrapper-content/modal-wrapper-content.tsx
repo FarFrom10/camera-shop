@@ -57,8 +57,8 @@ function ModalWrapperContent({onModalClose, children}: ModalWrapperContentProps)
 
 
   return(
-    <div ref={modalRef} className="modal__content">
-      <button onClick={onModalClose} className="cross-btn" type="button" aria-label="Закрыть попап">
+    <div data-testid='modalContent' ref={modalRef} className="modal__content">
+      <button data-testid='modalCloseButton' onClick={onModalClose} className="cross-btn" type="button" aria-label="Закрыть попап">
         <CommonIcon icon={IconName.Close}/>
       </button>
       {children}
