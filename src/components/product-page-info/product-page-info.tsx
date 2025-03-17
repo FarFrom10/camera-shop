@@ -23,7 +23,7 @@ function ProductPageInfo({camera}: ProductPageInfoProps): JSX.Element {
   } = camera;
 
   return (
-    <section className="product">
+    <section data-testid='productPageInfo' className="product">
       <div className="container">
         <CommonPicture
           category={CommonPictureCategory.ProductPage}

@@ -18,17 +18,17 @@ function ProductReviews(): JSX.Element {
   const sortedReviews = getSortedReviews(reviews, reviewsNumber);
 
   return(
-    <section className="review-block">
+    <section data-testid='productReviews' className="review-block">
       <div className="container">
         <div className="page-content__headed">
           <h2 className="title title--h3">Отзывы</h2>
         </div>
 
-        { reviews.length > 1
+        { reviews.length > 0
           ? <ReviewsList reviews={sortedReviews}/>
           : <EmptyListTitle message={EmptyListMessage.Reviews}/>}
 
-        <div className="review-block__buttons">
+        <div data-testid='productReviewsButtons' className="review-block__buttons">
           {reviewsNumber !== reviews.length && reviews.length > REVIEWS_STEP_NUMBER &&
             <CommonButton onButtonClick={handleButtonClick} buttonText={ButtonText.ShowMore}/>}
         </div>

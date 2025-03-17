@@ -4,7 +4,7 @@ type ProductTabsTextProps ={
 
 function ProductTabsText({description}: ProductTabsTextProps): JSX.Element {
   return (
-    <div className="product__tabs-text">
+    <div data-testid='productTabsText' className="product__tabs-text">
       <p>
         {description}
       </p>

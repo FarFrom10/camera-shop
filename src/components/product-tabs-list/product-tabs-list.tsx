@@ -12,7 +12,7 @@ function ProductTabsList({camera}: ProductTabsListProps): JSX.Element {
     level,
   } = camera;
   return (
-    <ul className="product__tabs-list">
+    <ul data-testid='productTabsList' className="product__tabs-list">
       <li className="item-list">
         <span className="item-list__title">Артикул:</span>
         <p className="item-list__text">{vendorCode}</p>

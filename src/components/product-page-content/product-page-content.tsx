@@ -9,10 +9,10 @@ type ProductPageContentProps = {
 function ProductPageContent({camera}: ProductPageContentProps): JSX.Element {
   return (
     <>
-      <div className="page-content__section">
+      <div data-testid='productPageInfoSection' className="page-content__section">
         <ProductPageInfo camera={camera}/>
       </div>
-      <div className="page-content__section">
+      <div data-testid='productPageReviewsSection' className="page-content__section">
         <ProductReviews/>
       </div>
     </>

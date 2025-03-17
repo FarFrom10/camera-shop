@@ -20,7 +20,7 @@ function ReviewCard({cameraReview}: ReviewCardProps): JSX.Element {
   } = cameraReview;
 
   return (
-    <li className="review-card">
+    <li data-testid='reviewCardItem' className="review-card">
       <div className="review-card__head">
         <p className="title title--h4">{userName}</p>
         <time className="review-card__data" dateTime={dayjs(createAt).format(DateFormat.DateTime)}>

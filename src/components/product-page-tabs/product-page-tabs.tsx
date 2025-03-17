@@ -27,19 +27,19 @@ function ProductPageTabs({camera}: ProductPageTabsProps): JSX.Element {
     .map((tab) => <ProductTabsButton onButtonClick={handleButtonClick} tabName={tab} activeTab={activeTab} key={tab}/>);
 
   return (
-    <div className="tabs product__tabs">
-      <div className="tabs__controls product__tabs-controls">
+    <div data-testid='productTabs' className="tabs product__tabs">
+      <div data-testid='tabsControls' className="tabs__controls product__tabs-controls">
         {buttons}
       </div>
       <div className="tabs__content">
-        <div className={cn(
+        <div data-testid='productTabsCharacteristics' className={cn(
           'tabs__element',
           {'is-active': activeTab === ProductTabsCategory.Characteristics}
         )}
         >
           <ProductTabsList camera={camera}/>
         </div>
-        <div className={cn(
+        <div data-testid='productPageTabsText' className={cn(
           'tabs__element',
           {'is-active': activeTab === ProductTabsCategory.Description}
         )}
