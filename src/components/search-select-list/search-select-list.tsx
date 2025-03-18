@@ -1,6 +1,6 @@
 function SearchSelectList(): JSX.Element {
   return (
-    <ul className="form-search__select-list">
+    <ul data-testid='searchSelectList' className="form-search__select-list">
       <li className="form-search__select-item" tabIndex={0}>
             Cannonball Pro MX 8i
       </li>

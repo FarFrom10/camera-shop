@@ -9,7 +9,7 @@ type BasketItemDescriptionProps = {
 
 function BasketItemDescription({shouldDisplayPrice = false, camera}: BasketItemDescriptionProps): JSX.Element {
   return (
-    <div className="basket-item__description">
+    <div data-testid='basketItemDescription' className="basket-item__description">
       <p className="basket-item__title">{camera?.name || TemporaryBusketItemDescription.Name}</p>
       <ul className="basket-item__list">
         <li className="basket-item__list-item">

@@ -4,8 +4,9 @@ import BasketItem from '../basket-item/basket-item';
 
 function BasketList(): JSX.Element {
   const basketList = Array.from({length: TemporaryNumbers.BasketList}).map(() => <BasketItem key={nanoid()}/>);
+
   return(
-    <ul className="basket__list">
+    <ul data-testid='basketList' className="basket__list">
       {basketList}
     </ul>
   );

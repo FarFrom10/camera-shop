@@ -26,7 +26,7 @@ function Breadcrumbs(): JSX.Element {
   });
 
   return(
-    <div className="breadcrumbs">
+    <div data-testid="breadcrumbs" className="breadcrumbs">
       <div className="container">
         <ul className="breadcrumbs__list">
           {breadcrumbsList}

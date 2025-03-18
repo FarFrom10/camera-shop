@@ -25,7 +25,7 @@ function BasketItem(): JSX.Element {
   };
 
   return (
-    <li className="basket-item">
+    <li data-testid='basketItem' className="basket-item">
       <CommonPicture category={CommonPictureCategory.BasketItem} imageClass={CommonPictureClass.Basket}/>
       <BasketItemDescription/>
       <ProductPrice priceClass={PriceClass.BasketItem} price={TemporaryNumbers.price}/>

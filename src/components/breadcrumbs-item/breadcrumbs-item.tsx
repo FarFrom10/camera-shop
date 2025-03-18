@@ -12,7 +12,7 @@ type BreadcrubmsItemProps = {
 function BreadcrubmsItem({isActive = false, route, productRoute = '', productName = 'Нет названия'}: BreadcrubmsItemProps): JSX.Element {
   if (isActive) {
     return (
-      <li className="breadcrumbs__item">
+      <li data-testid='breadcrubmsItem' className="breadcrumbs__item">
         <span className='breadcrumbs__link breadcrumbs__link--active'>
           {route ? RouteName[route] : productName}
         </span>
@@ -21,7 +21,7 @@ function BreadcrubmsItem({isActive = false, route, productRoute = '', productNam
   }
 
   return(
-    <li className="breadcrumbs__item">
+    <li data-testid='breadcrubmsItem' className="breadcrumbs__item">
       <Link className='breadcrumbs__link' to={route ? route : productRoute}>
         {route ? RouteName[route] : productName}
         <CommonIcon icon={IconName.ArrowMini}/>

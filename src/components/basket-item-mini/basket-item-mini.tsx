@@ -16,7 +16,7 @@ function BasketItemMini({camera}: BasketItemMiniProps): JSX.Element {
   } = camera;
 
   return (
-    <div className="basket-item basket-item--short">
+    <div data-testid='basketItemMini' className="basket-item basket-item--short">
       <CommonPicture
         category={CommonPictureCategory.BasketItem}
         imageClass={CommonPictureClass.Basket}

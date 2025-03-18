@@ -7,7 +7,7 @@ function CatalogPageContent(): JSX.Element {
   const cameras = useAppSelector(selectCameras);
 
   return (
-    <section className="catalog">
+    <section data-testid='catalogPageContent' className="catalog">
       <div className="container">
         <h1 className="title title--h2">Каталог фото- и видеотехники</h1>
         <div className="page-content__columns">

@@ -8,7 +8,7 @@ type TitleProps = {
 function Title({pageName}: TitleProps):JSX.Element{
   return (
     <Helmet>
-      <title>{`${RouteName[pageName]} - ${SITE_NAME}`}</title>
+      <title >{`${RouteName[pageName]} - ${SITE_NAME}`}</title>
     </Helmet>
   );
 }

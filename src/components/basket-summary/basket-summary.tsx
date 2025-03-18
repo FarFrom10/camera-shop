@@ -1,6 +1,6 @@
 function BasketSummary(): JSX.Element {
   return (
-    <div className="basket__summary">
+    <div data-testid='basketSummary' className="basket__summary">
       <div className="basket__promo">
       </div>
       <div className="basket__summary-order">
