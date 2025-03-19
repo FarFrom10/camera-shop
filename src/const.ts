@@ -3,8 +3,12 @@ export const TIMEOUT_SHOW_ERROR = 3000;
 export const RATING_STAR_NUMBER = 5;
 export const REVIEWS_STEP_NUMBER = 3;
 export const CLASS_SCROLL_LOCK = 'scroll-lock';
-export const MODAL_OPEN_FOCUS_DELAY = 300;
 export const PHONE_NUMBER_START = '+7';
+
+export const Delay = {
+  ModalOpenFocus: 300,
+  Slider: 3000
+} as const;
 
 export const PhoneMaxLength = {
   InputValue: 16,

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { CLASS_SCROLL_LOCK, IconName, MODAL_OPEN_FOCUS_DELAY } from '../../const';
+import { CLASS_SCROLL_LOCK, Delay, IconName } from '../../const';
 import CommonIcon from '../common-icon/common-icon';
 
 type ModalWrapperContentProps = {
@@ -22,7 +22,7 @@ function ModalWrapperContent({onModalClose, children}: ModalWrapperContentProps)
     //Без этого не получилось добавить фокус на модальном окне при его появлении
     setTimeout(() => {
       firstFocusableElement.focus();
-    }, MODAL_OPEN_FOCUS_DELAY) ;
+    }, Delay.ModalOpenFocus) ;
 
     const closeModal = (evt: KeyboardEvent) => {
       if(evt.key === 'Escape'){
