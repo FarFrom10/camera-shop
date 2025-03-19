@@ -54,7 +54,7 @@ function ProductPage(): JSX.Element {
   return (
     <>
       <main>
-        <div className="page-content">
+        <div data-testid='productPageContent' className="page-content">
           <Title pageName={AppRoute.Product}/>
           <Breadcrumbs/>
           <ProductPageContent camera={currentCamera}/>
