@@ -5,6 +5,7 @@ import CommonPicture from '../common-picture/common-picture';
 
 function BigBanner(): JSX.Element {
   const promoCameras = useAppSelector(selectPromoCameras);
+
   const {
     id,
     name,

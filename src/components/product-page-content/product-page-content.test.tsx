@@ -7,7 +7,7 @@ describe('Component: ProductPageContent', () => {
   it('should render correctly', () => {
     const infoContainerId = 'productPageInfoSection';
     const reviewsContainerId = 'productPageReviewsSection';
-    const {withStoreCompnent} = withStore(
+    const {withStoreComponent} = withStore(
       <ProductPageContent camera={fakeCurrentCamera}/>,
       {reviews: {
         reviews: fakeReviews,
@@ -15,7 +15,7 @@ describe('Component: ProductPageContent', () => {
       }
       });
 
-    render(withRouter(withStoreCompnent));
+    render(withRouter(withStoreComponent));
 
     expect(screen.getByTestId(infoContainerId)).toBeInTheDocument();
     expect(screen.getByTestId(reviewsContainerId)).toBeInTheDocument();

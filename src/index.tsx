@@ -6,6 +6,8 @@ import { ServerConnectionStatusMessage, TIMEOUT_SHOW_ERROR } from './const';
 import { store } from './store';
 import { fetchCamerasAction, fetchPromoCamerasAction } from './store/api-actions';
 import { Provider } from 'react-redux';
+import HistoryRouter from './components/history-route/history-route';
+import browserHistory from './browser-history';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -28,8 +30,10 @@ store.dispatch(fetchPromoCamerasAction())
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ToastContainer autoClose={TIMEOUT_SHOW_ERROR}/>
-      <App/>
+      <HistoryRouter history={browserHistory}>
+        <ToastContainer autoClose={TIMEOUT_SHOW_ERROR}/>
+        <App/>
+      </HistoryRouter>
     </Provider>
   </React.StrictMode>
 );

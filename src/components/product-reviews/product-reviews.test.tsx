@@ -8,7 +8,7 @@ describe('Component: ProductReviews', () => {
   const buttonsContainer = 'productReviewsButtons';
 
   it('should render correctly', () => {
-    const {withStoreCompnent} = withStore(
+    const {withStoreComponent} = withStore(
       <ProductReviews/>,
       {reviews: {
         reviews: fakeReviews,
@@ -16,14 +16,14 @@ describe('Component: ProductReviews', () => {
       }
       });
 
-    render(withRouter(withStoreCompnent));
+    render(withRouter(withStoreComponent));
 
     expect(screen.getByTestId(containerId)).toBeInTheDocument();
     expect(screen.getByTestId(buttonsContainer)).toBeInTheDocument();
   });
 
   it('should not render button "showMore" if reviews.length === 0', () => {
-    const {withStoreCompnent} = withStore(
+    const {withStoreComponent} = withStore(
       <ProductReviews/>,
       {reviews: {
         reviews: [],
@@ -31,7 +31,7 @@ describe('Component: ProductReviews', () => {
       }
       });
 
-    render(withRouter(withStoreCompnent));
+    render(withRouter(withStoreComponent));
     const buttonsContainerLength = screen.getByTestId(buttonsContainer).children.length;
 
     expect(buttonsContainerLength).toBe(0);

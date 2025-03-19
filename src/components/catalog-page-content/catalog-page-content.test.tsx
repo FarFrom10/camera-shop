@@ -8,7 +8,7 @@ describe('Component: CatalogPageContent', () => {
   const expectedTitleText = 'Каталог фото- и видеотехники';
 
   it('should render correctly', () => {
-    const {withStoreCompnent} = withStore(
+    const {withStoreComponent} = withStore(
       <CatalogPageContent />,
       {cameras: {
         cameras: fakeCameras,
@@ -20,7 +20,7 @@ describe('Component: CatalogPageContent', () => {
         isCurrentCameraLoading: false,
       }
       });
-    render(withRouter(withStoreCompnent));
+    render(withRouter(withStoreComponent));
 
     expect(screen.getByTestId(containerId)).toBeInTheDocument();
     expect(screen.getByText(expectedTitleText)).toBeInTheDocument();

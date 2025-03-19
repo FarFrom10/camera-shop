@@ -10,7 +10,7 @@ describe('Component: ModalContactMe', () => {
   const fakeOnModalClose = () => null;
 
   it('should render correctly', () => {
-    const {withStoreCompnent} = withStore(
+    const {withStoreComponent} = withStore(
       <ModalContactMe
         camera={fakeCurrentCamera}
         onModalClose={fakeOnModalClose}
@@ -20,7 +20,7 @@ describe('Component: ModalContactMe', () => {
       }
       });
 
-    render(withRouter(withStoreCompnent));
+    render(withRouter(withStoreComponent));
     const phoneInputElement = screen.getByTestId(phoneInputId);
 
     expect(phoneInputElement).toBeInTheDocument();
@@ -29,7 +29,7 @@ describe('Component: ModalContactMe', () => {
   it('should display phone input value correctly', async () => {
     const typedPhoneValue = '333';
     const expectedPhoneValue = `${PHONE_NUMBER_START}${typedPhoneValue}`;
-    const {withStoreCompnent} = withStore(
+    const {withStoreComponent} = withStore(
       <ModalContactMe
         camera={fakeCurrentCamera}
         onModalClose={fakeOnModalClose}
@@ -39,7 +39,7 @@ describe('Component: ModalContactMe', () => {
       }
       });
 
-    render(withRouter(withStoreCompnent));
+    render(withRouter(withStoreComponent));
     const phoneInputElement = screen.getByTestId(phoneInputId);
     await userEvent.type(
       phoneInputElement,
@@ -50,7 +50,7 @@ describe('Component: ModalContactMe', () => {
   });
 
   it('should render message instead of component if "camera" is null', () => {
-    const {withStoreCompnent} = withStore(
+    const {withStoreComponent} = withStore(
       <ModalContactMe
         camera={null}
         onModalClose={fakeOnModalClose}
@@ -60,7 +60,7 @@ describe('Component: ModalContactMe', () => {
       }
       });
 
-    render(withRouter(withStoreCompnent));
+    render(withRouter(withStoreComponent));
 
     expect(screen.queryByTestId(phoneInputId)).not.toBeInTheDocument();
     expect(screen.getByText(ServerConnectionStatusMessage.Fail.camera)).toBeInTheDocument();

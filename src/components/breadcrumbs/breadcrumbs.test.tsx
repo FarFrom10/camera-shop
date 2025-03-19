@@ -7,7 +7,7 @@ describe('Component: Breadcrumbs', () => {
   const containerId = 'breadcrumbs';
 
   it('should render correctly', () => {
-    const {withStoreCompnent} = withStore(
+    const {withStoreComponent} = withStore(
       <Breadcrumbs />,
       {cameras: {
         cameras: fakeCameras,
@@ -20,7 +20,7 @@ describe('Component: Breadcrumbs', () => {
       }
       });
 
-    render(withRouter(withStoreCompnent));
+    render(withRouter(withStoreComponent));
 
     expect(screen.getByTestId(containerId)).toBeInTheDocument();
   });

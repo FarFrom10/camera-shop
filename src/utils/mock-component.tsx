@@ -8,6 +8,8 @@ import thunk from 'redux-thunk';
 import { Action } from 'redux';
 import { AppThunkDispatch } from '../types/mocks';
 import { Provider } from 'react-redux';
+import { createMemoryHistory, MemoryHistory } from 'history';
+import HistoryRouter from '../components/history-route/history-route';
 
 export function withRouter(component: JSX.Element): JSX.Element {
   return (
@@ -20,7 +22,7 @@ export function withRouter(component: JSX.Element): JSX.Element {
 }
 
 type ComponentWithMockStore = {
-  withStoreCompnent: JSX.Element;
+  withStoreComponent: JSX.Element;
   mockStore: MockStore;
   mockAxiosAdapter: MockAdapter;
 }
@@ -36,10 +38,22 @@ export function withStore(
   const mockStore = mockStoreCreator(initialState);
 
   return({
-    withStoreCompnent: <Provider store={mockStore}>{component}</Provider>,
+    withStoreComponent: <Provider store={mockStore}>{component}</Provider>,
     mockStore,
     mockAxiosAdapter
   });
 }
 
 export const mockEmptyCallback = () => null;
+
+export function withHistory(component: JSX.Element, history?: MemoryHistory) {
+  const memoryHistory = history ?? createMemoryHistory();
+
+  return (
+    <HistoryRouter history={memoryHistory}>
+      <HelmetProvider>
+        {component}
+      </HelmetProvider>
+    </HistoryRouter>
+  );
+}
