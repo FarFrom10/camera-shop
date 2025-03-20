@@ -1,0 +1,15 @@
+:global(.swiper-pagination-bullet) {
+  width: 16px;
+  height: 16px;
+  background-color: #e8e8fa;
+  opacity: 0.5;
+}
+:global(.swiper-pagination-bullet-active) {
+  background-color: #7575e2;
+  opacity: 1;
+}
+
+:global(.swiper-pagination) {
+  text-align: right;
+  padding-right: 10px;
+}
