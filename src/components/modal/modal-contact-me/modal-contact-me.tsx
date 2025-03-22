@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, memo, useCallback, useState } from 'react';
 import { ButtonText, IconName, InputValidationErrorMessage, PHONE_NUMBER_START, PhoneMaxLength, ServerConnectionStatusMessage } from '../../../const';
 import { CameraData } from '../../../types/cameras';
 import BasketItemMini from '../../basket-item-mini/basket-item-mini';
@@ -16,7 +16,7 @@ type ModalContactMeProps ={
   onModalClose: () => void;
 }
 
-function ModalContactMe({camera, onModalClose}: ModalContactMeProps): JSX.Element {
+function ModalContactMeTemplate({camera, onModalClose}: ModalContactMeProps): JSX.Element {
   const dispatch = useAppDispatch();
   const [phone, setPhone] = useState<string>(PHONE_NUMBER_START);
   const [showError, setShowError] = useState<boolean>(false);
@@ -30,7 +30,7 @@ function ModalContactMe({camera, onModalClose}: ModalContactMeProps): JSX.Elemen
     setShowError(phoneNumbers.length < PhoneMaxLength.Numbers);
   };
 
-  const handleButtonClick = () => {
+  const handleButtonClick = useCallback(() => {
     if (showError || camera === null) {
       return;
     }
@@ -48,7 +48,7 @@ function ModalContactMe({camera, onModalClose}: ModalContactMeProps): JSX.Elemen
           toast.success(ServerConnectionStatusMessage.Success.contactMe);
         }
       });
-  };
+  }, [camera, dispatch, onModalClose, showError, phone]);
 
   if (camera === null) {
     return (
@@ -92,5 +92,7 @@ function ModalContactMe({camera, onModalClose}: ModalContactMeProps): JSX.Elemen
     </>
   );
 }
+
+const ModalContactMe = memo(ModalContactMeTemplate);
 
 export default ModalContactMe;

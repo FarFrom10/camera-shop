@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { CommonPictureCategory, CommonPictureClass } from '../../const';
 import { CameraData } from '../../types/cameras';
 import BasketItemDescription from '../basket-item-description/basket-item-description';
@@ -7,7 +8,7 @@ type BasketItemMiniProps = {
   camera: CameraData;
 }
 
-function BasketItemMini({camera}: BasketItemMiniProps): JSX.Element {
+function BasketItemMiniTemplate({camera}: BasketItemMiniProps): JSX.Element {
   const {
     previewImg,
     previewImg2x,
@@ -29,5 +30,7 @@ function BasketItemMini({camera}: BasketItemMiniProps): JSX.Element {
     </div>
   );
 }
+
+const BasketItemMini = memo(BasketItemMiniTemplate);
 
 export default BasketItemMini;

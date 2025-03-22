@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { InputValidationErrorMessage } from '../../const';
 
 type FormInputWrapperProps = {
@@ -6,7 +7,7 @@ type FormInputWrapperProps = {
   errorMessage: InputValidationErrorMessage;
 }
 
-function FormInputWrapper({children, isError, errorMessage}: FormInputWrapperProps): JSX.Element {
+function FormInputWrapperTemplate({children, isError, errorMessage}: FormInputWrapperProps): JSX.Element {
   return (
     <div data-testid='formInputWrapper' className={`custom-input form-review__item ${isError ? 'is-invalid' : ''}`}>
       {children}
@@ -14,5 +15,7 @@ function FormInputWrapper({children, isError, errorMessage}: FormInputWrapperPro
     </div>
   );
 }
+
+const FormInputWrapper = memo(FormInputWrapperTemplate);
 
 export default FormInputWrapper;

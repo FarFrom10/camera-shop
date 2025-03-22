@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { memo, useEffect, useRef } from 'react';
 import { CLASS_SCROLL_LOCK, Delay, IconName } from '../../const';
 import CommonIcon from '../common-icon/common-icon';
 
@@ -7,7 +7,7 @@ type ModalWrapperContentProps = {
   children: JSX.Element;
 }
 
-function ModalWrapperContent({onModalClose, children}: ModalWrapperContentProps): JSX.Element {
+function ModalWrapperContentTemplate({onModalClose, children}: ModalWrapperContentProps): JSX.Element {
   //Компонент существует с той целью, чтобы в useEffect срабатывала cleanUp функция
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -24,13 +24,13 @@ function ModalWrapperContent({onModalClose, children}: ModalWrapperContentProps)
       firstFocusableElement.focus();
     }, Delay.ModalOpenFocus) ;
 
-    const closeModal = (evt: KeyboardEvent) => {
+    const handleModalClose = (evt: KeyboardEvent) => {
       if(evt.key === 'Escape'){
         onModalClose();
       }
     };
 
-    window.addEventListener('keydown', closeModal);
+    window.addEventListener('keydown', handleModalClose);
     document.body.classList.add(CLASS_SCROLL_LOCK);
 
     const handleTabKey = (event: KeyboardEvent) => {
@@ -48,7 +48,7 @@ function ModalWrapperContent({onModalClose, children}: ModalWrapperContentProps)
     document.addEventListener('keydown', handleTabKey);
 
     return () =>{
-      window.removeEventListener('keydown', closeModal);
+      window.removeEventListener('keydown', handleModalClose);
       document.removeEventListener('keydown', handleTabKey);
       document.body.classList.remove(CLASS_SCROLL_LOCK);
     };
@@ -65,5 +65,7 @@ function ModalWrapperContent({onModalClose, children}: ModalWrapperContentProps)
     </div>
   );
 }
+
+const ModalWrapperContent = memo(ModalWrapperContentTemplate);
 
 export default ModalWrapperContent;

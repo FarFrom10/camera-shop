@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { ModalContactMeType } from '../types/types';
 
 type useModalContactMeData = [
@@ -8,17 +8,17 @@ type useModalContactMeData = [
 ]
 
 export const useModalContactMe = (): useModalContactMeData => {
-  const initialState: ModalContactMeType = {
+  const initialState: ModalContactMeType = useMemo(() =>({
     isOpen: false,
     currentId: null
-  };
+  }), []);
 
   const [modalContactMe, setModalContactMe] = useState<ModalContactMeType>(initialState);
-  const handleModalContactMeOpen = (id: number | null) => setModalContactMe(() => ({
+  const handleModalContactMeOpen = useCallback((id: number | null) => setModalContactMe(() => ({
     isOpen: true,
     currentId: id
-  }));
-  const handleModalContactMeClose = () => setModalContactMe(initialState);
+  })), []);
+  const handleModalContactMeClose = useCallback(() => setModalContactMe(initialState), [initialState]);
 
   return [modalContactMe, handleModalContactMeOpen, handleModalContactMeClose];
 };

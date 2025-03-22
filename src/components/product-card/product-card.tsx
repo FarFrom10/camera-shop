@@ -5,13 +5,14 @@ import ButtonMoreDetails from '../button-more-details/button-more-details';
 import CommonButton from '../common-button/common-button';
 import CommonPicture from '../common-picture/common-picture';
 import ProductCardInfo from '../product-card-info/product-card-info';
+import { memo, useCallback, useMemo } from 'react';
 
 type ProductCardProps = {
   camera: CameraData;
   onButtonClick: (id: number | null) => void ;
 }
 
-function ProductCard({camera, onButtonClick}: ProductCardProps): JSX.Element {
+function ProductCardTemplate({camera, onButtonClick}: ProductCardProps): JSX.Element {
   const {
     id,
     name,
@@ -24,8 +25,8 @@ function ProductCard({camera, onButtonClick}: ProductCardProps): JSX.Element {
     previewImgWebp2x,
   } = camera;
 
-  const handleButtonClick = () => onButtonClick(id);
-  const path = generatePath(AppRoute.Product, {id:String(id)});
+  const handleButtonClick = useCallback(() => onButtonClick(id), [onButtonClick, id]);
+  const path = useMemo(() => generatePath(AppRoute.Product, {id:String(id)}), [id]);
 
   return(
     <div data-testid='productCardContainer' className="product-card">
@@ -45,5 +46,7 @@ function ProductCard({camera, onButtonClick}: ProductCardProps): JSX.Element {
     </div>
   );
 }
+
+const ProductCard = memo(ProductCardTemplate);
 
 export default ProductCard;

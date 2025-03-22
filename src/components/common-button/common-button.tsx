@@ -2,6 +2,7 @@ import cn from 'classnames';
 import { ButtonText, IconName } from '../../const';
 import CommonIcon from '../common-icon/common-icon';
 import { Link } from 'react-router-dom';
+import { memo } from 'react';
 
 type CommonButtonProps = {
   isDisabled?: boolean;
@@ -14,7 +15,7 @@ type CommonButtonProps = {
   onButtonClick?: () => void ;
 }
 
-function CommonButton({
+function CommonButtonTemplate({
   isDisabled = false,
   isInCart = false,
   isAddToCart = false,
@@ -52,5 +53,7 @@ function CommonButton({
     </button>
   );
 }
+
+const CommonButton = memo(CommonButtonTemplate);
 
 export default CommonButton;

@@ -1,5 +1,6 @@
 import cn from 'classnames';
 import ModalWrapperContent from '../../modal-wrapper-content/modal-wrapper-content';
+import { memo } from 'react';
 
 type ModalWrapperProps = {
   isActive: boolean;
@@ -7,7 +8,7 @@ type ModalWrapperProps = {
   children: JSX.Element;
 }
 
-function ModalWrapper({isActive, onModalClose, children}: ModalWrapperProps): JSX.Element {
+function ModalWrapperTemplate({isActive, onModalClose, children}: ModalWrapperProps): JSX.Element {
   return(
     <div data-testid='modalWrapper' className={cn(
       'modal',
@@ -24,4 +25,7 @@ function ModalWrapper({isActive, onModalClose, children}: ModalWrapperProps): JS
     </div>
   );
 }
+
+const ModalWrapper = memo(ModalWrapperTemplate);
+
 export default ModalWrapper;
