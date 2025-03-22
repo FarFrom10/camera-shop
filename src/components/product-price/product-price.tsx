@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { PriceClass } from '../../const';
 import { convertPrice } from '../../utils/common';
 
@@ -6,7 +7,7 @@ type ProductPriceProps = {
   priceClass: PriceClass;
 }
 
-function ProductPrice({price, priceClass}: ProductPriceProps): JSX.Element {
+function ProductPriceTemplate({price, priceClass}: ProductPriceProps): JSX.Element {
   return(
     <p data-testid='productPriceContainer' className={priceClass}>
       <span className="visually-hidden">Цена:</span>
@@ -14,5 +15,7 @@ function ProductPrice({price, priceClass}: ProductPriceProps): JSX.Element {
     </p>
   );
 }
+
+const ProductPrice = memo(ProductPriceTemplate);
 
 export default ProductPrice;

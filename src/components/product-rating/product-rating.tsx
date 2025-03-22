@@ -1,3 +1,4 @@
+import { memo, useMemo } from 'react';
 import { IconName, ProductRatingClass, RATING_STAR_NUMBER, TemporaryNumbers } from '../../const';
 import CommonIcon from '../common-icon/common-icon';
 import { nanoid } from '@reduxjs/toolkit';
@@ -9,15 +10,15 @@ type ProductRatingProps = {
   disableReviewCount?: boolean;
 }
 
-function ProductRating({
+function ProductRatingTemplate({
   ratingNumber,
   ratingClass = ProductRatingClass.ProductCard,
   reviewCount = TemporaryNumbers.ReviewCount,
   disableReviewCount = false,
 }: ProductRatingProps): JSX.Element {
-  const stars = Array.from({length: RATING_STAR_NUMBER}).map((_, i) =>
+  const stars = useMemo(() => Array.from({length: RATING_STAR_NUMBER}).map((_, i) =>
     <CommonIcon icon={i > ratingNumber - 1 ? IconName.Star : IconName.StarFull} key={nanoid()}/>
-  );
+  ), [ratingNumber]);
 
   return (
     <div data-testid='productRatingContainer' className={`rate ${ratingClass}`}>
@@ -31,5 +32,7 @@ function ProductRating({
     </div>
   );
 }
+
+const ProductRating = memo(ProductRatingTemplate);
 
 export default ProductRating;

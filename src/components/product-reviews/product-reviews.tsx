@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { ButtonText, EmptyListMessage, REVIEWS_STEP_NUMBER } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { selectReviews } from '../../store/reviews-process/reviews-process.selectors';
@@ -7,13 +7,13 @@ import CommonButton from '../common-button/common-button';
 import ReviewsList from '../reviews-list/reviews-list';
 import EmptyListTitle from '../empty-list-title/empty-list-title';
 
-function ProductReviews(): JSX.Element {
+function ProductReviewsTemplate(): JSX.Element {
   const reviews = useAppSelector(selectReviews);
   const [reviewsNumber, setReviewsNumber] = useState<number>(REVIEWS_STEP_NUMBER);
 
-  const handleButtonClick = () => reviewsNumber + REVIEWS_STEP_NUMBER > reviews.length
+  const handleButtonClick = useCallback(() => reviewsNumber + REVIEWS_STEP_NUMBER > reviews.length
     ? setReviewsNumber(reviews.length)
-    : setReviewsNumber((prev) => prev + REVIEWS_STEP_NUMBER);
+    : setReviewsNumber((prev) => prev + REVIEWS_STEP_NUMBER), [reviews.length, reviewsNumber]);
 
   const sortedReviews = getSortedReviews(reviews, reviewsNumber);
 
@@ -36,5 +36,7 @@ function ProductReviews(): JSX.Element {
     </section>
   );
 }
+
+const ProductReviews = memo(ProductReviewsTemplate);
 
 export default ProductReviews;

@@ -1,8 +1,10 @@
+import { memo } from 'react';
+
 type ProductTabsTextProps ={
   description: string;
 }
 
-function ProductTabsText({description}: ProductTabsTextProps): JSX.Element {
+function ProductTabsTextTemplate({description}: ProductTabsTextProps): JSX.Element {
   return (
     <div data-testid='productTabsText' className="product__tabs-text">
       <p>
@@ -11,5 +13,7 @@ function ProductTabsText({description}: ProductTabsTextProps): JSX.Element {
     </div>
   );
 }
+
+const ProductTabsText = memo(ProductTabsTextTemplate);
 
 export default ProductTabsText;

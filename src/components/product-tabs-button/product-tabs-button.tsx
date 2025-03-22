@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import { ProductTabsCategory } from '../../const';
-import { MouseEvent } from 'react';
+import { memo, MouseEvent } from 'react';
 
 type ProductTabsButtonProps = {
   activeTab: ProductTabsCategory;
@@ -8,7 +8,7 @@ type ProductTabsButtonProps = {
   onButtonClick: (evt: MouseEvent<HTMLButtonElement>) => void;
 }
 
-function ProductTabsButton({activeTab, tabName, onButtonClick}: ProductTabsButtonProps): JSX.Element {
+function ProductTabsButtonTemplate({activeTab, tabName, onButtonClick}: ProductTabsButtonProps): JSX.Element {
   return (
     <button
       onClick={onButtonClick}
@@ -23,5 +23,7 @@ function ProductTabsButton({activeTab, tabName, onButtonClick}: ProductTabsButto
     </button>
   );
 }
+
+const ProductTabsButton = memo(ProductTabsButtonTemplate);
 
 export default ProductTabsButton;

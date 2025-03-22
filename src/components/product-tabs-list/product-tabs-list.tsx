@@ -1,10 +1,11 @@
+import { memo } from 'react';
 import { CameraData } from '../../types/cameras';
 
 type ProductTabsListProps = {
   camera: CameraData;
 }
 
-function ProductTabsList({camera}: ProductTabsListProps): JSX.Element {
+function ProductTabsListTemplate({camera}: ProductTabsListProps): JSX.Element {
   const {
     vendorCode,
     type,
@@ -32,5 +33,7 @@ function ProductTabsList({camera}: ProductTabsListProps): JSX.Element {
     </ul>
   );
 }
+
+const ProductTabsList = memo(ProductTabsListTemplate);
 
 export default ProductTabsList;

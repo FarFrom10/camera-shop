@@ -1,3 +1,4 @@
+import { memo, useMemo } from 'react';
 import { CommonPictureCategory, CommonPictureClass, TEMPORARY_ALT_TEXT, TemporaryImages } from '../../const';
 import BannerInfo from '../banner-info/banner-info';
 import { ImageSettings } from './common-picture-settings';
@@ -13,7 +14,7 @@ type CommonPictureProps = {
   webp2x?: string;
 }
 
-function CommonPicture({
+function CommonPictureTemplate({
   category,
   imageClass = CommonPictureClass.Product,
   name = TEMPORARY_ALT_TEXT,
@@ -23,7 +24,7 @@ function CommonPicture({
   webp = TemporaryImages.PreviewImgWebp,
   webp2x = TemporaryImages.PreviewImgWebp2x,
 }: CommonPictureProps): JSX.Element {
-  const isBanner = category === CommonPictureCategory.Banner;
+  const isBanner = useMemo(() =>category === CommonPictureCategory.Banner, [category]);
 
   return (
     <div className={imageClass}>
@@ -45,5 +46,7 @@ function CommonPicture({
     </div>
   );
 }
+
+const CommonPicture = memo(CommonPictureTemplate);
 
 export default CommonPicture;

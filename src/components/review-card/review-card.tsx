@@ -3,13 +3,14 @@ import 'dayjs/locale/ru';
 import { DateFormat, ProductRatingClass } from '../../const';
 import { CameraReview } from '../../types/cameras';
 import ProductRating from '../product-rating/product-rating';
+import { memo } from 'react';
 dayjs.locale('ru');
 
 type ReviewCardProps = {
   cameraReview: CameraReview;
 }
 
-function ReviewCard({cameraReview}: ReviewCardProps): JSX.Element {
+function ReviewCardTemplate({cameraReview}: ReviewCardProps): JSX.Element {
   const {
     createAt,
     userName,
@@ -51,5 +52,7 @@ function ReviewCard({cameraReview}: ReviewCardProps): JSX.Element {
     </li>
   );
 }
+
+const ReviewCard = memo(ReviewCardTemplate);
 
 export default ReviewCard;
