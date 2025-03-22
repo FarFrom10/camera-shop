@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom';
 import { AppRoute, IconName, LogoClass } from '../../const';
 import CommonIcon from '../common-icon/common-icon';
+import { memo } from 'react';
 
 type LogoProps = {
   isFooter?: boolean;
   isIndexPage?: boolean;
 }
 
-function Logo({isFooter = false, isIndexPage = false}: LogoProps): JSX.Element {
+function LogoTemplate({isFooter = false, isIndexPage = false}: LogoProps): JSX.Element {
   if (isIndexPage) {
     return (
       <span
@@ -30,5 +31,7 @@ function Logo({isFooter = false, isIndexPage = false}: LogoProps): JSX.Element {
     </Link>
   );
 }
+
+const Logo = memo(LogoTemplate);
 
 export default Logo;

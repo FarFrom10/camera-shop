@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import FooterNav from '../footer-nav/footer-nav';
 import Logo from '../logo/logo';
 import SocialList from '../social-list/social-list';
@@ -6,7 +7,7 @@ type FooterProps = {
   isIndexPage?: boolean;
 }
 
-function Footer({isIndexPage = false}: FooterProps): JSX.Element {
+function FooterTemplate({isIndexPage = false}: FooterProps): JSX.Element {
   return (
     <footer data-testid='footer' className="footer">
       <div className="container">
@@ -22,5 +23,7 @@ function Footer({isIndexPage = false}: FooterProps): JSX.Element {
     </footer>
   );
 }
+
+const Footer = memo(FooterTemplate);
 
 export default Footer;

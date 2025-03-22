@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
+import { memo } from 'react';
 
-function FooterNav(): JSX.Element {
+function FooterNavTemplate(): JSX.Element {
   return(
     <ul data-testid='footerNav' className="footer__nav">
       <li className="footer__nav-item">
@@ -67,5 +68,7 @@ function FooterNav(): JSX.Element {
     </ul>
   );
 }
+
+const FooterNav = memo(FooterNavTemplate);
 
 export default FooterNav;

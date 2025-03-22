@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import { AppRoute, RouteName } from '../../const';
+import { memo } from 'react';
 
 type HeaderNavLinkProps = {
   route: AppRoute;
 }
 
-function HeaderNavLink({route}: HeaderNavLinkProps): JSX.Element {
+function HeaderNavLinkTemplate({route}: HeaderNavLinkProps): JSX.Element {
   return (
     <li data-testid='headerNavItem' className="main-nav__item">
       <Link className="main-nav__link" to={route}>
@@ -14,5 +15,7 @@ function HeaderNavLink({route}: HeaderNavLinkProps): JSX.Element {
     </li>
   );
 }
+
+const HeaderNavLink = memo(HeaderNavLinkTemplate);
 
 export default HeaderNavLink;
