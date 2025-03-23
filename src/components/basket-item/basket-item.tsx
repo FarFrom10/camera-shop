@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BusketAmount, ButtonQuantityDirection, CommonPictureCategory, CommonPictureClass, IconName, PriceClass, TemporaryNumbers } from '../../const';
+import { BusketAmount, ButtonQuantityDirection, CommonPictureCategory, CommonPictureClass, IconName, PriceClass, Temporary } from '../../const';
 import BasketItemDescription from '../basket-item-description/basket-item-description';
 import BasketQuantityButton from '../basket-quantity-button/basket-quantity-button';
 import CommonIcon from '../common-icon/common-icon';
@@ -8,7 +8,7 @@ import CommonPicture from '../common-picture/common-picture';
 
 function BasketItem(): JSX.Element {
   const [amount, setAmount] = useState<number>(1);
-  const totalPrice = TemporaryNumbers.price * amount;
+  const totalPrice = Temporary.Numbers.price * amount;
 
   const decreaseAmount = () => {
     if (amount === BusketAmount.Min) {
@@ -28,7 +28,7 @@ function BasketItem(): JSX.Element {
     <li data-testid='basketItem' className="basket-item">
       <CommonPicture category={CommonPictureCategory.BasketItem} imageClass={CommonPictureClass.Basket}/>
       <BasketItemDescription/>
-      <ProductPrice priceClass={PriceClass.BasketItem} price={TemporaryNumbers.price}/>
+      <ProductPrice priceClass={PriceClass.BasketItem} price={Temporary.Numbers.price}/>
       <div className="quantity">
         <BasketQuantityButton onButtonClick={decreaseAmount}/>
         <label className="visually-hidden" htmlFor="counter1" />

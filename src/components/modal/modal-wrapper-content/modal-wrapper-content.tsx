@@ -1,6 +1,6 @@
 import { memo, useEffect, useRef } from 'react';
-import { CLASS_SCROLL_LOCK, Delay, IconName } from '../../const';
-import CommonIcon from '../common-icon/common-icon';
+import { CLASS_SCROLL_LOCK, Delay, IconName } from '../../../const';
+import CommonIcon from '../../common-icon/common-icon';
 
 type ModalWrapperContentProps = {
   onModalClose: () => void;
@@ -8,7 +8,6 @@ type ModalWrapperContentProps = {
 }
 
 function ModalWrapperContentTemplate({onModalClose, children}: ModalWrapperContentProps): JSX.Element {
-  //Компонент существует с той целью, чтобы в useEffect срабатывала cleanUp функция
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -19,7 +18,7 @@ function ModalWrapperContentTemplate({onModalClose, children}: ModalWrapperConte
     const firstFocusableElement = focusableElements[0] as HTMLElement;
     const lastFocusableElement = focusableElements[focusableElements.length - 1] as HTMLElement;
 
-    //Без этого не получилось добавить фокус на модальном окне при его появлении
+    //Добалвение фокуса с небольшой задержкой, после открытия модального окна
     setTimeout(() => {
       firstFocusableElement.focus();
     }, Delay.ModalOpenFocus) ;

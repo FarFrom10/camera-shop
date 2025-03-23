@@ -15,29 +15,27 @@ export const PhoneMaxLength = {
   Numbers: 11
 } as const;
 
-export const TEMPORARY_ALT_TEXT = 'ВРЕМЕННЫЙ ТЕКСТ';
-
-export const TemporaryNumbers = {
-  Rating: 2 ,
-  ReviewCount: 666,
-  BasketList: 2,
-  price: 73629
+export const Temporary = {
+  Numbers: {
+    rating: 2,
+    reviewCount: 666,
+    basketList: 2,
+    price: 73629
+  },
+  BusketItemDescription: {
+    name: 'ВРЕМЕННЫЕ ДАННЫЕ',
+    vendorCode: 'DA4IU67AD5',
+    type: 'Коллекционная',
+    category: 'Видеокамера',
+  },
+  Images: {
+    previewImg: 'img/content/das-auge.jpg',
+    previewImg2x: 'img/content/das-auge@2x.jpg',
+    previewImgWebp: 'img/content/das-auge.webp',
+    previewImgWebp2x: 'img/content/das-auge@2x.webp'
+  },
+  AltText: 'ВРЕМЕННЫЙ ТЕКСТ'
 } as const;
-
-export const TemporaryBusketItemDescription = {
-  Name: 'ВРЕМЕННЫЕ ДАННЫЕ',
-  VendorCode: 'DA4IU67AD5',
-  Type: 'Коллекционная',
-  Category: 'Видеокамера',
-} as const;
-
-export const TemporaryImages = {
-  PreviewImg: 'img/content/das-auge.jpg',
-  PreviewImg2x: 'img/content/das-auge@2x.jpg',
-  PreviewImgWebp: 'img/content/das-auge.webp',
-  PreviewImgWebp2x: 'img/content/das-auge@2x.webp'
-} as const;
-
 
 export const BusketAmount = {
   Min: 1,
@@ -63,7 +61,6 @@ export const RouteName = {
   [AppRoute.Basket]: 'Корзина',
   [AppRoute.NotFound]: '404',
 } as const;
-
 
 export const SocialsNames = ['vk', 'pinterest', 'reddit'] as const;
 

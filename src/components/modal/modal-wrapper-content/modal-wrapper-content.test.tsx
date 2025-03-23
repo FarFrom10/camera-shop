@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import { mockEmptyCallback, withRouter } from '../../utils/mock-component';
+import { mockEmptyCallback, withRouter } from '../../../utils/mock-component';
 import ModalWrapperContent from './modal-wrapper-content';
 import userEvent from '@testing-library/user-event';
-import * as mockComponent from '../../utils/mock-component';
+import * as mockComponent from '../../../utils/mock-component';
 
 describe('Component: ModalWrapperContent', () => {
   const containerId = 'modalContent';

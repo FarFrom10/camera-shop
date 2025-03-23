@@ -1,9 +1,9 @@
 import { nanoid } from '@reduxjs/toolkit';
-import { TemporaryNumbers } from '../../const';
+import { Temporary } from '../../const';
 import BasketItem from '../basket-item/basket-item';
 
 function BasketList(): JSX.Element {
-  const basketList = Array.from({length: TemporaryNumbers.BasketList}).map(() => <BasketItem key={nanoid()}/>);
+  const basketList = Array.from({length: Temporary.Numbers.basketList}).map(() => <BasketItem key={nanoid()}/>);
 
   return(
     <ul data-testid='basketList' className="basket__list">

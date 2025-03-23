@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import ModalWrapperContent from '../../modal-wrapper-content/modal-wrapper-content';
+import ModalWrapperContent from '../modal-wrapper-content/modal-wrapper-content';
 import { memo } from 'react';
 
 type ModalWrapperProps = {
