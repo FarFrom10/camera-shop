@@ -12,6 +12,8 @@ import { selectIsReviewsLoading } from '../../../store/reviews-process/reviews-p
 import Breadcrumbs from '../../breadcrumbs/breadcrumbs';
 import ButtonUp from '../../button-up/button-up';
 import { toast } from 'react-toastify';
+import { resetReviews } from '../../../store/reviews-process/reviews-process.slice';
+import { resetCurrentCamera } from '../../../store/cameras-process/cameras-process.slice';
 
 function ProductPage(): JSX.Element {
   const {id} = useParams();
@@ -30,6 +32,10 @@ function ProductPage(): JSX.Element {
           }
         });
     }
+
+    return () => {
+      dispatch(resetCurrentCamera());
+    };
   }, [id, dispatch]);
 
   useEffect(() => {
@@ -41,6 +47,10 @@ function ProductPage(): JSX.Element {
           }
         });
     }
+
+    return () => {
+      dispatch(resetReviews());
+    };
   }, [id, currentCamera, dispatch]);
 
   if(isCurrentCameraLoading || isReviewsLoading) {

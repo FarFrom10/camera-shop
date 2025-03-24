@@ -16,7 +16,11 @@ const initialState: CamerasProcess = {
 export const camerasProcess = createSlice({
   name: NameSpace.Cameras,
   initialState,
-  reducers: {},
+  reducers: {
+    resetCurrentCamera: (state) => {
+      state.currentCamera = null;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchCamerasAction.pending, (state) => {
@@ -53,3 +57,5 @@ export const camerasProcess = createSlice({
       });
   },
 });
+
+export const {resetCurrentCamera} = camerasProcess.actions;
