@@ -8,20 +8,6 @@ export function convertPrice(price: number): string{
   }).format(price);
 }
 
-export function getFilteredPathnames(pathnames: string[], id?: string | undefined): string[] {
-  const itemsToDelete: number[] = [];
-
-  return pathnames.length > 1
-    ? pathnames.map((path, i) => {
-      if (id && path === id) {
-        itemsToDelete.push(i - 1);
-        return `/${pathnames[i - 1]}/${path}`;
-      }
-      return `/${path}`;
-    }).filter((_, i) => !itemsToDelete.includes(i))
-    : pathnames;
-}
-
 export const getOnlyNumbersFromString = (value: string): string => value.replace(/[^\d]/g, '');
 
 export function formatPhoneNumber(value: string): string {
