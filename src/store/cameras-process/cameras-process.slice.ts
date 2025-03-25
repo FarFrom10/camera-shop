@@ -1,15 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { CamerasProcess } from '../../types/state';
-import { getCameraByIdAction, fetchCamerasAction, fetchPromoCamerasAction } from '../api-actions';
+import { getCameraByIdAction, fetchCamerasAction, fetchPromoCamerasAction, getSimilarCamerasByIdAction } from '../api-actions';
 
 const initialState: CamerasProcess = {
   cameras: [],
   promoCameras: [],
+  similarCameras: [],
   currentCamera: null,
 
   isCamerasLoading: false,
   isPromoCamerasLoading: false,
+  isSimilarCamerasLoading: false,
   isCurrentCameraLoading: false,
 };
 
@@ -19,6 +21,9 @@ export const camerasProcess = createSlice({
   reducers: {
     resetCurrentCamera: (state) => {
       state.currentCamera = null;
+    },
+    resetSimilarCameras: (state) => {
+      state.similarCameras = [];
     },
   },
   extraReducers(builder) {
@@ -45,6 +50,17 @@ export const camerasProcess = createSlice({
         state.isPromoCamerasLoading = false;
       })
 
+      .addCase(getSimilarCamerasByIdAction.pending, (state) => {
+        state.isSimilarCamerasLoading = true;
+      })
+      .addCase(getSimilarCamerasByIdAction.fulfilled,(state, action) => {
+        state.similarCameras = action.payload;
+        state.isSimilarCamerasLoading = false;
+      })
+      .addCase(getSimilarCamerasByIdAction.rejected, (state) => {
+        state.isSimilarCamerasLoading = false;
+      })
+
       .addCase(getCameraByIdAction.pending, (state) => {
         state.isCurrentCameraLoading = true;
       })
@@ -58,4 +74,4 @@ export const camerasProcess = createSlice({
   },
 });
 
-export const {resetCurrentCamera} = camerasProcess.actions;
+export const {resetCurrentCamera, resetSimilarCameras} = camerasProcess.actions;

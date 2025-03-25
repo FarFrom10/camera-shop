@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { useAppSelector } from '../../hooks';
 import { useModalContactMe } from '../../hooks/use-modal-contact-me';
 import { selectCameras } from '../../store/cameras-process/cameras-process.selectors';
@@ -13,11 +12,9 @@ function CatalogPageContent(): JSX.Element {
   const [
     modalContactMe,
     handleModalContactMeOpen,
-    handleModalContactMeClose
-  ] = useModalContactMe();
-
-  const currentCameraIndex = useMemo(() => cameras.findIndex((item) => item.id === modalContactMe.currentId), [cameras, modalContactMe]);
-  const currentCamera = useMemo(() => currentCameraIndex !== -1 ? cameras[currentCameraIndex] : null, [cameras, currentCameraIndex]);
+    handleModalContactMeClose,
+    currentModalCamera
+  ] = useModalContactMe({cameras});
 
   return (
     <section data-testid='catalogPageContent' className="catalog">
@@ -33,7 +30,7 @@ function CatalogPageContent(): JSX.Element {
           </div>
         </div>
         <ModalWrapper onModalClose={handleModalContactMeClose} isActive={modalContactMe.isOpen}>
-          <ModalContactMe onModalClose={handleModalContactMeClose} camera={currentCamera}/>
+          <ModalContactMe onModalClose={handleModalContactMeClose} camera={currentModalCamera}/>
         </ModalWrapper>
       </div>
     </section>

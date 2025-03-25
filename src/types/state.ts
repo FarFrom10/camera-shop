@@ -12,10 +12,12 @@ export type AppDispatch = typeof store.dispatch;
 export type CamerasProcess = {
   cameras: CameraData[];
   promoCameras: PromoCameraData[];
+  similarCameras: CameraData[];
   currentCamera: CameraData | null;
 
   isCamerasLoading: boolean;
   isPromoCamerasLoading: boolean;
+  isSimilarCamerasLoading: boolean;
   isCurrentCameraLoading: boolean;
 }
 

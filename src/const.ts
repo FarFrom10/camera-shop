@@ -137,6 +137,7 @@ export const ServerConnectionStatusMessage = {
   Fail: {
     common: 'Ошибка соединения с сервером',
     camera: 'Не удалось загрузить информацию о товаре',
+    similarCameras: 'Не удалось загрузить похожие товары',
     reviews: 'Не удалось загрузить отзывы'
   },
   Success: {

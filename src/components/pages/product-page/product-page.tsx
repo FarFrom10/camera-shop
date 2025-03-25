@@ -3,9 +3,9 @@ import { AppRoute, ServerConnectionStatusMessage } from '../../../const';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import ProductPageContent from '../../product-page-content/product-page-content';
 import Title from '../../title/title';
-import { getCameraByIdAction, fetchCameraReviewsByIdAction } from '../../../store/api-actions';
+import { getCameraByIdAction, fetchCameraReviewsByIdAction, getSimilarCamerasByIdAction } from '../../../store/api-actions';
 import { useEffect } from 'react';
-import { selectCurrentCamera, selectIsCurrentCameraLoading } from '../../../store/cameras-process/cameras-process.selectors';
+import { selectCurrentCamera, selectIsCurrentCameraLoading, selectIsSimilarCamerasLoading, selectSimilarCameras } from '../../../store/cameras-process/cameras-process.selectors';
 import LoadingScreen from '../../loading-screen/loading-screen';
 import NotFoundPage from '../not-found-page/not-found-page';
 import { selectIsReviewsLoading } from '../../../store/reviews-process/reviews-process.selectors';
@@ -13,7 +13,10 @@ import Breadcrumbs from '../../breadcrumbs/breadcrumbs';
 import ButtonUp from '../../button-up/button-up';
 import { toast } from 'react-toastify';
 import { resetReviews } from '../../../store/reviews-process/reviews-process.slice';
-import { resetCurrentCamera } from '../../../store/cameras-process/cameras-process.slice';
+import { resetCurrentCamera, resetSimilarCameras } from '../../../store/cameras-process/cameras-process.slice';
+import ModalWrapper from '../../modal/modal-wrapper/modal-wrapper';
+import ModalContactMe from '../../modal/modal-contact-me/modal-contact-me';
+import { useModalContactMe } from '../../../hooks/use-modal-contact-me';
 
 function ProductPage(): JSX.Element {
   const {id} = useParams();
@@ -21,7 +24,16 @@ function ProductPage(): JSX.Element {
 
   const isCurrentCameraLoading = useAppSelector(selectIsCurrentCameraLoading);
   const isReviewsLoading = useAppSelector(selectIsReviewsLoading);
+  const isSimilarCamerasLoading = useAppSelector(selectIsSimilarCamerasLoading);
   const currentCamera = useAppSelector(selectCurrentCamera);
+  const similarCameras = useAppSelector(selectSimilarCameras);
+
+  const [
+    modalContactMe,
+    handleModalContactMeOpen,
+    handleModalContactMeClose,
+    currentModalCamera
+  ] = useModalContactMe({cameras: similarCameras});
 
   useEffect(()=> {
     if (id) {
@@ -53,7 +65,23 @@ function ProductPage(): JSX.Element {
     };
   }, [id, currentCamera, dispatch]);
 
-  if(isCurrentCameraLoading || isReviewsLoading) {
+
+  useEffect(() => {
+    if (currentCamera !== null && id) {
+      dispatch(getSimilarCamerasByIdAction(id))
+        .then((response) => {
+          if(response.meta.requestStatus === 'rejected') {
+            toast.warn(ServerConnectionStatusMessage.Fail.similarCameras);
+          }
+        });
+    }
+
+    return () => {
+      dispatch(resetSimilarCameras());
+    };
+  }, [id, currentCamera, dispatch]);
+
+  if(isCurrentCameraLoading || isReviewsLoading || isSimilarCamerasLoading) {
     return <LoadingScreen/>;
   }
 
@@ -67,8 +95,11 @@ function ProductPage(): JSX.Element {
         <div data-testid='productPageContent' className="page-content">
           <Title pageName={AppRoute.Product}/>
           <Breadcrumbs/>
-          <ProductPageContent camera={currentCamera}/>
+          <ProductPageContent similarCameras={similarCameras} currentCamera={currentCamera} onModalContactMeOpen={handleModalContactMeOpen}/>
         </div>
+        <ModalWrapper onModalClose={handleModalContactMeClose} isActive={modalContactMe.isOpen}>
+          <ModalContactMe onModalClose={handleModalContactMeClose} camera={currentModalCamera}/>
+        </ModalWrapper>
       </main>
       <ButtonUp/>
     </>

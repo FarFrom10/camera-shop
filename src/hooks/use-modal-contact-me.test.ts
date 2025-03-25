@@ -2,12 +2,14 @@ import { renderHook } from '@testing-library/react';
 import { describe } from 'vitest';
 import { useModalContactMe } from './use-modal-contact-me';
 import { act } from 'react-dom/test-utils';
+import { fakeCameras } from '../mocks/mock-test';
 
 describe('Hook: useModalContactMe', () => {
   const fakeCurrentId = 666;
+  const cameras = fakeCameras;
 
   it('should return array with 3 elements', () => {
-    const { result } = renderHook(() => useModalContactMe());
+    const { result } = renderHook(() => useModalContactMe({cameras}));
     const [modalContactMe, handleModalContactMeOpen, handleModalContactMeClose] = result.current;
 
     expect(result.current).toHaveLength(3);
@@ -22,7 +24,7 @@ describe('Hook: useModalContactMe', () => {
       currentId: fakeCurrentId
     };
 
-    const { result } = renderHook(() => useModalContactMe());
+    const { result } = renderHook(() => useModalContactMe({cameras}));
     const [,handleModalContactMeOpen] = result.current;
     act(() => handleModalContactMeOpen(fakeCurrentId));
     const [modalContactMe] = result.current;
@@ -36,7 +38,7 @@ describe('Hook: useModalContactMe', () => {
       currentId: null
     };
 
-    const { result } = renderHook(() => useModalContactMe());
+    const { result } = renderHook(() => useModalContactMe({cameras}));
     const [,handleModalContactMeOpen, handleModalContactMeClose] = result.current;
     act(() => handleModalContactMeOpen(fakeCurrentId));
     act(() => handleModalContactMeClose());
