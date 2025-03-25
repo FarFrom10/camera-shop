@@ -2,18 +2,18 @@ import { useCallback, useMemo, useState } from 'react';
 import { ModalContactMeType } from '../types/types';
 import { CameraData } from '../types/cameras';
 
-type useModalContactMeData = [
+type UseModalContactMeData = [
   ModalContactMeType,
   (id: number | null) => void,
   () => void,
   currentModalCamera: CameraData | null
 ]
 
-type useModalContactMeProps = {
+type UseModalContactMeProps = {
   cameras: CameraData[];
 }
 
-export const useModalContactMe = ({cameras}: useModalContactMeProps): useModalContactMeData => {
+export const useModalContactMe = ({cameras}: UseModalContactMeProps): UseModalContactMeData => {
   const initialState: ModalContactMeType = useMemo(() =>({
     isOpen: false,
     currentId: null

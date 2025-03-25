@@ -15,9 +15,10 @@ function ProductPageContent({currentCamera, similarCameras, onModalContactMeOpen
       <div data-testid='productPageInfoSection' className="page-content__section">
         <ProductPageInfo camera={currentCamera}/>
       </div>
+      {similarCameras.length !== 0 &&
       <div data-testid='productPageSimilarSection' className="page-content__section">
         <ProductsSimilarList onModalContactMeOpen={onModalContactMeOpen} similarCameras={similarCameras}/>
-      </div>
+      </div>}
       <div data-testid='productPageReviewsSection' className="page-content__section">
         <ProductReviews/>
       </div>
