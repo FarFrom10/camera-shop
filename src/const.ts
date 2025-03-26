@@ -4,6 +4,7 @@ export const RATING_STAR_NUMBER = 5;
 export const REVIEWS_STEP_NUMBER = 3;
 export const CLASS_SCROLL_LOCK = 'scroll-lock';
 export const PHONE_NUMBER_START = '+7';
+export const SIMILAR_CAMERAS_SLIDES_PER_VIEW = 3;
 
 export const Delay = {
   ModalOpenFocus: 300,

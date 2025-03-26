@@ -6,13 +6,15 @@ import CommonButton from '../common-button/common-button';
 import CommonPicture from '../common-picture/common-picture';
 import ProductCardInfo from '../product-card-info/product-card-info';
 import { memo, useCallback, useMemo } from 'react';
+import cn from 'classnames';
 
 type ProductCardProps = {
   camera: CameraData;
   onButtonClick: (id: number | null) => void ;
+  isSimilarProduct?: boolean;
 }
 
-function ProductCardTemplate({camera, onButtonClick}: ProductCardProps): JSX.Element {
+function ProductCardTemplate({camera, onButtonClick, isSimilarProduct = false}: ProductCardProps): JSX.Element {
   const {
     id,
     name,
@@ -27,9 +29,15 @@ function ProductCardTemplate({camera, onButtonClick}: ProductCardProps): JSX.Ele
 
   const handleButtonClick = useCallback(() => onButtonClick(id), [onButtonClick, id]);
   const path = useMemo(() => generatePath(AppRoute.Product, {id:String(id)}), [id]);
+  const style = isSimilarProduct ? {width: '90%', heigth: '100%'} : {};
 
   return(
-    <div data-testid='productCardContainer' className="product-card">
+    <div data-testid='productCardContainer' className={cn(
+      'product-card',
+      {'is-active': isSimilarProduct}
+    )}
+    style={style}
+    >
       <CommonPicture
         category={CommonPictureCategory.ProductCard}
         name={name}
