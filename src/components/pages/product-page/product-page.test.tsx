@@ -1,52 +1,49 @@
 import { render, screen } from '@testing-library/react';
 import ProductPage from './product-page';
 import { withRouter, withStore } from '../../../utils/mock-component';
-import { fakeCameras, fakeCurrentCamera, fakePromoCameras, fakeReviews } from '../../../mocks/mock-test';
+import { fakeCameras, fakeCurrentCamera, fakePromoCameras } from '../../../mocks/mock-test';
+import { makeFakeStore } from '../../../utils/mocks';
 
 describe('Component: ReviewsList', () => {
   const containerId = 'productPageContent';
 
   it('should render correctly', () => {
-    const {withStoreComponent} = withStore(
-      <ProductPage />,
-      {cameras: {
-        cameras: fakeCameras,
-        promoCameras: fakePromoCameras,
-        currentCamera: fakeCurrentCamera,
+    const { withStoreComponent } = withStore(<ProductPage />, makeFakeStore(
+      {
+        cameras: {
+          cameras: fakeCameras,
+          promoCameras: fakePromoCameras,
+          similarCameras: fakeCameras,
+          currentCamera: fakeCurrentCamera,
 
-        isCamerasLoading: false,
-        isPromoCamerasLoading: false,
-        isCurrentCameraLoading: false,
-      },
-      reviews: {
-        reviews: fakeReviews,
+          isCamerasLoading: false,
+          isSimilarCamerasLoading: false,
+          isPromoCamerasLoading: false,
+          isCurrentCameraLoading: false,
+        }
+      }
+    ));
 
-        isReviewsLoading: false,
-      },
-      });
     render(withRouter(withStoreComponent));
 
     expect(screen.getByTestId(containerId)).toBeInTheDocument();
   });
 
   it('should not render component if data is loading', () => {
-    const {withStoreComponent} = withStore(
-      <ProductPage />,
-      {cameras: {
+    const { withStoreComponent } = withStore(<ProductPage />, makeFakeStore({
+      cameras: {
         cameras: fakeCameras,
         promoCameras: fakePromoCameras,
+        similarCameras: fakeCameras,
         currentCamera: fakeCurrentCamera,
 
         isCamerasLoading: false,
+        isSimilarCamerasLoading: false,
         isPromoCamerasLoading: false,
         isCurrentCameraLoading: true,
-      },
-      reviews: {
-        reviews: fakeReviews,
+      }
+    }));
 
-        isReviewsLoading: false,
-      },
-      });
     render(withRouter(withStoreComponent));
 
     expect(screen.queryByTestId(containerId)).not.toBeInTheDocument();
@@ -54,24 +51,22 @@ describe('Component: ReviewsList', () => {
 
   it('should return "NotFoundPage" if data loaded but "currentCamera" is null', () => {
     const notFoundPageText = '404: Страница не найдена';
+    const { withStoreComponent } = withStore(<ProductPage />, makeFakeStore(
+      {
+        cameras: {
+          cameras: fakeCameras,
+          promoCameras: fakePromoCameras,
+          similarCameras: fakeCameras,
+          currentCamera: null,
 
-    const {withStoreComponent} = withStore(
-      <ProductPage />,
-      {cameras: {
-        cameras: fakeCameras,
-        promoCameras: fakePromoCameras,
-        currentCamera: null,
+          isCamerasLoading: false,
+          isSimilarCamerasLoading: false,
+          isPromoCamerasLoading: false,
+          isCurrentCameraLoading: false,
+        }
+      }
+    ));
 
-        isCamerasLoading: false,
-        isPromoCamerasLoading: false,
-        isCurrentCameraLoading: false,
-      },
-      reviews: {
-        reviews: fakeReviews,
-
-        isReviewsLoading: false,
-      },
-      });
     render(withRouter(withStoreComponent));
 
     expect(screen.queryByTestId(containerId)).not.toBeInTheDocument();

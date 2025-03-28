@@ -1,16 +1,18 @@
 import { NameSpace } from '../../const';
 import { fakeCameras, fakePromoCameras, fakeCurrentCamera } from '../../mocks/mock-test';
-import { selectCameras, selectCurrentCamera, selectIsCamerasLoading, selectIsCurrentCameraLoading, selectIsPromoCamerasLoading, selectPromoCameras } from './cameras-process.selectors';
+import { selectCameras, selectCurrentCamera, selectIsCamerasLoading, selectIsCurrentCameraLoading, selectIsPromoCamerasLoading, selectIsSimilarCamerasLoading, selectPromoCameras, selectSimilarCameras } from './cameras-process.selectors';
 
 describe('CamerasProcess selectors', () => {
   const state = {
     [NameSpace.Cameras]: {
       cameras: fakeCameras,
       promoCameras: fakePromoCameras,
+      similarCameras: fakeCameras,
       currentCamera: fakeCurrentCamera,
 
       isCamerasLoading: false,
       isPromoCamerasLoading: false,
+      isSimilarCamerasLoading: false,
       isCurrentCameraLoading: false,
     }
   };
@@ -27,11 +29,18 @@ describe('CamerasProcess selectors', () => {
     expect(result).toStrictEqual(promoCameras);
   });
 
+  it('should return similarCameras from state', () => {
+    const { similarCameras } = state[NameSpace.Cameras];
+    const result = selectSimilarCameras(state);
+    expect(result).toStrictEqual(similarCameras);
+  });
+
   it('should return currentCamera from state', () => {
     const { currentCamera } = state[NameSpace.Cameras];
     const result = selectCurrentCamera(state);
     expect(result).toStrictEqual(currentCamera);
   });
+
 
   it('should return isCamerasLoading from state', () => {
     const { isCamerasLoading } = state[NameSpace.Cameras];
@@ -43,6 +52,12 @@ describe('CamerasProcess selectors', () => {
     const { isPromoCamerasLoading } = state[NameSpace.Cameras];
     const result = selectIsPromoCamerasLoading(state);
     expect(result).toBe(isPromoCamerasLoading);
+  });
+
+  it('should return isSimilarCamerasLoading from state', () => {
+    const { isSimilarCamerasLoading } = state[NameSpace.Cameras];
+    const result = selectIsSimilarCamerasLoading(state);
+    expect(result).toBe(isSimilarCamerasLoading);
   });
 
   it('should return isCurrentCameraLoading from state', () => {

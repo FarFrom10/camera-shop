@@ -5,9 +5,11 @@ export const makeFakeStore = (initialState?: Partial<State>): State => ({
   cameras: {
     cameras: fakeCameras,
     promoCameras: fakePromoCameras,
+    similarCameras: fakeCameras,
     currentCamera: fakeCurrentCamera,
 
     isCamerasLoading: false,
+    isSimilarCamerasLoading: false,
     isPromoCamerasLoading: false,
     isCurrentCameraLoading: false,
   },

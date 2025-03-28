@@ -1,19 +1,16 @@
 import { render, screen } from '@testing-library/react';
-import { withRouter, withStore } from '../../utils/mock-component';
-import { fakeCurrentCamera, fakeReviews } from '../../mocks/mock-test';
+import { mockEmptyCallback, withRouter, withStore } from '../../utils/mock-component';
+import { fakeCameras, fakeCurrentCamera } from '../../mocks/mock-test';
 import ProductPageContent from './product-page-content';
+import { makeFakeStore } from '../../utils/mocks';
 
 describe('Component: ProductPageContent', () => {
   it('should render correctly', () => {
     const infoContainerId = 'productPageInfoSection';
     const reviewsContainerId = 'productPageReviewsSection';
-    const {withStoreComponent} = withStore(
-      <ProductPageContent camera={fakeCurrentCamera}/>,
-      {reviews: {
-        reviews: fakeReviews,
-        isReviewsLoading: false
-      }
-      });
+    const { withStoreComponent } = withStore(
+      <ProductPageContent onModalContactMeOpen={mockEmptyCallback} currentCamera={fakeCurrentCamera} similarCameras={fakeCameras}/>
+      , makeFakeStore());
 
     render(withRouter(withStoreComponent));
 
