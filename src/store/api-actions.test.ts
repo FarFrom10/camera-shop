@@ -6,7 +6,7 @@ import { State } from '../types/state';
 import { Action } from '@reduxjs/toolkit';
 import { AppThunkDispatch, extractActionsTypes } from '../types/mocks';
 import { APIRoute } from '../const';
-import { fetchCameraReviewsByIdAction, fetchCamerasAction, fetchPromoCamerasAction, getCameraByIdAction, postContactMeDataAction } from './api-actions';
+import { fetchCameraReviewsByIdAction, fetchCamerasAction, fetchPromoCamerasAction, getCameraByIdAction, getSimilarCamerasByIdAction, postContactMeDataAction } from './api-actions';
 import { fakeCameras, fakeContactMeData, fakeCurrentCamera, fakePromoCameras, fakeReviews } from '../mocks/mock-test';
 
 describe('Async actions', () => {
@@ -78,6 +78,39 @@ describe('Async actions', () => {
       expect(actions).toEqual([
         fetchPromoCamerasAction.pending.type,
         fetchPromoCamerasAction.rejected.type
+      ]);
+    });
+  });
+
+  describe('getSimilarCamerasByIdAction', () => {
+    it('should dispatch "getSimilarCamerasByIdAction.pending" and "getSimilarCamerasByIdAction.fulfilled" when server response 200', async () => {
+      const fakeId = String(fakeCameras[0].id);
+      mockAxiosAdapter.onGet(`${APIRoute.Cameras}/${fakeId}/similar`).reply(200, fakeCameras);
+
+      await store.dispatch(getSimilarCamerasByIdAction(fakeId));
+      const emittedActions = store.getActions();
+      const extractedActionTypes = extractActionsTypes(emittedActions);
+      const getSimilarCamerasByIdActionFulfilled = emittedActions.at(1) as ReturnType<typeof getSimilarCamerasByIdAction.fulfilled>;
+
+      expect(extractedActionTypes).toEqual([
+        getSimilarCamerasByIdAction.pending.type,
+        getSimilarCamerasByIdAction.fulfilled.type
+      ]);
+
+      expect(getSimilarCamerasByIdActionFulfilled.payload)
+        .toEqual(fakeCameras);
+    });
+
+    it('should dispatch "getSimilarCamerasByIdAction.pending" and "getSimilarCamerasByIdAction.rejected" when server response 400', async () => {
+      const fakeId = String(fakeCameras[0].id);
+      mockAxiosAdapter.onGet(`${APIRoute.Cameras}/${fakeId}/similar`).reply(400);
+
+      await store.dispatch(getSimilarCamerasByIdAction(fakeId));
+      const actions = extractActionsTypes(store.getActions());
+
+      expect(actions).toEqual([
+        getSimilarCamerasByIdAction.pending.type,
+        getSimilarCamerasByIdAction.rejected.type
       ]);
     });
   });
