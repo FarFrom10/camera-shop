@@ -15,7 +15,7 @@ function HeaderTemplate({isBasketPage = false, isIndexPage = false}: HeaderProps
       <div className="container">
         <Logo isIndexPage={isIndexPage}/>
         <HeaderNav/>
-        {isBasketPage && <FormSearch/>}
+        <FormSearch/>
         {isBasketPage && <HeaderBasket/>}
       </div>
     </header>

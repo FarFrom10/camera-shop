@@ -6,6 +6,11 @@ export const CLASS_SCROLL_LOCK = 'scroll-lock';
 export const PHONE_NUMBER_START = '+7';
 export const SIMILAR_CAMERAS_SLIDES_PER_VIEW = 3;
 
+export const SearchLength = {
+  Min: 3,
+  MinToScroll: 5
+} as const;
+
 export const Delay = {
   ModalOpenFocus: 300,
   Slider: 3000
