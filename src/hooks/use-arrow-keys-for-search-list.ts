@@ -16,7 +16,6 @@ export const useArrowKeysForSearchList = ({
 
   const [highlightedIndex, setHighlightedIndex] = useState<number>(-1);
   const searchInputRefCurrent = searchInputRef?.current as HTMLElement;
-  const listRefCurrent = listRef?.current as HTMLElement;
 
   useEffect(() => {
     const handleListClose = (evt: KeyboardEvent) => {
@@ -39,6 +38,7 @@ export const useArrowKeysForSearchList = ({
             if (index === -1){
               searchInputRefCurrent.focus();
             } else {
+              const listRefCurrent = listRef?.current as HTMLElement;
               const listRefCurrentChildLink = listRefCurrent.children[index].children[0] as HTMLElement;
               listRefCurrentChildLink.focus();
             }
@@ -54,6 +54,7 @@ export const useArrowKeysForSearchList = ({
             if (index === -1){
               searchInputRefCurrent.focus();
             } else {
+              const listRefCurrent = listRef?.current as HTMLElement;
               const listRefCurrentChildLink = listRefCurrent.children[index].children[0] as HTMLElement;
               listRefCurrentChildLink.focus();
             }
