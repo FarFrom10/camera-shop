@@ -11,7 +11,7 @@ import ButtonUp from '../../button-up/button-up';
 import ModalWrapper from '../../modal/modal-wrapper/modal-wrapper';
 import ModalContactMe from '../../modal/modal-contact-me/modal-contact-me';
 import { useModalContactMe } from '../../../hooks/use-modal-contact-me';
-import { useLoadProductPage } from '../../../hooks/useLoadProductPage';
+import { useLoadProductPage } from '../../../hooks/use-load-product-page';
 
 function ProductPage(): JSX.Element {
   const isCurrentCameraLoading = useAppSelector(selectIsCurrentCameraLoading);

@@ -5,7 +5,7 @@ import SearchListEmpty from '../search-list-empty/search-list-empty';
 import SearchListItem from '../search-list-item/search-list-item';
 import styles from './search-select-list.module.css';
 import cn from 'classnames';
-import { useArrowKeysForSearchList } from '../../hooks/useArrowKeysForSearchList';
+import { useArrowKeysForSearchList } from '../../hooks/use-arrow-keys-for-search-list';
 
 type SearchSelectListProps = {
   isVisible: boolean;
