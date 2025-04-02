@@ -13,8 +13,8 @@ function SearchListItem({camera, onInputReset}: SearchListItemProps): JSX.Elemen
   const path = generatePath(AppRoute.Product, {id:String(id)});
 
   return(
-    <li className="form-search__select-item" tabIndex={0}>
-      <Link className={styles.cameraLink} onClick={onInputReset} to={path}>{name}</Link>
+    <li style={{padding: 0}} className="form-search__select-item">
+      <Link tabIndex={0} className={styles.cameraLink} onClick={onInputReset} to={path}>{name}</Link>
     </li>
   );
 }

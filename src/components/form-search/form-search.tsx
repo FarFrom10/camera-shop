@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import { IconName, SearchLength } from '../../const';
 import CommonIcon from '../common-icon/common-icon';
 import SearchSelectList from '../search-select-list/search-select-list';
@@ -8,6 +8,7 @@ import { selectCameras } from '../../store/cameras-process/cameras-process.selec
 function FormSearch(): JSX.Element {
   const [searchValue, setSearchValue] = useState<string>('');
   const isSearchVisible = searchValue.length >= SearchLength.Min;
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   const cameras = useAppSelector(selectCameras);
   const filteredCameras = isSearchVisible
@@ -23,6 +24,7 @@ function FormSearch(): JSX.Element {
         <label>
           <CommonIcon icon={IconName.Lens} iconClass='form-search__icon'/>
           <input
+            ref={searchInputRef}
             className="form-search__input"
             type="text"
             onChange={handleInputChange}
@@ -31,11 +33,11 @@ function FormSearch(): JSX.Element {
             placeholder="Поиск по сайту"
           />
         </label>
-        {isSearchVisible && <SearchSelectList onInputReset={handleInputReset} isVisible={isSearchVisible} cameras={filteredCameras}/>}
+        {isSearchVisible && <SearchSelectList searchInputRef={searchInputRef} onInputReset={handleInputReset} isVisible={isSearchVisible} cameras={filteredCameras}/>}
       </form>
       <button
         className="form-search__reset" type="reset"
-        style={isSearchVisible ? {display: 'block'} : {}}
+        style={searchValue.length ? {display: 'block'} : {}}
         onClick={handleInputReset}
       >
         <CommonIcon icon={IconName.Close}/>
