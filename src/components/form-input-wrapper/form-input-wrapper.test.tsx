@@ -6,7 +6,7 @@ import { InputValidationErrorMessage } from '../../const';
 describe('Component: FormInputWrapper', () => {
   const containerId = 'formInputWrapper';
   const fakeChildrenId = 'fakeChildren';
-  const fakeChildren = <div data-testid={fakeChildrenId}>children</div>;
+  const fakeChildren = <div data-testid={fakeChildrenId}></div>;
 
   it('should render correctly', () => {
     render(withRouter(

@@ -5,6 +5,7 @@ export const REVIEWS_STEP_NUMBER = 3;
 export const CLASS_SCROLL_LOCK = 'scroll-lock';
 export const PHONE_NUMBER_START = '+7';
 export const SIMILAR_CAMERAS_SLIDES_PER_VIEW = 3;
+export const EMPTY_SEARCH_LIST_TEXT = 'Не найдено...';
 
 export const SearchLength = {
   Min: 3,

@@ -12,10 +12,12 @@ describe('Component: CatalogPage', () => {
       {cameras: {
         cameras: fakeCameras,
         promoCameras: fakePromoCameras,
+        similarCameras: fakeCameras,
         currentCamera: fakeCurrentCamera,
 
         isCamerasLoading: false,
         isPromoCamerasLoading: false,
+        isSimilarCamerasLoading: false,
         isCurrentCameraLoading: false,
       }
       });
@@ -31,10 +33,12 @@ describe('Component: CatalogPage', () => {
       {cameras: {
         cameras: fakeCameras,
         promoCameras: [],
+        similarCameras: fakeCameras,
         currentCamera: fakeCurrentCamera,
 
         isCamerasLoading: false,
         isPromoCamerasLoading: false,
+        isSimilarCamerasLoading: false,
         isCurrentCameraLoading: false,
       }
       });

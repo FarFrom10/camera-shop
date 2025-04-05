@@ -1,12 +1,18 @@
 import { render, screen } from '@testing-library/react';
-import { withRouter } from '../../utils/mock-component';
+import { withRouter, withStore } from '../../utils/mock-component';
 import Header from './header';
+import { makeFakeStore } from '../../utils/mocks';
 
 describe('Component: Header', () => {
   it('should render correctly', () => {
     const containerId = 'header';
 
-    render(withRouter(<Header/>));
+    const {withStoreComponent} = withStore(
+      <Header />,
+      makeFakeStore()
+    );
+
+    render(withRouter(withStoreComponent));
 
     expect(screen.getByTestId(containerId)).toBeInTheDocument();
   });
