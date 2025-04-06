@@ -49,16 +49,16 @@ describe('Hook: useArrowKeysForSearchList', () => {
 
   it('input should have focus', async () => {
     render(withRouter(<TestComponent/>));
-    const expectedInput = screen.getByTestId(testSearchInput);
-    await userEvent.click(expectedInput);
+    const searchInputElement = screen.getByTestId(testSearchInput);
+    await userEvent.click(searchInputElement);
 
-    expect(expectedInput).toHaveFocus();
+    expect(searchInputElement).toHaveFocus();
   });
 
   it('first list item link should have focus after keydown "ArrowDown"', async () => {
     render(withRouter(<TestComponent/>));
-    const expectedInput = screen.getByTestId(testSearchInput);
-    await userEvent.click(expectedInput);
+    const searchInputElement = screen.getByTestId(testSearchInput);
+    await userEvent.click(searchInputElement);
     await userEvent.keyboard('[ArrowDown]');
     const firstListElement = screen.getAllByTestId(testItemLinkId).at(0);
 
@@ -67,12 +67,12 @@ describe('Hook: useArrowKeysForSearchList', () => {
 
   it('input should have focus after keydown "ArrowUp", while first list item link have focus', async () => {
     render(withRouter(<TestComponent/>));
-    const expectedInput = screen.getByTestId(testSearchInput);
-    await userEvent.click(expectedInput);
+    const searchInputElement = screen.getByTestId(testSearchInput);
+    await userEvent.click(searchInputElement);
     await userEvent.keyboard('[ArrowDown]');
     await userEvent.keyboard('[ArrowUp]');
 
-    expect(expectedInput).toHaveFocus();
+    expect(searchInputElement).toHaveFocus();
   });
 
   it('should call "onInputReset" after keydown "Esc"', async () => {

@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import CatalogPage from './catalog-page';
-import { withRouter, withStore } from '../../../utils/mock-component';
-import { fakeCameras, fakeCurrentCamera, fakePromoCameras } from '../../../mocks/mock-test';
+import { withRouter, withStore } from '../../utils/mock-component';
+import { fakeCameras, fakeCurrentCamera, fakePromoCameras } from '../../mocks/mock-test';
 
 describe('Component: CatalogPage', () => {
   const containerId = 'catalogPage';

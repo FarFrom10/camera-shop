@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import styles from './not-found-page.module.css';
-import Title from '../../title/title';
-import { AppRoute } from '../../../const';
+import Title from '../../components/title/title';
+import { AppRoute } from '../../const';
 
 function NotFoundPage(): JSX.Element {
   return (

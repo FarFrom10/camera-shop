@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import ProductPage from './product-page';
-import { withRouter, withStore } from '../../../utils/mock-component';
-import { fakeCameras, fakeCurrentCamera, fakePromoCameras } from '../../../mocks/mock-test';
-import { makeFakeStore } from '../../../utils/mocks';
+import { withRouter, withStore } from '../../utils/mock-component';
+import { makeFakeStore } from '../../utils/mocks';
+import { fakeCameras, fakeCurrentCamera, fakePromoCameras } from '../../mocks/mock-test';
 
 describe('Component: ReviewsList', () => {
   const containerId = 'productPageContent';

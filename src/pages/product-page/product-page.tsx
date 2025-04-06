@@ -1,17 +1,17 @@
-import { AppRoute, } from '../../../const';
-import { useAppSelector } from '../../../hooks';
-import ProductPageContent from '../../product-page-content/product-page-content';
-import Title from '../../title/title';
-import { selectCurrentCamera, selectIsCurrentCameraLoading, selectIsSimilarCamerasLoading, selectSimilarCameras } from '../../../store/cameras-process/cameras-process.selectors';
-import LoadingScreen from '../../loading-screen/loading-screen';
+import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
+import ButtonUp from '../../components/button-up/button-up';
+import LoadingScreen from '../../components/loading-screen/loading-screen';
+import ModalContactMe from '../../components/modal/modal-contact-me/modal-contact-me';
+import ModalWrapper from '../../components/modal/modal-wrapper/modal-wrapper';
+import ProductPageContent from '../../components/product-page-content/product-page-content';
+import Title from '../../components/title/title';
+import { AppRoute } from '../../const';
+import { useAppSelector } from '../../hooks';
+import { useLoadProductPage } from '../../hooks/use-load-product-page';
+import { useModalContactMe } from '../../hooks/use-modal-contact-me';
+import { selectCurrentCamera, selectIsCurrentCameraLoading, selectIsSimilarCamerasLoading, selectSimilarCameras } from '../../store/cameras-process/cameras-process.selectors';
+import { selectIsReviewsLoading } from '../../store/reviews-process/reviews-process.selectors';
 import NotFoundPage from '../not-found-page/not-found-page';
-import { selectIsReviewsLoading } from '../../../store/reviews-process/reviews-process.selectors';
-import Breadcrumbs from '../../breadcrumbs/breadcrumbs';
-import ButtonUp from '../../button-up/button-up';
-import ModalWrapper from '../../modal/modal-wrapper/modal-wrapper';
-import ModalContactMe from '../../modal/modal-contact-me/modal-contact-me';
-import { useModalContactMe } from '../../../hooks/use-modal-contact-me';
-import { useLoadProductPage } from '../../../hooks/use-load-product-page';
 
 function ProductPage(): JSX.Element {
   const isCurrentCameraLoading = useAppSelector(selectIsCurrentCameraLoading);

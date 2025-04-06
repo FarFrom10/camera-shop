@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import { withRouter } from '../../../utils/mock-component';
 import NotFoundPage from './not-found-page';
+import { withRouter } from '../../utils/mock-component';
 
 describe('Component: NotFoundPage', () => {
   it('should render correctly', () => {
