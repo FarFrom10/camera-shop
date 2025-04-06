@@ -1,6 +1,6 @@
 import { generatePath } from 'react-router-dom';
 import ButtonMoreDetails from '../button-more-details/button-more-details';
-import { AppRoute } from '../../const';
+import { AppRoute, DEFAULT_PRODUCT_TAB } from '../../const';
 
 type BannerInfoProps = {
   id: string;
@@ -8,7 +8,7 @@ type BannerInfoProps = {
 }
 
 function BannerInfo({id, name}: BannerInfoProps): JSX.Element {
-  const route = generatePath(AppRoute.Product, {id: id});
+  const route = `${generatePath(AppRoute.Product, {id:String(id)})}/${DEFAULT_PRODUCT_TAB}`;
 
   return(
     <p data-testid="bannerInfoContainer" className="banner__info">

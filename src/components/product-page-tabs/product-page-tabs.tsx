@@ -1,30 +1,20 @@
-import { MouseEvent, useState } from 'react';
 import ProductTabsList from '../product-tabs-list/product-tabs-list';
 import ProductTabsText from '../product-tabs-text/product-tabs-text';
 import { ProductTabsCategory } from '../../const';
 import ProductTabsButton from '../product-tabs-button/product-tabs-button';
 import cn from 'classnames';
-import { isValueProductTabsCategory } from '../../utils/type';
 import { CameraData } from '../../types/cameras';
+import { Route, Routes, useParams } from 'react-router-dom';
 
 type ProductPageTabsProps = {
   camera: CameraData;
 }
 
 function ProductPageTabs({camera}: ProductPageTabsProps): JSX.Element {
-  const [activeTab, setActiveTab] = useState<ProductTabsCategory>(ProductTabsCategory.Description);
   const {description} = camera;
+  const {'*': currentTab} = useParams();
 
-  const handleButtonClick = (evt: MouseEvent<HTMLButtonElement>) => {
-    if(evt.target instanceof HTMLElement
-      && evt.target.dataset.tab
-      && isValueProductTabsCategory(evt.target.dataset.tab)){
-      setActiveTab(evt.target.dataset.tab);
-    }
-  };
-
-  const buttons = Object.values(ProductTabsCategory)
-    .map((tab) => <ProductTabsButton onButtonClick={handleButtonClick} tabName={tab} activeTab={activeTab} key={tab}/>);
+  const buttons = ProductTabsCategory.map((name, i) => <ProductTabsButton tabName={name} tabNumber={i + 1} activeTab={String(i + 1) === currentTab} key={name}/>);
 
   return (
     <div data-testid='productTabs' className="tabs product__tabs">
@@ -32,20 +22,33 @@ function ProductPageTabs({camera}: ProductPageTabsProps): JSX.Element {
         {buttons}
       </div>
       <div className="tabs__content">
-        <div data-testid='productTabsCharacteristics' className={cn(
-          'tabs__element',
-          {'is-active': activeTab === ProductTabsCategory.Characteristics}
+        <Routes>
+          <Route path='1' element={
+            <div data-testid='productTabsCharacteristics' className={cn(
+              'tabs__element',
+              {'is-active': currentTab === String(1)}
+            )}
+            >
+              <ProductTabsList camera={camera}/>
+            </div>
+          }
+          />
+          <Route path="2" element={
+            <div data-testid='productPageTabsText' className={cn(
+              'tabs__element',
+              {'is-active': currentTab === String(2)}
+            )}
+            >
+              <ProductTabsText description={description}/>
+            </div>
+          }
+          />
+        </Routes>
+        {currentTab && !['1', '2'].includes(currentTab) && (
+          <div data-testid='productPageTabsText' className='tabs__element is-active'>
+            Таб не найден
+          </div>
         )}
-        >
-          <ProductTabsList camera={camera}/>
-        </div>
-        <div data-testid='productPageTabsText' className={cn(
-          'tabs__element',
-          {'is-active': activeTab === ProductTabsCategory.Description}
-        )}
-        >
-          <ProductTabsText description={description}/>
-        </div>
       </div>
     </div>
   );

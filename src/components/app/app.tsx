@@ -27,7 +27,7 @@ function App(): JSX.Element {
             <Route path={AppRoute.Index}>
               <Route index element={<CatalogPage/>}/>
               <Route
-                path={AppRoute.Product}
+                path={`${AppRoute.Product}/*`}
                 element={<ProductPage/>}
               />
               <Route

@@ -1,26 +1,25 @@
 import cn from 'classnames';
-import { ProductTabsCategory } from '../../const';
-import { memo, MouseEvent } from 'react';
+import { memo } from 'react';
+import { Link } from 'react-router-dom';
 
 type ProductTabsButtonProps = {
-  activeTab: ProductTabsCategory;
-  tabName: ProductTabsCategory;
-  onButtonClick: (evt: MouseEvent<HTMLButtonElement>) => void;
+  activeTab: boolean;
+  tabName: string;
+  tabNumber: number;
 }
 
-function ProductTabsButtonTemplate({activeTab, tabName, onButtonClick}: ProductTabsButtonProps): JSX.Element {
+function ProductTabsButtonTemplate({activeTab, tabName, tabNumber}: ProductTabsButtonProps): JSX.Element {
   return (
-    <button
-      onClick={onButtonClick}
-      data-tab={tabName}
+    <Link
+      to={String(tabNumber)}
       className={cn(
         'tabs__control',
-        {'is-active': activeTab === tabName}
+        {'is-active': activeTab}
       )}
       type="button"
     >
       {tabName}
-    </button>
+    </Link>
   );
 }
 

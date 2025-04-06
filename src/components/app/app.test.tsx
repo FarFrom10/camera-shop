@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { withHistory, withStore } from '../../utils/mock-component';
 import App from './app';
 import { createMemoryHistory, MemoryHistory } from 'history';
-import { AppRoute } from '../../const';
+import { AppRoute, DEFAULT_PRODUCT_TAB } from '../../const';
 import { makeFakeStore } from '../../utils/mocks';
 import { generatePath } from 'react-router-dom';
 import { fakeCurrentCamera } from '../../mocks/mock-test';
@@ -24,10 +24,10 @@ describe('Application Routing', () => {
     expect(screen.getByText(/Каталог фото- и видеотехники/i)).toBeInTheDocument();
   });
 
-  it('should render "Product" when user navigate to "/product/:id"', () => {
+  it('should render "Product" when user navigate to "/product/:id/*"', () => {
     const withHistoryComponent = withHistory(<App />, mockHistory);
     const { withStoreComponent } = withStore(withHistoryComponent, makeFakeStore());
-    mockHistory.push(generatePath(AppRoute.Product, {id: String(fakeCurrentCamera.id)}));
+    mockHistory.push(`${generatePath(AppRoute.Product, {id: String(fakeCurrentCamera.id)})}/${DEFAULT_PRODUCT_TAB}`);
 
     render(withStoreComponent);
 

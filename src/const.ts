@@ -5,6 +5,7 @@ export const REVIEWS_STEP_NUMBER = 3;
 export const CLASS_SCROLL_LOCK = 'scroll-lock';
 export const PHONE_NUMBER_START = '+7';
 export const SIMILAR_CAMERAS_SLIDES_PER_VIEW = 3;
+export const DEFAULT_PRODUCT_TAB = 2;
 export const EMPTY_SEARCH_LIST_TEXT = 'Не найдено...';
 
 export const SearchLength = {
@@ -98,10 +99,12 @@ export enum CommonPictureCategory {
   Banner = 'Banner'
 }
 
-export enum ProductTabsCategory {
-  Characteristics = 'Характеристики',
-  Description = 'Описание',
-}
+// export enum ProductTabsCategory {
+//   Characteristics = 'Характеристики',
+//   Description = 'Описание',
+// }
+
+export const ProductTabsCategory = ['Характеристики', 'Описание'] as const;
 
 export enum ButtonText {
   Loading = 'Отправка...',

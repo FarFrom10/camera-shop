@@ -7,21 +7,23 @@ import { generatePath, useParams } from 'react-router-dom';
 import { AppRoute } from '../../const';
 
 function Breadcrumbs(): JSX.Element {
-  const { id } = useParams();
+  const { id, '*': tab } = useParams();
   const currentCamera = useAppSelector(selectCurrentCamera);
   const breadcrumbs = useReactRouterBreadcrumbs();
 
   const breadcrumbsList = breadcrumbs.map(({ key }, i) => {
     const path = key;
-    const currentCameraPath = generatePath(AppRoute.Product, {id: String(id)});
     const isLastIndex = i === breadcrumbs.length - 1;
+    const currentCameraPath = `${generatePath(AppRoute.Product,
+      {id: String(id)})}/${String(tab)}`;
+
 
     //Путь указвыает на один из путей перечисления AppRoute
     if (isValueAppRoute(path)){
       return <BreadcrubmsItem route={path} key={path} isActive={isLastIndex}/>;
     }
     //Путь указывает на страницу конкретного продукта
-    if (key === currentCameraPath){
+    if (path === currentCameraPath){
       return <BreadcrubmsItem productName={currentCamera?.name} productRoute={path} key={path} isActive={isLastIndex}/>;
     }
   });

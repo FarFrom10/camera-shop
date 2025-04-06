@@ -1,5 +1,5 @@
 import { generatePath } from 'react-router-dom';
-import { AppRoute, ButtonText, CommonPictureCategory } from '../../const';
+import { AppRoute, ButtonText, CommonPictureCategory, DEFAULT_PRODUCT_TAB } from '../../const';
 import { CameraData } from '../../types/cameras';
 import ButtonMoreDetails from '../button-more-details/button-more-details';
 import CommonButton from '../common-button/common-button';
@@ -28,7 +28,7 @@ function ProductCardTemplate({camera, onButtonClick, isSimilarProduct = false}: 
   } = camera;
 
   const handleButtonClick = useCallback(() => onButtonClick(id), [onButtonClick, id]);
-  const path = useMemo(() => generatePath(AppRoute.Product, {id:String(id)}), [id]);
+  const path = useMemo(() => `${generatePath(AppRoute.Product, {id:String(id)})}/${DEFAULT_PRODUCT_TAB}`, [id]);
   const style = isSimilarProduct ? {width: '90%', heigth: '100%'} : {};
 
   return(
