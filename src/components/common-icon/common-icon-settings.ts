@@ -53,4 +53,8 @@ export const IconSettings: SettingsType = {
     width: 9,
     height: 9,
   },
+  [IconName.Sort]: {
+    width: 16,
+    height: 14,
+  },
 } as const;

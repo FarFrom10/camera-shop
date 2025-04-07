@@ -1,4 +1,4 @@
-import { NameSpace } from '../const';
+import { NameSpace, SortByOrder, SortByType } from '../const';
 import { store } from '../store';
 import { CameraData, CameraReview, PromoCameraData } from './cameras';
 
@@ -6,6 +6,7 @@ export type State = ReturnType<typeof store.getState>;
 export type StateCameras = Pick<State, NameSpace.Cameras>
 export type StateReviews = Pick<State, NameSpace.Reviews>
 export type StateUser = Pick<State, NameSpace.User>
+export type StateSort = Pick<State, NameSpace.Sort>
 
 export type AppDispatch = typeof store.dispatch;
 
@@ -29,4 +30,9 @@ export type ReviewsProcess = {
 
 export type UserProcess = {
   isContactMeDataLoading: boolean;
+}
+
+export type SortProcess = {
+  sortType: SortByType;
+  sortOrder: SortByOrder;
 }

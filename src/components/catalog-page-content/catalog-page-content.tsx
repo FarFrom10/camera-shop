@@ -3,6 +3,7 @@ import { useModalContactMe } from '../../hooks/use-modal-contact-me';
 import { selectCameras } from '../../store/cameras-process/cameras-process.selectors';
 import CatalogAside from '../catalog-aside/catalog-aside';
 import CatalogCards from '../catalog-cards/catalog-cards';
+import CatalogPageSort from '../catalog-page-sort/catalog-page-sort';
 import ModalContactMe from '../modal/modal-contact-me/modal-contact-me';
 import ModalWrapper from '../modal/modal-wrapper/modal-wrapper';
 
@@ -23,6 +24,7 @@ function CatalogPageContent(): JSX.Element {
         <div className="page-content__columns">
           <CatalogAside/>
           <div className="catalog__content">
+            <CatalogPageSort/>
             <CatalogCards
               cameras={cameras}
               onModalContactMeOpen={handleModalContactMeOpen}

@@ -17,7 +17,6 @@ function Breadcrumbs(): JSX.Element {
     const currentCameraPath = `${generatePath(AppRoute.Product,
       {id: String(id)})}/${String(tab)}`;
 
-
     //Путь указвыает на один из путей перечисления AppRoute
     if (isValueAppRoute(path)){
       return <BreadcrubmsItem route={path} key={path} isActive={isLastIndex}/>;

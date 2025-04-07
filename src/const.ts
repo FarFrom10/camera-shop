@@ -54,6 +54,7 @@ export enum NameSpace {
   Cameras = 'cameras',
   Reviews = 'reviews',
   User = 'user',
+  Sort = 'sort',
 }
 
 export enum AppRoute {
@@ -85,6 +86,7 @@ export enum IconName {
   Star = 'icon-star',
   StarFull = 'icon-full-star',
   Snowflake = 'icon-snowflake',
+  Sort = 'icon-sort'
 }
 
 export enum ButtonQuantityDirection {
@@ -99,12 +101,17 @@ export enum CommonPictureCategory {
   Banner = 'Banner'
 }
 
-// export enum ProductTabsCategory {
-//   Characteristics = 'Характеристики',
-//   Description = 'Описание',
-// }
-
 export const ProductTabsCategory = ['Характеристики', 'Описание'] as const;
+
+export enum SortByType {
+  Price = 'sortPrice',
+  Popular = 'sortPopular'
+}
+
+export enum SortByOrder {
+  Up = 'up',
+  Down = 'down'
+}
 
 export enum ButtonText {
   Loading = 'Отправка...',
