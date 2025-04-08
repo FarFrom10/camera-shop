@@ -1,6 +1,6 @@
 import { fakeReviews } from '../../mocks/mock-test';
 import { fetchCameraReviewsByIdAction } from '../api-actions';
-import { reviewsProcess } from './reviews-process.slice';
+import { resetReviews, reviewsProcess } from './reviews-process.slice';
 
 describe('ReviewProcess slice', () => {
   it('should return initial state with empty action', () => {
@@ -49,6 +49,19 @@ describe('ReviewProcess slice', () => {
     const fakeId = String(fakeReviews[0].cameraId);
 
     const result = reviewsProcess.reducer(undefined, fetchCameraReviewsByIdAction.fulfilled(fakeReviews, '', fakeId));
+
+    expect(result).toEqual(expectedState);
+  });
+  it('should reset "reviews" after get data and dispatch "resetReviews"', () => {
+    const expectedState = {
+      reviews: [],
+
+      isReviewsLoading: false,
+    };
+    const fakeId = String(fakeReviews[0].cameraId);
+
+    reviewsProcess.reducer(undefined, fetchCameraReviewsByIdAction.fulfilled(fakeReviews, '', fakeId));
+    const result = reviewsProcess.reducer(undefined, resetReviews);
 
     expect(result).toEqual(expectedState);
   });

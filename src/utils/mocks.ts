@@ -1,3 +1,4 @@
+import { SortByOrder, SortByType } from '../const';
 import { fakeCameras, fakeCurrentCamera, fakePromoCameras, fakeReviews } from '../mocks/mock-test';
 import { State } from '../types/state';
 
@@ -20,6 +21,10 @@ export const makeFakeStore = (initialState?: Partial<State>): State => ({
   },
   user: {
     isContactMeDataLoading: false
+  },
+  sort: {
+    sortType: SortByType.Price,
+    sortOrder: SortByOrder.Up,
   },
   ...initialState ?? {},
 });

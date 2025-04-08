@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import CatalogPage from './catalog-page';
 import { withRouter, withStore } from '../../utils/mock-component';
 import { fakeCameras, fakeCurrentCamera, fakePromoCameras } from '../../mocks/mock-test';
+import { SortByOrder, SortByType } from '../../const';
 
 describe('Component: CatalogPage', () => {
   const containerId = 'catalogPage';
@@ -19,6 +20,10 @@ describe('Component: CatalogPage', () => {
         isPromoCamerasLoading: false,
         isSimilarCamerasLoading: false,
         isCurrentCameraLoading: false,
+      },
+      sort: {
+        sortType: SortByType.Price,
+        sortOrder: SortByOrder.Up,
       }
       });
 
@@ -40,6 +45,10 @@ describe('Component: CatalogPage', () => {
         isPromoCamerasLoading: false,
         isSimilarCamerasLoading: false,
         isCurrentCameraLoading: false,
+      },
+      sort: {
+        sortType: SortByType.Price,
+        sortOrder: SortByOrder.Up,
       }
       });
 

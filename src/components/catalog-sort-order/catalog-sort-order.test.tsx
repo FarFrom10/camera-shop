@@ -1,20 +1,18 @@
 import { render, screen } from '@testing-library/react';
 import { withRouter, withStore } from '../../utils/mock-component';
-import CatalogPageContent from './catalog-page-content';
 import { makeFakeStore } from '../../utils/mocks';
+import CatalogSortOrder from './catalog-sort-order';
 
-describe('Component: CatalogPageContent', () => {
-  const containerId = 'catalogPageContent';
-  const expectedTitleText = 'Каталог фото- и видеотехники';
-
+describe('Component: CatalogSortOrder', () => {
   it('should render correctly', () => {
+    const containerId = 'catalogSortOrder';
     const {withStoreComponent} = withStore(
-      <CatalogPageContent />,
+      <CatalogSortOrder />,
       makeFakeStore()
     );
+
     render(withRouter(withStoreComponent));
 
     expect(screen.getByTestId(containerId)).toBeInTheDocument();
-    expect(screen.getByText(expectedTitleText)).toBeInTheDocument();
   });
 });

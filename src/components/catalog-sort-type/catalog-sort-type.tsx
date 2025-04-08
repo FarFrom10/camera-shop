@@ -21,7 +21,7 @@ function CatalogSortType(): JSX.Element {
   );
 
   return (
-    <div className="catalog-sort__type">
+    <div data-testid='catalogSortType' className="catalog-sort__type">
       {sortButtons}
     </div>
   );

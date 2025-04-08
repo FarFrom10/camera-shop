@@ -5,7 +5,7 @@ import { CatalogSortOrderButtonSettings } from './catalog-sort-order-button.sett
 type CatalogSortOrderButtonOrder = {
   sort: SortByOrder;
   currentSort: SortByOrder;
-    onSortOrderChange: (sortOrder: SortByOrder) => void;
+  onSortOrderChange: (sortOrder: SortByOrder) => void;
 }
 
 function CatalogSortOrderButton({sort, currentSort, onSortOrderChange}: CatalogSortOrderButtonOrder): JSX.Element {
@@ -14,6 +14,7 @@ function CatalogSortOrderButton({sort, currentSort, onSortOrderChange}: CatalogS
   return (
     <div className={`catalog-sort__btn catalog-sort__btn--${sort}`}>
       <input
+        data-testid='catalogSortOrderButton'
         onChange={() => onSortOrderChange(sort)}
         type="radio"
         id={sort}

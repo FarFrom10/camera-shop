@@ -21,7 +21,7 @@ function CatalogSortOrder(): JSX.Element {
   );
 
   return (
-    <div className="catalog-sort__order">
+    <div data-testid='catalogSortOrder' className="catalog-sort__order">
       {sortButtons}
     </div>
   );

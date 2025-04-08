@@ -12,7 +12,7 @@ function CatalogSortTypeButton({ sort, currentSort, onSortTypeChange }: CatalogS
 
   return (
     <div className="catalog-sort__btn-text">
-      <input onChange={() => onSortTypeChange(sort)} type="radio" id={sort} name="sort" checked={isChecked}/>
+      <input data-testid='catalogSortTypeButton' onChange={() => onSortTypeChange(sort)} type="radio" id={sort} name="sort" checked={isChecked}/>
       <label htmlFor={sort}>{CatalogSortTypeButtonSettings[sort].text}</label>
     </div>
   );
