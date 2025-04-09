@@ -1,5 +1,6 @@
+import { CameraCategory } from '../const';
+
 export type CameraType = 'Коллекционная' | 'Моментальная' | 'Цифровая' | 'Плёночная'
-export type CameraCategory = 'Видеокамера' | 'Фотоаппарат'
 export type CameraLevel = 'Нулевой' | 'Любительский' | 'Профессиональный'
 
 export type CameraData = {

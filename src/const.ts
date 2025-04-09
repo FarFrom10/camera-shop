@@ -183,3 +183,13 @@ export enum DateFormat {
   DateTime = 'YYYY/MM/DD',
   Review = 'DD MMMM'
 }
+
+export enum CameraCategory {
+  Video = 'Видеокамера',
+  Photo = 'Фотоаппарат'
+}
+
+export enum FilterCategory {
+  Photocamera = 'photocamera',
+  Videocamera = 'videocamera'
+}

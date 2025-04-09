@@ -8,8 +8,6 @@ export type FilterPrice = {
   max: string;
 }
 
-export type FilterCategory = 'photocamera' | 'videocamera'
-
 export type FilterCameraType = {
   digital: boolean;
   film: boolean;

@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace, } from '../../const';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { FilterCategory, NameSpace, } from '../../const';
 import { FilterProcess } from '../../types/state';
 
 const initialState: FilterProcess = {
@@ -25,7 +25,11 @@ export const filterProcess = createSlice({
   name: NameSpace.Filter,
   initialState,
   reducers: {
+    changeCategory: (state, action: PayloadAction<FilterCategory | null>) => {
+      state.category = action.payload;
+    },
+    resetFilters: () => initialState
   },
 });
 
-// export const {} = filterProcess.actions;
+export const {changeCategory, resetFilters} = filterProcess.actions;

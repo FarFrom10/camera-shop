@@ -6,6 +6,8 @@ import { memo, useMemo } from 'react';
 import { useAppSelector } from '../../hooks';
 import { selectSortOrder, selectSortType } from '../../store/sort-process/sort-process.selectors';
 import { sortCamerasByType } from '../../utils/sort';
+import { filterCamerasByCategory } from '../../utils/filter';
+import { selectFilterCategory } from '../../store/filter-process/filter-process.selectors';
 
 type CatalogCardsProps = {
   cameras: CameraData[];
@@ -15,10 +17,12 @@ type CatalogCardsProps = {
 function CatalogCardsTemplate({cameras, onModalContactMeOpen}: CatalogCardsProps): JSX.Element {
   const currentSortOrder = useAppSelector(selectSortOrder);
   const currentSortType = useAppSelector(selectSortType);
+  const filterCategory = useAppSelector(selectFilterCategory);
 
   const sortedCameras = sortCamerasByType([...cameras], currentSortType, currentSortOrder);
+  const filteredCameras = filterCamerasByCategory(filterCategory, sortedCameras);
 
-  const cards = useMemo(() => sortedCameras.map((camera) => <ProductCard onButtonClick={onModalContactMeOpen} camera={camera} key={camera.id}/>), [sortedCameras, onModalContactMeOpen]);
+  const cards = useMemo(() => filteredCameras.map((camera) => <ProductCard onButtonClick={onModalContactMeOpen} camera={camera} key={camera.id}/>), [filteredCameras, onModalContactMeOpen]);
 
   if (sortedCameras.length === 0) {
     return <EmptyListTitle message={EmptyListMessage.Cameras}/>;

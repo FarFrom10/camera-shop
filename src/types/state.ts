@@ -1,7 +1,7 @@
-import { NameSpace, SortByOrder, SortByType } from '../const';
+import { FilterCategory, NameSpace, SortByOrder, SortByType } from '../const';
 import { store } from '../store';
 import { CameraData, CameraReview, PromoCameraData } from './cameras';
-import { FilterCameraType, FilterCategory, FilterLevel, FilterPrice } from './types';
+import { FilterCameraType, FilterLevel, FilterPrice } from './types';
 
 export type State = ReturnType<typeof store.getState>;
 export type StateCameras = Pick<State, NameSpace.Cameras>
