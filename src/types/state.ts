@@ -1,12 +1,14 @@
 import { NameSpace, SortByOrder, SortByType } from '../const';
 import { store } from '../store';
 import { CameraData, CameraReview, PromoCameraData } from './cameras';
+import { FilterCameraType, FilterCategory, FilterLevel, FilterPrice } from './types';
 
 export type State = ReturnType<typeof store.getState>;
 export type StateCameras = Pick<State, NameSpace.Cameras>
 export type StateReviews = Pick<State, NameSpace.Reviews>
 export type StateUser = Pick<State, NameSpace.User>
 export type StateSort = Pick<State, NameSpace.Sort>
+export type StateFilter = Pick<State, NameSpace.Filter>
 
 export type AppDispatch = typeof store.dispatch;
 
@@ -35,4 +37,11 @@ export type UserProcess = {
 export type SortProcess = {
   sortType: SortByType;
   sortOrder: SortByOrder;
+}
+
+export type FilterProcess = {
+  price: FilterPrice;
+  category: FilterCategory | null;
+  cameraType: FilterCameraType;
+  level: FilterLevel;
 }

@@ -55,6 +55,7 @@ export enum NameSpace {
   Reviews = 'reviews',
   User = 'user',
   Sort = 'sort',
+  Filter = 'filter',
 }
 
 export enum AppRoute {
