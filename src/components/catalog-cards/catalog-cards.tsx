@@ -6,8 +6,8 @@ import { memo, useMemo } from 'react';
 import { useAppSelector } from '../../hooks';
 import { selectSortOrder, selectSortType } from '../../store/sort-process/sort-process.selectors';
 import { sortCamerasByType } from '../../utils/sort';
-import { filterCamerasByCategory } from '../../utils/filter';
-import { selectFilterCategory } from '../../store/filter-process/filter-process.selectors';
+import { getFilteredCameras } from '../../utils/filter';
+import { selectFilterCameraType, selectFilterCategory, selectFilterLevel } from '../../store/filter-process/filter-process.selectors';
 
 type CatalogCardsProps = {
   cameras: CameraData[];
@@ -18,11 +18,18 @@ function CatalogCardsTemplate({cameras, onModalContactMeOpen}: CatalogCardsProps
   const currentSortOrder = useAppSelector(selectSortOrder);
   const currentSortType = useAppSelector(selectSortType);
   const filterCategory = useAppSelector(selectFilterCategory);
+  const filterCameraType = useAppSelector(selectFilterCameraType);
+  const filterLevel = useAppSelector(selectFilterLevel);
 
-  const sortedCameras = sortCamerasByType([...cameras], currentSortType, currentSortOrder);
-  const filteredCameras = filterCamerasByCategory(filterCategory, sortedCameras);
+  const filteredCameras = getFilteredCameras(
+    [...cameras],
+    filterCategory,
+    filterCameraType,
+    filterLevel
+  );
+  const sortedCameras = sortCamerasByType(filteredCameras, currentSortType, currentSortOrder);
 
-  const cards = useMemo(() => filteredCameras.map((camera) => <ProductCard onButtonClick={onModalContactMeOpen} camera={camera} key={camera.id}/>), [filteredCameras, onModalContactMeOpen]);
+  const cards = useMemo(() => sortedCameras.map((camera) => <ProductCard onButtonClick={onModalContactMeOpen} camera={camera} key={camera.id}/>), [sortedCameras, onModalContactMeOpen]);
 
   if (sortedCameras.length === 0) {
     return <EmptyListTitle message={EmptyListMessage.Cameras}/>;
