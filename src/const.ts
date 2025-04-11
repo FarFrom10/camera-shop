@@ -189,6 +189,30 @@ export enum CameraCategory {
   Photo = 'Фотоаппарат'
 }
 
+export enum FilterItemType {
+  Digital = 'digital',
+  Film = 'film',
+  Snapshot = 'snapshot',
+  Collection = 'collection',
+}
+export const TranslatedFilterItemType = {
+  [FilterItemType.Digital]: 'Цифровая',
+  [FilterItemType.Film]: 'Плёночная',
+  [FilterItemType.Snapshot]: 'Моментальная',
+  [FilterItemType.Collection]: 'Коллекционная',
+} as const;
+
+export enum FilterItemLevel {
+  Zero = 'zero',
+  NonProfessional = 'nonProfessional',
+  Professional = 'professional',
+}
+export const TranslatedFilterItemLevel = {
+  [FilterItemLevel.Zero]: 'Нулевой',
+  [FilterItemLevel.NonProfessional]: 'Любительский',
+  [FilterItemLevel.Professional]: 'Профессиональный',
+} as const;
+
 export enum FilterCategory {
   Photocamera = 'photocamera',
   Videocamera = 'videocamera'

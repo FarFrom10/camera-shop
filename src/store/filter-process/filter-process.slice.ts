@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { FilterCategory, NameSpace, } from '../../const';
 import { FilterProcess } from '../../types/state';
+import { FilterCameraType, FilterLevel } from '../../types/types';
 
 const initialState: FilterProcess = {
   price: {
@@ -28,8 +29,14 @@ export const filterProcess = createSlice({
     changeCategory: (state, action: PayloadAction<FilterCategory | null>) => {
       state.category = action.payload;
     },
+    changeCameraType: (state, action: PayloadAction<FilterCameraType>) => {
+      state.cameraType = action.payload;
+    },
+    changeLevel: (state, action: PayloadAction<FilterLevel>) => {
+      state.level = action.payload;
+    },
     resetFilters: () => initialState
   },
 });
 
-export const {changeCategory, resetFilters} = filterProcess.actions;
+export const {changeCategory, resetFilters, changeCameraType, changeLevel} = filterProcess.actions;

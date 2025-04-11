@@ -1,3 +1,5 @@
+import { FilterItemType } from '../const';
+
 export type ModalContactMeType = {
   isOpen: boolean;
   currentId: number | null;
@@ -9,10 +11,7 @@ export type FilterPrice = {
 }
 
 export type FilterCameraType = {
-  digital: boolean;
-  film: boolean;
-  snapshot: boolean;
-  collection: boolean;
+  [key in FilterItemType]: boolean
 }
 
 export type FilterLevel = {
