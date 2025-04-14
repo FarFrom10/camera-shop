@@ -1,10 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { CamerasProcess } from '../../types/state';
 import { getCameraByIdAction, fetchCamerasAction, fetchPromoCamerasAction, getSimilarCamerasByIdAction } from '../api-actions';
+import { CameraData } from '../../types/cameras';
 
 const initialState: CamerasProcess = {
   cameras: [],
+  sortedCameras: [],
   promoCameras: [],
   similarCameras: [],
   currentCamera: null,
@@ -25,6 +27,9 @@ export const camerasProcess = createSlice({
     resetSimilarCameras: (state) => {
       state.similarCameras = [];
     },
+    updateSortedCameras: (state, action: PayloadAction<CameraData[]>) => {
+      state.sortedCameras = action.payload;
+    }
   },
   extraReducers(builder) {
     builder
@@ -74,4 +79,4 @@ export const camerasProcess = createSlice({
   },
 });
 
-export const {resetCurrentCamera, resetSimilarCameras} = camerasProcess.actions;
+export const {resetCurrentCamera, resetSimilarCameras, updateSortedCameras} = camerasProcess.actions;

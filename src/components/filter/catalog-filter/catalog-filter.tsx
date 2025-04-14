@@ -1,11 +1,16 @@
 import { useAppDispatch } from '../../../hooks';
 import { resetFilters } from '../../../store/filter-process/filter-process.slice';
+import { CameraData } from '../../../types/cameras';
 import CatalogFilterCategory from '../catalog-filter-category/catalog-filter-category';
 import CatalogFilterLevel from '../catalog-filter-level/catalog-filter-level';
 import CatalogFilterPrice from '../catalog-filter-price/catalog-filter-price';
 import CatalogFilterType from '../catalog-filter-type/catalog-filter-type';
 
-function CatalogFilter(): JSX.Element {
+type CatalogFilterProps = {
+  cameras: CameraData[];
+}
+
+function CatalogFilter({cameras}: CatalogFilterProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   const handleResetFilters = () => dispatch(resetFilters());
@@ -14,7 +19,7 @@ function CatalogFilter(): JSX.Element {
     <div className="catalog-filter">
       <form action="#">
         <h2 className="visually-hidden">Фильтр</h2>
-        <CatalogFilterPrice/>
+        <CatalogFilterPrice cameras={cameras}/>
         <CatalogFilterCategory/>
         <CatalogFilterType/>
         <CatalogFilterLevel/>

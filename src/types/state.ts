@@ -9,11 +9,13 @@ export type StateReviews = Pick<State, NameSpace.Reviews>
 export type StateUser = Pick<State, NameSpace.User>
 export type StateSort = Pick<State, NameSpace.Sort>
 export type StateFilter = Pick<State, NameSpace.Filter>
+export type StateWholeFilter = State[NameSpace.Filter]
 
 export type AppDispatch = typeof store.dispatch;
 
 export type CamerasProcess = {
   cameras: CameraData[];
+  sortedCameras: CameraData[];
   promoCameras: PromoCameraData[];
   similarCameras: CameraData[];
   currentCamera: CameraData | null;

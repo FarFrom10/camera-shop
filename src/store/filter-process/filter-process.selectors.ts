@@ -1,6 +1,8 @@
 import { FilterCategory, NameSpace } from '../../const';
-import { StateFilter } from '../../types/state';
+import { StateFilter, StateWholeFilter } from '../../types/state';
 import { FilterCameraType, FilterLevel, FilterPrice } from '../../types/types';
+
+export const selectFilterState = (state: StateFilter): StateWholeFilter => state[NameSpace.Filter];
 
 export const selectFilterPrice = (state: StateFilter): FilterPrice => state[NameSpace.Filter].price;
 export const selectFilterCategory = (state: StateFilter): FilterCategory | null => state[NameSpace.Filter].category;

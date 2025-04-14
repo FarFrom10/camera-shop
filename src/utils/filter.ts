@@ -1,5 +1,6 @@
 import { CameraCategory, FilterCategory, FilterItemLevel, FilterItemType, TranslatedFilterItemLevel, TranslatedFilterItemType } from '../const';
 import { CameraData } from '../types/cameras';
+import { StateWholeFilter } from '../types/state';
 import { FilterCameraType, FilterLevel } from '../types/types';
 
 const isFiltersUnused = (properties: Record<string, boolean>) => Object.values(properties).every((item) => item === false);
@@ -72,14 +73,13 @@ export function filterCamerasByLevel(cameras: CameraData[], level: FilterLevel):
 
 export function getFilteredCameras(
   cameras: CameraData[],
-  category: FilterCategory | null,
-  type: FilterCameraType,
-  level: FilterLevel,
+  wholeFilterState: StateWholeFilter
 ): CameraData[] {
+  const {category, cameraType, level} = wholeFilterState;
   let updatedCameras = cameras;
 
   updatedCameras = filterCamerasByCategory(updatedCameras, category);
-  updatedCameras = filterCamerasByType(updatedCameras, type);
+  updatedCameras = filterCamerasByType(updatedCameras, cameraType);
   updatedCameras = filterCamerasByLevel(updatedCameras, level);
 
   return updatedCameras;

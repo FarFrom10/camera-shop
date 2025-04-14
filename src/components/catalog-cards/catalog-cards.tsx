@@ -2,12 +2,13 @@ import ProductCard from '../product-card/product-card';
 import { CameraData } from '../../types/cameras';
 import { EmptyListMessage } from '../../const';
 import EmptyListTitle from '../empty-list-title/empty-list-title';
-import { memo, useMemo } from 'react';
-import { useAppSelector } from '../../hooks';
+import { memo, useEffect, useMemo } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectSortOrder, selectSortType } from '../../store/sort-process/sort-process.selectors';
 import { sortCamerasByType } from '../../utils/sort';
 import { getFilteredCameras } from '../../utils/filter';
-import { selectFilterCameraType, selectFilterCategory, selectFilterLevel } from '../../store/filter-process/filter-process.selectors';
+import { selectFilterState } from '../../store/filter-process/filter-process.selectors';
+import { updateSortedCameras } from '../../store/cameras-process/cameras-process.slice';
 
 type CatalogCardsProps = {
   cameras: CameraData[];
@@ -15,19 +16,22 @@ type CatalogCardsProps = {
 }
 
 function CatalogCardsTemplate({cameras, onModalContactMeOpen}: CatalogCardsProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
   const currentSortOrder = useAppSelector(selectSortOrder);
   const currentSortType = useAppSelector(selectSortType);
-  const filterCategory = useAppSelector(selectFilterCategory);
-  const filterCameraType = useAppSelector(selectFilterCameraType);
-  const filterLevel = useAppSelector(selectFilterLevel);
+  const wholeFilterState = useAppSelector(selectFilterState);
 
   const filteredCameras = getFilteredCameras(
     [...cameras],
-    filterCategory,
-    filterCameraType,
-    filterLevel
+    wholeFilterState
   );
   const sortedCameras = sortCamerasByType(filteredCameras, currentSortType, currentSortOrder);
+
+  useEffect(() => {
+    dispatch(updateSortedCameras(sortedCameras));
+
+  }, [dispatch, sortedCameras]);
 
   const cards = useMemo(() => sortedCameras.map((camera) => <ProductCard onButtonClick={onModalContactMeOpen} camera={camera} key={camera.id}/>), [sortedCameras, onModalContactMeOpen]);
 
