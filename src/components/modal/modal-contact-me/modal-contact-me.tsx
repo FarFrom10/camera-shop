@@ -19,7 +19,7 @@ type ModalContactMeProps ={
 function ModalContactMeTemplate({camera, onModalClose}: ModalContactMeProps): JSX.Element {
   const dispatch = useAppDispatch();
   const [phone, setPhone] = useState<string>(PHONE_NUMBER_START);
-  const [showError, setShowError] = useState<boolean>(false);
+  const [showError, setShowError] = useState<boolean>(true);
   const isContactMeDataLoading = useAppSelector(selectIsContactMeDataLoading);
 
   const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {

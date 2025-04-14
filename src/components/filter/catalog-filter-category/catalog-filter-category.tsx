@@ -1,16 +1,22 @@
-import { ChangeEvent } from 'react';
+import { MouseEvent } from 'react';
 import { useAppDispatch } from '../../../hooks';
-import { changeCategory } from '../../../store/filter-process/filter-process.slice';
+import { changeCategory, resetUnavailableTypesForVideo } from '../../../store/filter-process/filter-process.slice';
 import { isValueFilterCategory } from '../../../utils/type';
+import { FilterCategory } from '../../../const';
 
 function CatalogFilterCategory(): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const handleCategoryChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    const value = evt.target.value;
+  //Использовал click вместо change, так как появлялся баг при сбросе фильтров
+  const handleCategoryClick = (evt: MouseEvent<HTMLInputElement>) => {
+    //evt.target не работал с MouseEvent (отсутствует св-во value)
+    const value = evt.currentTarget.value;
 
     if (isValueFilterCategory(value)){
       dispatch(changeCategory(value));
+    }
+    if (value === String(FilterCategory.Videocamera)) {
+      dispatch(resetUnavailableTypesForVideo());
     }
   };
 
@@ -20,7 +26,7 @@ function CatalogFilterCategory(): JSX.Element {
       <div className="custom-radio catalog-filter__item">
         <label>
           <input
-            onChange={handleCategoryChange}
+            onClick={handleCategoryClick}
             type="radio"
             name="category"
             defaultValue="photocamera"
@@ -32,7 +38,7 @@ function CatalogFilterCategory(): JSX.Element {
       <div className="custom-radio catalog-filter__item">
         <label>
           <input
-            onChange={handleCategoryChange}
+            onClick={handleCategoryClick}
             type="radio"
             name="category"
             defaultValue="videocamera"

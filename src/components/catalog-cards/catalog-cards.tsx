@@ -31,13 +31,13 @@ function CatalogCardsTemplate({cameras, onModalContactMeOpen}: CatalogCardsProps
 
   const cards = useMemo(() => sortedCameras.map((camera) => <ProductCard onButtonClick={onModalContactMeOpen} camera={camera} key={camera.id}/>), [sortedCameras, onModalContactMeOpen]);
 
-  if (sortedCameras.length === 0) {
-    return <EmptyListTitle message={EmptyListMessage.Cameras}/>;
-  }
-
   return(
     <div data-testid='catalogCardsContainer' className="cards catalog__cards">
-      {cards}
+      {
+        !sortedCameras.length
+          ? <EmptyListTitle message={EmptyListMessage.Cameras}/>
+          : cards
+      }
     </div>
   );
 }

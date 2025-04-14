@@ -35,8 +35,19 @@ export const filterProcess = createSlice({
     changeLevel: (state, action: PayloadAction<FilterLevel>) => {
       state.level = action.payload;
     },
-    resetFilters: () => initialState
+    resetFilters: () => initialState,
+    resetUnavailableTypesForVideo: (state) => {
+      state.cameraType.film = false;
+      state.cameraType.snapshot = false;
+    }
   },
 });
 
-export const {changeCategory, resetFilters, changeCameraType, changeLevel} = filterProcess.actions;
+export const {
+  changeCategory,
+  changeCameraType,
+  changeLevel,
+  resetFilters,
+  resetUnavailableTypesForVideo
+} = filterProcess.actions;
+

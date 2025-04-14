@@ -25,6 +25,7 @@ function CatalogFilterLevel(): JSX.Element {
         onInputChange={handleInputChange}
         dataType={level}
         name={TranslatedFilterItemLevel[level]}
+        isChecked={filterlevel[level] === true}
       />
     ));
 

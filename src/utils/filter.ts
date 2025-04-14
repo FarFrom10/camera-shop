@@ -2,6 +2,8 @@ import { CameraCategory, FilterCategory, FilterItemLevel, FilterItemType, Transl
 import { CameraData } from '../types/cameras';
 import { FilterCameraType, FilterLevel } from '../types/types';
 
+const isFiltersUnused = (properties: Record<string, boolean>) => Object.values(properties).every((item) => item === false);
+
 export function filterCamerasByCategory(cameras: CameraData[], category: FilterCategory | null): CameraData[] {
   if (category === null) {
     return cameras;
@@ -17,9 +19,11 @@ export function filterCamerasByCategory(cameras: CameraData[], category: FilterC
   }
 }
 
-export function filterCamerasByType(cameras: CameraData[], type: FilterCameraType): CameraData[]{
-  const isFiltersUnused = Object.values(type).every((item) => item === false);
-  if (isFiltersUnused){
+export function filterCamerasByType(
+  cameras: CameraData[],
+  type: FilterCameraType,
+): CameraData[]{
+  if (isFiltersUnused(type)){
     return cameras;
   }
 
@@ -45,8 +49,7 @@ export function filterCamerasByType(cameras: CameraData[], type: FilterCameraTyp
 }
 
 export function filterCamerasByLevel(cameras: CameraData[], level: FilterLevel): CameraData[]{
-  const isFiltersUnused = Object.values(level).every((item) => item === false);
-  if (isFiltersUnused){
+  if (isFiltersUnused(level)){
     return cameras;
   }
 
@@ -67,7 +70,6 @@ export function filterCamerasByLevel(cameras: CameraData[], level: FilterLevel):
   ];
 }
 
-
 export function getFilteredCameras(
   cameras: CameraData[],
   category: FilterCategory | null,
@@ -76,9 +78,9 @@ export function getFilteredCameras(
 ): CameraData[] {
   let updatedCameras = cameras;
 
-  updatedCameras = filterCamerasByCategory(cameras, category);
-  updatedCameras = filterCamerasByType(cameras, type);
-  updatedCameras = filterCamerasByLevel(cameras, level);
+  updatedCameras = filterCamerasByCategory(updatedCameras, category);
+  updatedCameras = filterCamerasByType(updatedCameras, type);
+  updatedCameras = filterCamerasByLevel(updatedCameras, level);
 
   return updatedCameras;
 }
