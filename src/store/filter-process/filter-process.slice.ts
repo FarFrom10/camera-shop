@@ -26,6 +26,12 @@ export const filterProcess = createSlice({
   name: NameSpace.Filter,
   initialState,
   reducers: {
+    changeMinPrice: (state, action: PayloadAction<string>) => {
+      state.price.min = action.payload;
+    },
+    changeMaxPrice: (state, action: PayloadAction<string>) => {
+      state.price.max = action.payload;
+    },
     changeCategory: (state, action: PayloadAction<FilterCategory | null>) => {
       state.category = action.payload;
     },
@@ -44,6 +50,8 @@ export const filterProcess = createSlice({
 });
 
 export const {
+  changeMinPrice,
+  changeMaxPrice,
   changeCategory,
   changeCameraType,
   changeLevel,

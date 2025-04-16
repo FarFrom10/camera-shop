@@ -1,4 +1,5 @@
 import { PHONE_NUMBER_START } from '../const';
+import { PriceRange } from '../types/types';
 
 export function convertPrice(price: number): string{
   return Intl.NumberFormat('ru-RU', {
@@ -25,4 +26,48 @@ export function formatPhoneNumber(value: string): string {
   }
 
   return `${PHONE_NUMBER_START}(${phoneNumber.slice(0,3)})${phoneNumber.slice(3,6)}-${phoneNumber.slice(6,8)}-${phoneNumber.slice(8, 10)}`;
+}
+
+export function getMinPrice(
+  {
+    currentMinPrice,
+    currentMaxPrice,
+    minPrice,
+    maxPrice,
+  } : PriceRange
+): string{
+  if (currentMinPrice < minPrice) {
+    return String(minPrice);
+  }
+  if (currentMinPrice > maxPrice) {
+    return String(maxPrice);
+  }
+  if (currentMaxPrice && currentMinPrice > currentMaxPrice) {
+    return String(currentMaxPrice);
+  }
+
+  return String(currentMinPrice);
+}
+
+export function getMaxPrice({
+  currentMinPrice,
+  currentMaxPrice,
+  minPrice,
+  maxPrice,
+} : PriceRange
+): string{
+  if (currentMaxPrice > maxPrice) {
+    return String(maxPrice);
+  }
+  if (currentMaxPrice < minPrice && currentMinPrice >= minPrice) {
+    return String(currentMinPrice);
+  }
+  if (currentMaxPrice < minPrice) {
+    return String(minPrice);
+  }
+  if (currentMinPrice && currentMaxPrice < currentMinPrice) {
+    return String(currentMinPrice);
+  }
+
+  return String(currentMaxPrice);
 }

@@ -19,3 +19,10 @@ export type FilterLevel = {
   nonProfessional: boolean;
   professional: boolean;
 }
+
+export type PriceRange = {
+  currentMinPrice: number;
+  currentMaxPrice: number;
+  minPrice: number;
+  maxPrice: number;
+}
