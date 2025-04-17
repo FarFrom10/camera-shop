@@ -1,18 +1,16 @@
 import { useRef } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { useAppSelector } from '../../../hooks';
 import { selectSortedCameras } from '../../../store/cameras-process/cameras-process.selectors';
 import { selectFilterState } from '../../../store/filter-process/filter-process.selectors';
 import { CameraData } from '../../../types/cameras';
 import { getMinAndMaxPricesFromCameras } from '../../../utils/cameras';
-import { getMaxPrice, getMinPrice, getOnlyNumbersFromString } from '../../../utils/common';
-import { changeMaxPrice, changeMinPrice } from '../../../store/filter-process/filter-process.slice';
+import { useFilterPriceHandlers } from '../../../hooks/use-filter-price-handlers';
 
 type CatalogFilterPriceProps = {
   cameras: CameraData[];
 }
 
 function CatalogFilterPrice({cameras}: CatalogFilterPriceProps): JSX.Element {
-  const dispatch = useAppDispatch();
   const minPriceRef = useRef<HTMLInputElement>(null);
   const maxPriceRef = useRef<HTMLInputElement>(null);
 
@@ -27,39 +25,11 @@ function CatalogFilterPrice({cameras}: CatalogFilterPriceProps): JSX.Element {
     ? getMinAndMaxPricesFromCameras(cameras)
     : getMinAndMaxPricesFromCameras(sortedCameras);
 
-  const handleMinPriceChange = () => {
-    const currentMinPrice = Number(getOnlyNumbersFromString(minPriceRef.current?.value || ''));
-    const currentMaxPrice = Number(maxPriceRef.current?.value);
-    const convertedPrice = getMinPrice(
-      {
-        currentMinPrice,
-        currentMaxPrice,
-        minPrice: minMaxPrices.min,
-        maxPrice: minMaxPrices.max
-      }
-    );
-
-    if(minPriceRef.current) {
-      minPriceRef.current.value = convertedPrice;
-      dispatch(changeMinPrice(convertedPrice));
-    }
-  };
-
-  const handleMaxPriceChange = () => {
-    const currentMaxPrice = Number(getOnlyNumbersFromString(maxPriceRef.current?.value || ''));
-    const currentMinPrice = Number(minPriceRef.current?.value);
-    const convertedPrice = getMaxPrice({
-      currentMinPrice,
-      currentMaxPrice,
-      minPrice: minMaxPrices.min,
-      maxPrice: minMaxPrices.max
-    });
-
-    if(maxPriceRef.current) {
-      maxPriceRef.current.value = convertedPrice;
-      dispatch(changeMaxPrice(convertedPrice));
-    }
-  };
+  const [handleMinPriceChange, handleMaxPriceChange] = useFilterPriceHandlers({
+    minMaxPrices,
+    minPriceRef,
+    maxPriceRef
+  });
 
   return (
     <fieldset className="catalog-filter__block">
