@@ -1,29 +1,42 @@
-import { useAppDispatch } from '.';
+import { useAppDispatch, useAppSelector } from '.';
+import { selectSortedCameras } from '../store/cameras-process/cameras-process.selectors';
+import { selectFilterState } from '../store/filter-process/filter-process.selectors';
 import { changeMaxPrice, changeMinPrice } from '../store/filter-process/filter-process.slice';
+import { CameraData } from '../types/cameras';
+import { getMinAndMaxPricesFromCameras } from '../utils/cameras';
 import { getMaxPrice, getMinPrice, getOnlyNumbersFromString } from '../utils/common';
 
-type MinMaxPrices = {
-  min: number;
-  max: number;
-}
-
-type UseFilterPriceHandlersData = [
+type UseFilterPriceData = [
   handleMinPriceChange: () => void,
-  handleMaxPriceChange: () => void
+  handleMaxPriceChange: () => void,
+  minMaxPrices: {
+    min: number;
+    max: number;
+  }
 ]
 
-type UseFilterPriceHandlersProps = {
-  minMaxPrices: MinMaxPrices;
+type UseFilterPriceProps = {
+  cameras: CameraData[];
   minPriceRef: React.RefObject<HTMLInputElement>;
   maxPriceRef: React.RefObject<HTMLInputElement>;
 }
 
-export const useFilterPriceHandlers = ({
-  minMaxPrices,
+export const useFilterPrice = ({
+  cameras,
   minPriceRef,
   maxPriceRef
-}: UseFilterPriceHandlersProps): UseFilterPriceHandlersData => {
+}: UseFilterPriceProps): UseFilterPriceData => {
   const dispatch = useAppDispatch();
+  const sortedCameras = useAppSelector(selectSortedCameras);
+  const wholeFilterState = useAppSelector(selectFilterState);
+  const isFiltersUsed = [
+    ...Object.values(wholeFilterState.cameraType),
+    ...Object.values(wholeFilterState.level),
+  ].some((item) => item === true) || wholeFilterState.category !== null;
+
+  const minMaxPrices = !isFiltersUsed
+    ? getMinAndMaxPricesFromCameras(cameras)
+    : getMinAndMaxPricesFromCameras(sortedCameras);
 
   const handleMinPriceChange = () => {
     const currentMinPrice = Number(getOnlyNumbersFromString(minPriceRef.current?.value || ''));
@@ -59,5 +72,5 @@ export const useFilterPriceHandlers = ({
     }
   };
 
-  return [handleMinPriceChange, handleMaxPriceChange];
+  return [handleMinPriceChange, handleMaxPriceChange, minMaxPrices];
 };

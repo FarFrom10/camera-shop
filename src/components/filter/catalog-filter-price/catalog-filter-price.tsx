@@ -1,10 +1,6 @@
 import { useRef } from 'react';
-import { useAppSelector } from '../../../hooks';
-import { selectSortedCameras } from '../../../store/cameras-process/cameras-process.selectors';
-import { selectFilterState } from '../../../store/filter-process/filter-process.selectors';
 import { CameraData } from '../../../types/cameras';
-import { getMinAndMaxPricesFromCameras } from '../../../utils/cameras';
-import { useFilterPriceHandlers } from '../../../hooks/use-filter-price-handlers';
+import { useFilterPrice } from '../../../hooks/use-filter-price';
 
 type CatalogFilterPriceProps = {
   cameras: CameraData[];
@@ -14,19 +10,12 @@ function CatalogFilterPrice({cameras}: CatalogFilterPriceProps): JSX.Element {
   const minPriceRef = useRef<HTMLInputElement>(null);
   const maxPriceRef = useRef<HTMLInputElement>(null);
 
-  const sortedCameras = useAppSelector(selectSortedCameras);
-  const wholeFilterState = useAppSelector(selectFilterState);
-  const isFiltersUsed = [
-    ...Object.values(wholeFilterState.cameraType),
-    ...Object.values(wholeFilterState.level),
-  ].some((item) => item === true) || wholeFilterState.category !== null;
-
-  const minMaxPrices = !isFiltersUsed
-    ? getMinAndMaxPricesFromCameras(cameras)
-    : getMinAndMaxPricesFromCameras(sortedCameras);
-
-  const [handleMinPriceChange, handleMaxPriceChange] = useFilterPriceHandlers({
-    minMaxPrices,
+  const [
+    handleMinPriceChange,
+    handleMaxPriceChange,
+    minMaxPrices
+  ] = useFilterPrice({
+    cameras,
     minPriceRef,
     maxPriceRef
   });
