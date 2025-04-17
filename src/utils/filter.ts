@@ -1,7 +1,7 @@
 import { CameraCategory, FilterCategory, FilterItemLevel, FilterItemType, TranslatedFilterItemLevel, TranslatedFilterItemType } from '../const';
 import { CameraData } from '../types/cameras';
 import { StateWholeFilter } from '../types/state';
-import { FilterCameraType, FilterLevel } from '../types/types';
+import { FilterCameraType, FilterLevel, FilterPrice } from '../types/types';
 
 const isFiltersUnused = (properties: Record<string, boolean>) => Object.values(properties).every((item) => item === false);
 
@@ -71,16 +71,37 @@ export function filterCamerasByLevel(cameras: CameraData[], level: FilterLevel):
   ];
 }
 
+export function filterCamerasByPrice(cameras: CameraData[], price: FilterPrice): CameraData[]{
+  const minPrice = Number(price.min);
+  const maxPrice = Number(price.max);
+  if (!minPrice && !maxPrice) {
+    return cameras;
+  }
+
+  if (minPrice === maxPrice) {
+    return cameras.filter((camera) => camera.price === minPrice);
+  }
+  if (minPrice && !maxPrice) {
+    return cameras.filter((camera) => camera.price >= minPrice);
+  }
+  if (!minPrice && maxPrice) {
+    return cameras.filter((camera) => camera.price <= maxPrice);
+  }
+
+  return cameras.filter((camera) => camera.price >= minPrice && camera.price <= maxPrice);
+}
+
 export function getFilteredCameras(
   cameras: CameraData[],
   wholeFilterState: StateWholeFilter
 ): CameraData[] {
-  const {category, cameraType, level} = wholeFilterState;
+  const {category, cameraType, level, price} = wholeFilterState;
   let updatedCameras = cameras;
 
   updatedCameras = filterCamerasByCategory(updatedCameras, category);
   updatedCameras = filterCamerasByType(updatedCameras, cameraType);
   updatedCameras = filterCamerasByLevel(updatedCameras, level);
+  updatedCameras = filterCamerasByPrice(updatedCameras, price);
 
   return updatedCameras;
 }
