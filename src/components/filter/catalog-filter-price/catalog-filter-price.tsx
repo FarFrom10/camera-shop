@@ -31,7 +31,7 @@ function CatalogFilterPrice({cameras}: CatalogFilterPriceProps): JSX.Element {
               onBlur={handleMinPriceChange}
               type="number"
               name="price"
-              placeholder={`от ${minMaxPrices.min}`}
+              placeholder={`${minMaxPrices.min}`}
             />
           </label>
         </div>
@@ -42,7 +42,7 @@ function CatalogFilterPrice({cameras}: CatalogFilterPriceProps): JSX.Element {
               onBlur={handleMaxPriceChange}
               type="number"
               name="priceUp"
-              placeholder={`до ${minMaxPrices.max}`}
+              placeholder={`${minMaxPrices.max}`}
             />
           </label>
         </div>

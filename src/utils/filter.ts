@@ -5,7 +5,7 @@ import { FilterCameraType, FilterLevel, FilterPrice } from '../types/types';
 
 const isFiltersUnused = (properties: Record<string, boolean>) => Object.values(properties).every((item) => item === false);
 
-export function filterCamerasByCategory(cameras: CameraData[], category: FilterCategory | null): CameraData[] {
+function filterCamerasByCategory(cameras: CameraData[], category: FilterCategory | null): CameraData[] {
   if (category === null) {
     return cameras;
   }
@@ -20,7 +20,7 @@ export function filterCamerasByCategory(cameras: CameraData[], category: FilterC
   }
 }
 
-export function filterCamerasByType(
+function filterCamerasByType(
   cameras: CameraData[],
   type: FilterCameraType,
 ): CameraData[]{
@@ -49,7 +49,7 @@ export function filterCamerasByType(
   ];
 }
 
-export function filterCamerasByLevel(cameras: CameraData[], level: FilterLevel): CameraData[]{
+function filterCamerasByLevel(cameras: CameraData[], level: FilterLevel): CameraData[]{
   if (isFiltersUnused(level)){
     return cameras;
   }
@@ -71,7 +71,7 @@ export function filterCamerasByLevel(cameras: CameraData[], level: FilterLevel):
   ];
 }
 
-export function filterCamerasByPrice(cameras: CameraData[], price: FilterPrice): CameraData[]{
+function filterCamerasByPrice(cameras: CameraData[], price: FilterPrice): CameraData[]{
   const minPrice = Number(price.min);
   const maxPrice = Number(price.max);
   if (!minPrice && !maxPrice) {

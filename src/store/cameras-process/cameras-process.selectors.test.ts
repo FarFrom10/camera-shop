@@ -1,11 +1,12 @@
 import { NameSpace } from '../../const';
 import { fakeCameras, fakePromoCameras, fakeCurrentCamera } from '../../mocks/mock-test';
-import { selectCameras, selectCurrentCamera, selectIsCamerasLoading, selectIsCurrentCameraLoading, selectIsPromoCamerasLoading, selectIsSimilarCamerasLoading, selectPromoCameras, selectSimilarCameras } from './cameras-process.selectors';
+import { selectCameras, selectCurrentCamera, selectIsCamerasLoading, selectIsCurrentCameraLoading, selectIsPromoCamerasLoading, selectIsSimilarCamerasLoading, selectPromoCameras, selectSimilarCameras, selectSortedCameras } from './cameras-process.selectors';
 
 describe('CamerasProcess selectors', () => {
   const state = {
     [NameSpace.Cameras]: {
       cameras: fakeCameras,
+      sortedCameras: fakeCameras,
       promoCameras: fakePromoCameras,
       similarCameras: fakeCameras,
       currentCamera: fakeCurrentCamera,
@@ -21,6 +22,12 @@ describe('CamerasProcess selectors', () => {
     const { cameras } = state[NameSpace.Cameras];
     const result = selectCameras(state);
     expect(result).toStrictEqual(cameras);
+  });
+
+  it('should return sortedCameras from state', () => {
+    const { sortedCameras } = state[NameSpace.Cameras];
+    const result = selectSortedCameras(state);
+    expect(result).toStrictEqual(sortedCameras);
   });
 
   it('should return promoCameras from state', () => {

@@ -1,7 +1,7 @@
-import { SortByType } from '../../const';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { selectSortType } from '../../store/sort-process/sort-process.selectors';
-import { changeSortType } from '../../store/sort-process/sort-process.slice';
+import { SortByType } from '../../../const';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { selectSortType } from '../../../store/sort-process/sort-process.selectors';
+import { changeSortType } from '../../../store/sort-process/sort-process.slice';
 import CatalogSortTypeButton from '../catalog-sort-type-button/catalog-sort-type-button';
 
 function CatalogSortType(): JSX.Element {

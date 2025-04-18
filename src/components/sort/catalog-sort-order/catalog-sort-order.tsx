@@ -1,7 +1,7 @@
-import { SortByOrder } from '../../const';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { selectSortOrder } from '../../store/sort-process/sort-process.selectors';
-import { changeSortOrder } from '../../store/sort-process/sort-process.slice';
+import { SortByOrder } from '../../../const';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { selectSortOrder } from '../../../store/sort-process/sort-process.selectors';
+import { changeSortOrder } from '../../../store/sort-process/sort-process.slice';
 import CatalogSortOrderButton from '../catalog-sort-order-button/catalog-sort-order-button';
 
 function CatalogSortOrder(): JSX.Element {

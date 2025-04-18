@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import { withRouter, withStore } from '../../utils/mock-component';
-import { makeFakeStore } from '../../utils/mocks';
+import { withRouter, withStore } from '../../../utils/mock-component';
+import { makeFakeStore } from '../../../utils/mocks';
 import CatalogSortType from './catalog-sort-type';
 
 describe('Component: CatalogSortType', () => {

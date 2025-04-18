@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
-import { mockEmptyCallback, withRouter, withStore } from '../../utils/mock-component';
-import { makeFakeStore } from '../../utils/mocks';
+import { mockEmptyCallback, withRouter, withStore } from '../../../utils/mock-component';
+import { makeFakeStore } from '../../../utils/mocks';
 import CatalogSortOrderButton from './catalog-sort-order-button';
-import { SortByOrder } from '../../const';
-import * as mockComponent from '../../utils/mock-component';
+import { SortByOrder } from '../../../const';
+import * as mockComponent from '../../../utils/mock-component';
 import userEvent from '@testing-library/user-event';
 
 describe('Component: CatalogSortOrderButton', () => {

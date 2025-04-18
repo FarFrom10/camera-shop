@@ -1,4 +1,4 @@
-import { SortByOrder } from '../../const';
+import { SortByOrder } from '../../../const';
 
 type SettingsType = {
   [key in SortByOrder]: {text: string};

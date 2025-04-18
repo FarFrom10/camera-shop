@@ -7,6 +7,7 @@ describe('CameraProcess slice', () => {
     const emptyAction = { type: '' };
     const expectedState = {
       cameras: fakeCameras,
+      sortedCameras: fakeCameras,
       promoCameras: [],
       similarCameras: [],
       currentCamera: null,
@@ -26,6 +27,7 @@ describe('CameraProcess slice', () => {
     const emptyAction = { type: '' };
     const expectedState = {
       cameras: [],
+      sortedCameras: [],
       promoCameras: [],
       similarCameras: [],
       currentCamera: null,
@@ -44,6 +46,7 @@ describe('CameraProcess slice', () => {
   it('should set "isCamerasLoading" to "true" with "fetchCamerasAction.pending" action', () => {
     const expectedState = {
       cameras: [],
+      sortedCameras: [],
       promoCameras: [],
       similarCameras: [],
       currentCamera: null,
@@ -61,6 +64,7 @@ describe('CameraProcess slice', () => {
   it('should add data to "cameras" and set "isCamerasLoading" to "false" with "fetchCamerasAction.fulfilled" action', () => {
     const expectedState = {
       cameras: fakeCameras,
+      sortedCameras: [],
       promoCameras: [],
       similarCameras: [],
       currentCamera: null,
@@ -78,6 +82,7 @@ describe('CameraProcess slice', () => {
   it('should set "isCamerasLoading" to "false" with "fetchCamerasAction.rejected" action', () => {
     const expectedState = {
       cameras: [],
+      sortedCameras: [],
       promoCameras: [],
       similarCameras: [],
       currentCamera: null,
@@ -96,6 +101,7 @@ describe('CameraProcess slice', () => {
   it('should set "isPromoCamerasLoading"  with "fetchPromoCamerasAction.pending" action', () => {
     const expectedState = {
       cameras: [],
+      sortedCameras: [],
       promoCameras: [],
       similarCameras: [],
       currentCamera: null,
@@ -113,6 +119,7 @@ describe('CameraProcess slice', () => {
   it('should add data to "promoCameras" and set "isPromoCamerasLoading" to "false" with "fetchPromoCamerasAction.fulfilled" action', () => {
     const expectedState = {
       cameras: [],
+      sortedCameras: [],
       promoCameras: fakePromoCameras,
       similarCameras: [],
       currentCamera: null,
@@ -130,6 +137,7 @@ describe('CameraProcess slice', () => {
   it('should set "isPromoCamerasLoading" to "false" with "fetchPromoCamerasAction.rejected" action', () => {
     const expectedState = {
       cameras: [],
+      sortedCameras: [],
       promoCameras: [],
       similarCameras: [],
       currentCamera: null,
@@ -148,6 +156,7 @@ describe('CameraProcess slice', () => {
   it('should set "isCurrentCameraLoading" to "true" with "getCameraByIdAction.pending" action', () => {
     const expectedState = {
       cameras: [],
+      sortedCameras: [],
       promoCameras: [],
       similarCameras: [],
       currentCamera: null,
@@ -165,6 +174,7 @@ describe('CameraProcess slice', () => {
   it('should add data to "currentCamera" and set "isCurrentCameraLoading" to "false" with "getCameraByIdAction.fulfilled" action', () => {
     const expectedState = {
       cameras: [],
+      sortedCameras: [],
       promoCameras: [],
       similarCameras: [],
       currentCamera: fakeCurrentCamera,
@@ -183,6 +193,7 @@ describe('CameraProcess slice', () => {
   it('should set "isCurrentCameraLoading" to "false" with "getCameraByIdAction.rejected" action', () => {
     const expectedState = {
       cameras: [],
+      sortedCameras: [],
       promoCameras: [],
       similarCameras: [],
       currentCamera: null,
@@ -201,6 +212,7 @@ describe('CameraProcess slice', () => {
   it('should set "isSimilarCamerasLoading" to "true" with "getSimilarCamerasByIdAction.pending" action', () => {
     const expectedState = {
       cameras: [],
+      sortedCameras: [],
       promoCameras: [],
       similarCameras: [],
       currentCamera: null,
@@ -218,6 +230,7 @@ describe('CameraProcess slice', () => {
   it('should add data to "similarCameras" and set "isSimilarCamerasLoading" to "false" with "getSimilarCamerasByIdAction.fulfilled" action', () => {
     const expectedState = {
       cameras: [],
+      sortedCameras: [],
       promoCameras: [],
       similarCameras: fakeCameras,
       currentCamera: null,
@@ -236,6 +249,7 @@ describe('CameraProcess slice', () => {
   it('should set "isSimilarCamerasLoading" to "false" with "getSimilarCamerasByIdAction.rejected" action', () => {
     const expectedState = {
       cameras: [],
+      sortedCameras: [],
       promoCameras: [],
       similarCameras: [],
       currentCamera: null,

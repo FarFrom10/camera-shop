@@ -1,5 +1,5 @@
-import { IconName, SortByOrder } from '../../const';
-import CommonIcon from '../common-icon/common-icon';
+import { IconName, SortByOrder } from '../../../const';
+import CommonIcon from '../../common-icon/common-icon';
 import { CatalogSortOrderButtonSettings } from './catalog-sort-order-button.settings';
 
 type CatalogSortOrderButtonOrder = {

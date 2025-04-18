@@ -1,4 +1,4 @@
-import { SortByType } from '../../const';
+import { SortByType } from '../../../const';
 import { CatalogSortTypeButtonSettings } from './catalog-sort-type-button.settings';
 
 type CatalogSortTypeButtonProps = {

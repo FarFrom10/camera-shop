@@ -1,4 +1,4 @@
-import { SortByType } from '../../const';
+import { SortByType } from '../../../const';
 
 type SettingsType = {
   [key in SortByType]: {text: string};

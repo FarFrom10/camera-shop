@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import { mockEmptyCallback, withRouter, withStore } from '../../utils/mock-component';
-import { makeFakeStore } from '../../utils/mocks';
-import { SortByType } from '../../const';
-import * as mockComponent from '../../utils/mock-component';
+import { mockEmptyCallback, withRouter, withStore } from '../../../utils/mock-component';
+import { makeFakeStore } from '../../../utils/mocks';
+import { SortByType } from '../../../const';
+import * as mockComponent from '../../../utils/mock-component';
 import userEvent from '@testing-library/user-event';
 import CatalogSortTypeButton from './catalog-sort-type-button';
 

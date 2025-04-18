@@ -3,7 +3,7 @@ import { useModalContactMe } from '../../hooks/use-modal-contact-me';
 import { selectCameras } from '../../store/cameras-process/cameras-process.selectors';
 import CatalogCards from '../catalog-cards/catalog-cards';
 import CatalogFilter from '../filter/catalog-filter/catalog-filter';
-import CatalogPageSort from '../catalog-page-sort/catalog-page-sort';
+import CatalogPageSort from '../sort/catalog-page-sort/catalog-page-sort';
 import ModalContactMe from '../modal/modal-contact-me/modal-contact-me';
 import ModalWrapper from '../modal/modal-wrapper/modal-wrapper';
 
