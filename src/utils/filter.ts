@@ -71,9 +71,24 @@ function filterCamerasByLevel(cameras: CameraData[], level: FilterLevel): Camera
   ];
 }
 
-function filterCamerasByPrice(cameras: CameraData[], price: FilterPrice): CameraData[]{
+export function getFilteredCameras(
+  cameras: CameraData[],
+  wholeFilterState: StateWholeFilter
+): CameraData[] {
+  const {category, cameraType, level} = wholeFilterState;
+  let updatedCameras = cameras;
+
+  updatedCameras = filterCamerasByCategory(updatedCameras, category);
+  updatedCameras = filterCamerasByType(updatedCameras, cameraType);
+  updatedCameras = filterCamerasByLevel(updatedCameras, level);
+
+  return updatedCameras;
+}
+
+export function filterCamerasByPrice(cameras: CameraData[], price: FilterPrice): CameraData[]{
   const minPrice = Number(price.min);
   const maxPrice = Number(price.max);
+
   if (!minPrice && !maxPrice) {
     return cameras;
   }
@@ -89,19 +104,4 @@ function filterCamerasByPrice(cameras: CameraData[], price: FilterPrice): Camera
   }
 
   return cameras.filter((camera) => camera.price >= minPrice && camera.price <= maxPrice);
-}
-
-export function getFilteredCameras(
-  cameras: CameraData[],
-  wholeFilterState: StateWholeFilter
-): CameraData[] {
-  const {category, cameraType, level, price} = wholeFilterState;
-  let updatedCameras = cameras;
-
-  updatedCameras = filterCamerasByCategory(updatedCameras, category);
-  updatedCameras = filterCamerasByType(updatedCameras, cameraType);
-  updatedCameras = filterCamerasByLevel(updatedCameras, level);
-  updatedCameras = filterCamerasByPrice(updatedCameras, price);
-
-  return updatedCameras;
 }

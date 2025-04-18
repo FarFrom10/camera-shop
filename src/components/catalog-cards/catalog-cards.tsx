@@ -6,7 +6,7 @@ import { memo, useEffect, useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectSortOrder, selectSortType } from '../../store/sort-process/sort-process.selectors';
 import { sortCamerasByType } from '../../utils/sort';
-import { getFilteredCameras } from '../../utils/filter';
+import { filterCamerasByPrice, getFilteredCameras } from '../../utils/filter';
 import { selectFilterState } from '../../store/filter-process/filter-process.selectors';
 import { updateSortedCameras } from '../../store/cameras-process/cameras-process.slice';
 
@@ -33,7 +33,8 @@ function CatalogCardsTemplate({cameras, onModalContactMeOpen}: CatalogCardsProps
 
   }, [dispatch, sortedCameras]);
 
-  const cards = useMemo(() => sortedCameras.map((camera) => <ProductCard onButtonClick={onModalContactMeOpen} camera={camera} key={camera.id}/>), [sortedCameras, onModalContactMeOpen]);
+  const filteredCamerasByPrice = filterCamerasByPrice(sortedCameras, wholeFilterState.price);
+  const cards = useMemo(() => filteredCamerasByPrice.map((camera) => <ProductCard onButtonClick={onModalContactMeOpen} camera={camera} key={camera.id}/>), [filteredCamerasByPrice, onModalContactMeOpen]);
 
   return(
     <div data-testid='catalogCardsContainer' className="cards catalog__cards">
