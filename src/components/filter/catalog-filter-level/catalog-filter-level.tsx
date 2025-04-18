@@ -30,7 +30,7 @@ function CatalogFilterLevel(): JSX.Element {
     ));
 
   return (
-    <fieldset className="catalog-filter__block">
+    <fieldset data-testid='catalogFilterLevel' className="catalog-filter__block">
       <legend className="title title--h5">Уровень</legend>
       {levelInputs}
     </fieldset>

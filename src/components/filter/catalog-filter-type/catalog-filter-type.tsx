@@ -32,7 +32,7 @@ function CatalogFilterType(): JSX.Element {
     ));
 
   return (
-    <fieldset className="catalog-filter__block">
+    <fieldset data-testid='catalogFilterType' className="catalog-filter__block">
       <legend className="title title--h5">Тип камеры</legend>
       {typeInputs}
     </fieldset>

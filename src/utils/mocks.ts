@@ -5,6 +5,7 @@ import { State } from '../types/state';
 export const makeFakeStore = (initialState?: Partial<State>): State => ({
   cameras: {
     cameras: fakeCameras,
+    sortedCameras: fakeCameras,
     promoCameras: fakePromoCameras,
     similarCameras: fakeCameras,
     currentCamera: fakeCurrentCamera,
@@ -25,6 +26,24 @@ export const makeFakeStore = (initialState?: Partial<State>): State => ({
   sort: {
     sortType: SortByType.Price,
     sortOrder: SortByOrder.Up,
+  },
+  filter: {
+    price: {
+      min: '',
+      max: ''
+    },
+    category: null,
+    cameraType: {
+      digital: false,
+      film: false,
+      snapshot: false,
+      collection: false,
+    },
+    level: {
+      zero: false,
+      nonProfessional: false,
+      professional: false,
+    }
   },
   ...initialState ?? {},
 });

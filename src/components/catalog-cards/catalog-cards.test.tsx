@@ -3,6 +3,7 @@ import { mockEmptyCallback, withRouter, withStore } from '../../utils/mock-compo
 import CatalogCards from './catalog-cards';
 import { fakeCameras } from '../../mocks/mock-test';
 import { makeFakeStore } from '../../utils/mocks';
+import { EmptyListMessage } from '../../const';
 
 describe('Component: CatalogCards', () => {
   const containerId = 'catalogCardsContainer';
@@ -19,7 +20,7 @@ describe('Component: CatalogCards', () => {
     expect(screen.getByTestId(containerId).children).toHaveLength(fakeCameras.length);
   });
 
-  it('should not render cards with empty data', () => {
+  it('should render text "EmptyListMessage.Cameras" with empty "cameras" data', () => {
     const {withStoreComponent} = withStore(
       <CatalogCards onModalContactMeOpen={mockEmptyCallback} cameras={[]}/>,
       makeFakeStore()
@@ -27,6 +28,6 @@ describe('Component: CatalogCards', () => {
 
     render(withRouter(withStoreComponent));
 
-    expect(screen.queryByTestId(containerId)).not.toBeInTheDocument();
+    expect(screen.getByText(EmptyListMessage.Cameras)).toBeInTheDocument();
   });
 });

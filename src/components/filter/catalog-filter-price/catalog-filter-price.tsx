@@ -21,7 +21,7 @@ function CatalogFilterPrice({cameras}: CatalogFilterPriceProps): JSX.Element {
   });
 
   return (
-    <fieldset className="catalog-filter__block">
+    <fieldset data-testid='catalogFilterPrice' className="catalog-filter__block">
       <legend className="title title--h5">Цена, ₽</legend>
       <div className="catalog-filter__price-range">
         <div className="custom-input">

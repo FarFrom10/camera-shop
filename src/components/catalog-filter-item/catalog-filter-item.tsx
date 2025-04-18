@@ -21,7 +21,7 @@ function CatalogFilterItem({onInputChange,
   return(
     <div className="custom-checkbox catalog-filter__item">
       <label>
-        <input checked={isChecked} disabled={isDisabled} data-type={dataType} onChange={onInputChange} type="checkbox" name="digital" defaultValue="false"/>
+        <input data-testid='catalogFilterItemInput' checked={isChecked} disabled={isDisabled} data-type={dataType} onChange={onInputChange} type="checkbox" name="digital" defaultValue="false"/>
         <span className="custom-checkbox__icon" />
         <span className="custom-checkbox__label">{name}</span>
       </label>

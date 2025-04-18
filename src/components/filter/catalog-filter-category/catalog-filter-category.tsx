@@ -21,7 +21,7 @@ function CatalogFilterCategory(): JSX.Element {
   };
 
   return (
-    <fieldset className="catalog-filter__block">
+    <fieldset data-testid='catalogFilterCategory' className="catalog-filter__block">
       <legend className="title title--h5">Категория</legend>
       <div className="custom-radio catalog-filter__item">
         <label>

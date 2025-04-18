@@ -16,7 +16,7 @@ function CatalogFilter({cameras}: CatalogFilterProps): JSX.Element {
   const handleResetFilters = () => dispatch(resetFilters());
 
   return (
-    <div className="catalog-filter">
+    <div data-testid="catalogFilter" className="catalog-filter">
       <form action="#">
         <h2 className="visually-hidden">Фильтр</h2>
         <CatalogFilterPrice cameras={cameras}/>
