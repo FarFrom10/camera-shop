@@ -2,13 +2,7 @@ import ProductCard from '../product-card/product-card';
 import { CameraData } from '../../types/cameras';
 import { EmptyListMessage } from '../../const';
 import EmptyListTitle from '../empty-list-title/empty-list-title';
-import { memo, useEffect, useMemo } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { selectSortOrder, selectSortType } from '../../store/sort-process/sort-process.selectors';
-import { sortCamerasByType } from '../../utils/sort';
-import { filterCamerasByPrice, getFilteredCameras } from '../../utils/filter';
-import { selectFilterState } from '../../store/filter-process/filter-process.selectors';
-import { updateSortedCameras } from '../../store/cameras-process/cameras-process.slice';
+import { memo, useMemo } from 'react';
 
 type CatalogCardsProps = {
   cameras: CameraData[];
@@ -16,30 +10,12 @@ type CatalogCardsProps = {
 }
 
 function CatalogCardsTemplate({cameras, onModalContactMeOpen}: CatalogCardsProps): JSX.Element {
-  const dispatch = useAppDispatch();
-
-  const currentSortOrder = useAppSelector(selectSortOrder);
-  const currentSortType = useAppSelector(selectSortType);
-  const wholeFilterState = useAppSelector(selectFilterState);
-
-  const filteredCameras = getFilteredCameras(
-    [...cameras],
-    wholeFilterState
-  );
-  const sortedCameras = sortCamerasByType(filteredCameras, currentSortType, currentSortOrder);
-
-  useEffect(() => {
-    dispatch(updateSortedCameras(sortedCameras));
-
-  }, [dispatch, sortedCameras]);
-
-  const filteredCamerasByPrice = filterCamerasByPrice(sortedCameras, wholeFilterState.price);
-  const cards = useMemo(() => filteredCamerasByPrice.map((camera) => <ProductCard onButtonClick={onModalContactMeOpen} camera={camera} key={camera.id}/>), [filteredCamerasByPrice, onModalContactMeOpen]);
+  const cards = useMemo(() => cameras.map((camera) => <ProductCard onButtonClick={onModalContactMeOpen} camera={camera} key={camera.id}/>), [cameras, onModalContactMeOpen]);
 
   return(
     <div data-testid='catalogCardsContainer' className="cards catalog__cards">
       {
-        !sortedCameras.length
+        !cameras.length
           ? <EmptyListTitle message={EmptyListMessage.Cameras}/>
           : cards
       }

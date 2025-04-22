@@ -19,7 +19,8 @@ const initialState: FilterProcess = {
     zero: false,
     nonProfessional: false,
     professional: false,
-  }
+  },
+  catalogCurrentPage: 1
 };
 
 export const filterProcess = createSlice({
@@ -28,18 +29,26 @@ export const filterProcess = createSlice({
   reducers: {
     changeMinPrice: (state, action: PayloadAction<string>) => {
       state.price.min = action.payload;
+      state.catalogCurrentPage = 1;
     },
     changeMaxPrice: (state, action: PayloadAction<string>) => {
       state.price.max = action.payload;
+      state.catalogCurrentPage = 1;
     },
     changeCategory: (state, action: PayloadAction<FilterCategory | null>) => {
       state.category = action.payload;
+      state.catalogCurrentPage = 1;
     },
     changeCameraType: (state, action: PayloadAction<FilterCameraType>) => {
       state.cameraType = action.payload;
+      state.catalogCurrentPage = 1;
     },
     changeLevel: (state, action: PayloadAction<FilterLevel>) => {
       state.level = action.payload;
+      state.catalogCurrentPage = 1;
+    },
+    changeCatalogCurrentPage: (state, action: PayloadAction<number>) => {
+      state.catalogCurrentPage = action.payload;
     },
     resetFilters: () => initialState,
     resetUnavailableTypesForVideo: (state) => {
@@ -55,6 +64,7 @@ export const {
   changeCategory,
   changeCameraType,
   changeLevel,
+  changeCatalogCurrentPage,
   resetFilters,
   resetUnavailableTypesForVideo
 } = filterProcess.actions;

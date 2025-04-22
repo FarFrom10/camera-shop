@@ -46,4 +46,5 @@ export type FilterProcess = {
   category: FilterCategory | null;
   cameraType: FilterCameraType;
   level: FilterLevel;
+  catalogCurrentPage: number;
 }

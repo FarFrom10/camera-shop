@@ -7,3 +7,4 @@ export const selectFilterState = (state: StateFilter): StateWholeFilter => state
 export const selectFilterCategory = (state: StateFilter): FilterCategory | null => state[NameSpace.Filter].category;
 export const selectFilterCameraType = (state: StateFilter): FilterCameraType => state[NameSpace.Filter].cameraType;
 export const selectFilterLevel = (state: StateFilter): FilterLevel => state[NameSpace.Filter].level;
+export const selectCatalogCurrentPage = (state: StateFilter): number => state[NameSpace.Filter].catalogCurrentPage;

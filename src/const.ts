@@ -7,6 +7,11 @@ export const PHONE_NUMBER_START = '+7';
 export const SIMILAR_CAMERAS_SLIDES_PER_VIEW = 3;
 export const DEFAULT_PRODUCT_TAB = 2;
 export const EMPTY_SEARCH_LIST_TEXT = 'Не найдено...';
+export const CAMERAS_PER_PAGE = 9;
+
+export enum SearchParamsName {
+  Page = 'page'
+}
 
 export const SearchLength = {
   Min: 3,
