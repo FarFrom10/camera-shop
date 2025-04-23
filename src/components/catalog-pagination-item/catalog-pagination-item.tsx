@@ -3,25 +3,30 @@ import { Link } from 'react-router-dom';
 import { AppRoute, SearchParamsName } from '../../const';
 
 type CatalogPaginationItemProps = {
-  pageNumber: number;
+  pageNumber?: number;
   currentPage: number;
-  onLinkClick: () => void;
+  onButtonClick: () => void;
+  linkText?: string;
 }
 
-function CatalogPaginationItem({ pageNumber, currentPage, onLinkClick }: CatalogPaginationItemProps): JSX.Element {
-  const isActive = pageNumber === currentPage;
+function CatalogPaginationItem({ pageNumber, currentPage, onButtonClick, linkText }: CatalogPaginationItemProps): JSX.Element {
+  const isActive = pageNumber && pageNumber === currentPage;
+
+  const route = pageNumber
+    ? `${AppRoute.Index}?${SearchParamsName.Page}=${pageNumber}`
+    : `${AppRoute.Index}?${SearchParamsName.Page}=${currentPage}`;
 
   return (
     <li className="pagination__item">
       <Link
-        onClick={onLinkClick}
-        to={`${AppRoute.Index}?${SearchParamsName.Page}=${pageNumber}`}
+        onClick={onButtonClick}
+        to={route}
         className={cn(
           'pagination__link',
           {'pagination__link--active': isActive}
         )}
       >
-        {pageNumber}
+        {linkText || pageNumber}
       </Link>
     </li>
   );
