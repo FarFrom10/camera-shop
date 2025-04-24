@@ -50,7 +50,7 @@ function CatalogPagination({ pagesNumber, currentPage }: CatalogPaginationProps)
   const shouldShowNextButton = paginationItems.length > MAX_PAGES_PER_VIEW && currentPage < paginationItems.length;
 
   return (
-    <div className="pagination">
+    <div data-testid='catalogPagination' className="pagination">
       <ul className="pagination__list">
         { currentPage > 1 &&
         <CatalogPaginationItem

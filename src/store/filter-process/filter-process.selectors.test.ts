@@ -1,5 +1,5 @@
 import { NameSpace } from '../../const';
-import { selectFilterCameraType, selectFilterCategory, selectFilterLevel, selectFilterState } from './filter-process.selectors';
+import { selectCatalogCurrentPage, selectFilterCameraType, selectFilterCategory, selectFilterLevel, selectFilterState } from './filter-process.selectors';
 
 
 describe('FilterProcess selectors', () => {
@@ -20,7 +20,8 @@ describe('FilterProcess selectors', () => {
         zero: false,
         nonProfessional: false,
         professional: false,
-      }
+      },
+      catalogCurrentPage: 1
     }
   };
 
@@ -46,5 +47,11 @@ describe('FilterProcess selectors', () => {
     const { level } = state[NameSpace.Filter];
     const result = selectFilterLevel(state);
     expect(result).toStrictEqual(level);
+  });
+
+  it('should return "catalogCurrentPage" from state', () => {
+    const { catalogCurrentPage } = state[NameSpace.Filter];
+    const result = selectCatalogCurrentPage(state);
+    expect(result).toStrictEqual(catalogCurrentPage);
   });
 });

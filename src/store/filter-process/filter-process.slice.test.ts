@@ -1,5 +1,5 @@
 import { FilterCategory } from '../../const';
-import { changeCameraType, changeCategory, changeLevel, changeMaxPrice, changeMinPrice, filterProcess, resetFilters } from './filter-process.slice';
+import { changeCameraType, changeCatalogCurrentPage, changeCategory, changeLevel, changeMaxPrice, changeMinPrice, filterProcess, resetFilters } from './filter-process.slice';
 
 describe('filterProcess slice', () => {
   it('should return initial state with empty action', () => {
@@ -20,7 +20,8 @@ describe('filterProcess slice', () => {
         zero: false,
         nonProfessional: false,
         professional: false,
-      }
+      },
+      catalogCurrentPage: 1
     };
 
     const result = filterProcess.reducer(expectedState, emptyAction);
@@ -46,7 +47,8 @@ describe('filterProcess slice', () => {
         zero: false,
         nonProfessional: false,
         professional: false,
-      }
+      },
+      catalogCurrentPage: 1
     };
 
     const result = filterProcess.reducer(undefined, emptyAction);
@@ -72,7 +74,8 @@ describe('filterProcess slice', () => {
         zero: false,
         nonProfessional: false,
         professional: false,
-      }
+      },
+      catalogCurrentPage: 1
     };
 
     const result = filterProcess.reducer(undefined, changeMinPrice(expectedMinPrice));
@@ -98,7 +101,8 @@ describe('filterProcess slice', () => {
         zero: false,
         nonProfessional: false,
         professional: false,
-      }
+      },
+      catalogCurrentPage: 1
     };
 
     const result = filterProcess.reducer(undefined, changeMaxPrice(expectedMaxPrice));
@@ -124,7 +128,8 @@ describe('filterProcess slice', () => {
         zero: false,
         nonProfessional: false,
         professional: false,
-      }
+      },
+      catalogCurrentPage: 1
     };
 
     const result = filterProcess.reducer(undefined, changeCategory(expectedCategory));
@@ -150,7 +155,8 @@ describe('filterProcess slice', () => {
         zero: false,
         nonProfessional: false,
         professional: false,
-      }
+      },
+      catalogCurrentPage: 1
     };
 
     const result = filterProcess.reducer(undefined, changeCameraType(expectedCameraType));
@@ -176,7 +182,8 @@ describe('filterProcess slice', () => {
         snapshot: false,
         collection: false,
       },
-      level: expectedLevel
+      level: expectedLevel,
+      catalogCurrentPage: 1
     };
 
     const result = filterProcess.reducer(undefined, changeLevel(expectedLevel));
@@ -201,7 +208,8 @@ describe('filterProcess slice', () => {
         zero: false,
         nonProfessional: false,
         professional: false,
-      }
+      },
+      catalogCurrentPage: 1
     };
 
     filterProcess.reducer(undefined, changeMinPrice('666'));
@@ -227,7 +235,8 @@ describe('filterProcess slice', () => {
         zero: false,
         nonProfessional: false,
         professional: false,
-      }
+      },
+      catalogCurrentPage: 1
     };
 
     filterProcess.reducer(undefined, changeCameraType({
@@ -237,6 +246,32 @@ describe('filterProcess slice', () => {
       collection: false,
     }));
     const result = filterProcess.reducer(undefined, resetFilters());
+
+    expect(result).toEqual(expectedState);
+  });
+
+  it('should change "catalogCurrentPage" with "changeCatalogCurrentPage" action', () => {
+    const expectedState = {
+      price: {
+        min: '',
+        max: ''
+      },
+      category: null,
+      cameraType: {
+        digital: false,
+        film: false,
+        snapshot: false,
+        collection: false,
+      },
+      level: {
+        zero: false,
+        nonProfessional: false,
+        professional: false,
+      },
+      catalogCurrentPage: 2
+    };
+
+    const result = filterProcess.reducer(undefined, changeCatalogCurrentPage(2));
 
     expect(result).toEqual(expectedState);
   });

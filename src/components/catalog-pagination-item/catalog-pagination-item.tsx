@@ -17,8 +17,9 @@ function CatalogPaginationItem({ pageNumber, currentPage, onButtonClick, linkTex
     : `${AppRoute.Index}?${SearchParamsName.Page}=${currentPage}`;
 
   return (
-    <li className="pagination__item">
+    <li data-testid='catalogPaginationItem' className="pagination__item">
       <Link
+        data-testid='catalogPaginationButton'
         onClick={onButtonClick}
         to={route}
         className={cn(
