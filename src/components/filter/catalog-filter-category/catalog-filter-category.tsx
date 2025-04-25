@@ -1,14 +1,14 @@
-import { MouseEvent } from 'react';
+import { memo, MouseEvent, useCallback } from 'react';
 import { useAppDispatch } from '../../../hooks';
 import { changeCategory, resetUnavailableTypesForVideo } from '../../../store/filter-process/filter-process.slice';
 import { isValueFilterCategory } from '../../../utils/type';
 import { FilterCategory } from '../../../const';
 
-function CatalogFilterCategory(): JSX.Element {
+function CatalogFilterCategoryTemplate(): JSX.Element {
   const dispatch = useAppDispatch();
 
   //Использовал click вместо change, так как появлялся баг при сбросе фильтров
-  const handleCategoryClick = (evt: MouseEvent<HTMLInputElement>) => {
+  const handleCategoryClick = useCallback((evt: MouseEvent<HTMLInputElement>) => {
     //evt.target не работал с MouseEvent (отсутствует св-во value)
     const value = evt.currentTarget.value;
 
@@ -18,7 +18,7 @@ function CatalogFilterCategory(): JSX.Element {
     if (value === String(FilterCategory.Videocamera)) {
       dispatch(resetUnavailableTypesForVideo());
     }
-  };
+  }, [dispatch]);
 
   return (
     <fieldset data-testid='catalogFilterCategory' className="catalog-filter__block">
@@ -50,5 +50,7 @@ function CatalogFilterCategory(): JSX.Element {
     </fieldset>
   );
 }
+
+const CatalogFilterCategory = memo(CatalogFilterCategoryTemplate);
 
 export default CatalogFilterCategory;

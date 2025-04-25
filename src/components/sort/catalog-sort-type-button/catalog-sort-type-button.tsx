@@ -1,3 +1,4 @@
+import { memo, useMemo } from 'react';
 import { SortByType } from '../../../const';
 import { CatalogSortTypeButtonSettings } from './catalog-sort-type-button.settings';
 
@@ -7,8 +8,8 @@ type CatalogSortTypeButtonProps = {
   onSortTypeChange: (sortType: SortByType) => void;
 }
 
-function CatalogSortTypeButton({ sort, currentSort, onSortTypeChange }: CatalogSortTypeButtonProps): JSX.Element {
-  const isChecked = sort === currentSort;
+function CatalogSortTypeButtonTemplate({ sort, currentSort, onSortTypeChange }: CatalogSortTypeButtonProps): JSX.Element {
+  const isChecked = useMemo(() => sort === currentSort, [currentSort, sort]);
 
   return (
     <div className="catalog-sort__btn-text">
@@ -17,5 +18,7 @@ function CatalogSortTypeButton({ sort, currentSort, onSortTypeChange }: CatalogS
     </div>
   );
 }
+
+const CatalogSortTypeButton = memo(CatalogSortTypeButtonTemplate);
 
 export default CatalogSortTypeButton;

@@ -4,20 +4,21 @@ import { useAppDispatch } from '../../hooks';
 import { changeCatalogCurrentPage } from '../../store/filter-process/filter-process.slice';
 import { MAX_PAGES_PER_VIEW } from '../../const';
 import { getSlicedPaginationItems } from '../../utils/pagination';
+import { memo, useCallback, useMemo } from 'react';
 
 type CatalogPaginationProps = {
   pagesNumber: number;
   currentPage : number;
 }
 
-function CatalogPagination({ pagesNumber, currentPage }: CatalogPaginationProps): JSX.Element {
+function CatalogPaginationTemplate({ pagesNumber, currentPage }: CatalogPaginationProps): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const handleButtonClick = (pageNumber: number) => {
+  const handleButtonClick = useCallback((pageNumber: number) => {
     dispatch(changeCatalogCurrentPage(pageNumber));
-  };
+  }, [dispatch]);
 
-  const paginationItems = Array.from({length: pagesNumber})
+  const paginationItems = useMemo(() =>Array.from({length: pagesNumber})
     .map((_, i) =>
       (
         <CatalogPaginationItem
@@ -27,27 +28,27 @@ function CatalogPagination({ pagesNumber, currentPage }: CatalogPaginationProps)
           onButtonClick={() => handleButtonClick(i + 1)}
         />
       )
-    );
+    ), [currentPage, handleButtonClick, pagesNumber]);
 
-  const slicedPaginationItems = getSlicedPaginationItems(
+  const slicedPaginationItems = useMemo(() => getSlicedPaginationItems(
     paginationItems,
     currentPage,
     MAX_PAGES_PER_VIEW
-  );
+  ), [currentPage, paginationItems]);
 
-  const handlePrevButtonClick = () => {
+  const handlePrevButtonClick = useCallback(() => {
     dispatch(changeCatalogCurrentPage(currentPage - 1));
-  };
+  }, [currentPage, dispatch]);
 
-  const handleNextButtonClick = () => {
+  const handleNextButtonClick = useCallback(() => {
     const targetPageNumber = currentPage + MAX_PAGES_PER_VIEW - 1;
     const nextPage = paginationItems.length < targetPageNumber
       ? paginationItems.length
       : targetPageNumber;
     dispatch(changeCatalogCurrentPage(nextPage));
-  };
+  }, [currentPage, dispatch, paginationItems.length]);
 
-  const shouldShowNextButton = paginationItems.length > MAX_PAGES_PER_VIEW && currentPage < paginationItems.length;
+  const shouldShowNextButton = useMemo(() => paginationItems.length > MAX_PAGES_PER_VIEW && currentPage < paginationItems.length, [currentPage, paginationItems.length]);
 
   return (
     <div data-testid='catalogPagination' className="pagination">
@@ -71,5 +72,7 @@ function CatalogPagination({ pagesNumber, currentPage }: CatalogPaginationProps)
     </div>
   );
 }
+
+const CatalogPagination = memo(CatalogPaginationTemplate);
 
 export default CatalogPagination;

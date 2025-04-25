@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { memo, useRef } from 'react';
 import { CameraData } from '../../../types/cameras';
 import { useFilterPrice } from '../../../hooks/use-filter-price';
 
@@ -6,7 +6,7 @@ type CatalogFilterPriceProps = {
   cameras: CameraData[];
 }
 
-function CatalogFilterPrice({cameras}: CatalogFilterPriceProps): JSX.Element {
+function CatalogFilterPriceTemplate({cameras}: CatalogFilterPriceProps): JSX.Element {
   const minPriceRef = useRef<HTMLInputElement>(null);
   const maxPriceRef = useRef<HTMLInputElement>(null);
 
@@ -50,5 +50,7 @@ function CatalogFilterPrice({cameras}: CatalogFilterPriceProps): JSX.Element {
     </fieldset>
   );
 }
+
+const CatalogFilterPrice = memo(CatalogFilterPriceTemplate);
 
 export default CatalogFilterPrice;

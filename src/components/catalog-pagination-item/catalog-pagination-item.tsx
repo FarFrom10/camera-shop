@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import { AppRoute, SearchParamsName } from '../../const';
+import { memo, useMemo } from 'react';
 
 type CatalogPaginationItemProps = {
   pageNumber?: number;
@@ -9,12 +10,13 @@ type CatalogPaginationItemProps = {
   linkText?: string;
 }
 
-function CatalogPaginationItem({ pageNumber, currentPage, onButtonClick, linkText }: CatalogPaginationItemProps): JSX.Element {
-  const isActive = pageNumber && pageNumber === currentPage;
+function CatalogPaginationItemTemplate({ pageNumber, currentPage, onButtonClick, linkText }: CatalogPaginationItemProps): JSX.Element {
+  const isActive = useMemo(() => pageNumber && pageNumber === currentPage, [currentPage, pageNumber]);
 
-  const route = pageNumber
+  const route = useMemo(() => pageNumber
     ? `${AppRoute.Index}?${SearchParamsName.Page}=${pageNumber}`
-    : `${AppRoute.Index}?${SearchParamsName.Page}=${currentPage}`;
+    : `${AppRoute.Index}?${SearchParamsName.Page}=${currentPage}`
+  , [currentPage, pageNumber]);
 
   return (
     <li data-testid='catalogPaginationItem' className="pagination__item">
@@ -32,5 +34,7 @@ function CatalogPaginationItem({ pageNumber, currentPage, onButtonClick, linkTex
     </li>
   );
 }
+
+const CatalogPaginationItem = memo(CatalogPaginationItemTemplate);
 
 export default CatalogPaginationItem;

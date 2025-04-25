@@ -1,3 +1,4 @@
+import { useCallback, useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '.';
 import { selectSortedCameras } from '../store/cameras-process/cameras-process.selectors';
 import { selectFilterState } from '../store/filter-process/filter-process.selectors';
@@ -34,11 +35,11 @@ export const useFilterPrice = ({
     ...Object.values(wholeFilterState.level),
   ].some((item) => item === true) || wholeFilterState.category !== null;
 
-  const minMaxPrices = !isFiltersUsed
+  const minMaxPrices = useMemo(() => !isFiltersUsed
     ? getMinAndMaxPricesFromCameras(cameras)
-    : getMinAndMaxPricesFromCameras(sortedCameras);
+    : getMinAndMaxPricesFromCameras(sortedCameras), [cameras, isFiltersUsed, sortedCameras]);
 
-  const handleMinPriceChange = () => {
+  const handleMinPriceChange = useCallback(() => {
     const currentMinPrice = Number(getOnlyNumbersFromString(minPriceRef.current?.value || ''));
     const currentMaxPrice = Number(maxPriceRef.current?.value);
     const convertedPrice = getMinPrice(
@@ -54,9 +55,9 @@ export const useFilterPrice = ({
       minPriceRef.current.value = convertedPrice;
       dispatch(changeMinPrice(convertedPrice));
     }
-  };
+  }, [dispatch, maxPriceRef, minMaxPrices.max, minMaxPrices.min, minPriceRef]);
 
-  const handleMaxPriceChange = () => {
+  const handleMaxPriceChange = useCallback(() => {
     const currentMaxPrice = Number(getOnlyNumbersFromString(maxPriceRef.current?.value || ''));
     const currentMinPrice = Number(minPriceRef.current?.value);
     const convertedPrice = getMaxPrice({
@@ -70,7 +71,7 @@ export const useFilterPrice = ({
       maxPriceRef.current.value = convertedPrice;
       dispatch(changeMaxPrice(convertedPrice));
     }
-  };
+  }, [dispatch, maxPriceRef, minMaxPrices.max, minMaxPrices.min, minPriceRef]);
 
   return [handleMinPriceChange, handleMaxPriceChange, minMaxPrices];
 };

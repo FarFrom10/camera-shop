@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { CameraData } from '../types/cameras';
 import { useAppDispatch, useAppSelector } from '.';
 import { selectSortOrder, selectSortType } from '../store/sort-process/sort-process.selectors';
@@ -22,18 +22,18 @@ export const useFilterCatalog = ({cameras}: UseFilterCatalogProps): UseFilterCat
   const currentSortType = useAppSelector(selectSortType);
   const wholeFilterState = useAppSelector(selectFilterState);
 
-  const filteredCameras = getFilteredCameras(
+  const filteredCameras = useMemo(() => getFilteredCameras(
     [...cameras],
     wholeFilterState
-  );
-  const sortedCameras = sortCamerasByType(filteredCameras, currentSortType, currentSortOrder);
+  ), [cameras, wholeFilterState]);
+  const sortedCameras = useMemo(() => sortCamerasByType([...filteredCameras], currentSortType, currentSortOrder), [filteredCameras, currentSortType, currentSortOrder]);
 
   useEffect(() => {
     dispatch(updateSortedCameras(sortedCameras));
 
   }, [dispatch, sortedCameras]);
 
-  const filteredCamerasByPrice = filterCamerasByPrice(sortedCameras, wholeFilterState.price);
+  const filteredCamerasByPrice = useMemo(() => filterCamerasByPrice(sortedCameras, wholeFilterState.price), [sortedCameras, wholeFilterState.price]);
 
   return [filteredCamerasByPrice];
 };

@@ -32,16 +32,16 @@ export const usePaginationCatalog = ({filteredCamerasByPrice}: UsePaginationCata
   const currentPage = useAppSelector(selectCatalogCurrentPage);
 
 
-  const indexOfLastItem = currentPage * CAMERAS_PER_PAGE;
-  const indexOfFirstItem = indexOfLastItem - CAMERAS_PER_PAGE;
+  const indexOfLastItem = useMemo(() => currentPage * CAMERAS_PER_PAGE, [currentPage]);
+  const indexOfFirstItem = useMemo(() => indexOfLastItem - CAMERAS_PER_PAGE, [indexOfLastItem]);
 
   useEffect(() => {
     queryParams.set('page', String(currentPage));
     navigate({ search: queryParams.toString() });
   }, [currentPage, navigate, queryParams]);
 
-  const currentCameras = filteredCamerasByPrice.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(filteredCamerasByPrice.length / CAMERAS_PER_PAGE);
+  const currentCameras = useMemo(() => filteredCamerasByPrice.slice(indexOfFirstItem, indexOfLastItem), [filteredCamerasByPrice, indexOfFirstItem, indexOfLastItem]);
+  const totalPages = useMemo(() => Math.ceil(filteredCamerasByPrice.length / CAMERAS_PER_PAGE), [filteredCamerasByPrice.length]);
 
   return [currentCameras, currentPage, totalPages];
 };

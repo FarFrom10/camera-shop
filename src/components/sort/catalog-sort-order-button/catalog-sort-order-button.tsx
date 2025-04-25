@@ -1,3 +1,4 @@
+import { memo, useMemo } from 'react';
 import { IconName, SortByOrder } from '../../../const';
 import CommonIcon from '../../common-icon/common-icon';
 import { CatalogSortOrderButtonSettings } from './catalog-sort-order-button.settings';
@@ -8,8 +9,8 @@ type CatalogSortOrderButtonOrder = {
   onSortOrderChange: (sortOrder: SortByOrder) => void;
 }
 
-function CatalogSortOrderButton({sort, currentSort, onSortOrderChange}: CatalogSortOrderButtonOrder): JSX.Element {
-  const isChecked = sort === currentSort;
+function CatalogSortOrderButtonTemplate({sort, currentSort, onSortOrderChange}: CatalogSortOrderButtonOrder): JSX.Element {
+  const isChecked = useMemo(() => sort === currentSort, [currentSort, sort]);
 
   return (
     <div className={`catalog-sort__btn catalog-sort__btn--${sort}`}>
@@ -28,5 +29,7 @@ function CatalogSortOrderButton({sort, currentSort, onSortOrderChange}: CatalogS
     </div>
   );
 }
+
+const CatalogSortOrderButton = memo(CatalogSortOrderButtonTemplate);
 
 export default CatalogSortOrderButton;

@@ -1,3 +1,4 @@
+import { memo, useCallback } from 'react';
 import { useAppDispatch } from '../../../hooks';
 import { resetFilters } from '../../../store/filter-process/filter-process.slice';
 import { CameraData } from '../../../types/cameras';
@@ -10,10 +11,10 @@ type CatalogFilterProps = {
   cameras: CameraData[];
 }
 
-function CatalogFilter({cameras}: CatalogFilterProps): JSX.Element {
+function CatalogFilterTemplate({cameras}: CatalogFilterProps): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const handleResetFilters = () => dispatch(resetFilters());
+  const handleResetFilters = useCallback(() => dispatch(resetFilters()), [dispatch]);
 
   return (
     <div data-testid="catalogFilter" className="catalog-filter">
@@ -31,5 +32,7 @@ function CatalogFilter({cameras}: CatalogFilterProps): JSX.Element {
 
   );
 }
+
+const CatalogFilter = memo(CatalogFilterTemplate);
 
 export default CatalogFilter;

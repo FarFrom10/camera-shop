@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, memo, useMemo } from 'react';
 import { FilterItemType } from '../../const';
 
 type CatalogFilterItemProps = {
@@ -9,14 +9,14 @@ type CatalogFilterItemProps = {
   isChecked: boolean;
 }
 
-function CatalogFilterItem({onInputChange,
+function CatalogFilterItemTemplate({onInputChange,
   dataType,
   name,
   isVideo = false,
   isChecked
 }: CatalogFilterItemProps): JSX.Element {
-  const isTypeUnavailableForVideo = dataType === FilterItemType.Film || dataType === FilterItemType.Snapshot;
-  const isDisabled = isVideo && isTypeUnavailableForVideo;
+  const isTypeUnavailableForVideo = useMemo(() => dataType === FilterItemType.Film || dataType === FilterItemType.Snapshot, [dataType]);
+  const isDisabled = useMemo(() => isVideo && isTypeUnavailableForVideo, [isTypeUnavailableForVideo, isVideo]);
 
   return(
     <div className="custom-checkbox catalog-filter__item">
@@ -28,4 +28,7 @@ function CatalogFilterItem({onInputChange,
     </div>
   );
 }
+
+const CatalogFilterItem = memo(CatalogFilterItemTemplate);
+
 export default CatalogFilterItem;

@@ -1,7 +1,8 @@
+import { memo } from 'react';
 import CatalogSortOrder from '../catalog-sort-order/catalog-sort-order';
 import CatalogSortType from '../catalog-sort-type/catalog-sort-type';
 
-function CatalogPageSort(): JSX.Element {
+function CatalogPageSortTemplate(): JSX.Element {
   return (
     <div data-testid='catalogPageSort' className="catalog-sort">
       <form action="#">
@@ -14,5 +15,7 @@ function CatalogPageSort(): JSX.Element {
     </div>
   );
 }
+
+const CatalogPageSort = memo(CatalogPageSortTemplate);
 
 export default CatalogPageSort;
