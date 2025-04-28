@@ -11,7 +11,8 @@ export const CAMERAS_PER_PAGE = 9;
 export const MAX_PAGES_PER_VIEW = 3;
 
 export enum SearchParamsName {
-  Page = 'page'
+  Page = 'page',
+  Category = 'category'
 }
 
 export const SearchLength = {

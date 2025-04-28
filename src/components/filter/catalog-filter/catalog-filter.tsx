@@ -11,7 +11,7 @@ type CatalogFilterProps = {
   cameras: CameraData[];
 }
 
-function CatalogFilterTemplate({cameras}: CatalogFilterProps): JSX.Element {
+function CatalogFilterTemplate({ cameras }: CatalogFilterProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   const handleResetFilters = useCallback(() => dispatch(resetFilters()), [dispatch]);
@@ -21,7 +21,7 @@ function CatalogFilterTemplate({cameras}: CatalogFilterProps): JSX.Element {
       <form action="#">
         <h2 className="visually-hidden">Фильтр</h2>
         <CatalogFilterPrice cameras={cameras}/>
-        <CatalogFilterCategory/>
+        <CatalogFilterCategory />
         <CatalogFilterType/>
         <CatalogFilterLevel/>
         <button onClick={handleResetFilters} className="btn catalog-filter__reset-btn" type="reset">

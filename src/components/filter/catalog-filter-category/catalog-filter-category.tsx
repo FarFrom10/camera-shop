@@ -10,13 +10,14 @@ function CatalogFilterCategoryTemplate(): JSX.Element {
   //Использовал click вместо change, так как появлялся баг при сбросе фильтров
   const handleCategoryClick = useCallback((evt: MouseEvent<HTMLInputElement>) => {
     //evt.target не работал с MouseEvent (отсутствует св-во value)
-    const value = evt.currentTarget.value;
+    const category = evt.currentTarget.value;
 
-    if (isValueFilterCategory(value)){
-      dispatch(changeCategory(value));
-    }
-    if (value === String(FilterCategory.Videocamera)) {
+    if (category === String(FilterCategory.Videocamera)) {
       dispatch(resetUnavailableTypesForVideo());
+    }
+
+    if (isValueFilterCategory(category)){
+      dispatch(changeCategory(category));
     }
   }, [dispatch]);
 
