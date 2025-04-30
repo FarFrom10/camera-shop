@@ -12,9 +12,11 @@ import { useFilterCatalog } from '../../hooks/use-filter-catalog';
 import { usePaginationCatalog } from '../../hooks/use-pagination-catalog';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import { changeCatalogCurrentPage, changeCategory } from '../../store/filter-process/filter-process.slice';
+import { changeCameraType, changeCatalogCurrentPage, changeCategory, changeLevel } from '../../store/filter-process/filter-process.slice';
 import { isValueFilterCategory } from '../../utils/type';
 import { selectFilterState } from '../../store/filter-process/filter-process.selectors';
+import { convertStringCheckboxesToObject, convertFilterCheckboxesToString, isFiltersUnused } from '../../utils/filter';
+import { FilterCameraType, FilterLevel } from '../../types/types';
 
 function CatalogPageContent(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -23,29 +25,68 @@ function CatalogPageContent(): JSX.Element {
   const cameras = useAppSelector(selectCameras);
   const wholeFilterState = useAppSelector(selectFilterState);
 
-  useEffect(() => {
-    const searchPageNumber = Number(searchParams.get(SearchParamsName.Page));
-    const searchCategory = searchParams.get(SearchParamsName.Category);
+  //=================================================================================
+  const searchPageNumber = Number(searchParams.get(SearchParamsName.Page));
+  const searchCategory = searchParams.get(SearchParamsName.Category);
+  const searchType = searchParams.get(SearchParamsName.Type);
+  const searchLevel = searchParams.get(SearchParamsName.Level);
 
-    if (searchPageNumber > 1) {
-      dispatch(changeCatalogCurrentPage(searchPageNumber));
-    }
+  useEffect(() => {
     if (searchCategory && isValueFilterCategory(searchCategory)) {
       dispatch(changeCategory(searchCategory));
     }
-  }, [dispatch, searchParams]);
+
+    if (searchType) {
+      const updatedState = convertStringCheckboxesToObject(searchType, wholeFilterState.cameraType);
+      dispatch(changeCameraType(updatedState as FilterCameraType));
+    }
+
+    if (searchLevel) {
+      const updatedState = convertStringCheckboxesToObject(searchLevel, wholeFilterState.level);
+      dispatch(changeLevel(updatedState as FilterLevel));
+    }
+
+    //Страницу надо менять в последнюю очередь, так как все остальные фильтры сбрасывают её
+    if (searchPageNumber > 1) {
+      dispatch(changeCatalogCurrentPage(searchPageNumber));
+    }
+
+    //Отключил проверку массива зависимсотей, так как эффект должен срабоать лишь раз
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const newSearchParams = new URLSearchParams(searchParams);
+
     if (wholeFilterState.category) {
       newSearchParams.set(SearchParamsName.Category, wholeFilterState.category);
+    } else {
+      newSearchParams.delete(SearchParamsName.Category);
     }
-    if (wholeFilterState.catalogCurrentPage) {
+
+    if (!isFiltersUnused(wholeFilterState.cameraType)) {
+      const cameraTypes = convertFilterCheckboxesToString(wholeFilterState.cameraType);
+      newSearchParams.set(SearchParamsName.Type, cameraTypes);
+    } else {
+      newSearchParams.delete(SearchParamsName.Type);
+    }
+
+    if (!isFiltersUnused(wholeFilterState.level)) {
+      const levels = convertFilterCheckboxesToString(wholeFilterState.level);
+      newSearchParams.set(SearchParamsName.Level, levels);
+    } else {
+      newSearchParams.delete(SearchParamsName.Level);
+    }
+
+    if (wholeFilterState.catalogCurrentPage > 1) {
       newSearchParams.set(SearchParamsName.Page, String(wholeFilterState.catalogCurrentPage));
+    } else {
+      newSearchParams.delete(SearchParamsName.Page);
     }
 
     setSearchParams(newSearchParams);
-  }, [wholeFilterState, searchParams, setSearchParams]);
+  }, [wholeFilterState, searchParams, setSearchParams, searchPageNumber]);
+  //=================================================================================
 
   const [
     modalContactMe,

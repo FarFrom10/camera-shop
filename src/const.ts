@@ -12,7 +12,9 @@ export const MAX_PAGES_PER_VIEW = 3;
 
 export enum SearchParamsName {
   Page = 'page',
-  Category = 'category'
+  Category = 'category',
+  Type = 'type',
+  Level = 'level'
 }
 
 export const SearchLength = {

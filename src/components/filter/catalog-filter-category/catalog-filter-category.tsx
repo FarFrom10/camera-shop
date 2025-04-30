@@ -1,16 +1,16 @@
-import { memo, MouseEvent, useCallback } from 'react';
-import { useAppDispatch } from '../../../hooks';
+import { ChangeEvent, memo, useCallback } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { changeCategory, resetUnavailableTypesForVideo } from '../../../store/filter-process/filter-process.slice';
 import { isValueFilterCategory } from '../../../utils/type';
 import { FilterCategory } from '../../../const';
+import { selectFilterCategory } from '../../../store/filter-process/filter-process.selectors';
 
 function CatalogFilterCategoryTemplate(): JSX.Element {
   const dispatch = useAppDispatch();
+  const filterCategory = useAppSelector(selectFilterCategory);
 
-  //Использовал click вместо change, так как появлялся баг при сбросе фильтров
-  const handleCategoryClick = useCallback((evt: MouseEvent<HTMLInputElement>) => {
-    //evt.target не работал с MouseEvent (отсутствует св-во value)
-    const category = evt.currentTarget.value;
+  const handleCategoryChange = useCallback((evt: ChangeEvent<HTMLInputElement>) => {
+    const category = String(evt.target.value);
 
     if (category === String(FilterCategory.Videocamera)) {
       dispatch(resetUnavailableTypesForVideo());
@@ -27,10 +27,11 @@ function CatalogFilterCategoryTemplate(): JSX.Element {
       <div className="custom-radio catalog-filter__item">
         <label>
           <input
-            onClick={handleCategoryClick}
+            onChange={handleCategoryChange}
             type="radio"
             name="category"
-            defaultValue="photocamera"
+            defaultValue={FilterCategory.Photocamera}
+            checked={String(filterCategory) === FilterCategory.Photocamera}
           />
           <span className="custom-radio__icon" />
           <span className="custom-radio__label">Фотокамера</span>
@@ -39,10 +40,10 @@ function CatalogFilterCategoryTemplate(): JSX.Element {
       <div className="custom-radio catalog-filter__item">
         <label>
           <input
-            onClick={handleCategoryClick}
+            onChange={handleCategoryChange}
             type="radio"
-            name="category"
-            defaultValue="videocamera"
+            defaultValue={FilterCategory.Videocamera}
+            checked={String(filterCategory) === FilterCategory.Videocamera}
           />
           <span className="custom-radio__icon" />
           <span className="custom-radio__label">Видеокамера</span>

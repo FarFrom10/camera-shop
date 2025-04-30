@@ -3,7 +3,26 @@ import { CameraData } from '../types/cameras';
 import { StateWholeFilter } from '../types/state';
 import { FilterCameraType, FilterLevel, FilterPrice } from '../types/types';
 
-const isFiltersUnused = (properties: Record<string, boolean>) => Object.values(properties).every((item) => item === false);
+export const isFiltersUnused = (properties: Record<string, boolean>): boolean =>
+  Object.values(properties).every((item) => item === false);
+
+export function convertFilterCheckboxesToString(checkboxes: Record<string, boolean>): string {
+  const activeCheckboxes = Object.entries(checkboxes).filter((checkbox) => checkbox[1] === true);
+  const stringCheckboxes = Object.keys(Object.fromEntries(activeCheckboxes)).join('-');
+  return stringCheckboxes;
+}
+
+export function convertStringCheckboxesToObject(stringCheckboxes: string, state: Record<string, boolean>): Record<string, boolean> {
+  const activeTypes = stringCheckboxes.split('-');
+  const newState = Object.fromEntries(
+    Object.entries(state)
+      .map(([name, value]) => {
+        const newValue = activeTypes.includes(name) ? true : value;
+        return [name, newValue];
+      })
+  );
+  return newState;
+}
 
 function filterCamerasByCategory(cameras: CameraData[], category: FilterCategory | null): CameraData[] {
   if (category === null) {
