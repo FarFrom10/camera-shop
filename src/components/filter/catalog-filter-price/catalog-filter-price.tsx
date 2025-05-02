@@ -4,9 +4,11 @@ import { useFilterPrice } from '../../../hooks/use-filter-price';
 
 type CatalogFilterPriceProps = {
   cameras: CameraData[];
+  currentMinPrice: string;
+  currentMaxPrice: string;
 }
 
-function CatalogFilterPriceTemplate({cameras}: CatalogFilterPriceProps): JSX.Element {
+function CatalogFilterPriceTemplate({cameras, currentMinPrice, currentMaxPrice}: CatalogFilterPriceProps): JSX.Element {
   const minPriceRef = useRef<HTMLInputElement>(null);
   const maxPriceRef = useRef<HTMLInputElement>(null);
 
@@ -32,6 +34,7 @@ function CatalogFilterPriceTemplate({cameras}: CatalogFilterPriceProps): JSX.Ele
               type="number"
               name="price"
               placeholder={`${minMaxPrices.min}`}
+              defaultValue={currentMinPrice ? currentMinPrice : ''}
             />
           </label>
         </div>
@@ -43,6 +46,7 @@ function CatalogFilterPriceTemplate({cameras}: CatalogFilterPriceProps): JSX.Ele
               type="number"
               name="priceUp"
               placeholder={`${minMaxPrices.max}`}
+              defaultValue={currentMaxPrice ? currentMaxPrice : ''}
             />
           </label>
         </div>

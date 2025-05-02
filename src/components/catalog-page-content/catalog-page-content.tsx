@@ -12,7 +12,7 @@ import { useFilterCatalog } from '../../hooks/use-filter-catalog';
 import { usePaginationCatalog } from '../../hooks/use-pagination-catalog';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import { changeCameraType, changeCatalogCurrentPage, changeCategory, changeLevel } from '../../store/filter-process/filter-process.slice';
+import { changeCameraType, changeCatalogCurrentPage, changeCategory, changeLevel, changeMaxPrice, changeMinPrice } from '../../store/filter-process/filter-process.slice';
 import { isValueFilterCategory } from '../../utils/type';
 import { selectFilterState } from '../../store/filter-process/filter-process.selectors';
 import { convertStringCheckboxesToObject, convertFilterCheckboxesToString, isFiltersUnused } from '../../utils/filter';
@@ -30,6 +30,8 @@ function CatalogPageContent(): JSX.Element {
   const searchCategory = searchParams.get(SearchParamsName.Category);
   const searchType = searchParams.get(SearchParamsName.Type);
   const searchLevel = searchParams.get(SearchParamsName.Level);
+  const searchPriceMin = searchParams.get(SearchParamsName.PriceMin);
+  const searchPriceMax = searchParams.get(SearchParamsName.PriceMax);
 
   useEffect(() => {
     if (searchCategory && isValueFilterCategory(searchCategory)) {
@@ -44,6 +46,14 @@ function CatalogPageContent(): JSX.Element {
     if (searchLevel) {
       const updatedState = convertStringCheckboxesToObject(searchLevel, wholeFilterState.level);
       dispatch(changeLevel(updatedState as FilterLevel));
+    }
+
+    if (searchPriceMin) {
+      dispatch(changeMinPrice(searchPriceMin));
+    }
+
+    if (searchPriceMax) {
+      dispatch(changeMaxPrice(searchPriceMax));
     }
 
     //Страницу надо менять в последнюю очередь, так как все остальные фильтры сбрасывают её
@@ -84,6 +94,18 @@ function CatalogPageContent(): JSX.Element {
       newSearchParams.delete(SearchParamsName.Page);
     }
 
+    if (wholeFilterState.price.min) {
+      newSearchParams.set(SearchParamsName.PriceMin, String(wholeFilterState.price.min));
+    } else {
+      newSearchParams.delete(SearchParamsName.PriceMin);
+    }
+
+    if (wholeFilterState.price.max) {
+      newSearchParams.set(SearchParamsName.PriceMax, String(wholeFilterState.price.max));
+    } else {
+      newSearchParams.delete(SearchParamsName.PriceMax);
+    }
+
     setSearchParams(newSearchParams);
   }, [wholeFilterState, searchParams, setSearchParams, searchPageNumber]);
   //=================================================================================
@@ -108,7 +130,11 @@ function CatalogPageContent(): JSX.Element {
       <div className="container">
         <h1 className="title title--h2">Каталог фото- и видеотехники</h1>
         <div className="page-content__columns">
-          <CatalogFilter cameras={cameras} />
+          <CatalogFilter
+            cameras={cameras}
+            currentMinPrice={wholeFilterState.price.min}
+            currentMaxPrice={wholeFilterState.price.max}
+          />
           <div className="catalog__content">
             <CatalogPageSort/>
             <CatalogCards

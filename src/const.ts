@@ -14,7 +14,9 @@ export enum SearchParamsName {
   Page = 'page',
   Category = 'category',
   Type = 'type',
-  Level = 'level'
+  Level = 'level',
+  PriceMin = 'price-min',
+  PriceMax = 'price-max',
 }
 
 export const SearchLength = {

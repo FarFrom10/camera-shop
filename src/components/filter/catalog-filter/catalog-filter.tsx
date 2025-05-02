@@ -9,9 +9,11 @@ import CatalogFilterType from '../catalog-filter-type/catalog-filter-type';
 
 type CatalogFilterProps = {
   cameras: CameraData[];
+  currentMinPrice: string;
+  currentMaxPrice: string;
 }
 
-function CatalogFilterTemplate({ cameras }: CatalogFilterProps): JSX.Element {
+function CatalogFilterTemplate({ cameras,currentMinPrice, currentMaxPrice }: CatalogFilterProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   const handleResetFilters = useCallback(() => dispatch(resetFilters()), [dispatch]);
@@ -20,7 +22,11 @@ function CatalogFilterTemplate({ cameras }: CatalogFilterProps): JSX.Element {
     <div data-testid="catalogFilter" className="catalog-filter">
       <form action="#">
         <h2 className="visually-hidden">Фильтр</h2>
-        <CatalogFilterPrice cameras={cameras}/>
+        <CatalogFilterPrice
+          cameras={cameras}
+          currentMinPrice={currentMinPrice}
+          currentMaxPrice={currentMaxPrice}
+        />
         <CatalogFilterCategory />
         <CatalogFilterType/>
         <CatalogFilterLevel/>
