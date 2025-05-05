@@ -7,16 +7,18 @@ import CatalogPageSort from '../sort/catalog-page-sort/catalog-page-sort';
 import ModalContactMe from '../modal/modal-contact-me/modal-contact-me';
 import ModalWrapper from '../modal/modal-wrapper/modal-wrapper';
 import CatalogPagination from '../catalog-pagination/catalog-pagination';
-import { CAMERAS_PER_PAGE, SearchParamsName } from '../../const';
+import { CAMERAS_PER_PAGE, SearchParamsName, SortByOrder, SortByType } from '../../const';
 import { useFilterCatalog } from '../../hooks/use-filter-catalog';
 import { usePaginationCatalog } from '../../hooks/use-pagination-catalog';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { changeCameraType, changeCatalogCurrentPage, changeCategory, changeLevel, changeMaxPrice, changeMinPrice } from '../../store/filter-process/filter-process.slice';
-import { isValueFilterCategory } from '../../utils/type';
+import { isValueFilterCategory, isValueSortOrder, isValueSortType } from '../../utils/type';
 import { selectFilterState } from '../../store/filter-process/filter-process.selectors';
 import { convertStringCheckboxesToObject, convertFilterCheckboxesToString, isFiltersUnused } from '../../utils/filter';
 import { FilterCameraType, FilterLevel } from '../../types/types';
+import { selectSortOrder, selectSortType } from '../../store/sort-process/sort-process.selectors';
+import { changeSortOrder, changeSortType } from '../../store/sort-process/sort-process.slice';
 
 function CatalogPageContent(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -24,6 +26,8 @@ function CatalogPageContent(): JSX.Element {
 
   const cameras = useAppSelector(selectCameras);
   const wholeFilterState = useAppSelector(selectFilterState);
+  const sortType = useAppSelector(selectSortType);
+  const sortOrder = useAppSelector(selectSortOrder);
 
   //=================================================================================
   const searchPageNumber = Number(searchParams.get(SearchParamsName.Page));
@@ -32,6 +36,8 @@ function CatalogPageContent(): JSX.Element {
   const searchLevel = searchParams.get(SearchParamsName.Level);
   const searchPriceMin = searchParams.get(SearchParamsName.PriceMin);
   const searchPriceMax = searchParams.get(SearchParamsName.PriceMax);
+  const searchSortType = searchParams.get(SearchParamsName.SortType);
+  const searchSortOrder = searchParams.get(SearchParamsName.SortOrder);
 
   useEffect(() => {
     if (searchCategory && isValueFilterCategory(searchCategory)) {
@@ -54,6 +60,14 @@ function CatalogPageContent(): JSX.Element {
 
     if (searchPriceMax) {
       dispatch(changeMaxPrice(searchPriceMax));
+    }
+
+    if (searchSortType && isValueSortType(searchSortType)) {
+      dispatch(changeSortType(searchSortType));
+    }
+
+    if (searchSortOrder && isValueSortOrder(searchSortOrder)) {
+      dispatch(changeSortOrder(searchSortOrder));
     }
 
     //Страницу надо менять в последнюю очередь, так как все остальные фильтры сбрасывают её
@@ -108,6 +122,24 @@ function CatalogPageContent(): JSX.Element {
 
     setSearchParams(newSearchParams);
   }, [wholeFilterState, searchParams, setSearchParams, searchPageNumber]);
+
+  useEffect(() => {
+    const newSearchParams = new URLSearchParams(searchParams);
+
+    if (sortType !== SortByType.Price) {
+      newSearchParams.set(SearchParamsName.SortType, sortType);
+    } else {
+      newSearchParams.delete(SearchParamsName.SortType);
+    }
+
+    if (sortOrder !== SortByOrder.Up) {
+      newSearchParams.set(SearchParamsName.SortOrder, sortOrder);
+    } else {
+      newSearchParams.delete(SearchParamsName.SortOrder);
+    }
+
+    setSearchParams(newSearchParams);
+  }, [searchParams, searchSortOrder, searchSortType, setSearchParams, sortOrder, sortType]);
   //=================================================================================
 
   const [

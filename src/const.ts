@@ -15,8 +15,10 @@ export enum SearchParamsName {
   Category = 'category',
   Type = 'type',
   Level = 'level',
-  PriceMin = 'price-min',
-  PriceMax = 'price-max',
+  PriceMin = 'min',
+  PriceMax = 'max',
+  SortType = 'sort',
+  SortOrder = 'order'
 }
 
 export const SearchLength = {
