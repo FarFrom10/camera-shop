@@ -40,22 +40,8 @@ export const Temporary = {
   Numbers: {
     rating: 2,
     reviewCount: 666,
-    basketList: 2,
     price: 73629
   },
-  BusketItemDescription: {
-    name: 'ВРЕМЕННЫЕ ДАННЫЕ',
-    vendorCode: 'DA4IU67AD5',
-    type: 'Коллекционная',
-    category: 'Видеокамера',
-  },
-  Images: {
-    previewImg: 'img/content/das-auge.jpg',
-    previewImg2x: 'img/content/das-auge@2x.jpg',
-    previewImgWebp: 'img/content/das-auge.webp',
-    previewImgWebp2x: 'img/content/das-auge@2x.webp'
-  },
-  AltText: 'ВРЕМЕННЫЙ ТЕКСТ'
 } as const;
 
 export const BusketAmount = {
@@ -69,12 +55,13 @@ export enum NameSpace {
   User = 'user',
   Sort = 'sort',
   Filter = 'filter',
+  Basket = 'basket'
 }
 
 export enum AppRoute {
   Index = '/',
   Product = '/product/:id',
-  Basket = '/basket',
+  Basket = '/card',
   NotFound = '*',
 }
 
@@ -118,8 +105,8 @@ export enum CommonPictureCategory {
 export const ProductTabsCategory = ['Характеристики', 'Описание'] as const;
 
 export enum SortByType {
-  Price = 'sortPrice',
-  Popular = 'sortPopular'
+  Price = 'price',
+  Popular = 'popular'
 }
 
 export enum SortByOrder {
@@ -178,7 +165,8 @@ export const ServerConnectionStatusMessage = {
 
 export enum EmptyListMessage {
   Cameras = 'Список товаров пуст',
-  Reviews = 'Список отзывов пуст'
+  Reviews = 'Список отзывов пуст',
+  Basket = 'Нет добавленных товаров'
 }
 
 export const SocialIconSize = {

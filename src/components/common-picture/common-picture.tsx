@@ -1,28 +1,28 @@
 import { memo, useMemo } from 'react';
-import { CommonPictureCategory, CommonPictureClass, Temporary } from '../../const';
+import { CommonPictureCategory, CommonPictureClass } from '../../const';
 import BannerInfo from '../banner-info/banner-info';
 import { ImageSettings } from './common-picture-settings';
 
 type CommonPictureProps = {
   category: CommonPictureCategory;
   imageClass?: CommonPictureClass;
-  name?: string;
-  id?: string;
-  img?: string;
-  img2x?:string;
-  webp?: string;
-  webp2x?: string;
+  name: string;
+  id: string;
+  img: string;
+  img2x:string;
+  webp: string;
+  webp2x: string;
 }
 
 function CommonPictureTemplate({
   category,
   imageClass = CommonPictureClass.Product,
-  name = Temporary.AltText,
-  id = '',
-  img = Temporary.Images.previewImg,
-  img2x = Temporary.Images.previewImg2x,
-  webp = Temporary.Images.previewImgWebp,
-  webp2x = Temporary.Images.previewImgWebp2x,
+  id,
+  name,
+  img,
+  img2x,
+  webp,
+  webp2x,
 }: CommonPictureProps): JSX.Element {
   const isBanner = useMemo(() =>category === CommonPictureCategory.Banner, [category]);
 

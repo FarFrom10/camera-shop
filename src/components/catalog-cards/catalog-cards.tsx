@@ -6,11 +6,11 @@ import { memo, useMemo } from 'react';
 
 type CatalogCardsProps = {
   cameras: CameraData[];
-  onModalContactMeOpen: (id: number | null) => void;
+  onModalAddToBasketOpen: (id: number | null) => void;
 }
 
-function CatalogCardsTemplate({cameras, onModalContactMeOpen}: CatalogCardsProps): JSX.Element {
-  const cards = useMemo(() => cameras.map((camera) => <ProductCard onButtonClick={onModalContactMeOpen} camera={camera} key={camera.id}/>), [cameras, onModalContactMeOpen]);
+function CatalogCardsTemplate({cameras, onModalAddToBasketOpen}: CatalogCardsProps): JSX.Element {
+  const cards = useMemo(() => cameras.map((camera) => <ProductCard onButtonClick={onModalAddToBasketOpen} camera={camera} key={camera.id}/>), [cameras, onModalAddToBasketOpen]);
 
   return(
     <div data-testid='catalogCardsContainer' className="cards catalog__cards">

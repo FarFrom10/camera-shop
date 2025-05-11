@@ -1,14 +1,14 @@
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
 import ButtonUp from '../../components/button-up/button-up';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
-import ModalContactMe from '../../components/modal/modal-contact-me/modal-contact-me';
+import ModalAddToBasket from '../../components/modal/modal-add-to-basket/modal-add-to-basket';
 import ModalWrapper from '../../components/modal/modal-wrapper/modal-wrapper';
 import ProductPageContent from '../../components/product-page-content/product-page-content';
 import Title from '../../components/title/title';
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { useLoadProductPage } from '../../hooks/use-load-product-page';
-import { useModalContactMe } from '../../hooks/use-modal-contact-me';
+import { useModalAddToBasket } from '../../hooks/use-modal-add-to-basket';
 import { selectCurrentCamera, selectIsCurrentCameraLoading, selectIsSimilarCamerasLoading, selectSimilarCameras } from '../../store/cameras-process/cameras-process.selectors';
 import { selectIsReviewsLoading } from '../../store/reviews-process/reviews-process.selectors';
 import NotFoundPage from '../not-found-page/not-found-page';
@@ -23,11 +23,11 @@ function ProductPage(): JSX.Element {
   useLoadProductPage();
 
   const [
-    modalContactMe,
-    handleModalContactMeOpen,
-    handleModalContactMeClose,
+    modalAddToBasket,
+    handleModalAddToBasketOpen,
+    handleModalAddToBasketClose,
     currentModalCamera
-  ] = useModalContactMe({cameras: similarCameras});
+  ] = useModalAddToBasket({cameras: similarCameras});
 
   if(isCurrentCameraLoading || isReviewsLoading || isSimilarCamerasLoading) {
     return <LoadingScreen/>;
@@ -43,10 +43,10 @@ function ProductPage(): JSX.Element {
         <div data-testid='productPageContent' className="page-content">
           <Title pageName={AppRoute.Product}/>
           <Breadcrumbs/>
-          <ProductPageContent similarCameras={similarCameras} currentCamera={currentCamera} onModalContactMeOpen={handleModalContactMeOpen}/>
+          <ProductPageContent similarCameras={similarCameras} currentCamera={currentCamera} onModalAddToBasketOpen={handleModalAddToBasketOpen}/>
         </div>
-        <ModalWrapper onModalClose={handleModalContactMeClose} isActive={modalContactMe.isOpen}>
-          <ModalContactMe onModalClose={handleModalContactMeClose} camera={currentModalCamera}/>
+        <ModalWrapper onModalClose={handleModalAddToBasketClose} isActive={modalAddToBasket.isOpen}>
+          <ModalAddToBasket onModalClose={handleModalAddToBasketClose} camera={currentModalCamera}/>
         </ModalWrapper>
       </main>
       <ButtonUp/>

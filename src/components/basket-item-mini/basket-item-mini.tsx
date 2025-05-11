@@ -10,6 +10,8 @@ type BasketItemMiniProps = {
 
 function BasketItemMiniTemplate({camera}: BasketItemMiniProps): JSX.Element {
   const {
+    id,
+    name,
     previewImg,
     previewImg2x,
     previewImgWebp,
@@ -19,6 +21,8 @@ function BasketItemMiniTemplate({camera}: BasketItemMiniProps): JSX.Element {
   return (
     <div data-testid='basketItemMini' className="basket-item basket-item--short">
       <CommonPicture
+        id={String(id)}
+        name={name}
         category={CommonPictureCategory.BasketItem}
         imageClass={CommonPictureClass.Basket}
         img={previewImg}

@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { withRouter, withStore } from '../../../utils/mock-component';
-import ModalContactMe from './modal-contact-me';
+import ModalAddToBasket from './modal-add-to-basket';
 import { fakeCurrentCamera } from '../../../mocks/mock-test';
 import { PHONE_NUMBER_START, ServerConnectionStatusMessage } from '../../../const';
 import userEvent from '@testing-library/user-event';
@@ -11,7 +11,7 @@ describe('Component: ModalContactMe', () => {
 
   it('should render correctly', () => {
     const {withStoreComponent} = withStore(
-      <ModalContactMe
+      <ModalAddToBasket
         camera={fakeCurrentCamera}
         onModalClose={fakeOnModalClose}
       />,
@@ -30,7 +30,7 @@ describe('Component: ModalContactMe', () => {
     const typedPhoneValue = '333';
     const expectedPhoneValue = `${PHONE_NUMBER_START}${typedPhoneValue}`;
     const {withStoreComponent} = withStore(
-      <ModalContactMe
+      <ModalAddToBasket
         camera={fakeCurrentCamera}
         onModalClose={fakeOnModalClose}
       />,
@@ -51,7 +51,7 @@ describe('Component: ModalContactMe', () => {
 
   it('should render message instead of component if "camera" is null', () => {
     const {withStoreComponent} = withStore(
-      <ModalContactMe
+      <ModalAddToBasket
         camera={null}
         onModalClose={fakeOnModalClose}
       />,

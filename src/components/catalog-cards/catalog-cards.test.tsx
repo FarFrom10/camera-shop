@@ -10,7 +10,7 @@ describe('Component: CatalogCards', () => {
 
   it('should render correctly', () => {
     const {withStoreComponent} = withStore(
-      <CatalogCards onModalContactMeOpen={mockEmptyCallback} cameras={fakeCameras}/>,
+      <CatalogCards onModalAddToBasketOpen={mockEmptyCallback} cameras={fakeCameras}/>,
       makeFakeStore()
     );
 
@@ -22,7 +22,7 @@ describe('Component: CatalogCards', () => {
 
   it('should render text "EmptyListMessage.Cameras" with empty "cameras" data', () => {
     const {withStoreComponent} = withStore(
-      <CatalogCards onModalContactMeOpen={mockEmptyCallback} cameras={[]}/>,
+      <CatalogCards onModalAddToBasketOpen={mockEmptyCallback} cameras={[]}/>,
       makeFakeStore()
     );
 

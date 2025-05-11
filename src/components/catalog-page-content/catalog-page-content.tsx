@@ -1,10 +1,10 @@
 import { useAppSelector } from '../../hooks';
-import { useModalContactMe } from '../../hooks/use-modal-contact-me';
+import { useModalAddToBasket } from '../../hooks/use-modal-add-to-basket';
 import { selectCameras } from '../../store/cameras-process/cameras-process.selectors';
 import CatalogCards from '../catalog-cards/catalog-cards';
 import CatalogFilter from '../filter/catalog-filter/catalog-filter';
 import CatalogPageSort from '../sort/catalog-page-sort/catalog-page-sort';
-import ModalContactMe from '../modal/modal-contact-me/modal-contact-me';
+import ModalAddToBasket from '../modal/modal-add-to-basket/modal-add-to-basket';
 import ModalWrapper from '../modal/modal-wrapper/modal-wrapper';
 import CatalogPagination from '../catalog-pagination/catalog-pagination';
 import { CAMERAS_PER_PAGE } from '../../const';
@@ -18,11 +18,11 @@ function CatalogPageContent(): JSX.Element {
   const wholeFilterState = useAppSelector(selectFilterState);
 
   const [
-    modalContactMe,
-    handleModalContactMeOpen,
-    handleModalContactMeClose,
+    modalAddToBasket,
+    handleModalAddToBasketOpen,
+    handleModalAddToBasketClose,
     currentModalCamera
-  ] = useModalContactMe({cameras});
+  ] = useModalAddToBasket({cameras});
 
   const [filteredCamerasByPrice] = useFilterCatalog({cameras});
 
@@ -48,7 +48,7 @@ function CatalogPageContent(): JSX.Element {
             <CatalogPageSort/>
             <CatalogCards
               cameras={currentCameras}
-              onModalContactMeOpen={handleModalContactMeOpen}
+              onModalAddToBasketOpen={handleModalAddToBasketOpen}
             />
             {filteredCamerasByPrice.length > CAMERAS_PER_PAGE
             &&
@@ -58,8 +58,8 @@ function CatalogPageContent(): JSX.Element {
             />}
           </div>
         </div>
-        <ModalWrapper onModalClose={handleModalContactMeClose} isActive={modalContactMe.isOpen}>
-          <ModalContactMe onModalClose={handleModalContactMeClose} camera={currentModalCamera}/>
+        <ModalWrapper onModalClose={handleModalAddToBasketClose} isActive={modalAddToBasket.isOpen}>
+          <ModalAddToBasket onModalClose={handleModalAddToBasketClose} camera={currentModalCamera}/>
         </ModalWrapper>
       </div>
     </section>

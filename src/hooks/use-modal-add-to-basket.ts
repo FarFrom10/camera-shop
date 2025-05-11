@@ -1,0 +1,33 @@
+import { useCallback, useMemo, useState } from 'react';
+import { ModalAddToBasketType } from '../types/types';
+import { CameraData } from '../types/cameras';
+
+type UseModalAddToBasketData = [
+  ModalAddToBasketType,
+  (id: number | null) => void,
+  () => void,
+  currentModalCamera: CameraData | null
+]
+
+type UseModalAddToBasketProps = {
+  cameras: CameraData[];
+}
+
+export const useModalAddToBasket = ({cameras}: UseModalAddToBasketProps): UseModalAddToBasketData => {
+  const initialState: ModalAddToBasketType = useMemo(() =>({
+    isOpen: false,
+    currentId: null
+  }), []);
+
+  const [modalAddToBasket, setModalAddToBasket] = useState<ModalAddToBasketType>(initialState);
+  const handleModalAddToBasketOpen = useCallback((id: number | null) => setModalAddToBasket(() => ({
+    isOpen: true,
+    currentId: id
+  })), []);
+  const handleModalAddToBasketClose = useCallback(() => setModalAddToBasket(initialState), [initialState]);
+
+  const currentCameraIndex = useMemo(() => cameras.findIndex((item) => item.id === modalAddToBasket.currentId), [cameras, modalAddToBasket]);
+  const currentModalCamera = useMemo(() => currentCameraIndex !== -1 ? cameras[currentCameraIndex] : null, [cameras, currentCameraIndex]);
+
+  return [modalAddToBasket, handleModalAddToBasketOpen, handleModalAddToBasketClose, currentModalCamera];
+};

@@ -1,6 +1,6 @@
 import { FilterItemType } from '../const';
 
-export type ModalContactMeType = {
+export type ModalAddToBasketType = {
   isOpen: boolean;
   currentId: number | null;
 }

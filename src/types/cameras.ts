@@ -20,6 +20,10 @@ export type CameraData = {
   previewImgWebp2x: string;
 }
 
+export type BasketCameraData = CameraData & {
+  amount: number;
+}
+
 export type PromoCameraData = {
   id: number;
   name: string;

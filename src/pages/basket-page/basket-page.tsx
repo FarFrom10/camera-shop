@@ -3,8 +3,6 @@ import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
 import Title from '../../components/title/title';
 import { AppRoute } from '../../const';
 
-//Страница корзины не является завершенной, я лишь декомпозировал её
-
 function BasketPage(): JSX.Element {
   return (
     <main>

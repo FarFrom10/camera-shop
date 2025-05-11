@@ -6,6 +6,7 @@ function HeaderBasket(): JSX.Element {
   return (
     <Link data-testid='headerBasket' className="header__basket-link" to={AppRoute.Basket}>
       <CommonIcon icon={IconName.CartAdded}/>
+      {/* <span className="header__basket-count">3</span> */}
     </Link>
   );
 }

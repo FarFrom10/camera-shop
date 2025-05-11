@@ -6,10 +6,10 @@ import ProductsSimilarList from '../products-similar-list/products-similar-list'
 type ProductPageContentProps = {
   currentCamera: CameraData;
   similarCameras: CameraData[];
-  onModalContactMeOpen: (id: number | null) => void;
+  onModalAddToBasketOpen: (id: number | null) => void;
 }
 
-function ProductPageContent({currentCamera, similarCameras, onModalContactMeOpen}: ProductPageContentProps): JSX.Element {
+function ProductPageContent({currentCamera, similarCameras, onModalAddToBasketOpen}: ProductPageContentProps): JSX.Element {
   return (
     <>
       <div data-testid='productPageInfoSection' className="page-content__section">
@@ -17,7 +17,7 @@ function ProductPageContent({currentCamera, similarCameras, onModalContactMeOpen
       </div>
       {similarCameras.length !== 0 &&
       <div data-testid='productPageSimilarSection' className="page-content__section">
-        <ProductsSimilarList onModalContactMeOpen={onModalContactMeOpen} similarCameras={similarCameras}/>
+        <ProductsSimilarList onModalAddToBasketOpen={onModalAddToBasketOpen} similarCameras={similarCameras}/>
       </div>}
       <div data-testid='productPageReviewsSection' className="page-content__section">
         <ProductReviews/>

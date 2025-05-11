@@ -10,10 +10,10 @@ import 'swiper/css/navigation';
 
 type ProductsSimilarListProps = {
   similarCameras: CameraData[];
-  onModalContactMeOpen: (id: number | null) => void;
+  onModalAddToBasketOpen: (id: number | null) => void;
 }
 
-function ProductsSimilarList({ similarCameras, onModalContactMeOpen }: ProductsSimilarListProps): JSX.Element {
+function ProductsSimilarList({ similarCameras, onModalAddToBasketOpen }: ProductsSimilarListProps): JSX.Element {
   const [activeSlide, setActiveSlide] = useState<number>(0);
   const sliderRef = useRef<SwiperRef>(null);
 
@@ -44,7 +44,7 @@ function ProductsSimilarList({ similarCameras, onModalContactMeOpen }: ProductsS
 
   const similarCards = similarCameras.map((camera) => (
     <SwiperSlide key={camera.id}>
-      <ProductCard isSimilarProduct onButtonClick={onModalContactMeOpen} camera={camera}/>
+      <ProductCard isSimilarProduct onButtonClick={onModalAddToBasketOpen} camera={camera}/>
     </SwiperSlide>
   ));
 
