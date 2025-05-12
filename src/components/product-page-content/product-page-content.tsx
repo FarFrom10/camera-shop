@@ -1,3 +1,5 @@
+import { useAppSelector } from '../../hooks';
+import { selectAddedCameras } from '../../store/basket-process/basket-process.selectors';
 import { CameraData } from '../../types/cameras';
 import ProductPageInfo from '../product-page-info/product-page-info';
 import ProductReviews from '../product-reviews/product-reviews';
@@ -10,6 +12,8 @@ type ProductPageContentProps = {
 }
 
 function ProductPageContent({currentCamera, similarCameras, onModalAddToBasketOpen}: ProductPageContentProps): JSX.Element {
+  const camerasInCart = useAppSelector(selectAddedCameras);
+
   return (
     <>
       <div data-testid='productPageInfoSection' className="page-content__section">
@@ -17,7 +21,7 @@ function ProductPageContent({currentCamera, similarCameras, onModalAddToBasketOp
       </div>
       {similarCameras.length !== 0 &&
       <div data-testid='productPageSimilarSection' className="page-content__section">
-        <ProductsSimilarList onModalAddToBasketOpen={onModalAddToBasketOpen} similarCameras={similarCameras}/>
+        <ProductsSimilarList camerasInCart={camerasInCart} onModalAddToBasketOpen={onModalAddToBasketOpen} similarCameras={similarCameras}/>
       </div>}
       <div data-testid='productPageReviewsSection' className="page-content__section">
         <ProductReviews/>

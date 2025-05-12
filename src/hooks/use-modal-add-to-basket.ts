@@ -6,7 +6,7 @@ type UseModalAddToBasketData = [
   ModalAddToBasketType,
   (id: number | null) => void,
   () => void,
-  currentModalCamera: CameraData | null
+  currentModalCamera: CameraData | null,
 ]
 
 type UseModalAddToBasketProps = {
@@ -24,10 +24,18 @@ export const useModalAddToBasket = ({cameras}: UseModalAddToBasketProps): UseMod
     isOpen: true,
     currentId: id
   })), []);
-  const handleModalAddToBasketClose = useCallback(() => setModalAddToBasket(initialState), [initialState]);
+  const handleModalAddToBasketClose = useCallback(() => {
+    setModalAddToBasket(initialState);
+
+  }, [initialState]);
 
   const currentCameraIndex = useMemo(() => cameras.findIndex((item) => item.id === modalAddToBasket.currentId), [cameras, modalAddToBasket]);
   const currentModalCamera = useMemo(() => currentCameraIndex !== -1 ? cameras[currentCameraIndex] : null, [cameras, currentCameraIndex]);
 
-  return [modalAddToBasket, handleModalAddToBasketOpen, handleModalAddToBasketClose, currentModalCamera];
+  return [
+    modalAddToBasket,
+    handleModalAddToBasketOpen,
+    handleModalAddToBasketClose,
+    currentModalCamera,
+  ];
 };

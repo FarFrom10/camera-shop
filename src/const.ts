@@ -87,7 +87,8 @@ export enum IconName {
   Star = 'icon-star',
   StarFull = 'icon-full-star',
   Snowflake = 'icon-snowflake',
-  Sort = 'icon-sort'
+  Sort = 'icon-sort',
+  Success = 'icon-success'
 }
 
 export enum ButtonQuantityDirection {
@@ -119,8 +120,10 @@ export enum ButtonText {
   Buy = 'Купить',
   AddToCart = 'Добавить в корзину',
   AddedToCart = 'В корзине',
+  GoToCart = 'Перейти в корзину',
   ShowMore = 'Показать больше отзывов',
-  Order = 'Заказать'
+  Order = 'Заказать',
+  Continue = 'Продолжить покупки'
 }
 
 export enum PriceClass {

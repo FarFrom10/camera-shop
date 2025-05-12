@@ -12,9 +12,10 @@ type ProductCardProps = {
   camera: CameraData;
   onButtonClick: (id: number | null) => void ;
   isSimilarProduct?: boolean;
+  isAddedToCart: boolean;
 }
 
-function ProductCardTemplate({camera, onButtonClick, isSimilarProduct = false}: ProductCardProps): JSX.Element {
+function ProductCardTemplate({camera, onButtonClick, isSimilarProduct = false, isAddedToCart}: ProductCardProps): JSX.Element {
   const {
     id,
     name,
@@ -39,8 +40,9 @@ function ProductCardTemplate({camera, onButtonClick, isSimilarProduct = false}: 
     style={style}
     >
       <CommonPicture
-        category={CommonPictureCategory.ProductCard}
         name={name}
+        id={String(id)}
+        category={CommonPictureCategory.ProductCard}
         img={previewImg}
         img2x={previewImg2x}
         webp={previewImgWebp}
@@ -48,7 +50,12 @@ function ProductCardTemplate({camera, onButtonClick, isSimilarProduct = false}: 
       />
       <ProductCardInfo name={name} rating={rating} reviewCount={reviewCount} price={price}/>
       <div className="product-card__buttons">
-        <CommonButton onButtonClick={handleButtonClick} buttonText={ButtonText.Buy} isProductCard/>
+        {
+          isAddedToCart
+            ? <CommonButton isGoToCart isInCart buttonText={ButtonText.AddedToCart} isProductCard/>
+            : <CommonButton onButtonClick={handleButtonClick} buttonText={ButtonText.Buy} isProductCard/>
+
+        }
         <ButtonMoreDetails route={path}/>
       </div>
     </div>

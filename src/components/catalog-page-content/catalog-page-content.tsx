@@ -12,17 +12,27 @@ import { useFilterCatalog } from '../../hooks/use-filter-catalog';
 import { usePaginationCatalog } from '../../hooks/use-pagination-catalog';
 import { selectFilterState } from '../../store/filter-process/filter-process.selectors';
 import { useCatalogSearchParams } from '../../hooks/use-catalog-search-params';
+import { useModalAddedToBasket } from '../../hooks/use-modal-added-to-basket';
+import ModalAddedToBasket from '../modal/modal-added-to-basket/modal-added-to-basket';
+import { selectAddedCameras } from '../../store/basket-process/basket-process.selectors';
 
 function CatalogPageContent(): JSX.Element {
   const cameras = useAppSelector(selectCameras);
   const wholeFilterState = useAppSelector(selectFilterState);
+  const camerasInCart = useAppSelector(selectAddedCameras);
 
   const [
     modalAddToBasket,
     handleModalAddToBasketOpen,
     handleModalAddToBasketClose,
-    currentModalCamera
+    currentModalCamera,
   ] = useModalAddToBasket({cameras});
+
+  const [
+    handleModalAddedToBasketOpen,
+    handleModalAddedToBasketClose,
+    showAddedToBasket
+  ] = useModalAddedToBasket();
 
   const [filteredCamerasByPrice] = useFilterCatalog({cameras});
 
@@ -47,6 +57,7 @@ function CatalogPageContent(): JSX.Element {
           <div className="catalog__content">
             <CatalogPageSort/>
             <CatalogCards
+              camerasInCart={camerasInCart}
               cameras={currentCameras}
               onModalAddToBasketOpen={handleModalAddToBasketOpen}
             />
@@ -58,8 +69,24 @@ function CatalogPageContent(): JSX.Element {
             />}
           </div>
         </div>
-        <ModalWrapper onModalClose={handleModalAddToBasketClose} isActive={modalAddToBasket.isOpen}>
-          <ModalAddToBasket onModalClose={handleModalAddToBasketClose} camera={currentModalCamera}/>
+
+        <ModalWrapper
+          onModalClose={handleModalAddToBasketClose}
+          isActive={modalAddToBasket.isOpen}
+        >
+          <ModalAddToBasket
+            camera={currentModalCamera}
+            onModalClose={handleModalAddToBasketClose}
+            onModalAddedToBasketOpen={handleModalAddedToBasketOpen}
+          />
+        </ModalWrapper>
+
+        <ModalWrapper
+          onModalClose={handleModalAddedToBasketClose}
+          isActive={showAddedToBasket}
+          isModalNarrow
+        >
+          <ModalAddedToBasket onModalClose={handleModalAddedToBasketClose}/>
         </ModalWrapper>
       </div>
     </section>

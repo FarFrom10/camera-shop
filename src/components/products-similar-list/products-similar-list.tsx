@@ -1,4 +1,4 @@
-import { CameraData } from '../../types/cameras';
+import { BasketCameraData, CameraData } from '../../types/cameras';
 import ProductCard from '../product-card/product-card';
 import CommonIcon from '../common-icon/common-icon';
 import { IconName, SIMILAR_CAMERAS_SLIDES_PER_VIEW } from '../../const';
@@ -11,9 +11,10 @@ import 'swiper/css/navigation';
 type ProductsSimilarListProps = {
   similarCameras: CameraData[];
   onModalAddToBasketOpen: (id: number | null) => void;
+  camerasInCart: BasketCameraData[];
 }
 
-function ProductsSimilarList({ similarCameras, onModalAddToBasketOpen }: ProductsSimilarListProps): JSX.Element {
+function ProductsSimilarList({ similarCameras, onModalAddToBasketOpen, camerasInCart }: ProductsSimilarListProps): JSX.Element {
   const [activeSlide, setActiveSlide] = useState<number>(0);
   const sliderRef = useRef<SwiperRef>(null);
 
@@ -42,11 +43,16 @@ function ProductsSimilarList({ similarCameras, onModalAddToBasketOpen }: Product
     sliderRef.current.swiper.slideTo(currentIndex);
   };
 
-  const similarCards = similarCameras.map((camera) => (
-    <SwiperSlide key={camera.id}>
-      <ProductCard isSimilarProduct onButtonClick={onModalAddToBasketOpen} camera={camera}/>
-    </SwiperSlide>
-  ));
+  const similarCards = similarCameras.map((camera) => {
+    const isAddedToCart = camerasInCart.some((item) => item.vendorCode === camera.vendorCode);
+
+    return (
+      <SwiperSlide key={camera.id}>
+        <ProductCard isAddedToCart={isAddedToCart} isSimilarProduct onButtonClick={onModalAddToBasketOpen} camera={camera}/>
+      </SwiperSlide>
+    );
+  }
+  );
 
   return (
     <section data-testid='productsSimilarList' className="product-similar">

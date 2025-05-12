@@ -1,5 +1,5 @@
 import ProductCard from '../product-card/product-card';
-import { CameraData } from '../../types/cameras';
+import { BasketCameraData, CameraData } from '../../types/cameras';
 import { EmptyListMessage } from '../../const';
 import EmptyListTitle from '../empty-list-title/empty-list-title';
 import { memo, useMemo } from 'react';
@@ -7,10 +7,16 @@ import { memo, useMemo } from 'react';
 type CatalogCardsProps = {
   cameras: CameraData[];
   onModalAddToBasketOpen: (id: number | null) => void;
+  camerasInCart: BasketCameraData[];
 }
 
-function CatalogCardsTemplate({cameras, onModalAddToBasketOpen}: CatalogCardsProps): JSX.Element {
-  const cards = useMemo(() => cameras.map((camera) => <ProductCard onButtonClick={onModalAddToBasketOpen} camera={camera} key={camera.id}/>), [cameras, onModalAddToBasketOpen]);
+function CatalogCardsTemplate({cameras, onModalAddToBasketOpen, camerasInCart}: CatalogCardsProps): JSX.Element {
+  const cards = useMemo(() => cameras.map((camera) => {
+    const isAddedToCart = camerasInCart.some((item) => item.vendorCode === camera.vendorCode);
+
+    return <ProductCard isAddedToCart={isAddedToCart} onButtonClick={onModalAddToBasketOpen} camera={camera} key={camera.id}/>;
+  }
+  ), [cameras, onModalAddToBasketOpen, camerasInCart]);
 
   return(
     <div data-testid='catalogCardsContainer' className="cards catalog__cards">

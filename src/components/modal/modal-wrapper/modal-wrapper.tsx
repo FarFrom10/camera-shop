@@ -6,13 +6,15 @@ type ModalWrapperProps = {
   isActive: boolean;
   onModalClose: () => void;
   children: JSX.Element;
+  isModalNarrow?: boolean;
 }
 
-function ModalWrapperTemplate({isActive, onModalClose, children}: ModalWrapperProps): JSX.Element {
+function ModalWrapperTemplate({isActive, onModalClose, children, isModalNarrow = false}: ModalWrapperProps): JSX.Element {
   return(
     <div data-testid='modalWrapper' className={cn(
       'modal',
-      {'is-active': isActive}
+      {'is-active': isActive},
+      {'modal--narrow': isModalNarrow}
     )}
     >
       <div className="modal__wrapper">

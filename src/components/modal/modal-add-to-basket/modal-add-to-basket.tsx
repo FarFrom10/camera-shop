@@ -1,4 +1,4 @@
-import {memo} from 'react';
+import { memo } from 'react';
 import { ButtonText, ServerConnectionStatusMessage } from '../../../const';
 import { CameraData } from '../../../types/cameras';
 import BasketItemMini from '../../basket-item-mini/basket-item-mini';
@@ -9,9 +9,10 @@ import { addCamera } from '../../../store/basket-process/basket-process.slice';
 type ModalAddToBasketProps ={
   camera: CameraData | null;
   onModalClose: () => void;
+  onModalAddedToBasketOpen: () => void;
 }
 
-function ModalAddToBasketTemplate({camera, onModalClose}: ModalAddToBasketProps): JSX.Element {
+function ModalAddToBasketTemplate({camera, onModalClose, onModalAddedToBasketOpen}: ModalAddToBasketProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   if (camera === null) {
@@ -23,6 +24,7 @@ function ModalAddToBasketTemplate({camera, onModalClose}: ModalAddToBasketProps)
   const handleButtonClick = () => {
     dispatch(addCamera(camera));
     onModalClose();
+    onModalAddedToBasketOpen();
   };
 
   return(

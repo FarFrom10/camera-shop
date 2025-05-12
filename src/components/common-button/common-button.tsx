@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { ButtonText, IconName } from '../../const';
+import { AppRoute, ButtonText, IconName } from '../../const';
 import CommonIcon from '../common-icon/common-icon';
 import { Link } from 'react-router-dom';
 import { memo } from 'react';
@@ -7,6 +7,7 @@ import { memo } from 'react';
 type CommonButtonProps = {
   isDisabled?: boolean;
   isInCart?: boolean;
+  isGoToCart?: boolean;
   isAddToCart?: boolean;
   isProductCard?: boolean;
   isModal?: boolean;
@@ -22,14 +23,24 @@ function CommonButtonTemplate({
   isProductCard = false,
   isModal = false,
   isFitWidth = false,
+  isGoToCart = false,
   buttonText,
   onButtonClick
 }: CommonButtonProps): JSX.Element {
 
-  if (isInCart) {
+  if (isGoToCart) {
     return (
-      <Link data-testid='commonButtonWithLink' className="btn btn--purple-border product-card__btn product-card__btn--in-cart" to="#">
-        <CommonIcon icon={IconName.CartAdded}/>
+      <Link data-testid='commonButtonWithLink' className={cn(
+        'btn',
+        {'btn--purple-border': isInCart},
+        {'product-card__btn': isInCart},
+        {'product-card__btn--in-cart': isInCart},
+        {'btn--purple': isModal},
+        {'modal__btn': isModal},
+        {'modal__btn--fit-width': isFitWidth},
+      )} to={AppRoute.Basket}
+      >
+        {isInCart && <CommonIcon icon={IconName.CartAdded}/>}
         {buttonText}
       </Link>
     );
