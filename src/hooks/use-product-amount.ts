@@ -1,4 +1,4 @@
-import { ChangeEvent, RefObject, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { BasketCameraData } from '../types/cameras';
 import { BusketAmount } from '../const';
 
@@ -10,12 +10,11 @@ type UseProductAmountData = {
 }
 
 type UseProductAmountProps = {
-  inputAmount: RefObject<HTMLInputElement>;
   camera: BasketCameraData;
   onAmountChange: (vendorCode: string, amount: number) => void;
 }
 
-export const useProductAmount = ({inputAmount, camera, onAmountChange}: UseProductAmountProps): UseProductAmountData => {
+export const useProductAmount = ({ camera, onAmountChange }: UseProductAmountProps): UseProductAmountData => {
   const {
     vendorCode,
     amount
@@ -29,9 +28,6 @@ export const useProductAmount = ({inputAmount, camera, onAmountChange}: UseProdu
     }
     const updatedAmount = currentAmount - 1;
 
-    if(inputAmount.current){
-      inputAmount.current.value = String(updatedAmount);
-    }
     setCurrentAmount(updatedAmount);
     onAmountChange(vendorCode, updatedAmount);
   };
@@ -42,9 +38,6 @@ export const useProductAmount = ({inputAmount, camera, onAmountChange}: UseProdu
     }
     const updatedAmount = currentAmount + 1;
 
-    if(inputAmount.current){
-      inputAmount.current.value = String(updatedAmount);
-    }
     setCurrentAmount(updatedAmount);
     onAmountChange(vendorCode, updatedAmount);
   };
@@ -58,9 +51,6 @@ export const useProductAmount = ({inputAmount, camera, onAmountChange}: UseProdu
       updatedAmount = 99 ;
     }
 
-    if(inputAmount.current){
-      inputAmount.current.value = String(updatedAmount);
-    }
     setCurrentAmount(updatedAmount);
     onAmountChange(vendorCode, updatedAmount);
   };

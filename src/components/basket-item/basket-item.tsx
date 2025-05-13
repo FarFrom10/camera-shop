@@ -5,7 +5,6 @@ import CommonIcon from '../common-icon/common-icon';
 import ProductPrice from '../product-price/product-price';
 import CommonPicture from '../common-picture/common-picture';
 import { BasketCameraData } from '../../types/cameras';
-import { useRef } from 'react';
 import { useProductAmount } from '../../hooks/use-product-amount';
 
 type BasketItemProps = {
@@ -14,8 +13,6 @@ type BasketItemProps = {
 }
 
 function BasketItem({camera, onAmountChange}: BasketItemProps): JSX.Element {
-  const inputAmount = useRef<HTMLInputElement>(null);
-
   const {
     amount,
     id,
@@ -31,7 +28,7 @@ function BasketItem({camera, onAmountChange}: BasketItemProps): JSX.Element {
     handleAmountIncrease,
     handleAmountChange,
     currentAmount
-  } = useProductAmount({inputAmount, camera, onAmountChange});
+  } = useProductAmount({ camera, onAmountChange});
 
   const totalPrice = Temporary.Numbers.price * amount;
 
@@ -53,11 +50,10 @@ function BasketItem({camera, onAmountChange}: BasketItemProps): JSX.Element {
         <BasketQuantityButton onButtonClick={handleAmountDecrease}/>
         <label className="visually-hidden" htmlFor="counter1" />
         <input
-          ref={inputAmount}
           type="number"
           id="counter1"
-          onBlur={handleAmountChange}
-          defaultValue={currentAmount}
+          value={currentAmount}
+          onChange={handleAmountChange}
           aria-label="количество товара"
         />
         <BasketQuantityButton onButtonClick={handleAmountIncrease} direction={ButtonQuantityDirection.Next}/>
