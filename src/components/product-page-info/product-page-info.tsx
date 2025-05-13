@@ -1,10 +1,10 @@
 import { ButtonText, CommonPictureCategory, PriceClass, ProductRatingClass } from '../../const';
-import { useAppDispatch } from '../../hooks';
+import { useModalAddToBasket } from '../../hooks/use-modal-add-to-basket';
 import { useModalAddedToBasket } from '../../hooks/use-modal-added-to-basket';
-import { addCamera } from '../../store/basket-process/basket-process.slice';
 import { CameraData } from '../../types/cameras';
 import CommonButton from '../common-button/common-button';
 import CommonPicture from '../common-picture/common-picture';
+import ModalAddToBasket from '../modal/modal-add-to-basket/modal-add-to-basket';
 import ModalAddedToBasket from '../modal/modal-added-to-basket/modal-added-to-basket';
 import ModalWrapper from '../modal/modal-wrapper/modal-wrapper';
 import ProductPageTabs from '../product-page-tabs/product-page-tabs';
@@ -16,8 +16,6 @@ type ProductPageInfoProps = {
 }
 
 function ProductPageInfo({camera}: ProductPageInfoProps): JSX.Element {
-  const dispatch = useAppDispatch();
-
   const {
     id,
     name,
@@ -31,15 +29,20 @@ function ProductPageInfo({camera}: ProductPageInfoProps): JSX.Element {
   } = camera;
 
   const [
+    modalAddToBasket,
+    handleModalAddToBasketOpen,
+    handleModalAddToBasketClose,
+    currentModalCamera,
+  ] = useModalAddToBasket({cameras: [camera]});
+
+  const {
     handleModalAddedToBasketOpen,
     handleModalAddedToBasketClose,
+    handleNavigateToCatalog,
     showAddedToBasket
-  ] = useModalAddedToBasket();
+  } = useModalAddedToBasket();
 
-  const handleAddToCartClick = () => {
-    dispatch(addCamera(camera));
-    handleModalAddedToBasketOpen();
-  };
+  const handleAddToCartClick = () => handleModalAddToBasketOpen(id);
 
   return (
     <section data-testid='productPageInfo' className="product">
@@ -63,11 +66,22 @@ function ProductPageInfo({camera}: ProductPageInfoProps): JSX.Element {
       </div>
 
       <ModalWrapper
+        onModalClose={handleModalAddToBasketClose}
+        isActive={modalAddToBasket.isOpen}
+      >
+        <ModalAddToBasket
+          camera={currentModalCamera}
+          onModalClose={handleModalAddToBasketClose}
+          onModalAddedToBasketOpen={handleModalAddedToBasketOpen}
+        />
+      </ModalWrapper>
+
+      <ModalWrapper
         onModalClose={handleModalAddedToBasketClose}
         isActive={showAddedToBasket}
         isModalNarrow
       >
-        <ModalAddedToBasket onModalClose={handleModalAddedToBasketClose}/>
+        <ModalAddedToBasket onModalClose={handleNavigateToCatalog}/>
       </ModalWrapper>
     </section>
   );

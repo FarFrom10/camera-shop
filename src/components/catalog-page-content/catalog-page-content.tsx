@@ -28,11 +28,11 @@ function CatalogPageContent(): JSX.Element {
     currentModalCamera,
   ] = useModalAddToBasket({cameras});
 
-  const [
+  const {
     handleModalAddedToBasketOpen,
     handleModalAddedToBasketClose,
     showAddedToBasket
-  ] = useModalAddedToBasket();
+  } = useModalAddedToBasket();
 
   const [filteredCamerasByPrice] = useFilterCatalog({cameras});
 

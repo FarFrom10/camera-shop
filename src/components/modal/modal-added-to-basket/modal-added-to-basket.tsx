@@ -14,9 +14,6 @@ function ModalAddedToBasket({ onModalClose }: ModalAddedToBasketProps){
       <CommonIcon icon={IconName.Success} iconClass='modal__icon'/>
       <div className="modal__buttons">
         <ButtonMoreDetails onButtonClick={onModalClose} isModal />
-        {/* <button className="btn btn--purple modal__btn modal__btn--fit-width">
-      Перейти в корзину
-        </button> */}
         <CommonButton buttonText={ButtonText.GoToCart} isGoToCart isModal isFitWidth/>
       </div>
     </>

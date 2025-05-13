@@ -31,11 +31,12 @@ function ProductPage(): JSX.Element {
     currentModalCamera,
   ] = useModalAddToBasket({cameras: similarCameras});
 
-  const [
+  const {
     handleModalAddedToBasketOpen,
     handleModalAddedToBasketClose,
+    handleNavigateToCatalog,
     showAddedToBasket
-  ] = useModalAddedToBasket();
+  } = useModalAddedToBasket();
 
 
   if(isCurrentCameraLoading || isReviewsLoading || isSimilarCamerasLoading) {
@@ -71,7 +72,7 @@ function ProductPage(): JSX.Element {
           isActive={showAddedToBasket}
           isModalNarrow
         >
-          <ModalAddedToBasket onModalClose={handleModalAddedToBasketClose}/>
+          <ModalAddedToBasket onModalClose={handleNavigateToCatalog}/>
         </ModalWrapper>
       </main>
       <ButtonUp/>
