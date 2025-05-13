@@ -1,18 +1,21 @@
-import { BusketAmount, ButtonQuantityDirection, CommonPictureCategory, CommonPictureClass, IconName, PriceClass, Temporary } from '../../const';
+import { ButtonQuantityDirection, CommonPictureCategory, CommonPictureClass, IconName, PriceClass, Temporary } from '../../const';
 import BasketItemDescription from '../basket-item-description/basket-item-description';
 import BasketQuantityButton from '../basket-quantity-button/basket-quantity-button';
 import CommonIcon from '../common-icon/common-icon';
 import ProductPrice from '../product-price/product-price';
 import CommonPicture from '../common-picture/common-picture';
 import { BasketCameraData } from '../../types/cameras';
+import { useRef } from 'react';
+import { useProductAmount } from '../../hooks/use-product-amount';
 
 type BasketItemProps = {
   camera: BasketCameraData;
-  onIncreaseAmount: (vendorCode: string) => void;
-  onDecreaseAmount: (vendorCode: string) => void;
+  onAmountChange: (vendorCode: string, amount: number) => void;
 }
 
-function BasketItem({camera, onIncreaseAmount, onDecreaseAmount}: BasketItemProps): JSX.Element {
+function BasketItem({camera, onAmountChange}: BasketItemProps): JSX.Element {
+  const inputAmount = useRef<HTMLInputElement>(null);
+
   const {
     amount,
     id,
@@ -22,21 +25,15 @@ function BasketItem({camera, onIncreaseAmount, onDecreaseAmount}: BasketItemProp
     previewImgWebp,
     previewImgWebp2x,
   } = camera;
+
+  const {
+    handleAmountDecrease,
+    handleAmountIncrease,
+    handleAmountChange,
+    currentAmount
+  } = useProductAmount({inputAmount, camera, onAmountChange});
+
   const totalPrice = Temporary.Numbers.price * amount;
-
-  const decreaseAmount = () => {
-    if (amount === BusketAmount.Min) {
-      return;
-    }
-    onDecreaseAmount(camera.vendorCode);
-  };
-
-  const increaseAmount = () => {
-    if (amount === BusketAmount.Max) {
-      return;
-    }
-    onIncreaseAmount(camera.vendorCode);
-  };
 
   return (
     <li data-testid='basketItem' className="basket-item">
@@ -53,16 +50,17 @@ function BasketItem({camera, onIncreaseAmount, onDecreaseAmount}: BasketItemProp
       <BasketItemDescription camera={camera}/>
       <ProductPrice priceClass={PriceClass.BasketItem} price={Temporary.Numbers.price}/>
       <div className="quantity">
-        <BasketQuantityButton onButtonClick={decreaseAmount}/>
+        <BasketQuantityButton onButtonClick={handleAmountDecrease}/>
         <label className="visually-hidden" htmlFor="counter1" />
         <input
+          ref={inputAmount}
           type="number"
           id="counter1"
-          readOnly
-          value={amount}
+          onBlur={handleAmountChange}
+          defaultValue={currentAmount}
           aria-label="количество товара"
         />
-        <BasketQuantityButton onButtonClick={increaseAmount} direction={ButtonQuantityDirection.Next}/>
+        <BasketQuantityButton onButtonClick={handleAmountIncrease} direction={ButtonQuantityDirection.Next}/>
       </div>
       <ProductPrice priceClass={PriceClass.BasketItemTotal} price={totalPrice}/>
       <button

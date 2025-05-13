@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { BasketProcess } from '../../types/state';
-import { CameraData } from '../../types/cameras';
+import { CameraData, ChangedCameraAmountData } from '../../types/cameras';
 
 const initialState: BasketProcess = {
   addedCameras: []
@@ -23,21 +23,11 @@ export const basketProcess = createSlice({
     removeCamera: (state, action: PayloadAction<string>) => {
       state.addedCameras = state.addedCameras.filter((camera) => camera.vendorCode !== action.payload);
     },
-    increaseAmount: (state, action: PayloadAction<string>) => {
-      const vendorCode = action.payload;
+    changeAmount: (state, action: PayloadAction<ChangedCameraAmountData>) => {
+      const {vendorCode, amount} = action.payload;
       const updatedCameras =
       state.addedCameras.map((item) => item.vendorCode === vendorCode
-        ? {...item, amount: item.amount + 1}
-        : item
-      );
-
-      state.addedCameras = updatedCameras;
-    },
-    decreaseAmount: (state, action: PayloadAction<string>) => {
-      const vendorCode = action.payload;
-      const updatedCameras =
-      state.addedCameras.map((item) => item.vendorCode === vendorCode
-        ? {...item, amount: item.amount - 1}
+        ? {...item, amount: amount}
         : item
       );
 
@@ -46,4 +36,4 @@ export const basketProcess = createSlice({
   },
 });
 
-export const {addCamera, removeCamera, increaseAmount, decreaseAmount} = basketProcess.actions;
+export const {addCamera, removeCamera, changeAmount } = basketProcess.actions;
