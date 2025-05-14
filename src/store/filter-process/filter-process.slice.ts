@@ -3,7 +3,7 @@ import { FilterCategory, NameSpace, } from '../../const';
 import { FilterProcess } from '../../types/state';
 import { FilterCameraType, FilterLevel } from '../../types/types';
 
-const initialState: FilterProcess = {
+export const initialState: FilterProcess = {
   price: {
     min: '',
     max: ''

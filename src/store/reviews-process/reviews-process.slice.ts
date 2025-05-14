@@ -3,7 +3,7 @@ import { NameSpace } from '../../const';
 import { ReviewsProcess } from '../../types/state';
 import { fetchCameraReviewsByIdAction } from '../api-actions';
 
-const initialState: ReviewsProcess = {
+export const initialState: ReviewsProcess = {
   reviews: [],
 
   isReviewsLoading: false,

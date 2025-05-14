@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpace, SortByOrder, SortByType } from '../../const';
 import { SortProcess } from '../../types/state';
 
-const initialState: SortProcess = {
+export const initialState: SortProcess = {
   sortType: SortByType.Price,
   sortOrder: SortByOrder.Up,
 };

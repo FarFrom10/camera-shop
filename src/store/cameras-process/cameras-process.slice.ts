@@ -4,7 +4,7 @@ import { CamerasProcess } from '../../types/state';
 import { getCameraByIdAction, fetchCamerasAction, fetchPromoCamerasAction, getSimilarCamerasByIdAction } from '../api-actions';
 import { CameraData } from '../../types/cameras';
 
-const initialState: CamerasProcess = {
+export const initialState: CamerasProcess = {
   cameras: [],
   sortedCameras: [],
   promoCameras: [],

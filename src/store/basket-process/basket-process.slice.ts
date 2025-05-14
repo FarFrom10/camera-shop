@@ -3,7 +3,7 @@ import { NameSpace } from '../../const';
 import { BasketProcess } from '../../types/state';
 import { CameraData, ChangedCameraAmountData } from '../../types/cameras';
 
-const initialState: BasketProcess = {
+export const initialState: BasketProcess = {
   addedCameras: []
 };
 

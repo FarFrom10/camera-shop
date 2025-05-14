@@ -3,7 +3,7 @@ import { NameSpace } from '../../const';
 import { UserProcess } from '../../types/state';
 import { postContactMeDataAction } from '../api-actions';
 
-const initialState: UserProcess = {
+export const initialState: UserProcess = {
   isContactMeDataLoading: false
 };
 
