@@ -9,10 +9,11 @@ import { useProductAmount } from '../../hooks/use-product-amount';
 
 type BasketItemProps = {
   camera: BasketCameraData;
-  onAmountChange: (vendorCode: string, amount: number) => void;
+  onAmountChange: (id: number, amount: number) => void;
+  onModalOpen: (id: number | null) => void;
 }
 
-function BasketItem({camera, onAmountChange}: BasketItemProps): JSX.Element {
+function BasketItem({camera, onAmountChange, onModalOpen}: BasketItemProps): JSX.Element {
   const {
     amount,
     id,
@@ -29,6 +30,8 @@ function BasketItem({camera, onAmountChange}: BasketItemProps): JSX.Element {
     handleAmountChange,
     currentAmount
   } = useProductAmount({ camera, onAmountChange});
+
+  const handleButtonClick = () => onModalOpen(id);
 
   const totalPrice = Temporary.Numbers.price * amount;
 
@@ -60,6 +63,7 @@ function BasketItem({camera, onAmountChange}: BasketItemProps): JSX.Element {
       </div>
       <ProductPrice priceClass={PriceClass.BasketItemTotal} price={totalPrice}/>
       <button
+        onClick={handleButtonClick}
         className="cross-btn"
         type="button"
         aria-label="Удалить товар"

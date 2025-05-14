@@ -25,7 +25,7 @@ export type BasketCameraData = CameraData & {
 }
 
 export type ChangedCameraAmountData = {
-  vendorCode: string;
+  id: number;
   amount: number;
 }
 

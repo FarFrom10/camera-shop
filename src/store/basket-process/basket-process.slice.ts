@@ -13,20 +13,20 @@ export const basketProcess = createSlice({
   reducers: {
     addCamera: (state, action: PayloadAction<CameraData>) => {
       const camera = action.payload;
-      const cameraIndex = state.addedCameras.findIndex((item) => item.vendorCode === camera.vendorCode);
+      const cameraIndex = state.addedCameras.findIndex((item) => item.id === camera.id);
       const updatedCameras = cameraIndex !== -1
         ? state.addedCameras.map((item, index) => index === cameraIndex ? {...item, amount: item.amount + 1} : item)
         : [...state.addedCameras, {...camera, amount: 1}];
 
       state.addedCameras = updatedCameras;
     },
-    removeCamera: (state, action: PayloadAction<string>) => {
-      state.addedCameras = state.addedCameras.filter((camera) => camera.vendorCode !== action.payload);
+    removeProduct: (state, action: PayloadAction<number>) => {
+      state.addedCameras = state.addedCameras.filter((camera) => camera.id !== action.payload);
     },
     changeAmount: (state, action: PayloadAction<ChangedCameraAmountData>) => {
-      const {vendorCode, amount} = action.payload;
+      const {id, amount} = action.payload;
       const updatedCameras =
-      state.addedCameras.map((item) => item.vendorCode === vendorCode
+      state.addedCameras.map((item) => item.id === id
         ? {...item, amount: amount}
         : item
       );
@@ -36,4 +36,4 @@ export const basketProcess = createSlice({
   },
 });
 
-export const {addCamera, removeCamera, changeAmount } = basketProcess.actions;
+export const {addCamera, removeProduct, changeAmount } = basketProcess.actions;

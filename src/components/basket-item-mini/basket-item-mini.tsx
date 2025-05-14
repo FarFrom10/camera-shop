@@ -6,9 +6,10 @@ import CommonPicture from '../common-picture/common-picture';
 
 type BasketItemMiniProps = {
   camera: CameraData;
+  shouldDisplayPrice?: boolean;
 }
 
-function BasketItemMiniTemplate({camera}: BasketItemMiniProps): JSX.Element {
+function BasketItemMiniTemplate({camera, shouldDisplayPrice = true}: BasketItemMiniProps): JSX.Element {
   const {
     id,
     name,
@@ -30,7 +31,7 @@ function BasketItemMiniTemplate({camera}: BasketItemMiniProps): JSX.Element {
         webp={previewImgWebp}
         webp2x={previewImgWebp2x}
       />
-      <BasketItemDescription camera={camera} shouldDisplayPrice/>
+      <BasketItemDescription camera={camera} shouldDisplayPrice={shouldDisplayPrice}/>
     </div>
   );
 }

@@ -123,7 +123,8 @@ export enum ButtonText {
   GoToCart = 'Перейти в корзину',
   ShowMore = 'Показать больше отзывов',
   Order = 'Заказать',
-  Continue = 'Продолжить покупки'
+  Continue = 'Продолжить покупки',
+  Remove = 'Удалить'
 }
 
 export enum PriceClass {

@@ -7,15 +7,23 @@ type ButtonMoreDetailsProps = {
   route?: string;
   isModal?: boolean;
   onButtonClick?: () => void;
+  isHalfWidth?: boolean;
 }
 
-function ButtonMoreDetails({isTransparent = true, route = '#', isModal = false, onButtonClick}: ButtonMoreDetailsProps):JSX.Element {
+function ButtonMoreDetails({
+  onButtonClick,
+  route = '#',
+  isTransparent = true,
+  isModal = false,
+  isHalfWidth = false
+}: ButtonMoreDetailsProps):JSX.Element {
   if(isModal){
     return (
       <button onClick={onButtonClick && onButtonClick} data-testid="buttonMoreDetails" className={cn(
         'btn',
+        'modal__btn',
         {'btn--transparent': isTransparent},
-        'modal__btn'
+        {'modal__btn--half-width': isHalfWidth},
       )}
       >
         {ButtonText.Continue}
@@ -26,7 +34,8 @@ function ButtonMoreDetails({isTransparent = true, route = '#', isModal = false, 
   return (
     <Link data-testid="buttonMoreDetailsLink" className={cn(
       'btn',
-      {'btn--transparent': isTransparent}
+      {'btn--transparent': isTransparent},
+      {'modal__btn--half-width': isHalfWidth},
     )} to={route}
     >
       Подробнее

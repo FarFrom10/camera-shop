@@ -12,7 +12,7 @@ type CatalogCardsProps = {
 
 function CatalogCardsTemplate({cameras, onModalAddToBasketOpen, camerasInCart}: CatalogCardsProps): JSX.Element {
   const cards = useMemo(() => cameras.map((camera) => {
-    const isAddedToCart = camerasInCart.some((item) => item.vendorCode === camera.vendorCode);
+    const isAddedToCart = camerasInCart.some((item) => item.id === camera.id);
 
     return <ProductCard isAddedToCart={isAddedToCart} onButtonClick={onModalAddToBasketOpen} camera={camera} key={camera.id}/>;
   }

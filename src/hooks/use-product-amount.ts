@@ -11,12 +11,12 @@ type UseProductAmountData = {
 
 type UseProductAmountProps = {
   camera: BasketCameraData;
-  onAmountChange: (vendorCode: string, amount: number) => void;
+  onAmountChange: (id: number, amount: number) => void;
 }
 
 export const useProductAmount = ({ camera, onAmountChange }: UseProductAmountProps): UseProductAmountData => {
   const {
-    vendorCode,
+    id,
     amount
   } = camera;
 
@@ -29,7 +29,7 @@ export const useProductAmount = ({ camera, onAmountChange }: UseProductAmountPro
     const updatedAmount = currentAmount - 1;
 
     setCurrentAmount(updatedAmount);
-    onAmountChange(vendorCode, updatedAmount);
+    onAmountChange(id, updatedAmount);
   };
 
   const handleAmountIncrease = () => {
@@ -39,7 +39,7 @@ export const useProductAmount = ({ camera, onAmountChange }: UseProductAmountPro
     const updatedAmount = currentAmount + 1;
 
     setCurrentAmount(updatedAmount);
-    onAmountChange(vendorCode, updatedAmount);
+    onAmountChange(id, updatedAmount);
   };
 
   const handleAmountChange = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -52,7 +52,7 @@ export const useProductAmount = ({ camera, onAmountChange }: UseProductAmountPro
     }
 
     setCurrentAmount(updatedAmount);
-    onAmountChange(vendorCode, updatedAmount);
+    onAmountChange(id, updatedAmount);
   };
 
   return {

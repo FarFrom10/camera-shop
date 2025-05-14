@@ -1,9 +1,9 @@
 import { useCallback, useMemo, useState } from 'react';
-import { ModalAddToBasketType } from '../types/types';
+import { ModalStateType } from '../types/types';
 import { CameraData } from '../types/cameras';
 
 type UseModalAddToBasketData = [
-  ModalAddToBasketType,
+  ModalStateType,
   (id: number | null) => void,
   () => void,
   currentModalCamera: CameraData | null,
@@ -14,12 +14,12 @@ type UseModalAddToBasketProps = {
 }
 
 export const useModalAddToBasket = ({cameras}: UseModalAddToBasketProps): UseModalAddToBasketData => {
-  const initialState: ModalAddToBasketType = useMemo(() =>({
+  const initialState: ModalStateType = useMemo(() =>({
     isOpen: false,
     currentId: null
   }), []);
 
-  const [modalAddToBasket, setModalAddToBasket] = useState<ModalAddToBasketType>(initialState);
+  const [modalAddToBasket, setModalAddToBasket] = useState<ModalStateType>(initialState);
   const handleModalAddToBasketOpen = useCallback((id: number | null) => setModalAddToBasket(() => ({
     isOpen: true,
     currentId: id

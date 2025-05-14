@@ -44,7 +44,7 @@ function ProductsSimilarList({ similarCameras, onModalAddToBasketOpen, camerasIn
   };
 
   const similarCards = similarCameras.map((camera) => {
-    const isAddedToCart = camerasInCart.some((item) => item.vendorCode === camera.vendorCode);
+    const isAddedToCart = camerasInCart.some((item) => item.id === camera.id);
 
     return (
       <SwiperSlide key={camera.id}>

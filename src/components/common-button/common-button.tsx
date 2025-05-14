@@ -12,6 +12,7 @@ type CommonButtonProps = {
   isProductCard?: boolean;
   isModal?: boolean;
   isFitWidth?: boolean;
+  isHalfWidth?: boolean;
   buttonText: ButtonText;
   onButtonClick?: () => void ;
 }
@@ -23,6 +24,7 @@ function CommonButtonTemplate({
   isProductCard = false,
   isModal = false,
   isFitWidth = false,
+  isHalfWidth = false,
   isGoToCart = false,
   buttonText,
   onButtonClick
@@ -38,6 +40,7 @@ function CommonButtonTemplate({
         {'btn--purple': isModal},
         {'modal__btn': isModal},
         {'modal__btn--fit-width': isFitWidth},
+        {'modal__btn--half-width': isHalfWidth},
       )} to={AppRoute.Basket}
       >
         {isInCart && <CommonIcon icon={IconName.CartAdded}/>}
@@ -57,6 +60,7 @@ function CommonButtonTemplate({
         {'product-card__btn': isProductCard},
         {'modal__btn': isModal},
         {'modal__btn--fit-width': isFitWidth},
+        {'modal__btn--half-width': isHalfWidth},
       )} type="button"
     >
       {isAddToCart && <CommonIcon icon={IconName.CartAdd}/>}
