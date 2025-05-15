@@ -2,11 +2,12 @@ import { Link } from 'react-router-dom';
 import { AppRoute, IconName } from '../../const';
 import CommonIcon from '../common-icon/common-icon';
 import { useAppSelector } from '../../hooks';
-import { selectAddedCameras } from '../../store/basket-process/basket-process.selectors';
+import { selectBasketItems } from '../../store/basket-process/basket-process.selectors';
+import { getTotalBasketItemsAmount } from '../../utils/common';
 
 function HeaderBasket(): JSX.Element {
-  const addedCameras = useAppSelector(selectAddedCameras);
-  const totalAmount = addedCameras.reduce((sum, item) => sum + item.amount, 0);
+  const basketItems = useAppSelector(selectBasketItems);
+  const totalAmount = getTotalBasketItemsAmount(basketItems);
   const displayAmount = totalAmount > 99 ? 99 : totalAmount;
 
   return (

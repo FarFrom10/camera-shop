@@ -1,6 +1,6 @@
 import { FilterCategory, NameSpace, SortByOrder, SortByType } from '../const';
 import { store } from '../store';
-import { BasketCameraData, CameraData, CameraReview, PromoCameraData } from './cameras';
+import { BasketItemsData, CameraData, CameraReview, PromoCameraData } from './cameras';
 import { FilterCameraType, FilterLevel, FilterPrice } from './types';
 
 export type State = ReturnType<typeof store.getState>;
@@ -51,5 +51,5 @@ export type FilterProcess = {
 }
 
 export type BasketProcess = {
-  addedCameras: BasketCameraData[];
+  basketItems: BasketItemsData[];
 }

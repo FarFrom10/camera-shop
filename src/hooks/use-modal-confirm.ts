@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 import { ModalStateType } from '../types/types';
-import { BasketCameraData } from '../types/cameras';
+import { BasketItemsData } from '../types/cameras';
 import { useAppDispatch } from '.';
 import { removeProduct } from '../store/basket-process/basket-process.slice';
 
@@ -9,11 +9,11 @@ type UseModalConfirmData = {
   handleModalConfirmOpen: (id: number | null) => void;
   handleModalConfirmClose: () => void;
   handleProductRemove: () => void;
-  currentModalCamera: BasketCameraData | null;
+  currentModalCamera: BasketItemsData | null;
 }
 
 type UseModalConfirmProps = {
-  cameras: BasketCameraData[];
+  cameras: BasketItemsData[];
 }
 
 export const useModalConfirm = ({cameras}: UseModalConfirmProps): UseModalConfirmData => {

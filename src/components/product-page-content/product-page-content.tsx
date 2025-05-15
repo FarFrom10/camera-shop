@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../hooks';
-import { selectAddedCameras } from '../../store/basket-process/basket-process.selectors';
+import { selectBasketItems } from '../../store/basket-process/basket-process.selectors';
 import { CameraData } from '../../types/cameras';
 import ProductPageInfo from '../product-page-info/product-page-info';
 import ProductReviews from '../product-reviews/product-reviews';
@@ -12,7 +12,7 @@ type ProductPageContentProps = {
 }
 
 function ProductPageContent({currentCamera, similarCameras, onModalAddToBasketOpen}: ProductPageContentProps): JSX.Element {
-  const camerasInCart = useAppSelector(selectAddedCameras);
+  const camerasInCart = useAppSelector(selectBasketItems);
 
   return (
     <>

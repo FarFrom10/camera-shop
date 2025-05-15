@@ -1,4 +1,4 @@
-import { PriceClass, Temporary } from '../../const';
+import { PriceClass } from '../../const';
 import { CameraData } from '../../types/cameras';
 import ProductPrice from '../product-price/product-price';
 
@@ -34,7 +34,7 @@ function BasketItemDescription({shouldDisplayPrice = false, camera}: BasketItemD
         </li>
       </ul>
       {shouldDisplayPrice &&
-      <ProductPrice priceClass={PriceClass.BasketItem} price={camera?.price || Temporary.Numbers.price}/>}
+      <ProductPrice priceClass={PriceClass.BasketItem} price={camera.price}/>}
     </div>
   );
 }

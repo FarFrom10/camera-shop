@@ -222,3 +222,16 @@ export enum FilterCategory {
   Photocamera = 'photocamera',
   Videocamera = 'videocamera'
 }
+
+export const DiscountByAmount = {
+  low: 3,
+  medium: 5,
+  high: 10,
+  max: 15,
+} as const;
+
+export const DiscountReductionByCost = {
+  low: 1,
+  medium: 2,
+  high: 3,
+} as const;

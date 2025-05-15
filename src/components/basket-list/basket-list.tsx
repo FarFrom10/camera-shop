@@ -1,16 +1,19 @@
 import { EmptyListMessage } from '../../const';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch } from '../../hooks';
 import { useModalConfirm } from '../../hooks/use-modal-confirm';
-import { selectAddedCameras } from '../../store/basket-process/basket-process.selectors';
 import { changeAmount } from '../../store/basket-process/basket-process.slice';
+import { BasketItemsData } from '../../types/cameras';
 import BasketItem from '../basket-item/basket-item';
 import EmptyListTitle from '../empty-list-title/empty-list-title';
 import ModalRemoveItem from '../modal/modal-remove-item/modal-remove-item';
 import ModalWrapper from '../modal/modal-wrapper/modal-wrapper';
 
-function BasketList(): JSX.Element {
+type BasketListProps = {
+  cameras: BasketItemsData[];
+}
+
+function BasketList({ cameras }: BasketListProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const basketCameras = useAppSelector(selectAddedCameras);
   const handleAmountChange = (id: number, amount: number) => dispatch(changeAmount({id, amount}));
 
   const {
@@ -19,9 +22,9 @@ function BasketList(): JSX.Element {
     handleModalConfirmClose,
     handleProductRemove,
     currentModalCamera,
-  } = useModalConfirm({cameras: basketCameras});
+  } = useModalConfirm({ cameras });
 
-  const basketList = basketCameras.map((camera) =>
+  const basketList = cameras.map((camera) =>
     (
       <BasketItem
         key={camera.id}
@@ -35,7 +38,7 @@ function BasketList(): JSX.Element {
     <>
       <ul data-testid='basketList' className="basket__list">
         {
-          !basketCameras.length
+          !cameras.length
             ? <EmptyListTitle message={EmptyListMessage.Basket}/>
             : basketList
         }

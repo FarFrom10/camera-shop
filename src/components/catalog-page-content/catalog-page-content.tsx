@@ -14,12 +14,12 @@ import { selectFilterState } from '../../store/filter-process/filter-process.sel
 import { useCatalogSearchParams } from '../../hooks/use-catalog-search-params';
 import { useModalAddedToBasket } from '../../hooks/use-modal-added-to-basket';
 import ModalAddedToBasket from '../modal/modal-added-to-basket/modal-added-to-basket';
-import { selectAddedCameras } from '../../store/basket-process/basket-process.selectors';
+import { selectBasketItems } from '../../store/basket-process/basket-process.selectors';
 
 function CatalogPageContent(): JSX.Element {
   const cameras = useAppSelector(selectCameras);
   const wholeFilterState = useAppSelector(selectFilterState);
-  const camerasInCart = useAppSelector(selectAddedCameras);
+  const camerasInCart = useAppSelector(selectBasketItems);
 
   const [
     modalAddToBasket,

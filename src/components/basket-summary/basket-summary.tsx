@@ -1,4 +1,17 @@
-function BasketSummary(): JSX.Element {
+import cn from 'classnames';
+import { BasketItemsData } from '../../types/cameras';
+import { getTotalBasketPrice } from '../../utils/common';
+import { getDiscountedTotalPrice } from '../../utils/discount';
+
+type BasketSummaryProps = {
+  cameras: BasketItemsData[];
+}
+
+function BasketSummary({ cameras }: BasketSummaryProps): JSX.Element {
+  const totalBasketPrice = getTotalBasketPrice(cameras);
+  const discountedPrice = getDiscountedTotalPrice(cameras, totalBasketPrice);
+  const isDiscounted = totalBasketPrice !== discountedPrice;
+
   return (
     <div data-testid='basketSummary' className="basket__summary">
       <div className="basket__promo">
@@ -6,12 +19,16 @@ function BasketSummary(): JSX.Element {
       <div className="basket__summary-order">
         <p className="basket__summary-item">
           <span className="basket__summary-text">Всего:</span>
-          <span className="basket__summary-value">111 390 ₽</span>
+          <span className="basket__summary-value">{`${totalBasketPrice} ₽`}</span>
         </p>
         <p className="basket__summary-item">
           <span className="basket__summary-text">Скидка:</span>
-          <span className="basket__summary-value basket__summary-value--bonus">
-                  0 ₽
+          <span className={cn(
+            'basket__summary-value',
+            {'basket__summary-value--bonus': isDiscounted}
+          )}
+          >
+            {`${totalBasketPrice - discountedPrice} ₽`}
           </span>
         </p>
         <p className="basket__summary-item">
@@ -19,7 +36,7 @@ function BasketSummary(): JSX.Element {
                   К оплате:
           </span>
           <span className="basket__summary-value basket__summary-value--total">
-                  111 390 ₽
+            {`${discountedPrice} ₽`}
           </span>
         </p>
         <button className="btn btn--purple" type="submit">

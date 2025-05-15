@@ -1,14 +1,14 @@
-import { ButtonQuantityDirection, CommonPictureCategory, CommonPictureClass, IconName, PriceClass, Temporary } from '../../const';
+import { ButtonQuantityDirection, CommonPictureCategory, CommonPictureClass, IconName, PriceClass } from '../../const';
 import BasketItemDescription from '../basket-item-description/basket-item-description';
 import BasketQuantityButton from '../basket-quantity-button/basket-quantity-button';
 import CommonIcon from '../common-icon/common-icon';
 import ProductPrice from '../product-price/product-price';
 import CommonPicture from '../common-picture/common-picture';
-import { BasketCameraData } from '../../types/cameras';
+import { BasketItemsData } from '../../types/cameras';
 import { useProductAmount } from '../../hooks/use-product-amount';
 
 type BasketItemProps = {
-  camera: BasketCameraData;
+  camera: BasketItemsData;
   onAmountChange: (id: number, amount: number) => void;
   onModalOpen: (id: number | null) => void;
 }
@@ -18,6 +18,7 @@ function BasketItem({camera, onAmountChange, onModalOpen}: BasketItemProps): JSX
     amount,
     id,
     name,
+    price,
     previewImg,
     previewImg2x,
     previewImgWebp,
@@ -33,7 +34,7 @@ function BasketItem({camera, onAmountChange, onModalOpen}: BasketItemProps): JSX
 
   const handleButtonClick = () => onModalOpen(id);
 
-  const totalPrice = Temporary.Numbers.price * amount;
+  const totalPrice = price * amount;
 
   return (
     <li data-testid='basketItem' className="basket-item">
@@ -48,7 +49,7 @@ function BasketItem({camera, onAmountChange, onModalOpen}: BasketItemProps): JSX
         imageClass={CommonPictureClass.Basket}
       />
       <BasketItemDescription camera={camera}/>
-      <ProductPrice priceClass={PriceClass.BasketItem} price={Temporary.Numbers.price}/>
+      <ProductPrice priceClass={PriceClass.BasketItem} price={price}/>
       <div className="quantity">
         <BasketQuantityButton onButtonClick={handleAmountDecrease}/>
         <label className="visually-hidden" htmlFor="counter1" />

@@ -4,7 +4,7 @@ import { BasketProcess } from '../../types/state';
 import { CameraData, ChangedCameraAmountData } from '../../types/cameras';
 
 export const initialState: BasketProcess = {
-  addedCameras: []
+  basketItems: []
 };
 
 export const basketProcess = createSlice({
@@ -13,25 +13,25 @@ export const basketProcess = createSlice({
   reducers: {
     addCamera: (state, action: PayloadAction<CameraData>) => {
       const camera = action.payload;
-      const cameraIndex = state.addedCameras.findIndex((item) => item.id === camera.id);
+      const cameraIndex = state.basketItems.findIndex((item) => item.id === camera.id);
       const updatedCameras = cameraIndex !== -1
-        ? state.addedCameras.map((item, index) => index === cameraIndex ? {...item, amount: item.amount + 1} : item)
-        : [...state.addedCameras, {...camera, amount: 1}];
+        ? state.basketItems.map((item, index) => index === cameraIndex ? {...item, amount: item.amount + 1} : item)
+        : [...state.basketItems, {...camera, amount: 1}];
 
-      state.addedCameras = updatedCameras;
+      state.basketItems = updatedCameras;
     },
     removeProduct: (state, action: PayloadAction<number>) => {
-      state.addedCameras = state.addedCameras.filter((camera) => camera.id !== action.payload);
+      state.basketItems = state.basketItems.filter((camera) => camera.id !== action.payload);
     },
     changeAmount: (state, action: PayloadAction<ChangedCameraAmountData>) => {
       const {id, amount} = action.payload;
       const updatedCameras =
-      state.addedCameras.map((item) => item.id === id
+      state.basketItems.map((item) => item.id === id
         ? {...item, amount: amount}
         : item
       );
 
-      state.addedCameras = updatedCameras;
+      state.basketItems = updatedCameras;
     },
   },
 });

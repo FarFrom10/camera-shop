@@ -27,7 +27,7 @@ const preloadedState = {
   ...initialStates,
   [NameSpace.Basket]: {
     ...loadedBasket,
-    addedCameras: loadedBasket?.addedCameras ?? [],
+    basketItems: loadedBasket?.basketItems ?? [],
   },
 };
 
