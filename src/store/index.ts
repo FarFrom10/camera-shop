@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { createAPI } from '../services/api';
 import { rootReducer } from './root-reducer';
-import { loadBasketState, saveBasketState } from '../utils/local-storage';
+import { loadBasketItemsState, saveBasketItemsState } from '../utils/local-storage';
 import { NameSpace } from '../const';
 import { initialState as camerasInitial } from './cameras-process/cameras-process.slice';
 import { initialState as reviewsInitial } from './reviews-process/reviews-process.slice';
@@ -21,13 +21,13 @@ const initialStates = {
 };
 
 //Забираю данные корзины из localStorage
-const loadedBasket = loadBasketState() ?? initialStates[NameSpace.Basket];
+const loadedBasketItems = loadBasketItemsState() ?? initialStates[NameSpace.Basket];
 
 const preloadedState = {
   ...initialStates,
   [NameSpace.Basket]: {
-    ...loadedBasket,
-    basketItems: loadedBasket?.basketItems ?? [],
+    ...basketInitial,
+    basketItems: loadedBasketItems,
   },
 };
 
@@ -46,5 +46,5 @@ export const store = configureStore({
 store.subscribe(() => {
   const state = store.getState();
 
-  saveBasketState(state.basket);
+  saveBasketItemsState(state.basket.basketItems);
 });

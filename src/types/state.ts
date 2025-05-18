@@ -52,4 +52,6 @@ export type FilterProcess = {
 
 export type BasketProcess = {
   basketItems: BasketItemsData[];
+
+  isBasketLoading: boolean;
 }

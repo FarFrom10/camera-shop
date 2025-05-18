@@ -4,7 +4,9 @@ import { BasketProcess } from '../../types/state';
 import { CameraData, ChangedCameraAmountData } from '../../types/cameras';
 
 export const initialState: BasketProcess = {
-  basketItems: []
+  basketItems: [],
+
+  isBasketLoading: false
 };
 
 export const basketProcess = createSlice({

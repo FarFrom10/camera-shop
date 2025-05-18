@@ -1,18 +1,18 @@
-import { BasketProcess } from '../types/state';
+import { BasketItemsData } from '../types/cameras';
 
-export const loadBasketState = (): Partial<BasketProcess> | undefined => {
+export const loadBasketItemsState = (): BasketItemsData[] => {
   try {
     const data = localStorage.getItem('basket');
     if (!data) {
-      return undefined;
+      return [];
     }
-    return JSON.parse(data) as Partial<BasketProcess>;
+    return JSON.parse(data) as BasketItemsData[];
   } catch (err) {
-    return undefined;
+    return [];
   }
 };
 
-export const saveBasketState = (basketData: Partial<BasketProcess>): void => {
+export const saveBasketItemsState = (basketData: BasketItemsData[]): void => {
   try {
     localStorage.setItem('basket', JSON.stringify(basketData));
   } catch (err) {
