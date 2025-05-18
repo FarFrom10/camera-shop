@@ -10,9 +10,10 @@ import ModalWrapper from '../modal/modal-wrapper/modal-wrapper';
 
 type BasketListProps = {
   cameras: BasketItemData[];
+  isBasketLoading: boolean;
 }
 
-function BasketList({ cameras }: BasketListProps): JSX.Element {
+function BasketList({ cameras, isBasketLoading }: BasketListProps): JSX.Element {
   const dispatch = useAppDispatch();
   const handleAmountChange = (id: number, amount: number) => dispatch(changeAmount({id, amount}));
 
@@ -31,6 +32,7 @@ function BasketList({ cameras }: BasketListProps): JSX.Element {
         camera={camera}
         onAmountChange={handleAmountChange}
         onModalOpen={handleModalConfirmOpen}
+        isBasketLoading={isBasketLoading}
       />
     ));
 

@@ -11,9 +11,10 @@ type BasketItemProps = {
   camera: BasketItemData;
   onAmountChange: (id: number, amount: number) => void;
   onModalOpen: (id: number | null) => void;
+  isBasketLoading: boolean;
 }
 
-function BasketItem({camera, onAmountChange, onModalOpen}: BasketItemProps): JSX.Element {
+function BasketItem({camera, onAmountChange, onModalOpen, isBasketLoading}: BasketItemProps): JSX.Element {
   const {
     amount,
     id,
@@ -51,7 +52,10 @@ function BasketItem({camera, onAmountChange, onModalOpen}: BasketItemProps): JSX
       <BasketItemDescription camera={camera}/>
       <ProductPrice priceClass={PriceClass.BasketItem} price={price}/>
       <div className="quantity">
-        <BasketQuantityButton onButtonClick={handleAmountDecrease}/>
+        <BasketQuantityButton
+          isDisabled={isBasketLoading}
+          onButtonClick={handleAmountDecrease}
+        />
         <label className="visually-hidden" htmlFor="counter1" />
         <input
           type="number"
@@ -60,10 +64,15 @@ function BasketItem({camera, onAmountChange, onModalOpen}: BasketItemProps): JSX
           onChange={handleAmountChange}
           aria-label="количество товара"
         />
-        <BasketQuantityButton onButtonClick={handleAmountIncrease} direction={ButtonQuantityDirection.Next}/>
+        <BasketQuantityButton
+          isDisabled={isBasketLoading}
+          onButtonClick={handleAmountIncrease}
+          direction={ButtonQuantityDirection.Next}
+        />
       </div>
       <ProductPrice priceClass={PriceClass.BasketItemTotal} price={totalPrice}/>
       <button
+        disabled={isBasketLoading}
         onClick={handleButtonClick}
         className="cross-btn"
         type="button"

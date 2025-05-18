@@ -14,9 +14,10 @@ import ModalBasketSuccess from '../modal/modal-added-to-basket/modal-basket-succ
 
 type BasketSummaryProps = {
   cameras: BasketItemData[];
+  isBasketLoading: boolean;
 }
 
-function BasketSummary({ cameras }: BasketSummaryProps): JSX.Element {
+function BasketSummary({ cameras, isBasketLoading }: BasketSummaryProps): JSX.Element {
   const dispatch = useAppDispatch();
   const totalBasketPrice = getTotalBasketPrice(cameras);
   const discountedPrice = getDiscountedTotalPrice(cameras, totalBasketPrice);
@@ -69,7 +70,7 @@ function BasketSummary({ cameras }: BasketSummaryProps): JSX.Element {
               {`${discountedPrice} ₽`}
             </span>
           </p>
-          <CommonButton onButtonClick={handlePostOrderClick} buttonText={ButtonText.PlaceAnOrder} isSubmit isDisabled={!cameras.length}/>
+          <CommonButton onButtonClick={handlePostOrderClick} buttonText={ButtonText.PlaceAnOrder} isSubmit isDisabled={!cameras.length || isBasketLoading}/>
         </div>
       </div>
 
