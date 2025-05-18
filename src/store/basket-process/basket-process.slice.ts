@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { BasketProcess } from '../../types/state';
-import { BasketItemData, ChangedCameraAmountData } from '../../types/cameras';
+import { CameraData, ChangedCameraAmountData } from '../../types/cameras';
 import { postOrderDataAction } from '../api-actions';
 
 export const initialState: BasketProcess = {
@@ -14,7 +14,7 @@ export const basketProcess = createSlice({
   name: NameSpace.Basket,
   initialState,
   reducers: {
-    addCamera: (state, action: PayloadAction<BasketItemData>) => {
+    addCamera: (state, action: PayloadAction<CameraData>) => {
       const camera = action.payload;
       const cameraIndex = state.basketItems.findIndex((item) => item.id === camera.id);
       const updatedCameras = cameraIndex !== -1

@@ -88,7 +88,8 @@ export enum IconName {
   StarFull = 'icon-full-star',
   Snowflake = 'icon-snowflake',
   Sort = 'icon-sort',
-  Success = 'icon-success'
+  Success = 'icon-success',
+  Thanks = 'icon-review-success',
 }
 
 export enum ButtonQuantityDirection {
@@ -126,6 +127,14 @@ export enum ButtonText {
   Continue = 'Продолжить покупки',
   Remove = 'Удалить',
   PlaceAnOrder = 'Оформить заказ',
+  GoToCatalog = 'Вернуться к покупкам'
+}
+
+export enum ModalTitle {
+  SuccessfullyAdded = 'Товар успешно добавлен в корзину',
+  SuccessfullyOrdered = 'Спасибо за покупку',
+  AddToBasket = 'Добавить товар в корзину',
+  RemoveItemConfirm = 'Удалить этот товар?'
 }
 
 export enum PriceClass {

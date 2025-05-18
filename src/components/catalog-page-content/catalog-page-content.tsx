@@ -12,9 +12,9 @@ import { useFilterCatalog } from '../../hooks/use-filter-catalog';
 import { usePaginationCatalog } from '../../hooks/use-pagination-catalog';
 import { selectFilterState } from '../../store/filter-process/filter-process.selectors';
 import { useCatalogSearchParams } from '../../hooks/use-catalog-search-params';
-import { useModalAddedToBasket } from '../../hooks/use-modal-added-to-basket';
-import ModalAddedToBasket from '../modal/modal-added-to-basket/modal-added-to-basket';
+import { useModalBasketSuccess } from '../../hooks/use-modal-basket-success';
 import { selectBasketItems } from '../../store/basket-process/basket-process.selectors';
+import ModalBasketSuccess from '../modal/modal-added-to-basket/modal-basket-success';
 
 function CatalogPageContent(): JSX.Element {
   const cameras = useAppSelector(selectCameras);
@@ -29,10 +29,10 @@ function CatalogPageContent(): JSX.Element {
   ] = useModalAddToBasket({cameras});
 
   const {
-    handleModalAddedToBasketOpen,
-    handleModalAddedToBasketClose,
-    showAddedToBasket
-  } = useModalAddedToBasket();
+    handleModalBasketSuccessOpen,
+    handleModalBasketSuccessClose,
+    showBasketSuccess
+  } = useModalBasketSuccess();
 
   const [filteredCamerasByPrice] = useFilterCatalog({cameras});
 
@@ -77,16 +77,16 @@ function CatalogPageContent(): JSX.Element {
           <ModalAddToBasket
             camera={currentModalCamera}
             onModalClose={handleModalAddToBasketClose}
-            onModalAddedToBasketOpen={handleModalAddedToBasketOpen}
+            onModalAddedToBasketOpen={handleModalBasketSuccessOpen}
           />
         </ModalWrapper>
 
         <ModalWrapper
-          onModalClose={handleModalAddedToBasketClose}
-          isActive={showAddedToBasket}
+          onModalClose={handleModalBasketSuccessClose}
+          isActive={showBasketSuccess}
           isModalNarrow
         >
-          <ModalAddedToBasket onModalClose={handleModalAddedToBasketClose}/>
+          <ModalBasketSuccess onModalClose={handleModalBasketSuccessClose}/>
         </ModalWrapper>
       </div>
     </section>

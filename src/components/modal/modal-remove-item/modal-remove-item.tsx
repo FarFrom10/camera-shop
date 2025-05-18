@@ -1,4 +1,4 @@
-import { ButtonText, ServerConnectionStatusMessage } from '../../../const';
+import { ButtonText, ModalTitle, ServerConnectionStatusMessage } from '../../../const';
 import { CameraData } from '../../../types/cameras';
 import BasketItemMini from '../../basket-item-mini/basket-item-mini';
 import ButtonMoreDetails from '../../button-more-details/button-more-details';
@@ -19,7 +19,7 @@ function ModalRemoveItem({ camera, onModalClose, onProductRemove }: ModalRemoveI
 
   return(
     <>
-      <p className="title title--h4">Удалить этот товар?</p>
+      <p className="title title--h4">{ModalTitle.RemoveItemConfirm}</p>
       {camera !== null && <BasketItemMini shouldDisplayPrice={false} camera={camera}/>}
       <div className="modal__buttons">
         <CommonButton onButtonClick={onProductRemove} buttonText={ButtonText.Remove} isModal isHalfWidth/>

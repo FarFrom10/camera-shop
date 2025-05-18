@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { ButtonText, ServerConnectionStatusMessage } from '../../../const';
+import { ButtonText, ModalTitle, ServerConnectionStatusMessage } from '../../../const';
 import { CameraData } from '../../../types/cameras';
 import BasketItemMini from '../../basket-item-mini/basket-item-mini';
 import CommonButton from '../../common-button/common-button';
@@ -29,7 +29,7 @@ function ModalAddToBasketTemplate({camera, onModalClose, onModalAddedToBasketOpe
 
   return(
     <>
-      <p className="title title--h4">Добавить товар в корзину</p>
+      <p className="title title--h4">{ModalTitle.AddToBasket}</p>
       {camera !== null && <BasketItemMini camera={camera}/>}
       <div className="modal__buttons">
         <CommonButton

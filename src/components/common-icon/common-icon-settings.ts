@@ -61,4 +61,8 @@ export const IconSettings: SettingsType = {
     width:86,
     height: 80,
   },
+  [IconName.Thanks]: {
+    width:80,
+    height: 78,
+  },
 } as const;

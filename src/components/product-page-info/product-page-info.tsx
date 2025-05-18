@@ -1,11 +1,11 @@
 import { ButtonText, CommonPictureCategory, PriceClass, ProductRatingClass } from '../../const';
 import { useModalAddToBasket } from '../../hooks/use-modal-add-to-basket';
-import { useModalAddedToBasket } from '../../hooks/use-modal-added-to-basket';
+import { useModalBasketSuccess } from '../../hooks/use-modal-basket-success';
 import { CameraData } from '../../types/cameras';
 import CommonButton from '../common-button/common-button';
 import CommonPicture from '../common-picture/common-picture';
 import ModalAddToBasket from '../modal/modal-add-to-basket/modal-add-to-basket';
-import ModalAddedToBasket from '../modal/modal-added-to-basket/modal-added-to-basket';
+import ModalBasketSuccess from '../modal/modal-added-to-basket/modal-basket-success';
 import ModalWrapper from '../modal/modal-wrapper/modal-wrapper';
 import ProductPageTabs from '../product-page-tabs/product-page-tabs';
 import ProductPrice from '../product-price/product-price';
@@ -36,11 +36,11 @@ function ProductPageInfo({camera}: ProductPageInfoProps): JSX.Element {
   ] = useModalAddToBasket({cameras: [camera]});
 
   const {
-    handleModalAddedToBasketOpen,
-    handleModalAddedToBasketClose,
+    handleModalBasketSuccessOpen,
+    handleModalBasketSuccessClose,
     handleNavigateToCatalog,
-    showAddedToBasket
-  } = useModalAddedToBasket();
+    showBasketSuccess
+  } = useModalBasketSuccess();
 
   const handleAddToCartClick = () => handleModalAddToBasketOpen(id);
 
@@ -72,16 +72,16 @@ function ProductPageInfo({camera}: ProductPageInfoProps): JSX.Element {
         <ModalAddToBasket
           camera={currentModalCamera}
           onModalClose={handleModalAddToBasketClose}
-          onModalAddedToBasketOpen={handleModalAddedToBasketOpen}
+          onModalAddedToBasketOpen={handleModalBasketSuccessOpen}
         />
       </ModalWrapper>
 
       <ModalWrapper
-        onModalClose={handleModalAddedToBasketClose}
-        isActive={showAddedToBasket}
+        onModalClose={handleModalBasketSuccessClose}
+        isActive={showBasketSuccess}
         isModalNarrow
       >
-        <ModalAddedToBasket onModalClose={handleNavigateToCatalog}/>
+        <ModalBasketSuccess onModalClose={handleNavigateToCatalog}/>
       </ModalWrapper>
     </section>
   );
