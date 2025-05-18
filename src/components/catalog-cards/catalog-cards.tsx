@@ -1,5 +1,5 @@
 import ProductCard from '../product-card/product-card';
-import { BasketItemsData, CameraData } from '../../types/cameras';
+import { BasketItemData, CameraData } from '../../types/cameras';
 import { EmptyListMessage } from '../../const';
 import EmptyListTitle from '../empty-list-title/empty-list-title';
 import { memo, useMemo } from 'react';
@@ -7,7 +7,7 @@ import { memo, useMemo } from 'react';
 type CatalogCardsProps = {
   cameras: CameraData[];
   onModalAddToBasketOpen: (id: number | null) => void;
-  camerasInCart: BasketItemsData[];
+  camerasInCart: BasketItemData[];
 }
 
 function CatalogCardsTemplate({cameras, onModalAddToBasketOpen, camerasInCart}: CatalogCardsProps): JSX.Element {

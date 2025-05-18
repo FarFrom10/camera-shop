@@ -1,8 +1,8 @@
 import { DiscountByAmount, DiscountReductionByCost } from '../const';
-import { BasketItemsData } from '../types/cameras';
+import { BasketItemData } from '../types/cameras';
 import { getTotalBasketItemsAmount } from './common';
 
-function getDiscountByAmount(basketItems: BasketItemsData[]): number {
+function getDiscountByAmount(basketItems: BasketItemData[]): number {
   const itemsAmount = getTotalBasketItemsAmount(basketItems);
   if (itemsAmount <= 1) {
     return 0;
@@ -21,7 +21,7 @@ function getDiscountByAmount(basketItems: BasketItemsData[]): number {
   return DiscountByAmount.max;
 }
 
-function getDiscountReducedByPrice(basketItems: BasketItemsData[], totalPrice: number): number {
+function getDiscountReducedByPrice(basketItems: BasketItemData[], totalPrice: number): number {
   const discountByAmount = getDiscountByAmount(basketItems);
   if (discountByAmount === 0) {
     return 0;
@@ -40,7 +40,7 @@ function getDiscountReducedByPrice(basketItems: BasketItemsData[], totalPrice: n
   return discountByAmount - DiscountReductionByCost.high;
 }
 
-export function getDiscountedTotalPrice(basketItems: BasketItemsData[], totalBasketPrice: number): number {
+export function getDiscountedTotalPrice(basketItems: BasketItemData[], totalBasketPrice: number): number {
   const discount = getDiscountReducedByPrice(basketItems, totalBasketPrice);
   if (discount === 0) {
     return totalBasketPrice;

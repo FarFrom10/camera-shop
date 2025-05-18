@@ -184,7 +184,7 @@ describe('Async actions', () => {
   describe('postContactMeDataAction', () => {
     it('should dispatch "postContactMeDataAction.pending" and "postContactMeDataAction.fulfilled" when server response 200', async () => {
       const {camerasIds, coupon, tel} = fakeContactMeData;
-      mockAxiosAdapter.onPost(APIRoute.Oders).reply(200, {camerasIds, coupon, tel});
+      mockAxiosAdapter.onPost(APIRoute.Orders).reply(200, {camerasIds, coupon, tel});
 
       await store.dispatch(postContactMeDataAction(fakeContactMeData));
       const emittedActions = store.getActions();
@@ -201,7 +201,7 @@ describe('Async actions', () => {
     });
 
     it('should dispatch "postContactMeDataAction.pending" and "postContactMeDataAction.rejected" when server response 400', async () => {
-      mockAxiosAdapter.onPost(APIRoute.Oders).reply(400);
+      mockAxiosAdapter.onPost(APIRoute.Orders).reply(400);
 
       await store.dispatch(postContactMeDataAction(fakeContactMeData));
       const actions = extractActionsTypes(store.getActions());

@@ -12,3 +12,8 @@ export type ContactMeData = {
   coupon: string | null;
   tel: string;
 }
+
+export type OrderData = {
+  camerasIds: number[];
+  coupon: string | null;
+}

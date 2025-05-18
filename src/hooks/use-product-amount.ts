@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from 'react';
-import { BasketItemsData } from '../types/cameras';
+import { BasketItemData } from '../types/cameras';
 import { BusketAmount } from '../const';
 
 type UseProductAmountData = {
@@ -10,7 +10,7 @@ type UseProductAmountData = {
 }
 
 type UseProductAmountProps = {
-  camera: BasketItemsData;
+  camera: BasketItemData;
   onAmountChange: (id: number, amount: number) => void;
 }
 

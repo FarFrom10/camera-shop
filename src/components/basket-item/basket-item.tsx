@@ -4,11 +4,11 @@ import BasketQuantityButton from '../basket-quantity-button/basket-quantity-butt
 import CommonIcon from '../common-icon/common-icon';
 import ProductPrice from '../product-price/product-price';
 import CommonPicture from '../common-picture/common-picture';
-import { BasketItemsData } from '../../types/cameras';
+import { BasketItemData } from '../../types/cameras';
 import { useProductAmount } from '../../hooks/use-product-amount';
 
 type BasketItemProps = {
-  camera: BasketItemsData;
+  camera: BasketItemData;
   onAmountChange: (id: number, amount: number) => void;
   onModalOpen: (id: number | null) => void;
 }

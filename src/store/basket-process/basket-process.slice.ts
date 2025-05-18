@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { BasketProcess } from '../../types/state';
-import { CameraData, ChangedCameraAmountData } from '../../types/cameras';
+import { BasketItemData, ChangedCameraAmountData } from '../../types/cameras';
+import { postOrderDataAction } from '../api-actions';
 
 export const initialState: BasketProcess = {
   basketItems: [],
@@ -13,7 +14,7 @@ export const basketProcess = createSlice({
   name: NameSpace.Basket,
   initialState,
   reducers: {
-    addCamera: (state, action: PayloadAction<CameraData>) => {
+    addCamera: (state, action: PayloadAction<BasketItemData>) => {
       const camera = action.payload;
       const cameraIndex = state.basketItems.findIndex((item) => item.id === camera.id);
       const updatedCameras = cameraIndex !== -1
@@ -36,6 +37,19 @@ export const basketProcess = createSlice({
       state.basketItems = updatedCameras;
     },
   },
+  extraReducers(builder) {
+    builder
+      .addCase(postOrderDataAction.pending, (state) => {
+        state.isBasketLoading = true;
+      })
+      .addCase(postOrderDataAction.fulfilled, (state) => {
+        state.basketItems = [];
+        state.isBasketLoading = false;
+      })
+      .addCase(postOrderDataAction.rejected, (state) => {
+        state.isBasketLoading = false;
+      });
+  }
 });
 
 export const {addCamera, removeProduct, changeAmount } = basketProcess.actions;

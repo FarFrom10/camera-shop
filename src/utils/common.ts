@@ -1,5 +1,5 @@
 import { PHONE_NUMBER_START } from '../const';
-import { BasketItemsData } from '../types/cameras';
+import { BasketItemData } from '../types/cameras';
 import { PriceRange } from '../types/types';
 
 export function convertPrice(price: number): string{
@@ -73,8 +73,8 @@ export function getMaxPrice({
   return String(currentMaxPrice);
 }
 
-export const getTotalBasketItemsAmount = (basketItems: BasketItemsData[]) =>
+export const getTotalBasketItemsAmount = (basketItems: BasketItemData[]) =>
   basketItems.reduce((sum, item) => sum + item.amount, 0);
 
-export const getTotalBasketPrice = (basketItems: BasketItemsData[]) =>
+export const getTotalBasketPrice = (basketItems: BasketItemData[]) =>
   basketItems.reduce((sum, item) => sum + item.price * item.amount, 0);

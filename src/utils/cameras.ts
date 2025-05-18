@@ -1,4 +1,4 @@
-import { CameraData } from '../types/cameras';
+import { BasketItemData, CameraData } from '../types/cameras';
 
 export function getMinAndMaxPricesFromCameras(cameras: CameraData[]): {min: number; max: number} {
   const minValue = !cameras.length
@@ -13,3 +13,5 @@ export function getMinAndMaxPricesFromCameras(cameras: CameraData[]): {min: numb
     max: maxValue.price,
   };
 }
+
+export const getBasketCamerasIds = (cameras: BasketItemData[]): number[] => cameras.map((camera) => camera.id);

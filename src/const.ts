@@ -124,7 +124,8 @@ export enum ButtonText {
   ShowMore = 'Показать больше отзывов',
   Order = 'Заказать',
   Continue = 'Продолжить покупки',
-  Remove = 'Удалить'
+  Remove = 'Удалить',
+  PlaceAnOrder = 'Оформить заказ',
 }
 
 export enum PriceClass {
@@ -181,7 +182,7 @@ export const SocialIconSize = {
 export enum APIRoute {
   Cameras = '/cameras',
   PromoCameras = '/promo',
-  Oders = '/orders',
+  Orders = '/orders',
 }
 
 export enum DateFormat {

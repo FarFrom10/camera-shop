@@ -2,10 +2,11 @@ import cn from 'classnames';
 import { AppRoute, ButtonText, IconName } from '../../const';
 import CommonIcon from '../common-icon/common-icon';
 import { Link } from 'react-router-dom';
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 
 type CommonButtonProps = {
   isDisabled?: boolean;
+  isLoading?: boolean;
   isInCart?: boolean;
   isGoToCart?: boolean;
   isAddToCart?: boolean;
@@ -13,12 +14,14 @@ type CommonButtonProps = {
   isModal?: boolean;
   isFitWidth?: boolean;
   isHalfWidth?: boolean;
+  isSubmit?: boolean;
   buttonText: ButtonText;
   onButtonClick?: () => void ;
 }
 
 function CommonButtonTemplate({
   isDisabled = false,
+  isLoading = false,
   isInCart = false,
   isAddToCart = false,
   isProductCard = false,
@@ -26,9 +29,11 @@ function CommonButtonTemplate({
   isFitWidth = false,
   isHalfWidth = false,
   isGoToCart = false,
+  isSubmit = false,
   buttonText,
   onButtonClick
 }: CommonButtonProps): JSX.Element {
+  const buttonType = useMemo(() => isSubmit ? 'submit' : 'button', [isSubmit]);
 
   if (isGoToCart) {
     return (
@@ -61,10 +66,10 @@ function CommonButtonTemplate({
         {'modal__btn': isModal},
         {'modal__btn--fit-width': isFitWidth},
         {'modal__btn--half-width': isHalfWidth},
-      )} type="button"
+      )} type={buttonType}
     >
       {isAddToCart && <CommonIcon icon={IconName.CartAdd}/>}
-      {isDisabled ? ButtonText.Loading : buttonText}
+      {isLoading ? ButtonText.Loading : buttonText}
     </button>
   );
 }

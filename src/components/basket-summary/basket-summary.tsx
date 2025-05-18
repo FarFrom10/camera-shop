@@ -1,16 +1,33 @@
 import cn from 'classnames';
-import { BasketItemsData } from '../../types/cameras';
+import { BasketItemData } from '../../types/cameras';
 import { getTotalBasketPrice } from '../../utils/common';
 import { getDiscountedTotalPrice } from '../../utils/discount';
+import CommonButton from '../common-button/common-button';
+import { ButtonText, ServerConnectionStatusMessage } from '../../const';
+import { getBasketCamerasIds } from '../../utils/cameras';
+import { useAppDispatch } from '../../hooks';
+import { postOrderDataAction } from '../../store/api-actions';
+import { toast } from 'react-toastify';
 
 type BasketSummaryProps = {
-  cameras: BasketItemsData[];
+  cameras: BasketItemData[];
 }
 
 function BasketSummary({ cameras }: BasketSummaryProps): JSX.Element {
+  const dispatch = useAppDispatch();
   const totalBasketPrice = getTotalBasketPrice(cameras);
   const discountedPrice = getDiscountedTotalPrice(cameras, totalBasketPrice);
   const isDiscounted = totalBasketPrice !== discountedPrice;
+
+  function handlePostOrderClick() {
+    const camerasIds = getBasketCamerasIds(cameras);
+    dispatch(postOrderDataAction({camerasIds, coupon: null}))
+      .then((response) => {
+        if (response.meta.requestStatus === 'rejected') {
+          toast.warn(ServerConnectionStatusMessage.Fail.common);
+        }
+      });
+  }
 
   return (
     <div data-testid='basketSummary' className="basket__summary">
@@ -39,9 +56,7 @@ function BasketSummary({ cameras }: BasketSummaryProps): JSX.Element {
             {`${discountedPrice} ₽`}
           </span>
         </p>
-        <button className="btn btn--purple" type="submit">
-                Оформить заказ
-        </button>
+        <CommonButton onButtonClick={handlePostOrderClick} buttonText={ButtonText.PlaceAnOrder} isSubmit isDisabled={!cameras.length}/>
       </div>
     </div>
   );

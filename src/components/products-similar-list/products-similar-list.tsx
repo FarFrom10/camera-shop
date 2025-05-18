@@ -1,4 +1,4 @@
-import { BasketItemsData, CameraData } from '../../types/cameras';
+import { BasketItemData, CameraData } from '../../types/cameras';
 import ProductCard from '../product-card/product-card';
 import CommonIcon from '../common-icon/common-icon';
 import { IconName, SIMILAR_CAMERAS_SLIDES_PER_VIEW } from '../../const';
@@ -11,7 +11,7 @@ import 'swiper/css/navigation';
 type ProductsSimilarListProps = {
   similarCameras: CameraData[];
   onModalAddToBasketOpen: (id: number | null) => void;
-  camerasInCart: BasketItemsData[];
+  camerasInCart: BasketItemData[];
 }
 
 function ProductsSimilarList({ similarCameras, onModalAddToBasketOpen, camerasInCart }: ProductsSimilarListProps): JSX.Element {

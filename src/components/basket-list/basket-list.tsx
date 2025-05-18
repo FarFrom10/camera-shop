@@ -2,14 +2,14 @@ import { EmptyListMessage } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { useModalConfirm } from '../../hooks/use-modal-confirm';
 import { changeAmount } from '../../store/basket-process/basket-process.slice';
-import { BasketItemsData } from '../../types/cameras';
+import { BasketItemData } from '../../types/cameras';
 import BasketItem from '../basket-item/basket-item';
 import EmptyListTitle from '../empty-list-title/empty-list-title';
 import ModalRemoveItem from '../modal/modal-remove-item/modal-remove-item';
 import ModalWrapper from '../modal/modal-wrapper/modal-wrapper';
 
 type BasketListProps = {
-  cameras: BasketItemsData[];
+  cameras: BasketItemData[];
 }
 
 function BasketList({ cameras }: BasketListProps): JSX.Element {
