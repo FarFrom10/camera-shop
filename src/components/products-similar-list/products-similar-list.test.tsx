@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { mockEmptyCallback, withRouter } from '../../utils/mock-component';
 import ProductsSimilarList from './products-similar-list';
-import { fakeCameras } from '../../mocks/mock-test';
+import { fakeBasketCameras, fakeCameras } from '../../mocks/mock-test';
 
 describe('Component: ProductsSimilarList', () => {
   const containerId = 'productsSimilarList';
@@ -10,7 +10,11 @@ describe('Component: ProductsSimilarList', () => {
     const expectedCameraText = fakeCameras[0].name;
 
     render(withRouter(
-      <ProductsSimilarList onModalContactMeOpen={mockEmptyCallback} similarCameras={fakeCameras}/>
+      <ProductsSimilarList
+        onModalAddToBasketOpen={mockEmptyCallback}
+        similarCameras={fakeCameras}
+        camerasInCart={fakeBasketCameras}
+      />
     ));
 
     expect(screen.getByTestId(containerId)).toBeInTheDocument();

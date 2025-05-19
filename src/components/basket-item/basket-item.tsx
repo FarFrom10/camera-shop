@@ -72,6 +72,7 @@ function BasketItem({camera, onAmountChange, onModalOpen, isBasketLoading}: Bask
       </div>
       <ProductPrice priceClass={PriceClass.BasketItemTotal} price={totalPrice}/>
       <button
+        data-testid='basketItemRemoveButton'
         disabled={isBasketLoading}
         onClick={handleButtonClick}
         className="cross-btn"

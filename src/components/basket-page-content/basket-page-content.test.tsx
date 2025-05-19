@@ -1,14 +1,20 @@
 import { render, screen } from '@testing-library/react';
-import { withRouter } from '../../utils/mock-component';
+import { withRouter, withStore } from '../../utils/mock-component';
 import BasketPageContent from './basket-page-content';
+import { makeFakeStore } from '../../utils/mocks';
 
 describe('Component: BasketPageContent', () => {
   const containerId = 'basketPageContent';
 
   it('should render correctly', () => {
-    render(withRouter(
-      <BasketPageContent />));
+    const {withStoreComponent} = withStore(
+      <BasketPageContent isBasketLoading={false}/>,
+      makeFakeStore()
+    );
+
+    render(withRouter(withStoreComponent));
 
     expect(screen.getByTestId(containerId)).toBeInTheDocument();
+    expect(screen.getByText(/Корзина/i)).toBeInTheDocument();
   });
 });

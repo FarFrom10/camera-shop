@@ -35,6 +35,16 @@ describe('Application Routing', () => {
     expect(screen.getByText(/Описание/i)).toBeInTheDocument();
   });
 
+  it('should render "Basket" when user navigate to "/card"', () => {
+    const withHistoryComponent = withHistory(<App />, mockHistory);
+    const { withStoreComponent } = withStore(withHistoryComponent, makeFakeStore());
+    mockHistory.push(AppRoute.Basket);
+
+    render(withStoreComponent);
+
+    expect(screen.getByText(/Оформить заказ/i)).toBeInTheDocument();
+  });
+
   it('should render "NotFoundPage" when user navigate to non-existent route', () => {
     const withHistoryComponent = withHistory(<App />, mockHistory);
     const { withStoreComponent } = withStore(withHistoryComponent, makeFakeStore());

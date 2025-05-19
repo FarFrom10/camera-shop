@@ -1,12 +1,13 @@
+import { CameraCategory } from '../const';
 import { ContactMeData } from '../types/api';
-import { CameraData, CameraReview, PromoCameraData } from '../types/cameras';
+import { BasketItemData, CameraData, CameraReview, PromoCameraData } from '../types/cameras';
 
 export const fakeCurrentCamera: CameraData = {
   'id': 1,
   'name': 'Ретрокамера Dus Auge lV',
   'vendorCode': 'DA4IU67AD5',
   'type': 'Коллекционная',
-  'category': 'Видеокамера',
+  'category': CameraCategory.Video,
   'description': 'Немецкий концерн BRW разработал видеокамеру Das Auge IV в начале 80-х годов, однако она до сих пор пользуется популярностью среди коллекционеров и яростных почитателей старинной техники.',
   'level': 'Нулевой',
   'price': 65000,
@@ -18,8 +19,30 @@ export const fakeCurrentCamera: CameraData = {
   'previewImgWebp2x': 'img/content/das-auge@2x.webp'
 };
 
+export const fakeBasketCamera: BasketItemData = {
+  'id': 1,
+  'name': 'Ретрокамера Dus Auge lV',
+  'vendorCode': 'DA4IU67AD5',
+  'type': 'Коллекционная',
+  'category': CameraCategory.Video,
+  'description': 'Немецкий концерн BRW разработал видеокамеру Das Auge IV в начале 80-х годов, однако она до сих пор пользуется популярностью среди коллекционеров и яростных почитателей старинной техники.',
+  'level': 'Нулевой',
+  'price': 65000,
+  'rating': 5,
+  'reviewCount': 16,
+  'previewImg': 'img/content/das-auge.jpg',
+  'previewImg2x': 'img/content/das-auge@2x.jpg',
+  'previewImgWebp': 'img/content/das-auge.webp',
+  'previewImgWebp2x': 'img/content/das-auge@2x.webp',
+  'amount': 1
+};
+
 export const fakeCameras: CameraData[] = [
   fakeCurrentCamera
+];
+
+export const fakeBasketCameras: BasketItemData[] = [
+  fakeBasketCamera
 ];
 
 export const fakePromoCameras: PromoCameraData[] = [

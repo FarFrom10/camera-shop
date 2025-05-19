@@ -43,7 +43,13 @@ export const makeFakeStore = (initialState?: Partial<State>): State => ({
       zero: false,
       nonProfessional: false,
       professional: false,
-    }
+    },
+    catalogCurrentPage: 1
+  },
+  basket : {
+    basketItems: [],
+
+    isBasketLoading: false
   },
   ...initialState ?? {},
 });

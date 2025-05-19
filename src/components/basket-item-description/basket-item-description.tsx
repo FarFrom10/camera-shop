@@ -1,4 +1,4 @@
-import { PriceClass } from '../../const';
+import { CameraCategory, PriceClass } from '../../const';
 import { CameraData } from '../../types/cameras';
 import ProductPrice from '../product-price/product-price';
 
@@ -8,7 +8,7 @@ type BasketItemDescriptionProps = {
 }
 
 function BasketItemDescription({shouldDisplayPrice = false, camera}: BasketItemDescriptionProps): JSX.Element {
-  const cameraCategory = camera.category === 'Фотоаппарат'
+  const cameraCategory = camera.category === CameraCategory.Photo
     ? 'фотокамера'
     : 'видеокамера';
 

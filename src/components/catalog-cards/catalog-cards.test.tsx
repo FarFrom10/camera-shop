@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { mockEmptyCallback, withRouter, withStore } from '../../utils/mock-component';
 import CatalogCards from './catalog-cards';
-import { fakeCameras } from '../../mocks/mock-test';
+import { fakeBasketCameras, fakeCameras } from '../../mocks/mock-test';
 import { makeFakeStore } from '../../utils/mocks';
 import { EmptyListMessage } from '../../const';
 
@@ -10,7 +10,11 @@ describe('Component: CatalogCards', () => {
 
   it('should render correctly', () => {
     const {withStoreComponent} = withStore(
-      <CatalogCards onModalAddToBasketOpen={mockEmptyCallback} cameras={fakeCameras}/>,
+      <CatalogCards
+        onModalAddToBasketOpen={mockEmptyCallback}
+        cameras={fakeCameras}
+        camerasInCart={fakeBasketCameras}
+      />,
       makeFakeStore()
     );
 
@@ -22,7 +26,11 @@ describe('Component: CatalogCards', () => {
 
   it('should render text "EmptyListMessage.Cameras" with empty "cameras" data', () => {
     const {withStoreComponent} = withStore(
-      <CatalogCards onModalAddToBasketOpen={mockEmptyCallback} cameras={[]}/>,
+      <CatalogCards
+        onModalAddToBasketOpen={mockEmptyCallback}
+        cameras={[]}
+        camerasInCart={fakeBasketCameras}
+      />,
       makeFakeStore()
     );
 
