@@ -14,4 +14,12 @@ export function getMinAndMaxPricesFromCameras(cameras: CameraData[]): {min: numb
   };
 }
 
-export const getBasketCamerasIds = (cameras: BasketItemData[]): number[] => cameras.map((camera) => camera.id);
+export const getBasketCamerasIds = (cameras: BasketItemData[]): number[] =>
+  cameras.reduce((ids: number[], camera) => {
+    for (let i = 0; i < camera.amount; i++) {
+      ids.push(camera.id);
+    }
+    return ids;
+  }, []);
+
+
