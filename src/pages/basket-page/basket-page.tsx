@@ -11,7 +11,7 @@ function BasketPage(): JSX.Element {
 
   return (
     <main>
-      <div className="page-content">
+      <div data-testid='basketPage' className="page-content">
         <Title pageName={AppRoute.Basket}/>
         <Breadcrumbs/>
         <BasketPageContent isBasketLoading={isBasketLoading}/>
