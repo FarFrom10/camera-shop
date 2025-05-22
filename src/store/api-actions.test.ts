@@ -6,8 +6,8 @@ import { State } from '../types/state';
 import { Action } from '@reduxjs/toolkit';
 import { AppThunkDispatch, extractActionsTypes } from '../types/mocks';
 import { APIRoute } from '../const';
-import { fetchCameraReviewsByIdAction, fetchCamerasAction, fetchPromoCamerasAction, getCameraByIdAction, getSimilarCamerasByIdAction, postContactMeDataAction } from './api-actions';
-import { fakeCameras, fakeContactMeData, fakeCurrentCamera, fakePromoCameras, fakeReviews } from '../mocks/mock-test';
+import { fetchCameraReviewsByIdAction, fetchCamerasAction, fetchPromoCamerasAction, getCameraByIdAction, getSimilarCamerasByIdAction } from './api-actions';
+import { fakeCameras, fakeCurrentCamera, fakePromoCameras, fakeReviews } from '../mocks/mock-test';
 
 describe('Async actions', () => {
   const axios = createAPI();
@@ -181,35 +181,4 @@ describe('Async actions', () => {
     });
   });
 
-  describe('postContactMeDataAction', () => {
-    it('should dispatch "postContactMeDataAction.pending" and "postContactMeDataAction.fulfilled" when server response 200', async () => {
-      const {camerasIds, coupon, tel} = fakeContactMeData;
-      mockAxiosAdapter.onPost(APIRoute.Orders).reply(200, {camerasIds, coupon, tel});
-
-      await store.dispatch(postContactMeDataAction(fakeContactMeData));
-      const emittedActions = store.getActions();
-      const extractedActionTypes = extractActionsTypes(emittedActions);
-      const postContactMeDataActionFulfilled = emittedActions.at(1) as ReturnType<typeof postContactMeDataAction.fulfilled>;
-
-      expect(extractedActionTypes).toEqual([
-        postContactMeDataAction.pending.type,
-        postContactMeDataAction.fulfilled.type
-      ]);
-
-      expect(postContactMeDataActionFulfilled.payload)
-        .toEqual(fakeContactMeData);
-    });
-
-    it('should dispatch "postContactMeDataAction.pending" and "postContactMeDataAction.rejected" when server response 400', async () => {
-      mockAxiosAdapter.onPost(APIRoute.Orders).reply(400);
-
-      await store.dispatch(postContactMeDataAction(fakeContactMeData));
-      const actions = extractActionsTypes(store.getActions());
-
-      expect(actions).toEqual([
-        postContactMeDataAction.pending.type,
-        postContactMeDataAction.rejected.type
-      ]);
-    });
-  });
 });

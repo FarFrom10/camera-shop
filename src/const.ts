@@ -31,11 +31,6 @@ export const Delay = {
   Slider: 3000
 } as const;
 
-export const PhoneMaxLength = {
-  InputValue: 16,
-  Numbers: 11
-} as const;
-
 export const Temporary = {
   Numbers: {
     rating: 2,

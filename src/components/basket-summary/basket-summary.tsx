@@ -21,6 +21,7 @@ function BasketSummary({ cameras, isBasketLoading }: BasketSummaryProps): JSX.El
   const dispatch = useAppDispatch();
   const totalBasketPrice = getTotalBasketPrice(cameras);
   const discountedPrice = getDiscountedTotalPrice(cameras, totalBasketPrice);
+  const totalDiscount = Number((totalBasketPrice - discountedPrice).toFixed(2));
   const isDiscounted = totalBasketPrice !== discountedPrice;
 
   const {
@@ -59,7 +60,7 @@ function BasketSummary({ cameras, isBasketLoading }: BasketSummaryProps): JSX.El
               {'basket__summary-value--bonus': isDiscounted}
             )}
             >
-              {`${totalBasketPrice - discountedPrice} ₽`}
+              {`${totalDiscount} ₽`}
             </span>
           </p>
           <p className="basket__summary-item">

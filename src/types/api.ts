@@ -7,12 +7,6 @@ export type AsyncThunkArguments = {
   extra: AxiosInstance;
 }
 
-export type ContactMeData = {
-  camerasIds: number[];
-  coupon: string | null;
-  tel: string;
-}
-
 export type OrderData = {
   camerasIds: number[];
   coupon: string | null;

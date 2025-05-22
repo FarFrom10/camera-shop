@@ -5,7 +5,6 @@ import { loadBasketItemsState, saveBasketItemsState } from '../utils/local-stora
 import { NameSpace } from '../const';
 import { initialState as camerasInitial } from './cameras-process/cameras-process.slice';
 import { initialState as reviewsInitial } from './reviews-process/reviews-process.slice';
-import { initialState as userInitial } from './user-process/user-process.slice';
 import { initialState as sortInitial } from './sort-process/sort-process.slice';
 import { initialState as filterInitial } from './filter-process/filter-process.slice';
 import { initialState as basketInitial } from './basket-process/basket-process.slice';
@@ -14,7 +13,6 @@ import { initialState as basketInitial } from './basket-process/basket-process.s
 const initialStates = {
   [NameSpace.Cameras]: camerasInitial,
   [NameSpace.Reviews]: reviewsInitial,
-  [NameSpace.User]: userInitial,
   [NameSpace.Sort]: sortInitial,
   [NameSpace.Filter]: filterInitial,
   [NameSpace.Basket]: basketInitial,

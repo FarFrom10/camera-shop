@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AsyncThunkArguments, ContactMeData, OrderData } from '../types/api';
+import { AsyncThunkArguments, OrderData } from '../types/api';
 import { CameraData, CameraReview, PromoCameraData } from '../types/cameras';
 import { APIRoute, NameSpace } from '../const';
 
@@ -47,14 +47,6 @@ export const postOrderDataAction = createAsyncThunk<string, OrderData, AsyncThun
   `${NameSpace.Basket}/postOrderData`,
   async({camerasIds, coupon }, {extra: api}) => {
     const {data} = await api.post<string>(APIRoute.Orders, {camerasIds, coupon});
-    return data;
-  }
-);
-
-export const postContactMeDataAction = createAsyncThunk<string, ContactMeData, AsyncThunkArguments>(
-  `${NameSpace.User}/postContactMeData`,
-  async({camerasIds, coupon, tel}, {extra: api}) => {
-    const {data} = await api.post<string>(APIRoute.Orders, {camerasIds, coupon, tel});
     return data;
   }
 );

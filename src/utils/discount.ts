@@ -46,6 +46,8 @@ export function getDiscountedTotalPrice(basketItems: BasketItemData[], totalBask
     return totalBasketPrice;
   }
 
-  return Math.round(totalBasketPrice * Number(`0.${100 - discount}`));
+  const price = (totalBasketPrice * Number(`0.${100 - discount}`));
+
+  return Number(price.toFixed(2));
 }
 

@@ -20,9 +20,6 @@ export const makeFakeStore = (initialState?: Partial<State>): State => ({
 
     isReviewsLoading: false,
   },
-  user: {
-    isContactMeDataLoading: false
-  },
   sort: {
     sortType: SortByType.Price,
     sortOrder: SortByOrder.Up,

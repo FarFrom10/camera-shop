@@ -6,7 +6,6 @@ import { FilterCameraType, FilterLevel, FilterPrice } from './types';
 export type State = ReturnType<typeof store.getState>;
 export type StateCameras = Pick<State, NameSpace.Cameras>
 export type StateReviews = Pick<State, NameSpace.Reviews>
-export type StateUser = Pick<State, NameSpace.User>
 export type StateSort = Pick<State, NameSpace.Sort>
 export type StateFilter = Pick<State, NameSpace.Filter>
 export type StateBasket = Pick<State, NameSpace.Basket>
@@ -31,10 +30,6 @@ export type ReviewsProcess = {
   reviews: CameraReview[];
 
   isReviewsLoading: boolean;
-}
-
-export type UserProcess = {
-  isContactMeDataLoading: boolean;
 }
 
 export type SortProcess = {
