@@ -6,8 +6,8 @@ import { State } from '../types/state';
 import { Action } from '@reduxjs/toolkit';
 import { AppThunkDispatch, extractActionsTypes } from '../types/mocks';
 import { APIRoute } from '../const';
-import { fetchCameraReviewsByIdAction, fetchCamerasAction, fetchPromoCamerasAction, getCameraByIdAction, getSimilarCamerasByIdAction } from './api-actions';
-import { fakeCameras, fakeCurrentCamera, fakePromoCameras, fakeReviews } from '../mocks/mock-test';
+import { fetchCameraReviewsByIdAction, fetchCamerasAction, fetchPromoCamerasAction, getCameraByIdAction, getSimilarCamerasByIdAction, postOrderDataAction } from './api-actions';
+import { fakeCameras, fakeCurrentCamera, fakeOrderData, fakePromoCameras, fakeReviews } from '../mocks/mock-test';
 
 describe('Async actions', () => {
   const axios = createAPI();
@@ -181,4 +181,35 @@ describe('Async actions', () => {
     });
   });
 
+  describe('postOrderDataAction', () => {
+    it('should dispatch "postOrderDataAction.pending" and "postOrderDataAction.fulfilled" when server response 200', async () => {
+      const {camerasIds, coupon} = fakeOrderData;
+      mockAxiosAdapter.onPost(APIRoute.Orders).reply(200, {camerasIds, coupon});
+
+      await store.dispatch(postOrderDataAction(fakeOrderData));
+      const emittedActions = store.getActions();
+      const extractedActionTypes = extractActionsTypes(emittedActions);
+      const postOrderDataActionFulfilled = emittedActions.at(1) as ReturnType<typeof postOrderDataAction.fulfilled>;
+
+      expect(extractedActionTypes).toEqual([
+        postOrderDataAction.pending.type,
+        postOrderDataAction.fulfilled.type
+      ]);
+
+      expect(postOrderDataActionFulfilled.payload)
+        .toEqual(fakeOrderData);
+    });
+
+    it('should dispatch "postOrderDataAction.pending" and "postOrderDataAction.rejected" when server response 400', async () => {
+      mockAxiosAdapter.onPost(APIRoute.Orders).reply(400);
+
+      await store.dispatch(postOrderDataAction(fakeOrderData));
+      const actions = extractActionsTypes(store.getActions());
+
+      expect(actions).toEqual([
+        postOrderDataAction.pending.type,
+        postOrderDataAction.rejected.type
+      ]);
+    });
+  });
 });
