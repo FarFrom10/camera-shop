@@ -11,3 +11,12 @@ export type OrderData = {
   camerasIds: number[];
   coupon: string | null;
 }
+
+export type ReviewData = {
+  cameraId: number;
+  rating: number;
+  userName: string;
+  advantage: string;
+  disadvantage: string;
+  review: string;
+}

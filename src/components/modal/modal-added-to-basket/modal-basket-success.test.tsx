@@ -18,11 +18,11 @@ describe('Component: ModalBasketSuccess', () => {
     expect(screen.getByText(ModalTitle.SuccessfullyAdded)).toBeInTheDocument();
   });
 
-  it('should render changed title text with "isOrder" prop', () => {
+  it('should render changed title text with "isSingleButton" prop', () => {
     const {withStoreComponent} = withStore(
       <ModalBasketSuccess
         onModalClose={mockEmptyCallback}
-        isOrder
+        isSingleButton
       />,
       makeFakeStore()
     );

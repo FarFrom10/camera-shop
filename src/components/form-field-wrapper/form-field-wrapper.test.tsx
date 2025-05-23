@@ -1,18 +1,18 @@
 import { render, screen } from '@testing-library/react';
 import { withRouter } from '../../utils/mock-component';
-import FormInputWrapper from './form-input-wrapper';
+import FormFieldWrapper from './form-field-wrapper';
 import { InputValidationErrorMessage } from '../../const';
 
-describe('Component: FormInputWrapper', () => {
-  const containerId = 'formInputWrapper';
+describe('Component: FormFieldWrapper', () => {
+  const containerId = 'FormFieldWrapper';
   const fakeChildrenId = 'fakeChildren';
   const fakeChildren = <div data-testid={fakeChildrenId}></div>;
 
   it('should render correctly', () => {
     render(withRouter(
-      <FormInputWrapper isError={false} errorMessage={InputValidationErrorMessage.Phone}>
+      <FormFieldWrapper isError={false} errorMessage={InputValidationErrorMessage.Phone}>
         {fakeChildren}
-      </FormInputWrapper>));
+      </FormFieldWrapper>));
     const errorElement = screen.getByText(InputValidationErrorMessage.Phone);
 
     expect(screen.getByTestId(containerId)).toBeInTheDocument();
@@ -23,9 +23,9 @@ describe('Component: FormInputWrapper', () => {
 
   it('should render correctly with error', () => {
     render(withRouter(
-      <FormInputWrapper isError errorMessage={InputValidationErrorMessage.Phone}>
+      <FormFieldWrapper isError errorMessage={InputValidationErrorMessage.Phone}>
         {fakeChildren}
-      </FormInputWrapper>));
+      </FormFieldWrapper>));
     const errorElement = screen.getByText(InputValidationErrorMessage.Phone);
 
     expect(screen.getByTestId(containerId)).toHaveClass('is-invalid');

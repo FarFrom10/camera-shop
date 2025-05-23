@@ -28,9 +28,9 @@ export type PriceRange = {
 }
 
 export type FormReviewType = {
-  rating: null | number;
-  name: string;
-  advantages: string;
-  disadvantages: string;
+  rating: number;
+  userName: string;
+  advantage: string;
+  disadvantage: string;
   review: string;
 }

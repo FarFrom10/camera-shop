@@ -10,6 +10,7 @@
     "test": "vitest --passWithNoTests"
   },
   "dependencies": {
+    "@hookform/resolvers": "5.0.1",
     "@reduxjs/toolkit": "1.9.5",
     "axios": "0.27.2",
     "classnames": "2.3.2",
@@ -25,7 +26,8 @@
     "react-router-dom": "6.14.0",
     "react-toastify": "11.0.5",
     "swiper": "11.2.5",
-    "use-react-router-breadcrumbs": "4.0.1"
+    "use-react-router-breadcrumbs": "4.0.1",
+    "yup": "1.6.1"
   },
   "devDependencies": {
     "@jedmao/redux-mock-store": "3.0.5",

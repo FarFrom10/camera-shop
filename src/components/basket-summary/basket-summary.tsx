@@ -3,7 +3,7 @@ import { BasketItemData } from '../../types/cameras';
 import { getTotalBasketPrice } from '../../utils/common';
 import { getDiscountedTotalPrice } from '../../utils/discount';
 import CommonButton from '../common-button/common-button';
-import { ButtonText, ServerConnectionStatusMessage } from '../../const';
+import { ButtonText, ModalTitle, ServerConnectionStatusMessage } from '../../const';
 import { getBasketCamerasIds } from '../../utils/cameras';
 import { useAppDispatch } from '../../hooks';
 import { postOrderDataAction } from '../../store/api-actions';
@@ -81,9 +81,10 @@ function BasketSummary({ cameras, isBasketLoading }: BasketSummaryProps): JSX.El
         isModalNarrow
       >
         <ModalBasketSuccess
+          titleText={ModalTitle.ThanksForPurchase}
           onModalClose={handleModalBasketSuccessClose}
           onNavigateToCatalog={handleNavigateToCatalog}
-          isOrder
+          isSingleButton
         />
       </ModalWrapper>
     </>

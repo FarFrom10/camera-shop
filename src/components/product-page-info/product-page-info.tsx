@@ -1,4 +1,4 @@
-import { ButtonText, CommonPictureCategory, PriceClass, ProductRatingClass } from '../../const';
+import { ButtonText, CommonPictureCategory, ModalTitle, PriceClass, ProductRatingClass } from '../../const';
 import { useModalAddToBasket } from '../../hooks/use-modal-add-to-basket';
 import { useModalBasketSuccess } from '../../hooks/use-modal-basket-success';
 import { CameraData } from '../../types/cameras';
@@ -81,7 +81,10 @@ function ProductPageInfo({camera}: ProductPageInfoProps): JSX.Element {
         isActive={showBasketSuccess}
         isModalNarrow
       >
-        <ModalBasketSuccess onModalClose={handleNavigateToCatalog}/>
+        <ModalBasketSuccess
+          titleText={ModalTitle.SuccessfullyAdded}
+          onModalClose={handleNavigateToCatalog}
+        />
       </ModalWrapper>
     </section>
   );

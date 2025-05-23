@@ -7,7 +7,7 @@ import CatalogPageSort from '../sort/catalog-page-sort/catalog-page-sort';
 import ModalAddToBasket from '../modal/modal-add-to-basket/modal-add-to-basket';
 import ModalWrapper from '../modal/modal-wrapper/modal-wrapper';
 import CatalogPagination from '../catalog-pagination/catalog-pagination';
-import { CAMERAS_PER_PAGE } from '../../const';
+import { CAMERAS_PER_PAGE, ModalTitle } from '../../const';
 import { useFilterCatalog } from '../../hooks/use-filter-catalog';
 import { usePaginationCatalog } from '../../hooks/use-pagination-catalog';
 import { selectFilterState } from '../../store/filter-process/filter-process.selectors';
@@ -86,7 +86,10 @@ function CatalogPageContent(): JSX.Element {
           isActive={showBasketSuccess}
           isModalNarrow
         >
-          <ModalBasketSuccess onModalClose={handleModalBasketSuccessClose}/>
+          <ModalBasketSuccess
+            onModalClose={handleModalBasketSuccessClose}
+            titleText={ModalTitle.SuccessfullyAdded}
+          />
         </ModalWrapper>
       </div>
     </section>

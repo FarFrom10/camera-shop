@@ -30,6 +30,7 @@ export type ReviewsProcess = {
   reviews: CameraReview[];
 
   isReviewsLoading: boolean;
+  isPostReviewLoading: boolean;
 }
 
 export type SortProcess = {

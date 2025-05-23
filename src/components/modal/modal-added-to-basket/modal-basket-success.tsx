@@ -6,24 +6,24 @@ import CommonIcon from '../../common-icon/common-icon';
 type ModalBasketSuccessProps = {
   onModalClose: () => void;
   onNavigateToCatalog?: () => void;
-  isOrder?: boolean;
+  titleText: ModalTitle;
+  isSingleButton?: boolean;
 }
 
-function ModalBasketSuccess({ onModalClose, onNavigateToCatalog, isOrder = false }: ModalBasketSuccessProps){
-  const buttonText = isOrder ? ButtonText.GoToCatalog : ButtonText.GoToCart;
-  const iconClass = isOrder ? IconName.Thanks : IconName.Success;
-  const titleText = isOrder ? ModalTitle.SuccessfullyOrdered : ModalTitle.SuccessfullyAdded;
+function ModalBasketSuccess({ onModalClose, onNavigateToCatalog, isSingleButton = false, titleText }: ModalBasketSuccessProps){
+  const buttonText = isSingleButton ? ButtonText.GoToCatalog : ButtonText.GoToCart;
+  const iconClass = isSingleButton ? IconName.Thanks : IconName.Success;
 
   return(
     <>
       <p className="title title--h4">{titleText}</p>
       <CommonIcon icon={iconClass} iconClass='modal__icon'/>
       <div className="modal__buttons">
-        {!isOrder && <ButtonMoreDetails onButtonClick={onModalClose} isModal />}
+        {!isSingleButton && <ButtonMoreDetails onButtonClick={onModalClose} isModal />}
         <CommonButton
           onButtonClick={onNavigateToCatalog && onNavigateToCatalog}
           buttonText={buttonText}
-          isGoToCart={!isOrder}
+          isGoToCart={!isSingleButton}
           isModal
           isFitWidth
         />

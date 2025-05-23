@@ -15,6 +15,8 @@ type CommonButtonProps = {
   isFitWidth?: boolean;
   isHalfWidth?: boolean;
   isSubmit?: boolean;
+  isWhite?: boolean;
+  isFormReview?: boolean;
   buttonText: ButtonText;
   onButtonClick?: () => void ;
 }
@@ -30,6 +32,8 @@ function CommonButtonTemplate({
   isHalfWidth = false,
   isGoToCart = false,
   isSubmit = false,
+  isFormReview = false,
+  isWhite = false,
   buttonText,
   onButtonClick
 }: CommonButtonProps): JSX.Element {
@@ -57,15 +61,16 @@ function CommonButtonTemplate({
   return (
     <button
       data-testid='commonButton'
-      disabled={isDisabled}
+      disabled={isDisabled || isLoading}
       onClick={onButtonClick && onButtonClick}
       className={cn(
         'btn',
-        'btn--purple',
+        {'btn--purple': !isWhite},
         {'product-card__btn': isProductCard},
         {'modal__btn': isModal},
         {'modal__btn--fit-width': isFitWidth},
         {'modal__btn--half-width': isHalfWidth},
+        {'form-review__btn': isFormReview},
       )} type={buttonType}
     >
       {isAddToCart && <CommonIcon icon={IconName.CartAdd}/>}

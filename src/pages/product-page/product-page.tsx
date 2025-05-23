@@ -5,7 +5,6 @@ import ModalAddToBasket from '../../components/modal/modal-add-to-basket/modal-a
 import ModalBasketSuccess from '../../components/modal/modal-added-to-basket/modal-basket-success';
 import ModalWrapper from '../../components/modal/modal-wrapper/modal-wrapper';
 import ProductPageContent from '../../components/product-page-content/product-page-content';
-import ReviewForm from '../../components/review-form/review-form';
 import Title from '../../components/title/title';
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks';
@@ -73,13 +72,6 @@ function ProductPage(): JSX.Element {
           isModalNarrow
         >
           <ModalBasketSuccess onModalClose={handleNavigateToCatalog}/>
-        </ModalWrapper>
-
-        <ModalWrapper
-          onModalClose={handleModalBasketSuccessClose}
-          isActive
-        >
-          <ReviewForm/>
         </ModalWrapper>
       </main>
       <ButtonUp/>

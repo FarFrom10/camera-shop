@@ -1,23 +1,20 @@
-import { useMemo } from 'react';
 import { onHandleRatingChangeType } from '../../types/handlers';
 
 type RatingStarInputProps = {
-  rating: null | number;
   starNumber: number;
   grade: string;
   onChangeRating: onHandleRatingChangeType;
+  isDisabled: boolean;
 }
 
-function RatingStarInput({starNumber, grade, rating, onChangeRating}: RatingStarInputProps): JSX.Element {
-  const isChecked = useMemo(() => !!(rating && starNumber === rating), [rating, starNumber]);
-
+function RatingStarInput({starNumber, grade, onChangeRating, isDisabled}: RatingStarInputProps): JSX.Element {
   return (
     <>
       <input
+        disabled={isDisabled}
         className="visually-hidden"
         onChange={onChangeRating}
         value={starNumber}
-        checked={isChecked}
         id={`star-${starNumber}`}
         name="rate"
         type="radio"

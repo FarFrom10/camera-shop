@@ -1,99 +1,161 @@
-import { ChangeEvent, useCallback, useState } from 'react';
-import { IconName } from '../../const';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { ButtonText, IconName, ModalTitle, ServerConnectionStatusMessage } from '../../const';
 import { FormReviewType } from '../../types/types';
 import CommonIcon from '../common-icon/common-icon';
 import ReviewFormRating from '../review-from-rating/review-form-rating';
+import { Controller, useForm } from 'react-hook-form';
+import * as Yup from 'yup';
+import FormFieldWrapper from '../form-field-wrapper/form-field-wrapper';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { postReviewDataAction } from '../../store/api-actions';
+import CommonButton from '../common-button/common-button';
+import { selectIsPostReviewLoading } from '../../store/reviews-process/reviews-process.selectors';
+import { toast } from 'react-toastify';
 
-function ReviewForm(): JSX.Element {
-  const initialState: FormReviewType = {
-    rating: null,
-    name: '',
-    advantages: '',
-    disadvantages: '',
-    review: ''
+const schema = Yup.object().shape({
+  rating: Yup.number()
+    .required('Нужно оценить товар')
+    .min(1, 'Не менее 1 звезды')
+    .max(5, `Не более ${5} звёзд`),
+  userName: Yup.string()
+    .required('Нужно указать имя')
+    .min(2, `Минимум ${2} символа`)
+    .max(15, `Максимум ${15} символов`),
+  advantage: Yup.string()
+    .required('Нужно указать достоинства')
+    .min(10, `Не менее ${10} символов`)
+    .max(160, `Не более ${160} символов`),
+  disadvantage: Yup.string()
+    .required('Нужно указать недостатки')
+    .min(10, `Не менее ${10} символов`)
+    .max(160, `Не более ${160} символов`),
+  review: Yup.string()
+    .required('Нужно добавить комментарий')
+    .min(10, `Не менее ${10} символов`)
+    .max(160, `Не более ${160} символов`),
+});
+
+type ReviewFormProps = {
+  cameraId: number;
+  onModalClose: () => void;
+  onModalSuccessOpen: () => void;
+}
+
+function ReviewForm({ cameraId, onModalClose, onModalSuccessOpen }: ReviewFormProps): JSX.Element {
+  const dispatch = useAppDispatch();
+  const isPostReviewLoading = useAppSelector(selectIsPostReviewLoading);
+
+  const {register, control, handleSubmit, formState: { errors } } = useForm<FormReviewType>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      rating: 0,
+      userName: '',
+      advantage: '',
+      disadvantage: '',
+      review: ''
+    }
+  });
+
+  const onSubmit = (data: FormReviewType) => {
+    dispatch(postReviewDataAction({
+      ...data,
+      cameraId
+    }))
+      .then((response) => {
+        if (response.meta.requestStatus === 'rejected') {
+          toast.warn(ServerConnectionStatusMessage.Fail.common);
+        } else {
+          onModalClose();
+          onModalSuccessOpen();
+        }
+      });
   };
-  const [formData, setFormData] = useState<FormReviewType>(initialState);
-
-  const handleChangeRating = useCallback((evt: ChangeEvent<HTMLInputElement>) => {
-    setFormData((prev)=>({
-      ...prev,
-      rating: Number(evt.target.value)
-    }));
-  }, []);
 
   return (
     <>
-      <p className="title title--h4">Оставить отзыв</p>
+      <p className="title title--h4">{ModalTitle.LeaveReview}</p>
       <div className="form-review">
-        <form method="post">
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit(onSubmit)();
+        }} method="post"
+        >
           <div className="form-review__rate">
-            <ReviewFormRating rating={formData.rating} onChangeRating={handleChangeRating}/>
-            <div className="custom-input form-review__item">
+            <Controller
+              name="rating"
+              control={control}
+              rules={{ required: 'Нужно оценить товар' }}
+              render={({ field }) => (
+                <ReviewFormRating
+                  rating={field.value}
+                  error={errors.rating}
+                  onChangeRating={(value) => field.onChange(value)}
+                  isDisabled={isPostReviewLoading}
+                />
+              )}
+            />
+
+            <FormFieldWrapper error={errors.userName}>
               <label>
                 <span className="custom-input__label">
               Ваше имя
                   <CommonIcon icon={IconName.Snowflake}/>
                 </span>
                 <input
+                  disabled={isPostReviewLoading}
                   type="text"
-                  name="user-name"
+                  {...register('userName')}
                   placeholder="Введите ваше имя"
-                  required
                 />
               </label>
-              <p className="custom-input__error">Нужно указать имя</p>
-            </div>
-            <div className="custom-input form-review__item">
+            </FormFieldWrapper>
+
+            <FormFieldWrapper error={errors.advantage}>
               <label>
                 <span className="custom-input__label">
               Достоинства
                   <CommonIcon icon={IconName.Snowflake}/>
                 </span>
                 <input
+                  disabled={isPostReviewLoading}
                   type="text"
-                  name="user-plus"
+                  {...register('advantage')}
                   placeholder="Основные преимущества товара"
-                  required
                 />
               </label>
-              <p className="custom-input__error">Нужно указать достоинства</p>
-            </div>
-            <div className="custom-input form-review__item">
+            </FormFieldWrapper>
+
+            <FormFieldWrapper error={errors.disadvantage}>
               <label>
                 <span className="custom-input__label">
               Недостатки
                   <CommonIcon icon={IconName.Snowflake}/>
                 </span>
                 <input
+                  disabled={isPostReviewLoading}
                   type="text"
-                  name="user-minus"
+                  {...register('disadvantage')}
                   placeholder="Главные недостатки товара"
-                  required
                 />
               </label>
-              <p className="custom-input__error">Нужно указать недостатки</p>
-            </div>
-            <div className="custom-textarea form-review__item">
+            </FormFieldWrapper>
+
+            <FormFieldWrapper isTextarea error={errors.review}>
               <label>
                 <span className="custom-textarea__label">
               Комментарий
                   <CommonIcon icon={IconName.Snowflake}/>
                 </span>
                 <textarea
-                  name="user-comment"
-                  minLength={5}
+                  disabled={isPostReviewLoading}
+                  {...register('review')}
                   placeholder="Поделитесь своим опытом покупки"
-                  defaultValue=''
                 />
               </label>
-              <div className="custom-textarea__error">
-            Нужно добавить комментарий
-              </div>
-            </div>
+            </FormFieldWrapper>
           </div>
-          <button className="btn btn--purple form-review__btn" type="submit">
-        Отправить отзыв
-          </button>
+
+          <CommonButton isLoading={isPostReviewLoading} isSubmit isFormReview buttonText={ButtonText.LeaveReview}/>
         </form>
       </div>
     </>

@@ -118,18 +118,22 @@ export enum ButtonText {
   AddedToCart = 'В корзине',
   GoToCart = 'Перейти в корзину',
   ShowMore = 'Показать больше отзывов',
+  AddReview = 'Оставить свой отзыв',
   Order = 'Заказать',
   Continue = 'Продолжить покупки',
   Remove = 'Удалить',
   PlaceAnOrder = 'Оформить заказ',
+  LeaveReview = 'Отправить отзыв',
   GoToCatalog = 'Вернуться к покупкам'
 }
 
 export enum ModalTitle {
   SuccessfullyAdded = 'Товар успешно добавлен в корзину',
-  SuccessfullyOrdered = 'Спасибо за покупку',
+  ThanksForPurchase = 'Спасибо за покупку',
   AddToBasket = 'Добавить товар в корзину',
-  RemoveItemConfirm = 'Удалить этот товар?'
+  RemoveItemConfirm = 'Удалить этот товар?',
+  LeaveReview = 'Оставить отзыв',
+  ThanksForReview = 'Спасибо за отзыв'
 }
 
 export enum PriceClass {
@@ -154,10 +158,6 @@ export enum ProductRatingClass {
 export enum LogoClass {
   Header = 'header__logo',
   Footer = 'footer__logo',
-}
-
-export enum InputValidationErrorMessage {
-  Phone = 'Формат: +7(9XX)XXX-XX-XX'
 }
 
 export const ServerConnectionStatusMessage = {
@@ -187,6 +187,7 @@ export enum APIRoute {
   Cameras = '/cameras',
   PromoCameras = '/promo',
   Orders = '/orders',
+  Reviews = '/reviews',
 }
 
 export enum DateFormat {
