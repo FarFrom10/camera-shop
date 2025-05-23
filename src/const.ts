@@ -240,3 +240,5 @@ export const DiscountReductionByCost = {
   medium: 2,
   high: 3,
 } as const;
+
+export const ratingNames = ['Ужасно', 'Плохо', 'Нормально', 'Хорошо', 'Отлично'];

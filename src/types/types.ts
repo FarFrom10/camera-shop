@@ -26,3 +26,11 @@ export type PriceRange = {
   minPrice: number;
   maxPrice: number;
 }
+
+export type FormReviewType = {
+  rating: null | number;
+  name: string;
+  advantages: string;
+  disadvantages: string;
+  review: string;
+}
