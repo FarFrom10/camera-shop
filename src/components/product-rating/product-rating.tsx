@@ -1,19 +1,19 @@
 import { memo, useMemo } from 'react';
-import { IconName, ProductRatingClass, RATING_STAR_NUMBER, Temporary } from '../../const';
+import { IconName, ProductRatingClass, RATING_STAR_NUMBER } from '../../const';
 import CommonIcon from '../common-icon/common-icon';
 import { nanoid } from '@reduxjs/toolkit';
 
 type ProductRatingProps = {
   ratingNumber: number;
   ratingClass?: ProductRatingClass;
-  reviewCount?: number;
+  reviewCount: number;
   disableReviewCount?: boolean;
 }
 
 function ProductRatingTemplate({
   ratingNumber,
   ratingClass = ProductRatingClass.ProductCard,
-  reviewCount = Temporary.Numbers.reviewCount,
+  reviewCount,
   disableReviewCount = false,
 }: ProductRatingProps): JSX.Element {
   const stars = useMemo(() => Array.from({length: RATING_STAR_NUMBER}).map((_, i) =>

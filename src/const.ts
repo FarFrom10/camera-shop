@@ -31,14 +31,6 @@ export const Delay = {
   Slider: 3000
 } as const;
 
-export const Temporary = {
-  Numbers: {
-    rating: 2,
-    reviewCount: 666,
-    price: 73629
-  },
-} as const;
-
 export const BusketAmount = {
   Min: 1,
   Max: 99
@@ -243,3 +235,20 @@ export const DiscountReductionByCost = {
 } as const;
 
 export const ratingNames = ['Ужасно', 'Плохо', 'Нормально', 'Хорошо', 'Отлично'];
+
+export const ReviewValidNumber = {
+  Rating: {
+    min: 1,
+    max: 5
+  },
+  Text: {
+    userName: {
+      min: 2,
+      max: 15
+    },
+    general: {
+      min: 10,
+      max: 160
+    }
+  }
+} as const;

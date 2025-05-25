@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { ButtonText, IconName, ModalTitle, ServerConnectionStatusMessage } from '../../const';
+import { ButtonText, IconName, ModalTitle, ReviewValidNumber, ServerConnectionStatusMessage } from '../../const';
 import { FormReviewType } from '../../types/types';
 import CommonIcon from '../common-icon/common-icon';
 import ReviewFormRating from '../review-from-rating/review-form-rating';
@@ -15,24 +15,24 @@ import { toast } from 'react-toastify';
 const schema = Yup.object().shape({
   rating: Yup.number()
     .required('Нужно оценить товар')
-    .min(1, 'Не менее 1 звезды')
-    .max(5, `Не более ${5} звёзд`),
+    .min(ReviewValidNumber.Rating.min, `Не менее ${ReviewValidNumber.Rating.min} звезды`)
+    .max(ReviewValidNumber.Rating.max, `Не более ${ReviewValidNumber.Rating.max} звёзд`),
   userName: Yup.string()
     .required('Нужно указать имя')
-    .min(2, `Минимум ${2} символа`)
-    .max(15, `Максимум ${15} символов`),
+    .min(ReviewValidNumber.Text.userName.min, `Минимум ${ReviewValidNumber.Text.userName.min} символа`)
+    .max(ReviewValidNumber.Text.userName.max, `Максимум ${ReviewValidNumber.Text.userName.max} символов`),
   advantage: Yup.string()
     .required('Нужно указать достоинства')
-    .min(10, `Не менее ${10} символов`)
-    .max(160, `Не более ${160} символов`),
+    .min(ReviewValidNumber.Text.general.min, `Не менее ${ReviewValidNumber.Text.general.min} символов`)
+    .max(ReviewValidNumber.Text.general.max, `Не более ${ReviewValidNumber.Text.general.max} символов`),
   disadvantage: Yup.string()
     .required('Нужно указать недостатки')
-    .min(10, `Не менее ${10} символов`)
-    .max(160, `Не более ${160} символов`),
+    .min(ReviewValidNumber.Text.general.min, `Не менее ${ReviewValidNumber.Text.general.min} символов`)
+    .max(ReviewValidNumber.Text.general.max, `Не более ${ReviewValidNumber.Text.general.max} символов`),
   review: Yup.string()
     .required('Нужно добавить комментарий')
-    .min(10, `Не менее ${10} символов`)
-    .max(160, `Не более ${160} символов`),
+    .min(ReviewValidNumber.Text.general.min, `Не менее ${ReviewValidNumber.Text.general.min} символов`)
+    .max(ReviewValidNumber.Text.general.max, `Не более ${ReviewValidNumber.Text.general.max} символов`),
 });
 
 type ReviewFormProps = {
