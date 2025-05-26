@@ -1,4 +1,4 @@
-import { BasketItemData } from '../types/cameras';
+import { BasketItemData, PromoCameraData } from '../types/cameras';
 import { PriceRange } from '../types/types';
 
 export function convertPrice(price: number): string{
@@ -57,6 +57,13 @@ export function getMaxPrice({
 
 export const getTotalBasketItemsAmount = (basketItems: BasketItemData[]) =>
   basketItems.reduce((sum, item) => sum + item.amount, 0);
+
+//Убираем промо товары из массива
+export const filterCamerasByPromo = (basketItems: BasketItemData[], promo: PromoCameraData[]) => {
+  const promoIds = promo.map((camera) => camera.id);
+  return basketItems.filter((camera) => !promoIds.includes(camera.id));
+};
+
 
 export const getTotalBasketPrice = (basketItems: BasketItemData[]) =>
   basketItems.reduce((sum, item) => sum + item.price * item.amount, 0);

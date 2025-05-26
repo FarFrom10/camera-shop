@@ -1,16 +1,17 @@
 import cn from 'classnames';
 import { BasketItemData } from '../../types/cameras';
-import { getTotalBasketPrice } from '../../utils/common';
+import { filterCamerasByPromo, getTotalBasketPrice } from '../../utils/common';
 import { getDiscountedTotalPrice } from '../../utils/discount';
 import CommonButton from '../common-button/common-button';
 import { ButtonText, ModalTitle, ServerConnectionStatusMessage } from '../../const';
 import { getBasketCamerasIds } from '../../utils/cameras';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { postOrderDataAction } from '../../store/api-actions';
 import { toast } from 'react-toastify';
 import { useModalBasketSuccess } from '../../hooks/use-modal-basket-success';
 import ModalWrapper from '../modal/modal-wrapper/modal-wrapper';
 import ModalBasketSuccess from '../modal/modal-added-to-basket/modal-basket-success';
+import { selectPromoCameras } from '../../store/cameras-process/cameras-process.selectors';
 
 type BasketSummaryProps = {
   cameras: BasketItemData[];
@@ -19,8 +20,10 @@ type BasketSummaryProps = {
 
 function BasketSummary({ cameras, isBasketLoading }: BasketSummaryProps): JSX.Element {
   const dispatch = useAppDispatch();
+  const promoCameras = useAppSelector(selectPromoCameras);
+  const filteredCameras = filterCamerasByPromo(cameras, promoCameras);
   const totalBasketPrice = getTotalBasketPrice(cameras);
-  const discountedPrice = getDiscountedTotalPrice(cameras, totalBasketPrice);
+  const discountedPrice = getDiscountedTotalPrice(filteredCameras, totalBasketPrice);
   const totalDiscount = Number((totalBasketPrice - discountedPrice).toFixed(2));
   const isDiscounted = totalBasketPrice !== discountedPrice;
 
