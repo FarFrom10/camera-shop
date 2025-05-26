@@ -1,5 +1,5 @@
 import { CameraCategory } from '../const';
-import { OrderData } from '../types/api';
+import { OrderData, ReviewData } from '../types/api';
 import { BasketItemData, CameraData, CameraReview, PromoCameraData } from '../types/cameras';
 
 export const fakeCurrentCamera: CameraData = {
@@ -74,4 +74,13 @@ export const fakeReviews: CameraReview[] = [
 export const fakeOrderData: OrderData = {
   camerasIds: [1],
   coupon: null
+};
+
+export const fakeReviewData: ReviewData = {
+  cameraId: 1,
+  rating: 1,
+  userName: 'Respect',
+  advantage: 'RespectRespect',
+  disadvantage: 'RespectRespect',
+  review: 'RespectRespectRespect',
 };

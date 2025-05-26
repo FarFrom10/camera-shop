@@ -1,5 +1,5 @@
 import { fakeReviews } from '../../mocks/mock-test';
-import { fetchCameraReviewsByIdAction } from '../api-actions';
+import { fetchCameraReviewsByIdAction, postReviewDataAction } from '../api-actions';
 import { resetReviews, reviewsProcess } from './reviews-process.slice';
 
 describe('ReviewProcess slice', () => {
@@ -9,6 +9,7 @@ describe('ReviewProcess slice', () => {
       reviews:fakeReviews,
 
       isReviewsLoading: false,
+      isPostReviewLoading: false,
     };
 
     const result = reviewsProcess.reducer(expectedState, emptyAction);
@@ -22,6 +23,7 @@ describe('ReviewProcess slice', () => {
       reviews: [],
 
       isReviewsLoading: false,
+      isPostReviewLoading: false,
     };
 
     const result = reviewsProcess.reducer(undefined, emptyAction);
@@ -34,6 +36,7 @@ describe('ReviewProcess slice', () => {
       reviews:[],
 
       isReviewsLoading: true,
+      isPostReviewLoading: false,
     };
 
     const result = reviewsProcess.reducer(undefined, fetchCameraReviewsByIdAction.pending);
@@ -45,6 +48,7 @@ describe('ReviewProcess slice', () => {
       reviews: fakeReviews,
 
       isReviewsLoading: false,
+      isPostReviewLoading: false,
     };
     const fakeId = String(fakeReviews[0].cameraId);
 
@@ -57,6 +61,7 @@ describe('ReviewProcess slice', () => {
       reviews: [],
 
       isReviewsLoading: false,
+      isPostReviewLoading: false,
     };
     const fakeId = String(fakeReviews[0].cameraId);
 
@@ -70,9 +75,36 @@ describe('ReviewProcess slice', () => {
       reviews: [],
 
       isReviewsLoading: false,
+      isPostReviewLoading: false,
     };
 
     const result = reviewsProcess.reducer(undefined, fetchCameraReviewsByIdAction.rejected);
+
+    expect(result).toEqual(expectedState);
+  });
+
+  it('should set "isPostReviewLoading" to "true" with "postReviewDataAction.pending" action', () => {
+    const expectedState = {
+      reviews:[],
+
+      isReviewsLoading: false,
+      isPostReviewLoading: true,
+    };
+
+    const result = reviewsProcess.reducer(undefined, postReviewDataAction.pending);
+
+    expect(result).toEqual(expectedState);
+  });
+
+  it('should set "isPostReviewLoading" to "false" with "postReviewDataAction.rejected" action', () => {
+    const expectedState = {
+      reviews:[],
+
+      isReviewsLoading: false,
+      isPostReviewLoading: false,
+    };
+
+    const result = reviewsProcess.reducer(undefined, postReviewDataAction.rejected);
 
     expect(result).toEqual(expectedState);
   });

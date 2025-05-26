@@ -2,13 +2,12 @@ import { IconName, ratingNames } from '../../const';
 import CommonIcon from '../common-icon/common-icon';
 import RatingStarInput from '../rating-star-input/rating-star-input';
 import { onHandleRatingChangeType } from '../../types/handlers';
-import { FieldError } from 'react-hook-form';
 import cn from 'classnames';
 
 type ReviewFormRatingProps = {
   onChangeRating: onHandleRatingChangeType;
   rating: null | number;
-  error: FieldError | undefined;
+  error: string | undefined;
   isDisabled: boolean;
 }
 
@@ -28,14 +27,14 @@ function ReviewFormRating({ onChangeRating, rating, error, isDisabled }: ReviewF
   });
 
   return (
-    <fieldset className={cn(
+    <fieldset data-testid="reviewFormRating" className={cn(
       'rate',
       'form-review__item',
       {'is-invalid': error}
     )}
     >
       <legend className="rate__caption">
-            Рейтинг
+        Рейтинг
         <CommonIcon icon={IconName.Snowflake}/>
       </legend>
       <div className="rate__bar">
@@ -47,7 +46,7 @@ function ReviewFormRating({ onChangeRating, rating, error, isDisabled }: ReviewF
           <span className="rate__all-stars">{ratingNames.length}</span>
         </div>
       </div>
-      {error && <p className="rate__message">{error.message}</p>}
+      {error && <p className="rate__message">{error}</p>}
     </fieldset>
   );
 }

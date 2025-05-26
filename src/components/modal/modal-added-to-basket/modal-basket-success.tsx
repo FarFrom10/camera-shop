@@ -18,7 +18,7 @@ function ModalBasketSuccess({ onModalClose, onNavigateToCatalog, isSingleButton 
     <>
       <p className="title title--h4">{titleText}</p>
       <CommonIcon icon={iconClass} iconClass='modal__icon'/>
-      <div className="modal__buttons">
+      <div data-testid="modalBasketSuccessButtons" className="modal__buttons">
         {!isSingleButton && <ButtonMoreDetails onButtonClick={onModalClose} isModal />}
         <CommonButton
           onButtonClick={onNavigateToCatalog && onNavigateToCatalog}

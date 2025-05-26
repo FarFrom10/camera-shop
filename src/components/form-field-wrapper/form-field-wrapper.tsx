@@ -1,11 +1,10 @@
 import { memo } from 'react';
-import { FieldError } from 'react-hook-form';
 import cn from 'classnames';
 
 type FormFieldWrapperProps = {
   children: JSX.Element;
   isTextarea?: boolean;
-  error: FieldError | undefined;
+  error: string | undefined;
 }
 
 function FormFieldtWrapperTemplate({children, isTextarea = false, error}: FormFieldWrapperProps): JSX.Element {
@@ -18,7 +17,7 @@ function FormFieldtWrapperTemplate({children, isTextarea = false, error}: FormFi
     )}
     >
       {children}
-      {error && <p className="custom-input__error">{error.message}</p>}
+      {error && <p className="custom-input__error">{error}</p>}
     </div>
   );
 }

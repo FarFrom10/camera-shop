@@ -6,7 +6,7 @@ import { nanoid } from '@reduxjs/toolkit';
 type ProductRatingProps = {
   ratingNumber: number;
   ratingClass?: ProductRatingClass;
-  reviewCount: number;
+  reviewCount?: number;
   disableReviewCount?: boolean;
 }
 

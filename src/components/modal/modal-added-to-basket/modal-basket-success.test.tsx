@@ -6,8 +6,10 @@ import ModalBasketSuccess from './modal-basket-success';
 
 describe('Component: ModalBasketSuccess', () => {
   it('should render correctly', () => {
+    const expectedText = ModalTitle.SuccessfullyAdded;
     const {withStoreComponent} = withStore(
       <ModalBasketSuccess
+        titleText={expectedText}
         onModalClose={mockEmptyCallback}
       />,
       makeFakeStore()
@@ -15,12 +17,14 @@ describe('Component: ModalBasketSuccess', () => {
 
     render(withRouter(withStoreComponent));
 
-    expect(screen.getByText(ModalTitle.SuccessfullyAdded)).toBeInTheDocument();
+    expect(screen.getByText(expectedText)).toBeInTheDocument();
   });
 
-  it('should render changed title text with "isSingleButton" prop', () => {
+  it('should render only 1 button with "isSingleButton" prop', () => {
+    const buttonsContainerId = 'modalBasketSuccessButtons';
     const {withStoreComponent} = withStore(
       <ModalBasketSuccess
+        titleText={ModalTitle.SuccessfullyAdded}
         onModalClose={mockEmptyCallback}
         isSingleButton
       />,
@@ -29,6 +33,6 @@ describe('Component: ModalBasketSuccess', () => {
 
     render(withRouter(withStoreComponent));
 
-    expect(screen.queryByText(ModalTitle.SuccessfullyAdded)).not.toBeInTheDocument();
+    expect(screen.getByTestId(buttonsContainerId).children).toHaveLength(1);
   });
 });

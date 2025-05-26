@@ -1,6 +1,6 @@
 import { NameSpace } from '../../const';
 import { fakeReviews } from '../../mocks/mock-test';
-import { selectIsReviewsLoading, selectReviews } from './reviews-process.selectors';
+import { selectIsPostReviewLoading, selectIsReviewsLoading, selectReviews } from './reviews-process.selectors';
 
 describe('ReviewsProcess selectors', () => {
   const state = {
@@ -8,6 +8,7 @@ describe('ReviewsProcess selectors', () => {
       reviews: fakeReviews,
 
       isReviewsLoading: false,
+      isPostReviewLoading: false,
     }
   };
 
@@ -21,5 +22,11 @@ describe('ReviewsProcess selectors', () => {
     const { isReviewsLoading } = state[NameSpace.Reviews];
     const result = selectIsReviewsLoading(state);
     expect(result).toBe(isReviewsLoading);
+  });
+
+  it('should return isPostReviewLoading from state', () => {
+    const { isPostReviewLoading } = state[NameSpace.Reviews];
+    const result = selectIsPostReviewLoading(state);
+    expect(result).toBe(isPostReviewLoading);
   });
 });

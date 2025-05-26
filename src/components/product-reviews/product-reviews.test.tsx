@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { withRouter, withStore } from '../../utils/mock-component';
-import { fakeReviews } from '../../mocks/mock-test';
+import { fakeCurrentCamera, fakeReviews } from '../../mocks/mock-test';
 import ProductReviews from './product-reviews';
 
 describe('Component: ProductReviews', () => {
@@ -9,10 +9,11 @@ describe('Component: ProductReviews', () => {
 
   it('should render correctly', () => {
     const {withStoreComponent} = withStore(
-      <ProductReviews/>,
+      <ProductReviews cameraId={fakeCurrentCamera.id}/>,
       {reviews: {
         reviews: fakeReviews,
-        isReviewsLoading: false
+        isReviewsLoading: false,
+        isPostReviewLoading: false
       }
       });
 
@@ -24,10 +25,11 @@ describe('Component: ProductReviews', () => {
 
   it('should not render button "showMore" if reviews.length === 0', () => {
     const {withStoreComponent} = withStore(
-      <ProductReviews/>,
+      <ProductReviews cameraId={fakeCurrentCamera.id}/>,
       {reviews: {
         reviews: [],
-        isReviewsLoading: false
+        isReviewsLoading: false,
+        isPostReviewLoading: false
       }
       });
 

@@ -74,7 +74,7 @@ function ReviewForm({ cameraId, onModalClose, onModalSuccessOpen }: ReviewFormPr
   return (
     <>
       <p className="title title--h4">{ModalTitle.LeaveReview}</p>
-      <div className="form-review">
+      <div data-testid="reviewForm" className="form-review">
         <form onSubmit={(e) => {
           e.preventDefault();
           handleSubmit(onSubmit)();
@@ -88,14 +88,14 @@ function ReviewForm({ cameraId, onModalClose, onModalSuccessOpen }: ReviewFormPr
               render={({ field }) => (
                 <ReviewFormRating
                   rating={field.value}
-                  error={errors.rating}
+                  error={errors.rating?.message}
                   onChangeRating={(value) => field.onChange(value)}
                   isDisabled={isPostReviewLoading}
                 />
               )}
             />
 
-            <FormFieldWrapper error={errors.userName}>
+            <FormFieldWrapper error={errors.userName?.message}>
               <label>
                 <span className="custom-input__label">
               Ваше имя
@@ -110,7 +110,7 @@ function ReviewForm({ cameraId, onModalClose, onModalSuccessOpen }: ReviewFormPr
               </label>
             </FormFieldWrapper>
 
-            <FormFieldWrapper error={errors.advantage}>
+            <FormFieldWrapper error={errors.advantage?.message}>
               <label>
                 <span className="custom-input__label">
               Достоинства
@@ -125,7 +125,7 @@ function ReviewForm({ cameraId, onModalClose, onModalSuccessOpen }: ReviewFormPr
               </label>
             </FormFieldWrapper>
 
-            <FormFieldWrapper error={errors.disadvantage}>
+            <FormFieldWrapper error={errors.disadvantage?.message}>
               <label>
                 <span className="custom-input__label">
               Недостатки
@@ -140,7 +140,7 @@ function ReviewForm({ cameraId, onModalClose, onModalSuccessOpen }: ReviewFormPr
               </label>
             </FormFieldWrapper>
 
-            <FormFieldWrapper isTextarea error={errors.review}>
+            <FormFieldWrapper isTextarea error={errors.review?.message}>
               <label>
                 <span className="custom-textarea__label">
               Комментарий

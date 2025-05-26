@@ -6,8 +6,8 @@ import { State } from '../types/state';
 import { Action } from '@reduxjs/toolkit';
 import { AppThunkDispatch, extractActionsTypes } from '../types/mocks';
 import { APIRoute } from '../const';
-import { fetchCameraReviewsByIdAction, fetchCamerasAction, fetchPromoCamerasAction, getCameraByIdAction, getSimilarCamerasByIdAction, postOrderDataAction } from './api-actions';
-import { fakeCameras, fakeCurrentCamera, fakeOrderData, fakePromoCameras, fakeReviews } from '../mocks/mock-test';
+import { fetchCameraReviewsByIdAction, fetchCamerasAction, fetchPromoCamerasAction, getCameraByIdAction, getSimilarCamerasByIdAction, postOrderDataAction, postReviewDataAction } from './api-actions';
+import { fakeCameras, fakeCurrentCamera, fakeOrderData, fakePromoCameras, fakeReviewData, fakeReviews } from '../mocks/mock-test';
 
 describe('Async actions', () => {
   const axios = createAPI();
@@ -209,6 +209,37 @@ describe('Async actions', () => {
       expect(actions).toEqual([
         postOrderDataAction.pending.type,
         postOrderDataAction.rejected.type
+      ]);
+    });
+  });
+
+  describe('postReviewDataAction', () => {
+    it('should dispatch "postReviewDataAction.pending" and "postReviewDataAction.fulfilled" when server response 200', async () => {
+      mockAxiosAdapter.onPost(APIRoute.Reviews).reply(200, fakeReviewData);
+
+      await store.dispatch(postReviewDataAction(fakeReviewData));
+      const emittedActions = store.getActions();
+      const extractedActionTypes = extractActionsTypes(emittedActions);
+      const postReviewDataActionFulfilled = emittedActions.at(1) as ReturnType<typeof postReviewDataAction.fulfilled>;
+
+      expect(extractedActionTypes).toEqual([
+        postReviewDataAction.pending.type,
+        postReviewDataAction.fulfilled.type
+      ]);
+
+      expect(postReviewDataActionFulfilled.payload)
+        .toEqual(fakeReviewData);
+    });
+
+    it('should dispatch "postReviewDataAction.pending" and "postReviewDataAction.rejected" when server response 400', async () => {
+      mockAxiosAdapter.onPost(APIRoute.Reviews).reply(400);
+
+      await store.dispatch(postReviewDataAction(fakeReviewData));
+      const actions = extractActionsTypes(store.getActions());
+
+      expect(actions).toEqual([
+        postReviewDataAction.pending.type,
+        postReviewDataAction.rejected.type
       ]);
     });
   });

@@ -11,6 +11,7 @@ function RatingStarInput({starNumber, grade, onChangeRating, isDisabled}: Rating
   return (
     <>
       <input
+        data-testid="ratingStarInput"
         disabled={isDisabled}
         className="visually-hidden"
         onChange={onChangeRating}

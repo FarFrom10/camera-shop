@@ -1,34 +1,43 @@
 import { render, screen } from '@testing-library/react';
 import { withRouter } from '../../utils/mock-component';
 import FormFieldWrapper from './form-field-wrapper';
-import { InputValidationErrorMessage } from '../../const';
 
 describe('Component: FormFieldWrapper', () => {
   const containerId = 'FormFieldWrapper';
   const fakeChildrenId = 'fakeChildren';
   const fakeChildren = <div data-testid={fakeChildrenId}></div>;
+  const fakeError = 'some error message';
 
   it('should render correctly', () => {
     render(withRouter(
-      <FormFieldWrapper isError={false} errorMessage={InputValidationErrorMessage.Phone}>
+      <FormFieldWrapper error={undefined}>
         {fakeChildren}
       </FormFieldWrapper>));
-    const errorElement = screen.getByText(InputValidationErrorMessage.Phone);
 
     expect(screen.getByTestId(containerId)).toBeInTheDocument();
+    expect(screen.getByTestId(containerId)).toHaveClass('custom-input');
     expect(screen.getByTestId(fakeChildrenId)).toBeInTheDocument();
-    expect(errorElement).toBeInTheDocument();
-    expect(errorElement).toHaveStyle('opacity: 0');
+    expect(screen.queryByText(fakeError)).not.toBeInTheDocument();
   });
 
   it('should render correctly with error', () => {
     render(withRouter(
-      <FormFieldWrapper isError errorMessage={InputValidationErrorMessage.Phone}>
+      <FormFieldWrapper error={fakeError}>
         {fakeChildren}
       </FormFieldWrapper>));
-    const errorElement = screen.getByText(InputValidationErrorMessage.Phone);
 
     expect(screen.getByTestId(containerId)).toHaveClass('is-invalid');
-    expect(errorElement).toHaveStyle('opacity: 1');
+    expect(screen.getByText(fakeError)).toBeInTheDocument();
+  });
+
+  it('should have "custom-textarea" class with "isTextarea" prop', () => {
+    render(withRouter(
+      <FormFieldWrapper error={undefined} isTextarea>
+        {fakeChildren}
+      </FormFieldWrapper>));
+    const containerElement = screen.getByTestId(containerId);
+
+    expect(containerElement).toHaveClass('custom-textarea');
+    expect(containerElement).not.toHaveClass('custom-input');
   });
 });
