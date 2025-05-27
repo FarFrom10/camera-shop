@@ -1,5 +1,6 @@
 import { DiscountByAmount, DiscountReductionByCost } from '../const';
 import { BasketItemData } from '../types/cameras';
+import { PromoCode } from '../types/types';
 import { getTotalBasketItemsAmount } from './common';
 
 function getDiscountByAmount(basketItems: BasketItemData[]): number {
@@ -40,8 +41,15 @@ function getDiscountReducedByPrice(basketItems: BasketItemData[], totalPrice: nu
   return discountByAmount - DiscountReductionByCost.high;
 }
 
-export function getDiscountedTotalPrice(basketItems: BasketItemData[], totalBasketPrice: number): number {
-  const discount = getDiscountReducedByPrice(basketItems, totalBasketPrice);
+export function getDiscountedTotalPrice(
+  basketItems: BasketItemData[],
+  totalBasketPrice: number,
+  promoCode: PromoCode | undefined
+): number {
+  const discount = promoCode
+    ? getDiscountReducedByPrice(basketItems, totalBasketPrice) + promoCode.discount
+    : getDiscountReducedByPrice(basketItems, totalBasketPrice);
+
   if (discount === 0) {
     return totalBasketPrice;
   }

@@ -1,7 +1,7 @@
 import { FilterCategory, NameSpace, SortByOrder, SortByType } from '../const';
 import { store } from '../store';
 import { BasketItemData, CameraData, CameraReview, PromoCameraData } from './cameras';
-import { FilterCameraType, FilterLevel, FilterPrice } from './types';
+import { FilterCameraType, FilterLevel, FilterPrice, PromoCode } from './types';
 
 export type State = ReturnType<typeof store.getState>;
 export type StateCameras = Pick<State, NameSpace.Cameras>
@@ -48,6 +48,8 @@ export type FilterProcess = {
 
 export type BasketProcess = {
   basketItems: BasketItemData[];
+  promoCode: PromoCode;
 
   isBasketLoading: boolean;
+  isPromoCodeLoading: boolean;
 }

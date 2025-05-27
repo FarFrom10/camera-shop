@@ -2,19 +2,24 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { BasketProcess } from '../../types/state';
 import { CameraData, ChangedCameraAmountData } from '../../types/cameras';
-import { postOrderDataAction } from '../api-actions';
+import { postCouponAction, postOrderDataAction } from '../api-actions';
 
 export const initialState: BasketProcess = {
   basketItems: [],
+  promoCode: {
+    coupon: '',
+    discount: 0
+  },
 
-  isBasketLoading: false
+  isBasketLoading: false,
+  isPromoCodeLoading: false,
 };
 
 export const basketProcess = createSlice({
   name: NameSpace.Basket,
   initialState,
   reducers: {
-    addCamera: (state, action: PayloadAction<CameraData>) => {
+    addProduct: (state, action: PayloadAction<CameraData>) => {
       const camera = action.payload;
       const cameraIndex = state.basketItems.findIndex((item) => item.id === camera.id);
       const updatedCameras = cameraIndex !== -1
@@ -36,6 +41,16 @@ export const basketProcess = createSlice({
 
       state.basketItems = updatedCameras;
     },
+    changePromoCode: (state, action: PayloadAction<string>) => {
+      state.promoCode.coupon = action.payload;
+    },
+    resetPromoCode: (state) => {
+      state.promoCode = {
+        coupon: '',
+        discount: 0
+      };
+    },
+
   },
   extraReducers(builder) {
     builder
@@ -44,12 +59,27 @@ export const basketProcess = createSlice({
       })
       .addCase(postOrderDataAction.fulfilled, (state) => {
         state.basketItems = [];
+        state.promoCode = {
+          coupon: '',
+          discount: 0
+        };
         state.isBasketLoading = false;
       })
       .addCase(postOrderDataAction.rejected, (state) => {
         state.isBasketLoading = false;
+      })
+
+      .addCase(postCouponAction.pending, (state) => {
+        state.isPromoCodeLoading = true;
+      })
+      .addCase(postCouponAction.fulfilled, (state, action) => {
+        state.promoCode.discount = action.payload;
+        state.isPromoCodeLoading = false;
+      })
+      .addCase(postCouponAction.rejected, (state) => {
+        state.isPromoCodeLoading = false;
       });
   }
 });
 
-export const {addCamera, removeProduct, changeAmount } = basketProcess.actions;
+export const {addProduct, removeProduct, changeAmount, changePromoCode, resetPromoCode } = basketProcess.actions;

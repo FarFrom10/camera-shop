@@ -4,10 +4,13 @@ import LoadingScreen from '../../components/loading-screen/loading-screen';
 import Title from '../../components/title/title';
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks';
-import { selectIsBasketLoading } from '../../store/basket-process/basket-process.selectors';
+import { selectIsBasketLoading, selectIsPromoCodeLoading } from '../../store/basket-process/basket-process.selectors';
 
 function BasketPage(): JSX.Element {
   const isBasketLoading = useAppSelector(selectIsBasketLoading);
+  const isPromoCodeLoading = useAppSelector(selectIsPromoCodeLoading);
+  const isLoading = isBasketLoading || isPromoCodeLoading;
+
 
   return (
     <main>
@@ -16,7 +19,7 @@ function BasketPage(): JSX.Element {
         <Breadcrumbs/>
         <BasketPageContent isBasketLoading={isBasketLoading}/>
 
-        {isBasketLoading && <LoadingScreen/>}
+        {isLoading && <LoadingScreen/>}
       </div>
     </main>
   );

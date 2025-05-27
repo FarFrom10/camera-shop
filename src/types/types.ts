@@ -34,3 +34,14 @@ export type FormReviewType = {
   disadvantage: string;
   review: string;
 }
+
+export type PromoStatus = {
+  required: boolean;
+  error: boolean;
+  success: boolean;
+}
+
+export type PromoCode = {
+  coupon: string;
+  discount: number;
+}

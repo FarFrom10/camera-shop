@@ -12,6 +12,8 @@ import { useModalBasketSuccess } from '../../hooks/use-modal-basket-success';
 import ModalWrapper from '../modal/modal-wrapper/modal-wrapper';
 import ModalBasketSuccess from '../modal/modal-added-to-basket/modal-basket-success';
 import { selectPromoCameras } from '../../store/cameras-process/cameras-process.selectors';
+import BasketPromo from '../basket-promo/basket-promo';
+import { selectPromoCode } from '../../store/basket-process/basket-process.selectors';
 
 type BasketSummaryProps = {
   cameras: BasketItemData[];
@@ -21,9 +23,11 @@ type BasketSummaryProps = {
 function BasketSummary({ cameras, isBasketLoading }: BasketSummaryProps): JSX.Element {
   const dispatch = useAppDispatch();
   const promoCameras = useAppSelector(selectPromoCameras);
+  const promoCode = useAppSelector(selectPromoCode);
+
   const filteredCameras = filterCamerasByPromo(cameras, promoCameras);
   const totalBasketPrice = getTotalBasketPrice(cameras);
-  const discountedPrice = getDiscountedTotalPrice(filteredCameras, totalBasketPrice);
+  const discountedPrice = getDiscountedTotalPrice(filteredCameras, totalBasketPrice, promoCode);
   const totalDiscount = Number((totalBasketPrice - discountedPrice).toFixed(2));
   const isDiscounted = totalBasketPrice !== discountedPrice;
 
@@ -36,7 +40,7 @@ function BasketSummary({ cameras, isBasketLoading }: BasketSummaryProps): JSX.El
 
   function handlePostOrderClick() {
     const camerasIds = getBasketCamerasIds(cameras);
-    dispatch(postOrderDataAction({camerasIds, coupon: null}))
+    dispatch(postOrderDataAction({camerasIds, coupon: promoCode.coupon}))
       .then((response) => {
         if (response.meta.requestStatus === 'rejected') {
           toast.warn(ServerConnectionStatusMessage.Fail.common);
@@ -49,8 +53,7 @@ function BasketSummary({ cameras, isBasketLoading }: BasketSummaryProps): JSX.El
   return (
     <>
       <div data-testid='basketSummary' className="basket__summary">
-        <div className="basket__promo">
-        </div>
+        <BasketPromo promoCode={promoCode}/>
         <div className="basket__summary-order">
           <p className="basket__summary-item">
             <span className="basket__summary-text">Всего:</span>

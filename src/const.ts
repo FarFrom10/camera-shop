@@ -180,6 +180,7 @@ export enum APIRoute {
   PromoCameras = '/promo',
   Orders = '/orders',
   Reviews = '/reviews',
+  Coupons = '/coupons',
 }
 
 export enum DateFormat {

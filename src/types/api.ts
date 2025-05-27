@@ -20,3 +20,7 @@ export type ReviewData = {
   disadvantage: string;
   review: string;
 }
+
+export type CouponData = {
+  coupon: string;
+}

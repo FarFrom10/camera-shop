@@ -4,7 +4,7 @@ import { CameraData } from '../../../types/cameras';
 import BasketItemMini from '../../basket-item-mini/basket-item-mini';
 import CommonButton from '../../common-button/common-button';
 import { useAppDispatch } from '../../../hooks';
-import { addCamera } from '../../../store/basket-process/basket-process.slice';
+import { addProduct } from '../../../store/basket-process/basket-process.slice';
 
 type ModalAddToBasketProps ={
   camera: CameraData | null;
@@ -22,7 +22,7 @@ function ModalAddToBasketTemplate({camera, onModalClose, onModalAddedToBasketOpe
   }
 
   const handleButtonClick = () => {
-    dispatch(addCamera(camera));
+    dispatch(addProduct(camera));
     onModalClose();
     onModalAddedToBasketOpen();
   };
