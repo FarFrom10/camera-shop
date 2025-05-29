@@ -1,3 +1,4 @@
+import { memo, useCallback, useMemo } from 'react';
 import { EmptyListMessage } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { useModalConfirm } from '../../hooks/use-modal-confirm';
@@ -13,9 +14,9 @@ type BasketListProps = {
   isBasketLoading: boolean;
 }
 
-function BasketList({ cameras, isBasketLoading }: BasketListProps): JSX.Element {
+function BasketListTemplate({ cameras, isBasketLoading }: BasketListProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const handleAmountChange = (id: number, amount: number) => dispatch(changeAmount({id, amount}));
+  const handleAmountChange = useCallback((id: number, amount: number) => dispatch(changeAmount({id, amount})), [dispatch]);
 
   const {
     modalConfirm,
@@ -25,7 +26,7 @@ function BasketList({ cameras, isBasketLoading }: BasketListProps): JSX.Element 
     currentModalCamera,
   } = useModalConfirm({ cameras });
 
-  const basketList = cameras.map((camera) =>
+  const basketList = useMemo(() => cameras.map((camera) =>
     (
       <BasketItem
         key={camera.id}
@@ -34,7 +35,7 @@ function BasketList({ cameras, isBasketLoading }: BasketListProps): JSX.Element 
         onModalOpen={handleModalConfirmOpen}
         isBasketLoading={isBasketLoading}
       />
-    ));
+    )), [cameras, handleAmountChange, handleModalConfirmOpen, isBasketLoading]);
 
   return(
     <>
@@ -59,5 +60,7 @@ function BasketList({ cameras, isBasketLoading }: BasketListProps): JSX.Element 
     </>
   );
 }
+
+const BasketList = memo(BasketListTemplate);
 
 export default BasketList;

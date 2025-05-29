@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useRef, useState } from 'react';
+import { FormEvent, memo, useCallback, useEffect, useRef, useState } from 'react';
 import { ButtonText, IconName } from '../../const';
 import CommonIcon from '../common-icon/common-icon';
 import cn from 'classnames';
@@ -12,7 +12,7 @@ type BasketPromoProps = {
   promoCode: PromoCode;
 }
 
-function BasketPromo({ promoCode }: BasketPromoProps): JSX.Element {
+function BasketPromoTemplate({ promoCode }: BasketPromoProps): JSX.Element {
   const dispatch = useAppDispatch();
   const initialState = {
     required: false,
@@ -34,7 +34,7 @@ function BasketPromo({ promoCode }: BasketPromoProps): JSX.Element {
     }
   }, [promoCode.coupon]);
 
-  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = useCallback((evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if (!inputRef.current?.value) {
       return setPromoStatus((prev) => ({
@@ -70,7 +70,7 @@ function BasketPromo({ promoCode }: BasketPromoProps): JSX.Element {
           }));
         }
       });
-  };
+  }, [dispatch]);
 
   return(
     <div data-testid='basketPromo' className="basket__promo">
@@ -108,4 +108,7 @@ function BasketPromo({ promoCode }: BasketPromoProps): JSX.Element {
     </div>
   );
 }
+
+const BasketPromo = memo(BasketPromoTemplate);
+
 export default BasketPromo;

@@ -11,7 +11,6 @@ function BasketPage(): JSX.Element {
   const isPromoCodeLoading = useAppSelector(selectIsPromoCodeLoading);
   const isLoading = isBasketLoading || isPromoCodeLoading;
 
-
   return (
     <main>
       <div data-testid='basketPage' className="page-content">

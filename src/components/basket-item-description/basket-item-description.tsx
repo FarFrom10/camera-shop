@@ -1,3 +1,4 @@
+import { memo, useMemo } from 'react';
 import { CameraCategory, PriceClass } from '../../const';
 import { CameraData } from '../../types/cameras';
 import ProductPrice from '../product-price/product-price';
@@ -7,10 +8,11 @@ type BasketItemDescriptionProps = {
   shouldDisplayPrice?: boolean;
 }
 
-function BasketItemDescription({shouldDisplayPrice = false, camera}: BasketItemDescriptionProps): JSX.Element {
-  const cameraCategory = camera.category === CameraCategory.Photo
+function BasketItemDescriptionTemplate({shouldDisplayPrice = false, camera}: BasketItemDescriptionProps): JSX.Element {
+  const cameraCategory = useMemo(() => camera.category === CameraCategory.Photo
     ? 'фотокамера'
-    : 'видеокамера';
+    : 'видеокамера'
+  , [camera.category]);
 
   return (
     <div data-testid='basketItemDescription' className="basket-item__description">
@@ -38,5 +40,7 @@ function BasketItemDescription({shouldDisplayPrice = false, camera}: BasketItemD
     </div>
   );
 }
+
+const BasketItemDescription = memo(BasketItemDescriptionTemplate);
 
 export default BasketItemDescription;

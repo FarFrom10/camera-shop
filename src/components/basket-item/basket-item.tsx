@@ -6,6 +6,7 @@ import ProductPrice from '../product-price/product-price';
 import CommonPicture from '../common-picture/common-picture';
 import { BasketItemData } from '../../types/cameras';
 import { useProductAmount } from '../../hooks/use-product-amount';
+import { memo, useCallback, useMemo } from 'react';
 
 type BasketItemProps = {
   camera: BasketItemData;
@@ -14,7 +15,7 @@ type BasketItemProps = {
   isBasketLoading: boolean;
 }
 
-function BasketItem({camera, onAmountChange, onModalOpen, isBasketLoading}: BasketItemProps): JSX.Element {
+function BasketItemTemplate({camera, onAmountChange, onModalOpen, isBasketLoading}: BasketItemProps): JSX.Element {
   const {
     amount,
     id,
@@ -33,9 +34,9 @@ function BasketItem({camera, onAmountChange, onModalOpen, isBasketLoading}: Bask
     currentAmount
   } = useProductAmount({ camera, onAmountChange});
 
-  const handleButtonClick = () => onModalOpen(id);
+  const handleButtonClick = useCallback(() => onModalOpen(id), [onModalOpen, id]);
 
-  const totalPrice = price * amount;
+  const totalPrice = useMemo(() => price * amount, [price, amount]);
 
   return (
     <li data-testid='basketItem' className="basket-item">
@@ -84,5 +85,7 @@ function BasketItem({camera, onAmountChange, onModalOpen, isBasketLoading}: Bask
     </li>
   );
 }
+
+const BasketItem = memo(BasketItemTemplate);
 
 export default BasketItem;
