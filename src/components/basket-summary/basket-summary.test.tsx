@@ -1,11 +1,12 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { withRouter, withStore } from '../../utils/mock-component';
 import BasketSummary from './basket-summary';
 import { makeFakeStore } from '../../utils/mocks';
 import { fakeBasketCameras } from '../../mocks/mock-test';
 
 describe('Component: BasketSummary', () => {
-  const containerId = 'basketSummary';
+  const mainContainerId = 'basketSummary';
+  const orderContainerId = 'basketSummaryOrder';
 
   it('should render correctly', () => {
     const {withStoreComponent} = withStore(
@@ -17,12 +18,14 @@ describe('Component: BasketSummary', () => {
     );
 
     render(withRouter(withStoreComponent));
+    const mainContainer = screen.getByTestId(mainContainerId);
+    const orderContainer = screen.getByTestId(orderContainerId);
 
-    expect(screen.getByTestId(containerId)).toBeInTheDocument();
+    expect(mainContainer).toBeInTheDocument();
     expect(screen.getByText(/Всего/i)).toBeInTheDocument();
     expect(screen.getByText(/Скидка/i)).toBeInTheDocument();
     expect(screen.getByText(/К оплате/i)).toBeInTheDocument();
-    expect(screen.getByRole('button')).toBeInTheDocument();
+    expect(within(orderContainer).getByRole('button')).toBeInTheDocument();
   });
 
   it('submit button should be disabled if "cameras" array is empty', () => {
@@ -35,8 +38,9 @@ describe('Component: BasketSummary', () => {
     );
 
     render(withRouter(withStoreComponent));
+    const orderContainer = screen.getByTestId(orderContainerId);
 
-    expect(screen.getByRole('button')).toBeDisabled();
+    expect(within(orderContainer).getByRole('button')).toBeDisabled();
   });
 
   it('submit button should be disabled if "isBasketLoading" is "true"', () => {
@@ -49,7 +53,8 @@ describe('Component: BasketSummary', () => {
     );
 
     render(withRouter(withStoreComponent));
+    const orderContainer = screen.getByTestId(orderContainerId);
 
-    expect(screen.getByRole('button')).toBeDisabled();
+    expect(within(orderContainer).getByRole('button')).toBeDisabled();
   });
 });

@@ -33,7 +33,7 @@ export const Delay = {
 
 export const BusketAmount = {
   Min: 1,
-  Max: 99
+  Max: 9
 } as const;
 
 export enum NameSpace {
@@ -116,7 +116,8 @@ export enum ButtonText {
   Remove = 'Удалить',
   PlaceAnOrder = 'Оформить заказ',
   LeaveReview = 'Отправить отзыв',
-  GoToCatalog = 'Вернуться к покупкам'
+  GoToCatalog = 'Вернуться к покупкам',
+  Apply = 'Применить'
 }
 
 export enum ModalTitle {

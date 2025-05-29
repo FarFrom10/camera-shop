@@ -19,6 +19,7 @@ export const makeFakeStore = (initialState?: Partial<State>): State => ({
     reviews: fakeReviews,
 
     isReviewsLoading: false,
+    isPostReviewLoading: false
   },
   sort: {
     sortType: SortByType.Price,
@@ -45,8 +46,13 @@ export const makeFakeStore = (initialState?: Partial<State>): State => ({
   },
   basket : {
     basketItems: [],
+    promoCode: {
+      coupon: '',
+      discount: 0
+    },
 
-    isBasketLoading: false
+    isBasketLoading: false,
+    isPromoCodeLoading: false,
   },
   ...initialState ?? {},
 });

@@ -1,6 +1,7 @@
 import { CameraCategory } from '../const';
-import { OrderData, ReviewData } from '../types/api';
+import { CouponData, OrderData, ReviewData } from '../types/api';
 import { BasketItemData, CameraData, CameraReview, PromoCameraData } from '../types/cameras';
+import { PromoCode } from '../types/types';
 
 export const fakeCurrentCamera: CameraData = {
   'id': 1,
@@ -83,4 +84,13 @@ export const fakeReviewData: ReviewData = {
   advantage: 'RespectRespect',
   disadvantage: 'RespectRespect',
   review: 'RespectRespectRespect',
+};
+
+export const fakeCouponData: CouponData = {
+  coupon: 'FAKE-123'
+};
+
+export const fakePromoCode: PromoCode = {
+  coupon: 'FAKE-123',
+  discount: 10
 };

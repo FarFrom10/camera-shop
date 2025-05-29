@@ -44,11 +44,11 @@ export const useProductAmount = ({ camera, onAmountChange }: UseProductAmountPro
 
   const handleAmountChange = (evt: ChangeEvent<HTMLInputElement>) => {
     let updatedAmount = Number(evt.target.value);
-    if (updatedAmount < 1) {
-      updatedAmount = 1;
+    if (updatedAmount < BusketAmount.Min) {
+      updatedAmount = BusketAmount.Min;
     }
-    if (updatedAmount > 99) {
-      updatedAmount = 99 ;
+    if (updatedAmount > BusketAmount.Max) {
+      updatedAmount = BusketAmount.Max ;
     }
 
     setCurrentAmount(updatedAmount);

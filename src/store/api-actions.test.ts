@@ -6,8 +6,8 @@ import { State } from '../types/state';
 import { Action } from '@reduxjs/toolkit';
 import { AppThunkDispatch, extractActionsTypes } from '../types/mocks';
 import { APIRoute } from '../const';
-import { fetchCameraReviewsByIdAction, fetchCamerasAction, fetchPromoCamerasAction, getCameraByIdAction, getSimilarCamerasByIdAction, postOrderDataAction, postReviewDataAction } from './api-actions';
-import { fakeCameras, fakeCurrentCamera, fakeOrderData, fakePromoCameras, fakeReviewData, fakeReviews } from '../mocks/mock-test';
+import { fetchCameraReviewsByIdAction, fetchCamerasAction, fetchPromoCamerasAction, getCameraByIdAction, getSimilarCamerasByIdAction, postCouponAction, postOrderDataAction, postReviewDataAction } from './api-actions';
+import { fakeCameras, fakeCouponData, fakeCurrentCamera, fakeOrderData, fakePromoCameras, fakeReviewData, fakeReviews } from '../mocks/mock-test';
 
 describe('Async actions', () => {
   const axios = createAPI();
@@ -240,6 +240,37 @@ describe('Async actions', () => {
       expect(actions).toEqual([
         postReviewDataAction.pending.type,
         postReviewDataAction.rejected.type
+      ]);
+    });
+  });
+
+  describe('postCouponAction', () => {
+    it('should dispatch "postCouponAction.pending" and "postCouponAction.fulfilled" when server response 200', async () => {
+      mockAxiosAdapter.onPost(APIRoute.Coupons).reply(200, fakeCouponData);
+
+      await store.dispatch(postCouponAction(fakeCouponData));
+      const emittedActions = store.getActions();
+      const extractedActionTypes = extractActionsTypes(emittedActions);
+      const postCouponActionFulfilled = emittedActions.at(1) as ReturnType<typeof postCouponAction.fulfilled>;
+
+      expect(extractedActionTypes).toEqual([
+        postCouponAction.pending.type,
+        postCouponAction.fulfilled.type
+      ]);
+
+      expect(postCouponActionFulfilled.payload)
+        .toEqual(fakeCouponData);
+    });
+
+    it('should dispatch "postCouponAction.pending" and "postCouponAction.rejected" when server response 400', async () => {
+      mockAxiosAdapter.onPost(APIRoute.Coupons).reply(400);
+
+      await store.dispatch(postCouponAction(fakeCouponData));
+      const actions = extractActionsTypes(store.getActions());
+
+      expect(actions).toEqual([
+        postCouponAction.pending.type,
+        postCouponAction.rejected.type
       ]);
     });
   });

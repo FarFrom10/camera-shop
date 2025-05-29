@@ -54,7 +54,7 @@ function BasketSummary({ cameras, isBasketLoading }: BasketSummaryProps): JSX.El
     <>
       <div data-testid='basketSummary' className="basket__summary">
         <BasketPromo promoCode={promoCode}/>
-        <div className="basket__summary-order">
+        <div data-testid="basketSummaryOrder" className="basket__summary-order">
           <p className="basket__summary-item">
             <span className="basket__summary-text">Всего:</span>
             <span className="basket__summary-value">{`${totalBasketPrice} ₽`}</span>
