@@ -10,6 +10,7 @@ function Layout(): JSX.Element {
 
   return(
     <div data-testid='layout' className="wrapper">
+      <div id="modal-root"></div>
       <Header isIndexPage={isIndexPage} />
       <Outlet/>
       <Footer isIndexPage={isIndexPage}/>

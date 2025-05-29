@@ -1,6 +1,8 @@
 import cn from 'classnames';
 import ModalWrapperContent from '../modal-wrapper-content/modal-wrapper-content';
 import { memo } from 'react';
+import { createPortal } from 'react-dom';
+import { MODAL_ROOT_ID } from '../../../const';
 
 type ModalWrapperProps = {
   isActive: boolean;
@@ -10,7 +12,13 @@ type ModalWrapperProps = {
 }
 
 function ModalWrapperTemplate({isActive, onModalClose, children, isModalNarrow = false}: ModalWrapperProps): JSX.Element {
-  return(
+  const modalRoot = document.getElementById(MODAL_ROOT_ID);
+
+  if (!modalRoot) {
+    return <div data-testid='modalWrapper'></div>;
+  }
+
+  return createPortal(
     <div data-testid='modalWrapper' className={cn(
       'modal',
       {'is-active': isActive},
@@ -24,7 +32,8 @@ function ModalWrapperTemplate({isActive, onModalClose, children, isModalNarrow =
             {children}
           </ModalWrapperContent>}
       </div>
-    </div>
+    </div>,
+    modalRoot
   );
 }
 

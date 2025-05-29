@@ -3,12 +3,19 @@ import ModalWrapper from './modal-wrapper';
 import { mockEmptyCallback, withRouter } from '../../../utils/mock-component';
 import * as mockComponent from '../../../utils/mock-component';
 import userEvent from '@testing-library/user-event';
+import { MODAL_ROOT_ID } from '../../../const';
 
 describe('Component: ModalWrapper', () => {
   const containerId = 'modalWrapper';
   const overlayId = 'modalWrapperOverlay';
   const fakeChildrenId = 'fakeChildren';
   const fakeChildren = <div data-testid={fakeChildrenId}>children</div>;
+
+  beforeEach(() => {
+    const modalRoot = document.createElement('div');
+    modalRoot.setAttribute('id', MODAL_ROOT_ID);
+    document.body.appendChild(modalRoot);
+  });
 
   it('should render correctly and not have chldren', () => {
     const fakeShowModal = false;
@@ -25,10 +32,8 @@ describe('Component: ModalWrapper', () => {
   });
 
   it('should have children', () => {
-    const fakeShowModal = true;
-
     render(withRouter(
-      <ModalWrapper onModalClose={mockEmptyCallback} isActive={fakeShowModal}>
+      <ModalWrapper onModalClose={mockEmptyCallback} isActive>
         {fakeChildren}
       </ModalWrapper>
     ));
@@ -38,11 +43,10 @@ describe('Component: ModalWrapper', () => {
   });
 
   it('should call "onModalClose" on overlay click', async () => {
-    const fakeShowModal = true;
     const fakeOnModalCloseSpy = vi.spyOn(mockComponent, 'mockEmptyCallback');
 
     render(withRouter(
-      <ModalWrapper onModalClose={mockEmptyCallback} isActive={fakeShowModal}>
+      <ModalWrapper onModalClose={mockEmptyCallback} isActive>
         {fakeChildren}
       </ModalWrapper>
     ));

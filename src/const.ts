@@ -2,12 +2,13 @@ export const SITE_NAME = 'Фотошоп';
 export const TIMEOUT_SHOW_ERROR = 3000;
 export const RATING_STAR_NUMBER = 5;
 export const REVIEWS_STEP_NUMBER = 3;
-export const CLASS_SCROLL_LOCK = 'scroll-lock';
 export const SIMILAR_CAMERAS_SLIDES_PER_VIEW = 3;
 export const DEFAULT_PRODUCT_TAB = 2;
 export const EMPTY_SEARCH_LIST_TEXT = 'Не найдено...';
 export const CAMERAS_PER_PAGE = 9;
 export const MAX_PAGES_PER_VIEW = 3;
+export const CLASS_SCROLL_LOCK = 'scroll-lock';
+export const MODAL_ROOT_ID = 'modal-root';
 
 export enum SearchParamsName {
   Page = 'page',
