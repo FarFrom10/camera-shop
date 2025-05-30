@@ -1,5 +1,5 @@
 import { FormEvent, memo, useCallback, useEffect, useRef, useState } from 'react';
-import { ButtonText, IconName } from '../../const';
+import { ButtonText, IconName, SERVER_POST_DELAY } from '../../const';
 import CommonIcon from '../common-icon/common-icon';
 import cn from 'classnames';
 import { PromoCode, PromoStatus } from '../../types/types';
@@ -7,6 +7,9 @@ import { useAppDispatch } from '../../hooks';
 import { postCouponAction } from '../../store/api-actions';
 import { changePromoCode, resetPromoCode } from '../../store/basket-process/basket-process.slice';
 import CommonButton from '../common-button/common-button';
+import { throttle } from 'lodash';
+import { toast } from 'react-toastify';
+import { getThrottleMessage } from '../../utils/common';
 
 type BasketPromoProps = {
   promoCode: PromoCode;
@@ -21,6 +24,7 @@ function BasketPromoTemplate({ promoCode }: BasketPromoProps): JSX.Element {
   };
 
   const [promoStatus, setPromoStatus] = useState<PromoStatus>(initialState);
+  const [isThrottled, setIsThrottled] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -34,8 +38,34 @@ function BasketPromoTemplate({ promoCode }: BasketPromoProps): JSX.Element {
     }
   }, [promoCode.coupon]);
 
+  const throttledDispatchRef = useRef(
+    throttle((convertedValue: string) => {
+      setIsThrottled(false);
+
+      dispatch(postCouponAction({ coupon: convertedValue }))
+        .then((response) => {
+          if (response.meta.requestStatus === 'rejected') {
+            dispatch(resetPromoCode());
+            setPromoStatus((prev) => ({
+              ...prev,
+              required: true,
+              error: true
+            }));
+          } else {
+            dispatch(changePromoCode(convertedValue));
+            setPromoStatus({
+              required: false,
+              error: false,
+              success: true
+            });
+          }
+        });
+    }, SERVER_POST_DELAY)
+  );
+
   const handleFormSubmit = useCallback((evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
+
     if (!inputRef.current?.value) {
       return setPromoStatus((prev) => ({
         ...prev,
@@ -43,34 +73,19 @@ function BasketPromoTemplate({ promoCode }: BasketPromoProps): JSX.Element {
       }));
     }
 
-    //Убираем пробелы
+    if (isThrottled) {
+      toast.warn(getThrottleMessage(SERVER_POST_DELAY));
+      return;
+    }
+
     const convertedValue = inputRef.current.value
       .replace(/\s+/g, '')
       .toLowerCase();
     inputRef.current.value = convertedValue;
 
-
-    dispatch(postCouponAction({
-      coupon: convertedValue
-    }))
-      .then((response) => {
-        if (response.meta.requestStatus === 'rejected') {
-          dispatch(resetPromoCode());
-          setPromoStatus((prev) => ({
-            ...prev,
-            required: true,
-            error: true
-          }));
-        } else {
-          dispatch(changePromoCode(convertedValue));
-          setPromoStatus(({
-            required: false,
-            error: false,
-            success: true
-          }));
-        }
-      });
-  }, [dispatch]);
+    setIsThrottled(true);
+    throttledDispatchRef.current(convertedValue);
+  }, [isThrottled]);
 
   return(
     <div data-testid='basketPromo' className="basket__promo">

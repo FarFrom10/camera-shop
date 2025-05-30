@@ -67,3 +67,8 @@ export const filterCamerasByPromo = (basketItems: BasketItemData[], promo: Promo
 
 export const getTotalBasketPrice = (basketItems: BasketItemData[]) =>
   basketItems.reduce((sum, item) => sum + item.price * item.amount, 0);
+
+export const getThrottleMessage = (delay: number): string => {
+  const seconds = String(delay).split('').at(0) || delay;
+  return `Действие возможно раз в ${seconds} секунд(ы)`;
+};

@@ -1,5 +1,6 @@
 export const SITE_NAME = 'Фотошоп';
 export const TIMEOUT_SHOW_ERROR = 3000;
+export const SERVER_POST_DELAY = 2000;
 export const RATING_STAR_NUMBER = 5;
 export const REVIEWS_STEP_NUMBER = 3;
 export const SIMILAR_CAMERAS_SLIDES_PER_VIEW = 3;
