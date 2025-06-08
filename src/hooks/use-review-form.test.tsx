@@ -15,20 +15,18 @@ describe('useReviewForm', () => {
     expect(typeof handleReviewFormClose).toBe('function');
   });
 
-  it('should change "showReviewForm" state to "true" with "handleReviewFormOpen"', () => {
+  it('should change "showReviewForm" state to "true" with "handleReviewFormOpen" function', () => {
     const { result } = renderHook(() => useReviewForm());
     const {
       handleReviewFormOpen,
     } = result.current;
 
-    act(() => {
-      handleReviewFormOpen();
-    });
+    act(() => handleReviewFormOpen());
 
     expect(result.current.showReviewForm).toBe(true);
   });
 
-  it('should change "showReviewForm" state to "false" with "handleReviewFormClose"', () => {
+  it('should change "showReviewForm" state to "false" with "handleReviewFormClose" function', () => {
     const { result } = renderHook(() => useReviewForm());
     const {
       handleReviewFormOpen,

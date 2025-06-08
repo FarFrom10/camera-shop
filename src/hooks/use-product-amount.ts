@@ -23,7 +23,7 @@ export const useProductAmount = ({ camera, onAmountChange }: UseProductAmountPro
   const [currentAmount, setCurrentAmount] = useState<number>(amount);
 
   const handleAmountDecrease = () => {
-    if (amount === BusketAmount.Min) {
+    if (currentAmount === BusketAmount.Min) {
       return;
     }
     const updatedAmount = currentAmount - 1;
@@ -33,7 +33,7 @@ export const useProductAmount = ({ camera, onAmountChange }: UseProductAmountPro
   };
 
   const handleAmountIncrease = () => {
-    if (amount === BusketAmount.Max) {
+    if (currentAmount === BusketAmount.Max) {
       return;
     }
     const updatedAmount = currentAmount + 1;
