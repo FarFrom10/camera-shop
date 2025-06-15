@@ -7,7 +7,7 @@ import { postCouponAction, postOrderDataAction } from '../api-actions';
 export const initialState: BasketProcess = {
   basketItems: [],
   promoCode: {
-    coupon: '',
+    coupon: null,
     discount: 0
   },
 
@@ -60,7 +60,7 @@ export const basketProcess = createSlice({
       .addCase(postOrderDataAction.fulfilled, (state) => {
         state.basketItems = [];
         state.promoCode = {
-          coupon: '',
+          coupon: null,
           discount: 0
         };
         state.isBasketLoading = false;

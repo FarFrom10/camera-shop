@@ -10,6 +10,7 @@ export const CAMERAS_PER_PAGE = 9;
 export const MAX_PAGES_PER_VIEW = 3;
 export const CLASS_SCROLL_LOCK = 'scroll-lock';
 export const MODAL_ROOT_ID = 'modal-root';
+export const MAX_DISPLAY_CART_AMOUNT = 99;
 
 export enum SearchParamsName {
   Page = 'page',

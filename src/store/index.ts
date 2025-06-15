@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { createAPI } from '../services/api';
 import { rootReducer } from './root-reducer';
-import { loadBasketItemsState, saveBasketItemsState } from '../utils/local-storage';
+import { getLocalStorageCouponData, loadBasketItemsState, saveBasketItemsState, saveLocalStorageCouponData } from '../utils/local-storage';
 import { NameSpace } from '../const';
 import { initialState as camerasInitial } from './cameras-process/cameras-process.slice';
 import { initialState as reviewsInitial } from './reviews-process/reviews-process.slice';
@@ -20,12 +20,14 @@ const initialStates = {
 
 //Забираю данные корзины из localStorage
 const loadedBasketItems = loadBasketItemsState() ?? initialStates[NameSpace.Basket];
+const loadedCoupon = getLocalStorageCouponData() ?? initialStates[NameSpace.Basket].promoCode;
 
 const preloadedState = {
   ...initialStates,
   [NameSpace.Basket]: {
     ...basketInitial,
     basketItems: loadedBasketItems,
+    promoCode: loadedCoupon
   },
 };
 
@@ -45,4 +47,5 @@ store.subscribe(() => {
   const state = store.getState();
 
   saveBasketItemsState(state.basket.basketItems);
+  saveLocalStorageCouponData(state.basket.promoCode);
 });

@@ -8,7 +8,7 @@ describe('BasketProcess slice', () => {
     const expectedState = {
       basketItems: [],
       promoCode: {
-        coupon: '',
+        coupon: null,
         discount: 0
       },
 
@@ -26,7 +26,7 @@ describe('BasketProcess slice', () => {
     const expectedState = {
       basketItems: [],
       promoCode: {
-        coupon: '',
+        coupon: null,
         discount: 0
       },
 
@@ -43,7 +43,7 @@ describe('BasketProcess slice', () => {
     const expectedState = {
       basketItems: [],
       promoCode: {
-        coupon: '',
+        coupon: null,
         discount: 0
       },
 
@@ -59,7 +59,7 @@ describe('BasketProcess slice', () => {
     const expectedState = {
       basketItems: [],
       promoCode: {
-        coupon: '',
+        coupon: null,
         discount: 0
       },
 
@@ -75,7 +75,7 @@ describe('BasketProcess slice', () => {
     const expectedState = {
       basketItems: [],
       promoCode: {
-        coupon: '',
+        coupon: null,
         discount: 0
       },
 
@@ -92,7 +92,7 @@ describe('BasketProcess slice', () => {
     const expectedState = {
       basketItems: [{...fakeCurrentCamera, amount: 1}],
       promoCode: {
-        coupon: '',
+        coupon: null,
         discount: 0
       },
 
@@ -109,7 +109,7 @@ describe('BasketProcess slice', () => {
     const expectedState = {
       basketItems: [],
       promoCode: {
-        coupon: '',
+        coupon: null,
         discount: 0
       },
 

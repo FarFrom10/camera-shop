@@ -42,6 +42,6 @@ export type PromoStatus = {
 }
 
 export type PromoCode = {
-  coupon: string;
+  coupon: string | null;
   discount: number;
 }

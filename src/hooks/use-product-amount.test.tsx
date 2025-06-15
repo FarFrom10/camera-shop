@@ -2,6 +2,7 @@ import { renderHook } from '@testing-library/react';
 import { useProductAmount } from './use-product-amount';
 import {fakeBasketCamera } from '../mocks/mock-test';
 import { act } from 'react-dom/test-utils';
+import { BusketAmount } from '../const';
 
 describe('useProductAmount', () => {
   const mockOnAmountChange = vi.fn();
@@ -46,6 +47,23 @@ describe('useProductAmount', () => {
 
     act(() => result.current.handleAmountDecrease());
     expect(result.current.currentAmount).toBe(mockCamera.amount);
+  });
+
+  it('should NOT increase "currentAmount" state value with "handleAmountDecrease" function, if "currentAmount" value is "BusketAmount.Max"', () => {
+    const { result } = renderHook(() => useProductAmount({
+      camera: mockCamera,
+      onAmountChange: mockOnAmountChange
+    }));
+
+    //Change currentAmount to BusketAmount.Max
+    const mockEvent = {
+      target: { value: `${BusketAmount.Max}`},
+    } as React.ChangeEvent<HTMLInputElement>;
+    act(() => result.current.handleAmountChange(mockEvent));
+    expect(result.current.currentAmount).toBe(BusketAmount.Max);
+
+    act(() => result.current.handleAmountIncrease());
+    expect(result.current.currentAmount).toBe(BusketAmount.Max);
   });
 
   it('should decrease amount correctly after increase', () => {
