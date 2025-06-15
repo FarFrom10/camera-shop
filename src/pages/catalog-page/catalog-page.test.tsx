@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import CatalogPage from './catalog-page';
 import { withRouter, withStore } from '../../utils/mock-component';
-import { fakeCameras, fakeCurrentCamera } from '../../mocks/mock-test';
 import { makeFakeStore } from '../../utils/mocks';
 
 describe('Component: CatalogPage', () => {
@@ -23,16 +22,7 @@ describe('Component: CatalogPage', () => {
       <CatalogPage />,
       makeFakeStore({
         cameras: {
-          cameras: fakeCameras,
-          sortedCameras: fakeCameras,
           promoCameras: [],
-          similarCameras: fakeCameras,
-          currentCamera: fakeCurrentCamera,
-
-          isCamerasLoading: false,
-          isSimilarCamerasLoading: false,
-          isPromoCamerasLoading: false,
-          isCurrentCameraLoading: false,
         }
       })
     );

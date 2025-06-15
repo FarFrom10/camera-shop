@@ -21,7 +21,11 @@ function ProductPageContent({currentCamera, similarCameras, onModalAddToBasketOp
       </div>
       {similarCameras.length !== 0 &&
       <div data-testid='productPageSimilarSection' className="page-content__section">
-        <ProductsSimilarList camerasInCart={camerasInCart} onModalAddToBasketOpen={onModalAddToBasketOpen} similarCameras={similarCameras}/>
+        <ProductsSimilarList
+          camerasInCart={camerasInCart}
+          onModalAddToBasketOpen={onModalAddToBasketOpen}
+          similarCameras={similarCameras}
+        />
       </div>}
       <div data-testid='productPageReviewsSection' className="page-content__section">
         <ProductReviews cameraId={currentCamera.id}/>

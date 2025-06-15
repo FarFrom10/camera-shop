@@ -8,7 +8,11 @@ describe('Component: CatalogFilterPrice', () => {
   it('should render correctly', () => {
     const containerId = 'catalogFilterPrice';
     const {withStoreComponent} = withStore(
-      <CatalogFilterPrice cameras={fakeCameras}/>,
+      <CatalogFilterPrice
+        currentMinPrice=''
+        currentMaxPrice=''
+        cameras={fakeCameras}
+      />,
       makeFakeStore()
     );
 

@@ -108,7 +108,7 @@ function BasketPromoTemplate({ promoCode }: BasketPromoProps): JSX.Element {
               <input
                 data-testid="basketPromoInput"
                 ref={inputRef}
-                defaultValue={promoCode.coupon}
+                defaultValue={promoCode.coupon ?? ''}
                 type="text"
                 name="promo"
                 placeholder="Введите промокод"

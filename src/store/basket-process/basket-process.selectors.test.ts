@@ -5,8 +5,13 @@ describe('BasketProcess selectors', () => {
   const state = {
     [NameSpace.Basket]: {
       basketItems: [],
+      promoCode: {
+        coupon: null,
+        discount: 0
+      },
 
-      isBasketLoading: false
+      isBasketLoading: false,
+      isPromoCodeLoading: false,
     }
   };
 

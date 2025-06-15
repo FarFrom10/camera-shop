@@ -10,7 +10,11 @@ describe('Component: CatalogFilter', () => {
     const containerId = 'catalogFilter';
 
     const {withStoreComponent} = withStore(
-      <CatalogFilter cameras={fakeCameras}/>,
+      <CatalogFilter
+        currentMinPrice=''
+        currentMaxPrice=''
+        cameras={fakeCameras}
+      />,
       makeFakeStore()
     );
     render(withRouter(withStoreComponent));

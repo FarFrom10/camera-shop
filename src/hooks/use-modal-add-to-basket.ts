@@ -2,12 +2,12 @@ import { useCallback, useMemo, useState } from 'react';
 import { ModalStateType } from '../types/types';
 import { CameraData } from '../types/cameras';
 
-type UseModalAddToBasketData = [
-  ModalStateType,
-  (id: number | null) => void,
-  () => void,
-  currentModalCamera: CameraData | null,
-]
+type UseModalAddToBasketData = {
+  modalAddToBasket: ModalStateType;
+  handleModalAddToBasketOpen: (id: number | null) => void;
+  handleModalAddToBasketClose: () => void;
+  currentModalCamera: CameraData | null;
+}
 
 type UseModalAddToBasketProps = {
   cameras: CameraData[];
@@ -32,10 +32,10 @@ export const useModalAddToBasket = ({cameras}: UseModalAddToBasketProps): UseMod
   const currentCameraIndex = useMemo(() => cameras.findIndex((item) => item.id === modalAddToBasket.currentId), [cameras, modalAddToBasket]);
   const currentModalCamera = useMemo(() => currentCameraIndex !== -1 ? cameras[currentCameraIndex] : null, [cameras, currentCameraIndex]);
 
-  return [
+  return {
     modalAddToBasket,
     handleModalAddToBasketOpen,
     handleModalAddToBasketClose,
     currentModalCamera,
-  ];
+  };
 };

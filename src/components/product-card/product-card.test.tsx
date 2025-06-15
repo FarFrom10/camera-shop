@@ -8,7 +8,12 @@ describe('Component: ProductCard', () => {
     const containerId = 'productCardContainer';
     const testHandleButtonClick = (id: number | null) => id;
 
-    render(withRouter(<ProductCard camera={fakeCurrentCamera} onButtonClick={testHandleButtonClick}/>));
+    render(withRouter(
+      <ProductCard
+        isAddedToCart={false}
+        camera={fakeCurrentCamera}
+        onButtonClick={testHandleButtonClick}
+      />));
 
     expect(screen.getByTestId(containerId)).toBeInTheDocument();
   });

@@ -19,7 +19,7 @@ const initialStates = {
 };
 
 //Забираю данные корзины из localStorage
-const loadedBasketItems = loadBasketItemsState() ?? initialStates[NameSpace.Basket];
+const loadedBasketItems = loadBasketItemsState() ?? initialStates[NameSpace.Basket].basketItems;
 const loadedCoupon = getLocalStorageCouponData() ?? initialStates[NameSpace.Basket].promoCode;
 
 const preloadedState = {

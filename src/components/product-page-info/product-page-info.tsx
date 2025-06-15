@@ -28,12 +28,12 @@ function ProductPageInfo({camera}: ProductPageInfoProps): JSX.Element {
     previewImgWebp2x,
   } = camera;
 
-  const [
+  const {
     modalAddToBasket,
     handleModalAddToBasketOpen,
     handleModalAddToBasketClose,
     currentModalCamera,
-  ] = useModalAddToBasket({cameras: [camera]});
+  } = useModalAddToBasket({cameras: [camera]});
 
   const {
     handleModalBasketSuccessOpen,

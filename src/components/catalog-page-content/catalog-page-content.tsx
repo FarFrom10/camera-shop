@@ -21,12 +21,12 @@ function CatalogPageContent(): JSX.Element {
   const wholeFilterState = useAppSelector(selectFilterState);
   const camerasInCart = useAppSelector(selectBasketItems);
 
-  const [
+  const {
     modalAddToBasket,
     handleModalAddToBasketOpen,
     handleModalAddToBasketClose,
     currentModalCamera,
-  ] = useModalAddToBasket({cameras});
+  } = useModalAddToBasket({cameras});
 
   const {
     handleModalBasketSuccessOpen,

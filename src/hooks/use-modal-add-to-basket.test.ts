@@ -8,11 +8,15 @@ describe('Hook: useModalContactMe', () => {
   const fakeCurrentId = 666;
   const cameras = fakeCameras;
 
-  it('should return array with 4 elements', () => {
+  it('should return object with 4 elements', () => {
     const { result } = renderHook(() => useModalAddToBasket({cameras}));
-    const [ modalAddToBasket, handleModalAddToBasketOpen, handleModalAddToBasketClose ] = result.current;
+    const {
+      modalAddToBasket,
+      handleModalAddToBasketOpen,
+      handleModalAddToBasketClose
+    } = result.current;
 
-    expect(result.current).toHaveLength(4);
+    expect(Object.keys(result.current)).toHaveLength(4);
     expect(modalAddToBasket).toBeInstanceOf(Object);
     expect(typeof handleModalAddToBasketOpen).toBe('function');
     expect(typeof handleModalAddToBasketClose).toBe('function');
@@ -25,9 +29,9 @@ describe('Hook: useModalContactMe', () => {
     };
 
     const { result } = renderHook(() => useModalAddToBasket({cameras}));
-    const [,handleModalAddToBasketOpen] = result.current;
+    const { handleModalAddToBasketOpen } = result.current;
     act(() => handleModalAddToBasketOpen(fakeCurrentId));
-    const [modalAddToBasket] = result.current;
+    const { modalAddToBasket } = result.current;
 
     expect(modalAddToBasket).toEqual(expectedState);
   });
@@ -39,10 +43,10 @@ describe('Hook: useModalContactMe', () => {
     };
 
     const { result } = renderHook(() => useModalAddToBasket({cameras}));
-    const [,handleModalAddToBasketOpen, handleModalAddToBasketClose] = result.current;
+    const { handleModalAddToBasketOpen, handleModalAddToBasketClose } = result.current;
     act(() => handleModalAddToBasketOpen(fakeCurrentId));
     act(() => handleModalAddToBasketClose());
-    const [modalAddToBasket] = result.current;
+    const { modalAddToBasket } = result.current;
 
     expect(modalAddToBasket).toEqual(expectedState);
   });

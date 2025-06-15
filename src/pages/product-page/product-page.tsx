@@ -6,7 +6,7 @@ import ModalBasketSuccess from '../../components/modal/modal-added-to-basket/mod
 import ModalWrapper from '../../components/modal/modal-wrapper/modal-wrapper';
 import ProductPageContent from '../../components/product-page-content/product-page-content';
 import Title from '../../components/title/title';
-import { AppRoute } from '../../const';
+import { AppRoute, ModalTitle } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { useLoadProductPage } from '../../hooks/use-load-product-page';
 import { useModalAddToBasket } from '../../hooks/use-modal-add-to-basket';
@@ -24,12 +24,12 @@ function ProductPage(): JSX.Element {
 
   useLoadProductPage();
 
-  const [
+  const {
     modalAddToBasket,
     handleModalAddToBasketOpen,
     handleModalAddToBasketClose,
     currentModalCamera,
-  ] = useModalAddToBasket({cameras: similarCameras});
+  } = useModalAddToBasket({cameras: similarCameras});
 
   const {
     handleModalBasketSuccessOpen,
@@ -71,7 +71,10 @@ function ProductPage(): JSX.Element {
           isActive={showBasketSuccess}
           isModalNarrow
         >
-          <ModalBasketSuccess onModalClose={handleNavigateToCatalog}/>
+          <ModalBasketSuccess
+            titleText={ModalTitle.SuccessfullyAdded}
+            onModalClose={handleNavigateToCatalog}
+          />
         </ModalWrapper>
       </main>
       <ButtonUp/>
