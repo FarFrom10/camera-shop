@@ -1,7 +1,7 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import Footer from '../footer/footer';
 import Header from '../header/header';
-import { AppRoute } from '../../const';
+import { AppRoute, MODAL_ROOT_ID } from '../../const';
 
 
 function Layout(): JSX.Element {
@@ -10,7 +10,7 @@ function Layout(): JSX.Element {
 
   return(
     <div data-testid='layout' className="wrapper">
-      <div id="modal-root"></div>
+      <div id={MODAL_ROOT_ID}></div>
       <Header isIndexPage={isIndexPage} />
       <Outlet/>
       <Footer isIndexPage={isIndexPage}/>
