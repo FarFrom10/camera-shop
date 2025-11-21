@@ -3,9 +3,9 @@
 **Live Demo:** https://camera-shop-alpha.vercel.app/
 **Screenshots:**
 ![Главная страница](./assets/screenshots/1.png)
-![Карточка товара](./assets/screenshots/2.png)
-![Отзывы](./assets/screenshots/3.png)
-![Корзина](./assets/screenshots/4.png)
+[Карточка товара](./assets/screenshots/2.png)
+[Отзывы](./assets/screenshots/3.png)
+[Корзина](./assets/screenshots/4.png)
 
 
 ## 📌 Описание проекта
