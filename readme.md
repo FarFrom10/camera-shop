@@ -2,10 +2,10 @@
 
 **Live Demo:** https://camera-shop-alpha.vercel.app/
 **Screenshots:**
-https://github.com/user-attachments/assets/20cc7132-da22-410a-a420-80fe9a75773b
-https://github.com/user-attachments/assets/5a888507-9104-4324-9cf0-49bf44446003
-https://github.com/user-attachments/assets/6f0acf9e-a436-4c4b-9975-460e4944d064
-https://github.com/user-attachments/assets/8ce05d36-6ec9-4ae5-ad9e-510b973bd6ce
+![Главная страница](./assets/screenshots/1.png)
+![Карточка товара](./assets/screenshots/2.png)
+![Отзывы](./assets/screenshots/3.png)
+![Корзина](./assets/screenshots/4.png)
 
 
 ## 📌 Описание проекта
